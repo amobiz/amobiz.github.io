@@ -112,16 +112,16 @@ ga('send', 'pageview');
 </div><div><a class="Credit-link" target="_blank" href="https://unsplash.com/sweeticecreamphotography">Sweet Ice Cream Photography</a></div></div></div></div>
 <h1 id="埋設-DFP-DoubleClick-for-Publishers-廣告"><a href="#埋設-DFP-DoubleClick-for-Publishers-廣告" class="headerlink" title="埋設 DFP - DoubleClick for Publishers 廣告"></a>埋設 <a href="https://www.google.com/dfp/" target="_blank" rel="external">DFP - DoubleClick for Publishers</a> 廣告</h1><h3 id="初始設定"><a href="#初始設定" class="headerlink" title="初始設定"></a>初始設定</h3><p>比較跳脫一般經驗法則的是，在載入 <a href="//www.googletagservices.com/tag/js/gpt.js">script</a> 之後，服務仍然不是可用狀態，因此，此時不可呼叫相關服務 API。</p>
 <p>譬如，以下是錯誤做法：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$.getScript(<span class="string">‘//www.googletagservices.com/tag/js/gpt.js’</span>).then(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">window</span>.googletag.pubads().enableSingleRequest();</span><br><span class="line">    <span class="built_in">window</span>.googletag.enableServices();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$.getScript(<span class="string">&#39;//www.googletagservices.com/tag/js/gpt.js&#39;</span>).then(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">window</span>.googletag.pubads().enableSingleRequest();</span><br><span class="line">    <span class="built_in">window</span>.googletag.enableServices();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <p>不論是透過直接在 html 中埋入 script tag 的方式載入，或是以上面的方式動態載入 DFP script，都不可以直接呼叫 DFP 的 API。</p>
 <p>正確的做法，須將命令以函數的形式，推到 <code>window.googletag.cmd</code> 陣列中。注意，此時 <code>googletag</code> 和 <code>googletag.cmd</code> 可以只是普通物件和陣列。待 DFP 服務啟動後，會在 <code>googletag</code> 中添加功能，然後逐一呼叫被推入 <code>googletag.cmd</code> 陣列的函數。也就是說，在該函數中才能保證 DFP 的服務已備妥，並且才能呼叫 API：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> adUnitPath = <span class="string">‘pub-id/slot-id’</span>;</span><br><span class="line"><span class="keyword">var</span> adSize = [<span class="number">300</span>, <span class="number">25</span>];</span><br><span class="line"><span class="keyword">var</span> adElementId = <span class="string">‘id-to-html-element’</span>;</span><br><span class="line"></span><br><span class="line">$.getScript(<span class="string">‘//www.googletagservices.com/tag/js/gpt.js’</span>).then(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> googletag = <span class="built_in">window</span>.googletag || (<span class="built_in">window</span>.googletag = []);</span><br><span class="line">    googletag.cmd = (googletag.cmd || []);</span><br><span class="line">    googletag.cmd.push(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        initDfp();</span><br><span class="line">        googletag.defineSlot(adUnitPath, adSize, adElementId)</span><br><span class="line">            .addService(googletag.pubads());</span><br><span class="line">        googletag.display(adElementId);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">initDfp</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    googletag.pubads().enableSingleRequest();</span><br><span class="line">    googletag.enableServices();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> adUnitPath = <span class="string">&#39;pub-id/slot-id&#39;</span>;</span><br><span class="line"><span class="keyword">var</span> adSize = [<span class="number">300</span>, <span class="number">25</span>];</span><br><span class="line"><span class="keyword">var</span> adElementId = <span class="string">&#39;id-to-html-element&#39;</span>;</span><br><span class="line"></span><br><span class="line">$.getScript(<span class="string">&#39;//www.googletagservices.com/tag/js/gpt.js&#39;</span>).then(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> googletag = <span class="built_in">window</span>.googletag || (<span class="built_in">window</span>.googletag = []);</span><br><span class="line">    googletag.cmd = (googletag.cmd || []);</span><br><span class="line">    googletag.cmd.push(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        initDfp();</span><br><span class="line">        googletag.defineSlot(adUnitPath, adSize, adElementId)</span><br><span class="line">            .addService(googletag.pubads());</span><br><span class="line">        googletag.display(adElementId);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">initDfp</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    googletag.pubads().enableSingleRequest();</span><br><span class="line">    googletag.enableServices();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>上面的 <code>adElementId</code>，雖然在 DFP 上使用 generate tag 時，會產生一個 <code>div-gpt-ad-1234567890123-0</code> 格式的字串，要我們填在 html 元素作為 id 使用，但其實只要保握 html 的基本原則：id 不要重複，在這裡使用任意 id 皆可，並不影響廣告呈現。不過 DFP 仍然建議，id 最好能反映廣告版位，以方便投廣告的客戶確認。</p>
 <h3 id="多個廣告版位"><a href="#多個廣告版位" class="headerlink" title="多個廣告版位"></a>多個廣告版位</h3><p>上面的做法，如果直接套用在多個廣告上，雖然不會有什麼問題，但是重複執行 DFP 的設定，還是讓人渾身不舒服。</p>
 <p>可以將 <code>$.getScript()</code> 和 <code>initDfp()</code> 的處理包裝起來，讓它們永遠只會執行一次：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">once</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> promise;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> args;</span><br><span class="line">        <span class="keyword">if</span> (!promise) &#123;</span><br><span class="line">            args = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>);</span><br><span class="line">            promise = <span class="built_in">Promise</span>.resolve(fn.apply(<span class="literal">null</span>, args));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> promise;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> loadDfp = once(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> $.getScript(<span class="string">‘//www.googletagservices.com/tag/js/gpt.js’</span>).then(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">window</span>.googletag = <span class="built_in">window</span>.googletag || &#123;&#125;;</span><br><span class="line">        <span class="built_in">window</span>.googletag.cmd = <span class="built_in">window</span>.googletag.cmd || [];</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">window</span>.googletag;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> initDfp = once(<span class="function"><span class="keyword">function</span> (<span class="params">googletag</span>) </span>&#123;</span><br><span class="line">    googletag.pubads().enableSingleRequest();</span><br><span class="line">    googletag.enableServices();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">once</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> promise;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> args;</span><br><span class="line">        <span class="keyword">if</span> (!promise) &#123;</span><br><span class="line">            args = <span class="built_in">Array</span>.prototype.slice.call(<span class="built_in">arguments</span>);</span><br><span class="line">            promise = <span class="built_in">Promise</span>.resolve(fn.apply(<span class="literal">null</span>, args));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> promise;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> loadDfp = once(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> $.getScript(<span class="string">&#39;//www.googletagservices.com/tag/js/gpt.js&#39;</span>).then(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">window</span>.googletag = <span class="built_in">window</span>.googletag || &#123;&#125;;</span><br><span class="line">        <span class="built_in">window</span>.googletag.cmd = <span class="built_in">window</span>.googletag.cmd || [];</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">window</span>.googletag;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> initDfp = once(<span class="function"><span class="keyword">function</span> (<span class="params">googletag</span>) </span>&#123;</span><br><span class="line">    googletag.pubads().enableSingleRequest();</span><br><span class="line">    googletag.enableServices();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <p>然後，每個要新增版位的地方，都這樣呼叫：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">loadDfp().then(<span class="function"><span class="keyword">function</span> (<span class="params">googletag</span>) </span>&#123;</span><br><span class="line">    googletag.cmd.push(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        initDfp(googletag);</span><br><span class="line">        googletag.defineSlot(adUnitPath, adSize, adElementId)</span><br><span class="line">          .addService(googletag.pubads());</span><br><span class="line">        googletag.display(adElementId);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
@@ -156,7 +156,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://amobiz.github.io/2016/08/11/react-dfp/" data-id="cj4y0ufta008ck056q00m7wy0" class="article-share-link">Share</a>
+      <a data-url="https://amobiz.github.io/2016/08/11/react-dfp/" data-id="cj4y12ude008gu556mbo6l43a" class="article-share-link">Share</a>
       
         <a href="https://amobiz.github.io/2016/08/11/react-dfp/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -210,7 +210,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://amobiz.github.io/2016/04/22/modular-css-notes/" data-id="cj4y0uftd008gk056yn4no155" class="article-share-link">Share</a>
+      <a data-url="https://amobiz.github.io/2016/04/22/modular-css-notes/" data-id="cj4y12udc008du556xfo4gxrv" class="article-share-link">Share</a>
       
         <a href="https://amobiz.github.io/2016/04/22/modular-css-notes/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -269,7 +269,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://amobiz.github.io/2016/04/15/angularjs-1.5-best-practices/" data-id="cj4y0uftf008jk056osfy3r3b" class="article-share-link">Share</a>
+      <a data-url="https://amobiz.github.io/2016/04/15/angularjs-1.5-best-practices/" data-id="cj4y12udg008ku556ai9qd3in" class="article-share-link">Share</a>
       
         <a href="https://amobiz.github.io/2016/04/15/angularjs-1.5-best-practices/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -323,7 +323,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://amobiz.github.io/2016/04/07/re-npm-left-pad-have-we-forgotten-how-to-program/" data-id="cj4y0uft70089k0565ki0qc58" class="article-share-link">Share</a>
+      <a data-url="https://amobiz.github.io/2016/04/07/re-npm-left-pad-have-we-forgotten-how-to-program/" data-id="cj4y12ud90089u5564wonm8o3" class="article-share-link">Share</a>
       
         <a href="https://amobiz.github.io/2016/04/07/re-npm-left-pad-have-we-forgotten-how-to-program/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -376,7 +376,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://amobiz.github.io/2016/03/09/npm-package-node-or-browser/" data-id="cj4y0uft50085k056cc5q3ry7" class="article-share-link">Share</a>
+      <a data-url="https://amobiz.github.io/2016/03/09/npm-package-node-or-browser/" data-id="cj4y12ud70086u556czrj2j41" class="article-share-link">Share</a>
       
         <a href="https://amobiz.github.io/2016/03/09/npm-package-node-or-browser/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -437,7 +437,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://amobiz.github.io/2016/02/28/amp-intro/" data-id="cj4y0uft1007zk056rh19gtr6" class="article-share-link">Share</a>
+      <a data-url="https://amobiz.github.io/2016/02/28/amp-intro/" data-id="cj4y12ud50083u556zw2dawxf" class="article-share-link">Share</a>
       
         <a href="https://amobiz.github.io/2016/02/28/amp-intro/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -490,7 +490,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://amobiz.github.io/2015/12/21/applying-eslint-using-atom-linter-eslint/" data-id="cj4y0uft30082k0564i2rgvro" class="article-share-link">Share</a>
+      <a data-url="https://amobiz.github.io/2015/12/21/applying-eslint-using-atom-linter-eslint/" data-id="cj4y12ud3007zu556gq5q6hty" class="article-share-link">Share</a>
       
         <a href="https://amobiz.github.io/2015/12/21/applying-eslint-using-atom-linter-eslint/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -534,7 +534,7 @@ ga('send', 'pageview');
         <div class="Credit"><p><img src="https://images.unsplash.com/photo-1442115597578-2d0fb2413734?crop=entropy&amp;fit=crop&amp;fm=jpg&amp;h=975&amp;ixjsv=2.1.0&amp;ixlib=rb-0.3.5&amp;q=80&amp;w=1075" alt=""></p>
 <div class="Credit-backdrop"><div class="Credit-info"><div class="Credit-desc"><p>意象說明<br><br>問題 &lt; 一個頭兩個大 &lt; 小孩讀聖經</p>
 </div><div><a class="Credit-link" target="_blank" href="https://unsplash.com/samanthasophia">Samantha Sophia</a></div></div></div></div>
-<p>最早的 JavaScript <a href="https://en.wikipedia.org/wiki/Lint_%28software%29">linter</a> 是 <a href="http://www.jslint.com/">JSLint</a>，但是由於作者 <a href="https://en.wikipedia.org/wiki/Douglas_Crockford">Douglas Crockford</a> 設定了太多個人主觀認定必須要遵守的強制規則，而且很少有妥協的餘地，所以後來強調可以配置規則的 <a href="http://jshint.com/docs/">JSHint</a> 漸漸崛起，我自己從一開始就是使用 JSHint，並且也用了蠻長一段時間。然而…</p>
+<p>最早的 JavaScript <a href="https://en.wikipedia.org/wiki/Lint_%28software%29">linter</a> 是 <a href="http://www.jslint.com/">JSLint</a>，但是由於作者 <a href="https://en.wikipedia.org/wiki/Douglas_Crockford">Douglas Crockford</a> 設定了太多個人主觀認定必須要遵守的強制規則，而且很少有妥協的餘地，所以後來強調可以配置規則的 <a href="http://jshint.com/docs/">JSHint</a> 漸漸崛起，我自己從一開始就是使用 JSHint，並且也用了蠻長一段時間。然而...</p>
         
           <p class="article-more-link">
             <a href="/2015/12/20/problems-of-jshint/#more">Read More</a>
@@ -543,7 +543,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://amobiz.github.io/2015/12/20/problems-of-jshint/" data-id="cj4y0ufsz007vk0561ppc0ros" class="article-share-link">Share</a>
+      <a data-url="https://amobiz.github.io/2015/12/20/problems-of-jshint/" data-id="cj4y12ud1007wu55619q1ef4e" class="article-share-link">Share</a>
       
         <a href="https://amobiz.github.io/2015/12/20/problems-of-jshint/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -598,7 +598,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://amobiz.github.io/2015/11/15/logdown-notes/" data-id="cj4y0ufsx007sk056fpl2ilp6" class="article-share-link">Share</a>
+      <a data-url="https://amobiz.github.io/2015/11/15/logdown-notes/" data-id="cj4y12ucy007su556vzk1mli7" class="article-share-link">Share</a>
       
         <a href="https://amobiz.github.io/2015/11/15/logdown-notes/#disqus_thread" class="article-comment-link">Comments</a>
       
@@ -652,7 +652,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://amobiz.github.io/2015/11/14/gulp-glob/" data-id="cj4y0ufsv007ok0568t21ty9p" class="article-share-link">Share</a>
+      <a data-url="https://amobiz.github.io/2015/11/14/gulp-glob/" data-id="cj4y12ucx007pu5560k5xaoi7" class="article-share-link">Share</a>
       
         <a href="https://amobiz.github.io/2015/11/14/gulp-glob/#disqus_thread" class="article-comment-link">Comments</a>
       

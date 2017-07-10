@@ -131,7 +131,7 @@ ga('send', 'pageview');
 <p>The goal you specified requires a project to execute but there is no POM in this directory</p>
 </blockquote>
 <p>後來發現把參數用引號刮起來，像這樣：</p>
-<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate</span><br><span class="line">    “-DarchetypeGroupId=com.sun.jersey.archetypes”</span><br><span class="line">    “-DarchetypeArtifactId=jersey-quickstart-webapp”</span><br></pre></td></tr></table></figure>
+<figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mvn archetype:generate</span><br><span class="line">    &quot;-DarchetypeGroupId=com.sun.jersey.archetypes&quot;</span><br><span class="line">    &quot;-DarchetypeArtifactId=jersey-quickstart-webapp&quot;</span><br></pre></td></tr></table></figure>
 
 <p>才能正確執行。由於不熟 PowerShell，暫時還不清楚原因。目前還是使用 cmd 來建置專案。</p>
 <p>歡迎大家的回饋與心得分享。</p>
@@ -159,7 +159,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://amobiz.github.io/2013/12/27/integrating-maven-and-yeoman-study-notes-2-mvn-archetype-generate-jersey/" data-id="cj4y0ufrd005uk056n8wifxm9" class="article-share-link">Share</a>
+      <a data-url="https://amobiz.github.io/2013/12/27/integrating-maven-and-yeoman-study-notes-2-mvn-archetype-generate-jersey/" data-id="cj4y12uba005ru556umywzngn" class="article-share-link">Share</a>
       
         <a href="https://amobiz.github.io/2013/12/27/integrating-maven-and-yeoman-study-notes-2-mvn-archetype-generate-jersey/#disqus_thread" class="article-comment-link">Comments</a>
       

@@ -127,28 +127,28 @@ ga('send', 'pageview');
 <h4 id="Lookahead-順序環視"><a href="#Lookahead-順序環視" class="headerlink" title="Lookahead (順序環視)"></a>Lookahead (順序環視)</h4><p>Lookahead (順序環視)，或稱為「順向環視」、「向前環視」，顧名思義是在原地向前看的意思。也就是先偷看還沒看過的內容，確認是否符合預期，只有在接下來的內容能夠滿足指定條件的前提下，才繼續由下一個表達式、由目前位置開始後續的測試。(注意這裡的「前」，是 ahead 的意思，是指對引擎而言，擺在引擎前方尚未測試過的文本。與中文的「先前」，英文的 previous 意思不同。由於在中文裡，ahead 與 previous 的翻譯都有「前」這個字眼，但是實際上方向卻完全相反，為避免混淆，建議使用「順序環視」（依照檢視的順序），以強調環視測試文本的方向與引擎測試文本的方向，兩者之間的關係。)</p>
 <p>順序環視表達式的語法為：</p>
 <p>肯定型：</p>
-<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">?=expression</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(?=expression)</span><br></pre></td></tr></table></figure>
 
 <p>否定型：</p>
-<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">?!expression</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(?!expression)</span><br></pre></td></tr></table></figure>
 
 <p>其中，對於肯定型順序環視表達式，其子表達式必需匹配文本，才算匹配成功。對於否定型順序環視表達式，其子表達式必需不匹配文本，才算匹配成功。 (請參考後面 <a href="#bnf-grammar">BNF 語法</a> 的說明)</p>
 <h5 id="Lookbehind-逆序環視"><a href="#Lookbehind-逆序環視" class="headerlink" title="Lookbehind (逆序環視)"></a>Lookbehind (逆序環視)</h5><p>Lookbehind (逆序環視)，或稱為「逆向環視」、「向後環視」，顧名思義是在原地往後看的意思。也就是由目前位置回頭測試文本。只有在目前位置之前的內容能夠滿足指定條件的前提下，才繼續由下一個表達式、由目前位置開始後續的測試。(注意這裡的「後」，是 behind 的意思，是指對引擎而言，擺在引擎後方已經測試過的文本。與中文的「後續」，英文的 next 意思不同。由於在中文裡，behind 與 next 的翻譯都有「後」這個字眼，但是實際上方向卻完全相反，為避免混淆，建議使用「逆序環視」（依照檢視的相反順序），以強調環視測試文本的方向與引擎測試文本的方向，兩者之間的關係。)</p>
 <p>逆序環視表達式的語法為：</p>
 <p>肯定型：</p>
-<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">?&lt;=expression</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(?&lt;=expression)</span><br></pre></td></tr></table></figure>
 
 <p>否定型：</p>
-<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">?&lt;!expression</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(?&lt;!expression)</span><br></pre></td></tr></table></figure>
 
 <p>其中，對於肯定型逆序環視表達式，其子表達式必需匹配文本，才算匹配成功。對於否定型逆序環視表達式，其子表達式必需不匹配文本，才算匹配成功。 (請參考後面 <a href="#bnf-grammar">BNF 語法</a> 的說明)</p>
 <p>注意，JavaScript 只支援 lookahead，不支援 lookbehind。這裡特意列出以完整說明 NFA 引擎的正則表達式的能力。</p>
 <p>注意：lookahead (順序環視表達式) 所允許的子表達式，在多數的流派中都沒有特殊限制。而的 lookbehind (逆序環視表達式) (JavaScript 不支援) 通常限定子表達式的匹配長度必須固定。</p>
 <h5 id="匹配的文本主體需要滿足多重條件"><a href="#匹配的文本主體需要滿足多重條件" class="headerlink" title="匹配的文本主體需要滿足多重條件"></a>匹配的文本主體需要滿足多重條件</h5><p>針對本節開頭所描述的問題，當要匹配的文本主體，需要滿足的條件不只一個時，可以將順序環視表達式置於用來匹配主體的表達式的前方。或者將逆序環視表達式置於其後方。像這樣：</p>
-<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">?=lookahead-expression-1</span>)(<span class="name">?!lookahead-expression-2</span>)(<span class="name">main-expression</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(?=lookahead-expression-1)(?!lookahead-expression-2)(main-expression)</span><br></pre></td></tr></table></figure>
 
 <p>或</p>
-<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">main-expression</span>)(<span class="name">?&lt;=lookbehind-expression-1</span>)(<span class="name">?&lt;!lookbehind-expression-2</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(main-expression)(?&lt;=lookbehind-expression-1)(?&lt;!lookbehind-expression-2)</span><br></pre></td></tr></table></figure>
 
 <p>譬如，下面的表達式，來自於 <a href="http://www.rexegg.com/regex-lookarounds.html" title="Mastering Lookahead and Lookbehind" target="_blank" rel="external">Mastering Lookahead and Lookbehind</a> 這篇文章，用來檢查密碼是否符合規範：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^(?=.<em>?[a-z])(?=.</em>?[A-Z])(?=.*?\d)\w&#123;<span class="number">6</span>,<span class="number">10</span>&#125;$/</span><br></pre></td></tr></table></figure>
@@ -223,7 +223,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://amobiz.github.io/2014/08/03/regular-expression-javascript-study-notes-2-theory-2/" data-id="cj4y0ufs7006qk056t66j9b3o" class="article-share-link">Share</a>
+      <a data-url="https://amobiz.github.io/2014/08/03/regular-expression-javascript-study-notes-2-theory-2/" data-id="cj4y12uc4006hu556fckoxtmd" class="article-share-link">Share</a>
       
         <a href="https://amobiz.github.io/2014/08/03/regular-expression-javascript-study-notes-2-theory-2/#disqus_thread" class="article-comment-link">Comments</a>
       

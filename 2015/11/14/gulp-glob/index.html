@@ -123,20 +123,20 @@ ga('send', 'pageview');
 <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p><a href="http://en.wikipedia.org/wiki/Glob_(programming)" target="_blank" rel="external">Glob</a> 類似於 <a href="/2014/08/04/regular-expression-javascript-study-notes-3-informal-bnf-grammar/" title="regular expression">regular expression</a>，但是僅用來匹配檔案路徑名稱。名稱由來是 UNIX 一個負責解析匹配檔案、叫做 global command 的模組。</p>
 <p>本文針對 gulp 使用的 <a href="https://github.com/isaacs/node-glob" title="node-glob" target="_blank" rel="external">node-glob</a> 所支援的語法及選項進行說明，詳細的使用方法可參考 <a href="https://github.com/isaacs/node-glob" title="node-glob" target="_blank" rel="external">node-glob</a> 的說明。</p>
 <a id="more"></a>
-<h3 id="gulp-src-基本使用方式"><a href="#gulp-src-基本使用方式" class="headerlink" title="gulp.src() 基本使用方式"></a><code>gulp.src()</code> 基本使用方式</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">‘gulp’</span>);</span><br><span class="line"><span class="keyword">var</span> uglify = <span class="built_in">require</span>(<span class="string">‘gulp-uglify’</span>);</span><br><span class="line"></span><br><span class="line">gulp.src(<span class="string">‘<em>*/</em>.js’</span>)</span><br><span class="line">    .pipe(uglify())</span><br><span class="line">    .pipe(gulp.dest(<span class="string">‘dist’</span>));</span><br></pre></td></tr></table></figure>
+<h3 id="gulp-src-基本使用方式"><a href="#gulp-src-基本使用方式" class="headerlink" title="gulp.src() 基本使用方式"></a><code>gulp.src()</code> 基本使用方式</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">&#39;gulp&#39;</span>);</span><br><span class="line"><span class="keyword">var</span> uglify = <span class="built_in">require</span>(<span class="string">&#39;gulp-uglify&#39;</span>);</span><br><span class="line"></span><br><span class="line">gulp.src(<span class="string">&#39;<em>*/</em>.js&#39;</span>)</span><br><span class="line">    .pipe(uglify())</span><br><span class="line">    .pipe(gulp.dest(<span class="string">&#39;dist&#39;</span>));</span><br></pre></td></tr></table></figure>
 
 <p><code>gulp.src()</code> 還支援陣列形式的多組 glob 參數：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gulp.src([<span class="string">‘<strong>/*.js’</strong></span>, <span class="string">‘/*.ts’</span>])</span><br><span class="line">    .pipe(uglify())</span><br><span class="line">    .pipe(gulp.dest(<span class="string">‘dist’</span>));</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gulp.src([<span class="string">&#39;<strong>/*.js&#39;</strong></span>, <span class="string">&#39;/*.ts&#39;</span>])</span><br><span class="line">    .pipe(uglify())</span><br><span class="line">    .pipe(gulp.dest(<span class="string">&#39;dist&#39;</span>));</span><br></pre></td></tr></table></figure>
 
 <p>不過這個例子，可以使用後面介紹的『多選結構』加以簡化，而不必使用陣列：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gulp.src(<span class="string">‘<em>*/</em>.&#123;js,ts&#125;’</span>)</span><br><span class="line">    .pipe(uglify())</span><br><span class="line">    .pipe(gulp.dest(<span class="string">‘dist’</span>));</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gulp.src(<span class="string">&#39;<em>*/</em>.&#123;js,ts&#125;&#39;</span>)</span><br><span class="line">    .pipe(uglify())</span><br><span class="line">    .pipe(gulp.dest(<span class="string">&#39;dist&#39;</span>));</span><br></pre></td></tr></table></figure>
 
 <h3 id="或者，直接使用-node-glob-來匹配檔案"><a href="#或者，直接使用-node-glob-來匹配檔案" class="headerlink" title="或者，直接使用 node-glob 來匹配檔案"></a>或者，直接使用 <code>node-glob</code> 來匹配檔案</h3><p>安裝</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install –save glob</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save glob</span><br></pre></td></tr></table></figure>
 
 <p>注意，雖然 GitHub 上的名稱為 <code>node-glob</code>，但是 npm 上卻是註冊為 <code>glob</code>，因此安裝時名稱必須為 <code>glob</code>。</p>
 <p>呼叫 glob() 函數</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> glob = <span class="built_in">require</span>(<span class="string">‘glob’</span>);</span><br><span class="line"><span class="keyword">var</span> files = glob(<span class="string">‘<em>*/</em>‘</span>, &#123; <span class="attr">dot</span>: <span class="literal">true</span> &#125;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> glob = <span class="built_in">require</span>(<span class="string">&#39;glob&#39;</span>);</span><br><span class="line"><span class="keyword">var</span> files = glob(<span class="string">&#39;<em>*/</em>&#39;</span>, &#123; <span class="attr">dot</span>: <span class="literal">true</span> &#125;);</span><br></pre></td></tr></table></figure>
 
 <p>檔案路徑匹配結果以陣列回傳，如果沒有匹配任何路徑或檔案，將回傳空陣列。</p>
 <h3 id="Glob-元字元"><a href="#Glob-元字元" class="headerlink" title="Glob 元字元"></a>Glob 元字元</h3><p>前面兩個例子中，呼叫 <code>gulp.src()</code> 及 <code>glob()</code> 函數的第一個字串參數，就是所謂的 glob，其中 <code>*</code> 及 <code>/</code> 字元，就是所謂的 Glob 元字元。就是這些元字元，讓我們可以以簡單的模式，即可對應各種不同的檔案名稱。</p>
@@ -222,61 +222,61 @@ ga('send', 'pageview');
 <tr>
 <th>gulp.src(glob)</th>
 <th>base (粗體部分) / match path (紅色部分)</th>
-<th>gulp.dest(‘dist’)</th>
+<th>gulp.dest(&#39;dist&#39;)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>src(‘<b>app/</b>&#42;/&#42;.html’)</td>
+<td>src(&#39;<b>app/</b>&#42;/&#42;.html&#39;)</td>
 <td><b>app/</b><span style="color:red">views/</span> (假設 app/views 目錄下無 .html 檔案。)</td>
 <td>N/A (假設 app/views 目錄下無 .html 檔案。)</td>
 </tr>
 <tr>
-<td>src(‘<b>app/</b>&#42;&#42;/&#42;.html’)</td>
+<td>src(&#39;<b>app/</b>&#42;&#42;/&#42;.html&#39;)</td>
 <td><b>app/</b><span style="color:red">views/options/</span>options.html</td>
 <td>dist/<span style="color:red">views/options/</span>options.html</td>
 </tr>
 <tr>
-<td>src(‘<b>app/views/</b>&#42;/&#42;.html’)</td>
+<td>src(&#39;<b>app/views/</b>&#42;/&#42;.html&#39;)</td>
 <td><b>app/views/</b><span style="color:red">options/</span>options.html</td>
 <td>dist/<span style="color:red">options/</span>options.html</td>
 </tr>
 <tr>
-<td>src(‘<b>app/views/</b>&#42;&#42;/&#42;.html’)</td>
+<td>src(&#39;<b>app/views/</b>&#42;&#42;/&#42;.html&#39;)</td>
 <td><b>app/views/</b><span style="color:red">options/</span>options.html</td>
 <td>dist/<span style="color:red">options/</span>options.html</td>
 </tr>
 <tr>
-<td>src(‘<b>app/views/options/</b>&#42;.html’)</td>
+<td>src(&#39;<b>app/views/options/</b>&#42;.html&#39;)</td>
 <td><b>app/views/options/</b>options.html</td>
 <td>dist/options.html</td>
 </tr>
 <tr>
-<td>src(‘&#42;/views/&#42;&#42;/&#42;.html’)</td>
+<td>src(&#39;&#42;/views/&#42;&#42;/&#42;.html&#39;)</td>
 <td><span style="color:red">app/views/options/</span>options.html</td>
 <td>dist/<span style="color:red">app/views/options/</span>options.html</td>
 </tr>
 </tbody>
 </table>
-<p>3.透過指定 “base” property 來改變參照路徑；或者，在 <code>gulp.dest()</code> 指定輸出路徑。</p>
+<p>3.透過指定 &quot;base&quot; property 來改變參照路徑；或者，在 <code>gulp.dest()</code> 指定輸出路徑。</p>
 <p>下面的範例中，對 <code>gulp.src()</code> 指定了兩個不同的 glob：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gulp.src([ <span class="string">‘bower.json’</span>, <span class="string">‘app/manifest.json’</span> ])</span><br><span class="line">      .pipe(plugins.configSync(&#123;</span><br><span class="line">           <span class="attr">fields</span>: [ <span class="string">‘version’</span> ]</span><br><span class="line">      &#125;))</span><br><span class="line">      <span class="comment">// 注意這裡若指定為 gulp.dest(‘/‘) 則真的會輸出到磁碟的根目錄。</span></span><br><span class="line">      .pipe(gulp.dest(<span class="string">‘.’</span>));</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gulp.src([ <span class="string">&#39;bower.json&#39;</span>, <span class="string">&#39;app/manifest.json&#39;</span> ])</span><br><span class="line">      .pipe(plugins.configSync(&#123;</span><br><span class="line">           <span class="attr">fields</span>: [ <span class="string">&#39;version&#39;</span> ]</span><br><span class="line">      &#125;))</span><br><span class="line">      <span class="comment">// 注意這裡若指定為 gulp.dest(&#39;/&#39;) 則真的會輸出到磁碟的根目錄。</span></span><br><span class="line">      .pipe(gulp.dest(<span class="string">&#39;.&#39;</span>));</span><br></pre></td></tr></table></figure>
 
 <p>但是由於兩個檔案的根目錄不同，同時目錄也都未使用通配字元，所以最後匹配的檔案都不含路徑，因此，使用 <code>gulp.dest(&#39;.&#39;)</code> 輸出時，將輸出到專案目錄 (假設專案叫做 project) 下：</p>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">project</span><br><span class="line">    +<span class="comment">– bower.json</span></span><br><span class="line">    +<span class="comment">– manifest.json</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">project</span><br><span class="line">    +-- bower.json</span><br><span class="line">    +-- manifest.json</span><br></pre></td></tr></table></figure>
 
 <p>這裡當然也可以藉由指定通配字元 <code>&quot;*/manifest.json&quot;</code> 從而避免 base 的指定。但是，這樣的寫法，很可能會殃及無辜檔案。同時，最重要的是，反而不容易看出我們真正的意圖：就是只要 app/manifest.json 這個檔案。</p>
 <p>因此，這裡可以藉由指定 <code>base</code> property 來改變參照路徑，強迫匹配的檔案以目前目錄為相對路徑表示，從而，得以保留檔案的目錄資訊。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gulp.src([ <span class="string">‘bower.json’</span>, <span class="string">‘app/manifest.json’</span> ], &#123; <span class="attr">base</span>: <span class="string">‘.’</span> &#125;)</span><br><span class="line">      .pipe(plugins.configSync(&#123;</span><br><span class="line">           <span class="attr">fields</span>: [ <span class="string">‘version’</span> ]</span><br><span class="line">      &#125;))</span><br><span class="line">      .pipe(gulp.dest(<span class="string">‘.’</span>));</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gulp.src([ <span class="string">&#39;bower.json&#39;</span>, <span class="string">&#39;app/manifest.json&#39;</span> ], &#123; <span class="attr">base</span>: <span class="string">&#39;.&#39;</span> &#125;)</span><br><span class="line">      .pipe(plugins.configSync(&#123;</span><br><span class="line">           <span class="attr">fields</span>: [ <span class="string">&#39;version&#39;</span> ]</span><br><span class="line">      &#125;))</span><br><span class="line">      .pipe(gulp.dest(<span class="string">&#39;.&#39;</span>));</span><br></pre></td></tr></table></figure>
 
 <p>輸出如下：</p>
-<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">project</span><br><span class="line">    +<span class="comment">– app</span></span><br><span class="line">            +<span class="comment">– manifest.json</span></span><br><span class="line">    +<span class="comment">– bower.json</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">project</span><br><span class="line">    +-- app</span><br><span class="line">            +-- manifest.json</span><br><span class="line">    +-- bower.json</span><br></pre></td></tr></table></figure>
 
 <p>當匹配的檔案都在共同的子目錄之下時，若輸出目錄仍然希望含有特定目錄，則可以在 <code>gulp.dest()</code> 指定輸出路徑：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gulp.src(<span class="string">‘app/scripts/<em>*/</em>.js’</span>)</span><br><span class="line">    .pipe(uglify())</span><br><span class="line">    .pipe(gulp.dest(<span class="string">‘dist/scripts’</span>));</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gulp.src(<span class="string">&#39;app/scripts/<em>*/</em>.js&#39;</span>)</span><br><span class="line">    .pipe(uglify())</span><br><span class="line">    .pipe(gulp.dest(<span class="string">&#39;dist/scripts&#39;</span>));</span><br></pre></td></tr></table></figure>
 
 <p>4.透過 <a href="https://github.com/armed/gulp-flatten" target="_blank" rel="external"><code>gulp-flatten</code></a> 可消除匹配的路徑。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> flatten = <span class="built_in">require</span>(<span class="string">‘gulp-flatten’</span>);</span><br><span class="line">gulp.src(<span class="string">‘bower_components/<em>*/</em>.min.js’</span>)</span><br><span class="line">    .pipe(flatten())</span><br><span class="line">    .pipe(gulp.dest(<span class="string">‘build/js’</span>));</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> flatten = <span class="built_in">require</span>(<span class="string">&#39;gulp-flatten&#39;</span>);</span><br><span class="line">gulp.src(<span class="string">&#39;bower_components/<em>*/</em>.min.js&#39;</span>)</span><br><span class="line">    .pipe(flatten())</span><br><span class="line">    .pipe(gulp.dest(<span class="string">&#39;build/js&#39;</span>));</span><br></pre></td></tr></table></figure>
 
 <h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ul>
 <li><a href="http://en.wikipedia.org/wiki/Glob_(programming)" target="_blank" rel="external">Glob</a></li>
@@ -295,7 +295,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://amobiz.github.io/2015/11/14/gulp-glob/" data-id="cj4y0ufsv007ok0568t21ty9p" class="article-share-link">Share</a>
+      <a data-url="https://amobiz.github.io/2015/11/14/gulp-glob/" data-id="cj4y12ucx007pu5560k5xaoi7" class="article-share-link">Share</a>
       
         <a href="https://amobiz.github.io/2015/11/14/gulp-glob/#disqus_thread" class="article-comment-link">Comments</a>
       

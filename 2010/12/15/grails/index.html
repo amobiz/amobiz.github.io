@@ -111,7 +111,7 @@ ga('send', 'pageview');
         <!-- Post Contents -->
         <p><a href="http://www.grails.org/" target="_blank" rel="external">Grails</a> 雖然在專案根目錄下的 <a href="http://www.grails.org/Configuration" target="_blank" rel="external"><code>application.properties</code></a> 檔案中，儲存了專案的設定資料。但是諸如於專案開發、編譯期間所需要的 resource、script 及 template 等，甚至 plugin 及其說明文件，卻都不是儲存於專案目錄下，而是另外存放在 <a href="http://en.wikipedia.org/wiki/Home_directory" target="_blank" rel="external">user home</a> 底下。每個專案，依其專案名稱（於建立專案時，由 <a href="http://grails.org/doc/latest/ref/Command%20Line/create-app.html" target="_blank" rel="external"><code>grails create-app</code></a> 命令指定），皆有專屬目錄存放該專案的相關資源。</p>
 <p>該目錄所在位置，在 user home 的 <code>.grails\{grails 版本}\projects</code> 下，譬如：</p>
-<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:<span class="symbol">\D</span>ocuments and Settings<span class="symbol">\A</span>dministrator<span class="symbol">.</span>grails<span class="symbol">\1</span>.3.5<span class="symbol">\p</span>rojects<span class="symbol">\&#123;</span>專案名稱&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Documents and Settings\Administrator.grails\1.3.5\projects\&#123;專案名稱&#125;</span><br></pre></td></tr></table></figure>
 
 <p>關於這一事實，有以下兩個問題必須加以關注：</p>
 <a id="more"></a>
@@ -120,7 +120,7 @@ ga('send', 'pageview');
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grails install-plugin app-engine</span><br></pre></td></tr></table></figure>
 
 <p>安裝完成後，application.properties 檔案將包含下列資訊：</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">appengine.<span class="attribute">persistence</span>=jpa</span><br><span class="line">plugins.<span class="attribute">app-engine</span>=0.8.10</span><br><span class="line">plugins.<span class="attribute">gorm-jpa</span>=0.7.1</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">appengine.persistence=jpa</span><br><span class="line">plugins.app-engine=0.8.10</span><br><span class="line">plugins.gorm-jpa=0.7.1</span><br></pre></td></tr></table></figure>
 
 <p>但是若前述專案的對應設定目錄不存在，譬如將專案移轉到新的電腦環境中，在建置或執行專案時，過程中將必須重新下載並安裝相關 plugin。也就是說，若於命令列首次以 <a href="http://www.grails.org/doc/latest/ref/Command%20Line/compile.html" target="_blank" rel="external"><code>grails compile</code></a> 命令建置專案，或以 <a href="http://www.grails.org/doc/latest/ref/Command%20Line/run-app.html" target="_blank" rel="external"><code>grails run-app</code></a> 命令直接執行專案，因為此時 plugin 相關檔案尚不存在，因此，在建置過程中，Grails 將根據 application.properties 檔案中的設定， 重新下載、安裝 plugin。</p>
 <p>這個過程，可能會遇到兩個意外。</p>
@@ -172,7 +172,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://amobiz.github.io/2010/12/15/grails/" data-id="cj4y0ufpl004jk0562qu22foy" class="article-share-link">Share</a>
+      <a data-url="https://amobiz.github.io/2010/12/15/grails/" data-id="cj4y12u9r004ru556dnq8crnx" class="article-share-link">Share</a>
       
         <a href="https://amobiz.github.io/2010/12/15/grails/#disqus_thread" class="article-comment-link">Comments</a>
       

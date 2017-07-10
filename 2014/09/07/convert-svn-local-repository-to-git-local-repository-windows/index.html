@@ -126,21 +126,21 @@ ga('send', 'pageview');
 <p>以下假設 local repository 放在 <code>C:\svn</code> 目錄下，不需要是當初 repository 實際運作的目錄。另外，git 專案想放在 <code>D:\workspace</code> 目錄下。</p>
 <p>1.在 cmd 模式下，先切換到該目錄下 (<code>cd/d D:\workspace</code>)。</p>
 <p>2.在檔案總管裡，在 <code>C:\svn</code> 目錄下點右鍵，點選 TortoiseSVN / Repo-browser，這會列出 local repository 中的所有專案。假設現在要轉換 <code>editor</code> 專案。進入該專案，看一下所有 checkin 的 author 名稱，編輯 <code>D:\workspace\authors.txt</code>，設定好 svn 的作者名稱要如何對應 git 的作者名稱及 email，譬如：</p>
-<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">svn-user1</span> = git-user1 &lt;git-user1@gmail.com&gt;</span><br><span class="line"><span class="attr">svn-user2</span> = git-user2 &lt;git-user2@gmail.com&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">svn-user1 = git-user1 &lt;git-user1@gmail.com&gt;</span><br><span class="line">svn-user2 = git-user2 &lt;git-user2@gmail.com&gt;</span><br></pre></td></tr></table></figure>
 
 <p>3.回到 cmd，使用這個指令：</p>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">subgit <span class="keyword">import</span> –non-interactive –authors-<span class="keyword">file</span> authors.txt –svn-url <span class="keyword">file</span>:<span class="comment">///C:\svn\editor editor.git</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">subgit import --non-interactive --authors-file authors.txt --svn-url file:///C:\svn\editor editor.git</span><br></pre></td></tr></table></figure>
 
 <p>就可以建立 D:\workspace\editor.git 目錄，裡面就是轉換成功的 git bare repository。<br>注意這裡的 <code>file:///C:\svn\editor</code>，其中 <code>file:///C:\svn\</code> 是 local repository 所在目錄，而 <code>editor</code> 是專案名稱。<code>editor.git</code> 則是要匯出的 git bare repository 目錄名稱，在這裡是匯出到 <code>D:\workspace\editor.git</code>。</p>
 <p>這裡需要注意的是，即使專案名稱指定錯誤，subgit 仍然會顯示轉換成功。可參考第 5 步驟確認。</p>
 <p>4.成功匯出之後，就可以將 git 專案 push 到 server：</p>
-<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">push</span> –mirror https:<span class="comment">//remote.github.com/editor.git</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push --mirror <a href="https://remote.github.com/editor.git" target="_blank" rel="external">https://remote.github.com/editor.git</a></span><br></pre></td></tr></table></figure>
 
 <p>5.或者要直接 clone 出來，建立 working repository:</p>
-<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">-l</span> editor.git</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone -l editor.git</span><br></pre></td></tr></table></figure>
 
 <p>這樣就會建立 <code>D:\workspace\editor</code> 專案目錄。<br>如果第 3 步驟發生錯誤，這裡的 clone 指令會提示：</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">warning: You appear <span class="built_in">to</span> have cloned <span class="keyword">an</span> <span class="literal">empty</span> repository.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">warning: You appear to have cloned an empty repository.</span><br></pre></td></tr></table></figure>
 
 <p>6.如果還有其他專案需要轉換，重複上面 5 個步驟即可。</p>
 <h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料:"></a>參考資料:</h3><ul>
@@ -153,7 +153,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://amobiz.github.io/2014/09/07/convert-svn-local-repository-to-git-local-repository-windows/" data-id="cj4y0ufs6006nk056ho5shxlk" class="article-share-link">Share</a>
+      <a data-url="https://amobiz.github.io/2014/09/07/convert-svn-local-repository-to-git-local-repository-windows/" data-id="cj4y12uc7006ku55688ufzwvn" class="article-share-link">Share</a>
       
         <a href="https://amobiz.github.io/2014/09/07/convert-svn-local-repository-to-git-local-repository-windows/#disqus_thread" class="article-comment-link">Comments</a>
       

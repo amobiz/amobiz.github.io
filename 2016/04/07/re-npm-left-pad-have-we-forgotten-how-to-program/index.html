@@ -140,7 +140,7 @@ ga('send', 'pageview');
 <p>至於另一個例子 <a href="https://www.npmjs.com/package/is-positive-integer" target="_blank" rel="external"><code>is-positive-integer</code></a>，『檢查一個整數是否是正數』這個模組的存在本身，的確符合作者的理論。但是由這個模組的實際下載量根本不高來看，更只能證明，顯然絕大多數的開發者並不會貿然使用毫無意義的模組。沒有人使用的模組，就算它依賴於兩萬個模組，影響也極有限。特地拿一個沒有人使用的模組來指責全體開發者，有何意義？</p>
 <h4 id="一部分要歸咎於歷史因素"><a href="#一部分要歸咎於歷史因素" class="headerlink" title="一部分要歸咎於歷史因素"></a>一部分要歸咎於歷史因素</h4><p>至於像 <code>isArray</code> 這樣的函數的存在，正是因為過去並沒有原生的函數可以使用，而導致每個人都要自己寫一個系統本應該要有的功能。這一點在英文原文下面的討論，是一個攻防重點，大家不妨去看看。</p>
 <p>回頭看看 <code>isArray()</code> 的實現：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> toString.call(arr) == <span class="string">‘[object Array]’</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> toString.call(arr) == <span class="string">&#39;[object Array]&#39;</span></span><br></pre></td></tr></table></figure>
 
 <p>沒錯，只有短短的一行。但是捫心自問，不參考任何文件、資料，你隨時都寫的出來嗎？<br>如果你每次<strong>又要再寫一遍</strong>的時候，都還需要翻找文件，這樣真的會比較快嗎？</p>
 <h4 id="再來談談封裝"><a href="#再來談談封裝" class="headerlink" title="再來談談封裝"></a>再來談談封裝</h4><p>如果程式中到處充滿 <code>return toString.call(arr) == &#39;[object Array]&#39;</code>，你就必須直接看到程式碼的細節，而無法像 Bob 大叔在『<a href="http://www.books.com.tw/products/0010579897" target="_blank" rel="external">Clean Code</a>』中所說的，程式碼應該要『讓名稱代表意圖』。於是，你還是會把它封裝成 <code>isArray()</code>。封裝之後，請問你會把它放在哪裡？</p>
@@ -162,7 +162,7 @@ ga('send', 'pageview');
 <p>過去開發者不斷地重新發明輪子，而軟體專家則不斷地疾呼要 reuse。終於現在 JavaScript 社群蓬勃發展，大家支持 open source，信任 open source 反而變成『不良』的習慣？</p>
 <h3 id="『Functions-Are-Not-Packages』"><a href="#『Functions-Are-Not-Packages』" class="headerlink" title="『Functions Are Not Packages』"></a>『Functions Are Not Packages』</h3><p>模組並不是這樣定義的。根據維基百科對『<a href="https://en.wikipedia.org/wiki/Modularity" target="_blank" rel="external">Modularity</a>』的定義：</p>
 <blockquote>
-<p>In software design, modularity refers to a logical partitioning of the “software design” that allows complex software to be manageable for the purpose of implementation and maintenance. The logic of partitioning may be based on related functions, implementation considerations, data links, or other criteria.</p>
+<p>In software design, modularity refers to a logical partitioning of the &quot;software design&quot; that allows complex software to be manageable for the purpose of implementation and maintenance. The logic of partitioning may be based on related functions, implementation considerations, data links, or other criteria.</p>
 </blockquote>
 <p>『在軟體設計中，模組化是指軟體設計的邏輯分割，以允許複雜的軟體，能夠以可管理的方式實作及維護。邏輯分割可能基於相關性、實作考量、資料連結、以及其它要素。』</p>
 <p>要我說，任何具有獨立性、內聚性，可以管理的東西，都可以將它做成模組，哪怕只是提供一些常數。</p>
@@ -172,7 +172,7 @@ ga('send', 'pageview');
 </blockquote>
 <p>沒有人強迫你用他們的模組，你要使用前，本應做好評估。甚至，如果你是 TDD 派，只要你的程式碼通過測試，就是該模組的功能符合你的需求的證明。更何況如果你對該模組有疑慮，大可以針對該模組撰寫測試來進行評估。『為什麼要幫別人寫測試？』你問。這一段程式你原本不是要自幹？難道自幹就不用寫測試？</p>
 <p>至於，如何保證引用的模組，是『最有效率的解決方案』？好問題，你如何證明你自幹的程式碼，是『最有效率的解決方案』？</p>
-<p>『至少我自己寫的程式碼，要怎麼改就可以怎麼改。』—- 你知道 open source 是什麼意思嗎？</p>
+<p>『至少我自己寫的程式碼，要怎麼改就可以怎麼改。』---- 你知道 open source 是什麼意思嗎？</p>
 <blockquote>
 <p>Second, even if the package’s logic is correct, I can’t help but be amazed by the fact that developers are taking on dependencies for single line functions that they should be able to write with their eyes closed. In my opinion, if you cannot write a left-pad, is-positive-integer, or isArray function in 5 minutes flat (including the time you spend Googling), then you don’t actually know how to code.</p>
 </blockquote>
@@ -192,7 +192,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://amobiz.github.io/2016/04/07/re-npm-left-pad-have-we-forgotten-how-to-program/" data-id="cj4y0uft70089k0565ki0qc58" class="article-share-link">Share</a>
+      <a data-url="https://amobiz.github.io/2016/04/07/re-npm-left-pad-have-we-forgotten-how-to-program/" data-id="cj4y12ud90089u5564wonm8o3" class="article-share-link">Share</a>
       
         <a href="https://amobiz.github.io/2016/04/07/re-npm-left-pad-have-we-forgotten-how-to-program/#disqus_thread" class="article-comment-link">Comments</a>
       

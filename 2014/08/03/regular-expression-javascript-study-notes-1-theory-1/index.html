@@ -126,7 +126,7 @@ ga('send', 'pageview');
 <p>由上可知，當引擎宣告匹配失敗時，引擎必然嘗試了所有的可能性。所以必須注意當匹配失敗時，可能會有的效率問題。</p>
 <h4 id="優先選擇最前端的匹配結果-The-Match-That-Begins-Earliest-Wins"><a href="#優先選擇最前端的匹配結果-The-Match-That-Begins-Earliest-Wins" class="headerlink" title="優先選擇最前端的匹配結果 (The Match That Begins Earliest Wins)"></a>優先選擇最前端的匹配結果 (The Match That Begins Earliest Wins)</h4><p>由於 NFA 引擎是由文本的起始位置，逐字元測試整個正則表達式，同時，在不斷嘗試的過程中，一旦其中任何一種可能性能夠通過測試，則整個正則表達式匹配成功。因此，只要正則表達式能匹配成功，則其必定是在所有可能結果的最前端。</p>
 <p>譬如，下例的匹配結果，是 <code>&quot;belly&quot;</code>，而不是 <code>&quot;fat&quot;</code>：</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">“The dragging belly indicates your cat is too fat”</span>.match(<span class="regexp">/fat|cat|belly|your/</span>);    <span class="comment">// [ “belly” ]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;The dragging belly indicates your cat is too fat&quot;</span>.match(<span class="regexp">/fat|cat|belly|your/</span>);    <span class="comment">// [ &quot;belly&quot; ]</span></span><br></pre></td></tr></table></figure>
 
 <aside class="cheatsheet"><h5>Regular Expression 語法快速說明</h5><p>這裡的 「<code>fat|cat|belly|your</code>」代表多選結構。由「<code>|</code>」所分隔的任一表達式，如果能成功匹配文本，即代表該多選結構成功完成匹配。請參考後面 <a href="#bnf-grammar">BNF 語法</a> 的說明。</p>
 </aside>
@@ -135,7 +135,7 @@ ga('send', 'pageview');
 <p>標準匹配量詞有 <code>+</code>, <code>?</code>, <code>*</code>, <code>{m,n}</code>。(詳見後面 <a href="#bnf-grammar">BNF 語法</a> 的說明)</p>
 <p>使用量詞來約束子表達式時，進行嘗試的次數是存在下限和上限的。而標準匹配量詞總是希望獲得最長的可能匹配。也就是說，它們<strong>總是嘗試匹配盡可能多的字元</strong>，直到匹配上限為止。這正是它的名字 <strong>greedy (貪婪)</strong> 的由來。</p>
 <p>譬如:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">“Subject: Hi there”</span>.match(<span class="regexp">/Subject: (.<em>)/</em></span>);       <span class="comment">// [ “Subject: Hi there”, “Hi there” ]</span></span><br><span class="line"><span class="string">“Subject: Hi there”</span>.match(<span class="regexp">/Subject: (.)(.*)/</span>);   <span class="comment">// [ “Subject: Hi there”, “Hi there”, “” ]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;Subject: Hi there&quot;</span>.match(<span class="regexp">/Subject: (.<em>)/</em></span>);       <span class="comment">// [ &quot;Subject: Hi there&quot;, &quot;Hi there&quot; ]</span></span><br><span class="line"><span class="string">&quot;Subject: Hi there&quot;</span>.match(<span class="regexp">/Subject: (.)(.*)/</span>);   <span class="comment">// [ &quot;Subject: Hi there&quot;, &quot;Hi there&quot;, &quot;&quot; ]</span></span><br></pre></td></tr></table></figure>
 
 <aside class="cheatsheet"><h5>Regular Expression 語法快速說明</h5><p>「<code>.</code>」代表匹配任意字元；<br>「<code>*</code>」代表前面的字元，也就是這裡的「<code>.</code>」，可以匹配最少 0 次，最多無限次；<br>「<code>()</code>」代表要將匹配的內容，另外捕捉、儲存下來。</p>
 <p>請參考後面 <a href="#bnf-grammar">BNF 語法</a> 的說明。</p>
@@ -152,7 +152,7 @@ ga('send', 'pageview');
 <h4 id="匹配優先量詞-以及後面提到的忽略優先量詞-總想獲得全局匹配-Greediness-and-Laziness-Always-Favor-an-Overall-Match"><a href="#匹配優先量詞-以及後面提到的忽略優先量詞-總想獲得全局匹配-Greediness-and-Laziness-Always-Favor-an-Overall-Match" class="headerlink" title="匹配優先量詞 (以及後面提到的忽略優先量詞) 總想獲得全局匹配 (Greediness and Laziness Always Favor an Overall Match)"></a>匹配優先量詞 (以及後面提到的忽略優先量詞) 總想獲得全局匹配 (Greediness and Laziness Always Favor an Overall Match)</h4><p>前面的例子，剛好第二個「<code>(.*)</code>」可以匹配 0 個字元，所以整個正則表達式可以匹配成功。然而，如果在包含匹配優先量詞的表達式之後，還有其它表達式，並且期望獲得至少一個字元的匹配，是否該表達式就會匹配失敗呢？</p>
 <p>為了成功匹配整個正則表達式，為了使匹配優先量詞後續的表達式也能匹配 (然後才能使整個正則表達式成功匹配)，有時候引擎必須要求量詞表達式將已經匹配的字元再交還 (吐) 出來，這個過程叫做 <strong>relinquish (放棄)</strong> 或 <strong>unmatch (交還)</strong>。(其實這只是 backtracking (回溯) 的一個特例，詳見後面 backtracking 的說明。)</p>
 <p>譬如:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">“Subject: Hi there”</span>.match(<span class="regexp">/(.<em>): (.</em>)/</span>);        <span class="comment">// [ “Subject: Hi there”, “Subject:”, “Hi there” ]</span></span><br><span class="line"><span class="string">“Subject: Re: Hi there”</span>.match(<span class="regexp">/(.<em>): (.</em>)/</span>);    <span class="comment">// [ “Subject: Re: Hi there”, “Subject: Re:”, “Hi there” ]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;Subject: Hi there&quot;</span>.match(<span class="regexp">/(.<em>): (.</em>)/</span>);        <span class="comment">// [ &quot;Subject: Hi there&quot;, &quot;Subject:&quot;, &quot;Hi there&quot; ]</span></span><br><span class="line"><span class="string">&quot;Subject: Re: Hi there&quot;</span>.match(<span class="regexp">/(.<em>): (.</em>)/</span>);    <span class="comment">// [ &quot;Subject: Re: Hi there&quot;, &quot;Subject: Re:&quot;, &quot;Hi there&quot; ]</span></span><br></pre></td></tr></table></figure>
 
 <p>首先，因為「<code>*</code>」量詞是匹配優先的，所以兩個例子中的第一個「<code>(.*)</code>」會嘗試匹配所有的字元，直到文本結束。</p>
 <p>由於此時再無其它可匹配字元，第一個「<code>(.*)</code>」匹配結束，由下一個表達式「<code>:</code>」開始嘗試匹配。</p>
@@ -173,7 +173,7 @@ ga('send', 'pageview');
 </aside>
 <p>忽略優先量詞的特性，與標準匹配量詞相反，是忽略優先的，也就是<strong>總是嘗試匹配盡可能少的字元</strong>。這正是它的名字 <strong>lazy (懶惰)</strong> 或 <strong>reluctant (厭惡)</strong> 的由來。</p>
 <p>譬如:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">“Subject: Re: Hi there”</span>.match(<span class="regexp">/(.<em>?): (.</em>)/</span>);    <span class="comment">// [ “Subject: Re: Hi there”, “Subject”, “Re: Hi there” ]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;Subject: Re: Hi there&quot;</span>.match(<span class="regexp">/(.<em>?): (.</em>)/</span>);    <span class="comment">// [ &quot;Subject: Re: Hi there&quot;, &quot;Subject&quot;, &quot;Re: Hi there&quot; ]</span></span><br></pre></td></tr></table></figure>
 
 <p>由於忽略優先量詞總是嘗試匹配盡可能少的字元，「<code>(.*?)</code>」首先決定略過匹配 (或者說，匹配 <code>&quot;&quot;</code>)。</p>
 <p>接下來，「<code>:</code>」嘗試匹配 <code>&quot;S&quot;</code> 字元，匹配失敗。</p>
@@ -227,7 +227,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://amobiz.github.io/2014/08/03/regular-expression-javascript-study-notes-1-theory-1/" data-id="cj4y0ufry006ak056br507tay" class="article-share-link">Share</a>
+      <a data-url="https://amobiz.github.io/2014/08/03/regular-expression-javascript-study-notes-1-theory-1/" data-id="cj4y12uc2006du556ursndnc1" class="article-share-link">Share</a>
       
         <a href="https://amobiz.github.io/2014/08/03/regular-expression-javascript-study-notes-1-theory-1/#disqus_thread" class="article-comment-link">Comments</a>
       

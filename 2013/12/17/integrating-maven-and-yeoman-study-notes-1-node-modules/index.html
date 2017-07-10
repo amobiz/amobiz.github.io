@@ -115,9 +115,9 @@ ga('send', 'pageview');
 <a id="more"></a>
 <p>當使用 <code>yo webapp</code> 指令來生成專案時，會立即下載一堆依賴模組，這些依賴模組的檔案，都會放在專案根目錄下的 <code>node_modules</code> 目錄下，我目前使用的 yo 1.0.6 版會產生總共 41.7 MB 大小的檔案。仔細去看的話，這些檔案在每個生成的專案都是完全相同的。這實在是個浪費，尤其是當要 git 或備份專案檔案，或者使用 dropbox 同步的時候，都必須要設法避開這些檔案。</p>
 <p>使用過 Maven 管理專案的人，應該都知道 Maven 使用 <code>groupId</code>，<code>artifactId</code>，<code>version</code> 三個 『座標』 指定唯一的程式庫版本。這些通用的模組，都是放在 local repository 供所有的專案共用的，絕對不會有重複的情形。</p>
-<p>不幸的是，這似乎是 node 社群不打算解決的問題，使用 <a href="https://www.google.com.tw/search?q=+install+node_modules+global&amp;oq=+install+node_modules+global" target="_blank" rel="external"><code>install node_modules global</code></a> 作為關鍵字搜尋，可以找到很多疑問。但是，在 <a href="https://npmjs.org/doc/faq.html#Why-can-t-npm-just-put-everything-in-one-place-like-other-package-managers" title="Why can&#39;t npm just put everything in one place，like other package managers?" target="_blank" rel="external">Why can’t npm just put everything in one place，like other package managers?</a> 這裡，明白說了：</p>
+<p>不幸的是，這似乎是 node 社群不打算解決的問題，使用 <a href="https://www.google.com.tw/search?q=+install+node_modules+global&amp;oq=+install+node_modules+global" target="_blank" rel="external"><code>install node_modules global</code></a> 作為關鍵字搜尋，可以找到很多疑問。但是，在 <a href="https://npmjs.org/doc/faq.html#Why-can-t-npm-just-put-everything-in-one-place-like-other-package-managers" title="Why can&#39;t npm just put everything in one place，like other package managers?" target="_blank" rel="external">Why can&#39;t npm just put everything in one place，like other package managers?</a> 這裡，明白說了：</p>
 <blockquote>
-<p>because it’s a terrible idea that causes more problems than it solves.</p>
+<p>because it&#39;s a terrible idea that causes more problems than it solves.</p>
 </blockquote>
 <p>還有</p>
 <blockquote>
@@ -140,7 +140,7 @@ ga('send', 'pageview');
 <p>或執行一次上面的 <code>for</code> 迴圈指令，全部更新。</p>
 <p>2.接受它，放下它：</p>
 <ul>
-<li>就…假裝看不見吧。</li>
+<li>就...假裝看不見吧。</li>
 </ul>
 <p>不論選用上面哪種方法，都必須要處理下面的設定與改變：</p>
 <ul>
@@ -150,16 +150,16 @@ ga('send', 'pageview');
 <figure class="highlight bat"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">7</span>za a -r -xr!node_modules my_project c:\my_project*.*</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li>Dropbox 同步: 嗯…無解。…就不要用了吧。</li>
+<li>Dropbox 同步: 嗯...無解。...就不要用了吧。</li>
 </ul>
 <p>前面第一種方法，是我自己實驗出來的，先試用一陣子看看，不行的話，再採用第二種方法。</p>
 <p>歡迎大家的回饋與心得分享。</p>
 <h3 id="參考文章："><a href="#參考文章：" class="headerlink" title="參考文章："></a>參考文章：</h3><ul>
 <li><a href="https://nodejs.org/en/blog/npm/npm-1-0-global-vs-local-installation/" title="npm 1.0: Global vs Local installation" target="_blank" rel="external">npm 1.0: Global vs Local installation</a></li>
-<li><a href="https://docs.npmjs.com/misc/faq#why-can-t-npm-just-put-everything-in-one-place-like-other-package-managers" title="npm fag - Why can&#39;t npm just put everything in one place，like other package managers?" target="_blank" rel="external">npm fag - Why can’t npm just put everything in one place，like other package managers?</a></li>
+<li><a href="https://docs.npmjs.com/misc/faq#why-can-t-npm-just-put-everything-in-one-place-like-other-package-managers" title="npm fag - Why can&#39;t npm just put everything in one place，like other package managers?" target="_blank" rel="external">npm fag - Why can&#39;t npm just put everything in one place，like other package managers?</a></li>
 <li><a href="https://docs.npmjs.com/files/folders" target="_blank" rel="external">npm folders</a></li>
 <li><a href="https://docs.npmjs.com/cli/link" target="_blank" rel="external">npm - link</a></li>
-<li><a href="http://stackoverflow.com/questions/19141614/installing-projects-dependencies-globally-and-running-the-project-without-node" title="Installing project&#39;s dependencies globally and running the project without &#39;node_modules/&#39; — how?" target="_blank" rel="external">Installing project’s dependencies globally and running the project without ‘node_modules/‘ — how?</a></li>
+<li><a href="http://stackoverflow.com/questions/19141614/installing-projects-dependencies-globally-and-running-the-project-without-node" title="Installing project&#39;s dependencies globally and running the project without &#39;node_modules/&#39; — how?" target="_blank" rel="external">Installing project&#39;s dependencies globally and running the project without &#39;node_modules/&#39; — how?</a></li>
 <li><a href="http://stackoverflow.com/questions/14742553/npm-local-install-package-to-custom-location" title="npm local install package to custom location" target="_blank" rel="external">npm local install package to custom location</a></li>
 <li><a href="http://stackoverflow.com/questions/13668097/how-to-replace-npm-node-module-folder-with-another-folder" title="How to replace NPM node_module folder with another folder?" target="_blank" rel="external">How to replace NPM node_module folder with another folder?</a></li>
 <li><a href="http://blog.longwin.com.tw/2010/01/git-ignore-howto-set-zim-2010/" title="Git .gitignore 設定 與 注意事項 - 以 Zim 操作為範例" target="_blank" rel="external">Git .gitignore 設定 與 注意事項 - 以 Zim 操作為範例</a></li>
@@ -179,7 +179,7 @@ ga('send', 'pageview');
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://amobiz.github.io/2013/12/17/integrating-maven-and-yeoman-study-notes-1-node-modules/" data-id="cj4y0ufrb005qk056txxq2hmk" class="article-share-link">Share</a>
+      <a data-url="https://amobiz.github.io/2013/12/17/integrating-maven-and-yeoman-study-notes-1-node-modules/" data-id="cj4y12ub8005ou556vgumaczr" class="article-share-link">Share</a>
       
         <a href="https://amobiz.github.io/2013/12/17/integrating-maven-and-yeoman-study-notes-1-node-modules/#disqus_thread" class="article-comment-link">Comments</a>
       
