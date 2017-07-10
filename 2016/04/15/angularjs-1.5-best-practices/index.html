@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>AngularJS 1.5 最佳實務 | 格物致知</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言本文整理截至目前 AngularJS 1.5 為止， 個人以為的最佳實務做法。
+為什麼現在？基於以下三點理由：
+
+雖然 AngularJS 2.0 發佈在即，但是既有的 AngularJS 1.x 程式碼仍需要維護。
+由於 AngularJS 1.x 受到廣泛的歡迎，前後做了不少的改進，因此網路上到處可見其實已經過時的作法。
+基於向後相容的原則，有些功能雖然被保留下來，但未必是最佳作法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AngularJS 1.5 最佳實務">
+<meta property="og:url" content="https://amobiz.github.io/2016/04/15/angularjs-1.5-best-practices/index.html">
+<meta property="og:site_name" content="格物致知">
+<meta property="og:description" content="前言本文整理截至目前 AngularJS 1.5 為止， 個人以為的最佳實務做法。
+為什麼現在？基於以下三點理由：
+
+雖然 AngularJS 2.0 發佈在即，但是既有的 AngularJS 1.x 程式碼仍需要維護。
+由於 AngularJS 1.x 受到廣泛的歡迎，前後做了不少的改進，因此網路上到處可見其實已經過時的作法。
+基於向後相容的原則，有些功能雖然被保留下來，但未必是最佳作法。">
+<meta property="og:image" content="https://angularjs.org/img/AngularJS-large.png">
+<meta property="og:updated_time" content="2016-06-28T03:07:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AngularJS 1.5 最佳實務">
+<meta name="twitter:description" content="前言本文整理截至目前 AngularJS 1.5 為止， 個人以為的最佳實務做法。
+為什麼現在？基於以下三點理由：
+
+雖然 AngularJS 2.0 發佈在即，但是既有的 AngularJS 1.x 程式碼仍需要維護。
+由於 AngularJS 1.x 受到廣泛的歡迎，前後做了不少的改進，因此網路上到處可見其實已經過時的作法。
+基於向後相容的原則，有些功能雖然被保留下來，但未必是最佳作法。">
+<meta name="twitter:image" content="https://angularjs.org/img/AngularJS-large.png">
+  
+    <link rel="alternative" href="/atom.xml" title="格物致知" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-68633744-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">格物致知</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Happiness only real when shared.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://amobiz.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-angularjs-1.5-best-practices" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/15/angularjs-1.5-best-practices/" class="article-date">
+  <time datetime="2016-04-14T23:02:00.000Z" itemprop="datePublished">2016-04-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Programming/">Programming</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/15/angularjs-1.5-best-practices/">AngularJS 1.5 最佳實務</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+          <div id="toc" class="toc-article">
+            <strong class="toc-title">文章目錄</strong>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最佳實務"><span class="toc-number">2.</span> <span class="toc-text">最佳實務</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#不要使用-ng-controller"><span class="toc-number">2.1.</span> <span class="toc-text">不要使用 ng-controller</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不要在路由中指定-controller"><span class="toc-number">2.2.</span> <span class="toc-text">不要在路由中指定 controller</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#盡可能元件化-使用-component-取代-ng-controller"><span class="toc-number">2.3.</span> <span class="toc-text">盡可能元件化 (使用 component 取代 ng-controller)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用-component-定義-element-元件；使用-directive-定義-attribute-directive"><span class="toc-number">2.4.</span> <span class="toc-text">使用 component() 定義 element 元件；使用 directive() 定義 attribute directive</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#永遠使用-isolated-scope"><span class="toc-number">2.5.</span> <span class="toc-text">永遠使用 isolated scope</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#永遠將屬性資料以物件加以包裹，或使用-“controllerAs”-語法"><span class="toc-number">2.6.</span> <span class="toc-text">永遠將屬性資料以物件加以包裹，或使用 “controllerAs” 語法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#指定-“controllerAs”-之後，controller-中的-this-與-scope-有何不同？"><span class="toc-number">2.6.1.</span> <span class="toc-text">指定 “controllerAs” 之後，controller 中的 this 與 $scope 有何不同？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#參考資料-延伸閱讀"><span class="toc-number">2.6.2.</span> <span class="toc-text">參考資料 / 延伸閱讀</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#少用-rootScope"><span class="toc-number">2.7.</span> <span class="toc-text">少用 $rootScope</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#盡量讓狀態靠近使用的元件"><span class="toc-number">2.8.</span> <span class="toc-text">盡量讓狀態靠近使用的元件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#就使用-factory-函數-忘記-service-和-provider-吧"><span class="toc-number">2.9.</span> <span class="toc-text">就使用 factory() 函數 (忘記 service() 和 provider() 吧)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#詳細說明"><span class="toc-number">2.9.1.</span> <span class="toc-text">詳細說明</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">2.9.1.1.</span> <span class="toc-text">建議主要以 factory() 函數來建立服務</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#undefined"><span class="toc-number">2.9.1.2.</span> <span class="toc-text">Service vs Factory - Once and for all</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用-factory-函數來建立服務的常見用法"><span class="toc-number">2.9.2.</span> <span class="toc-text">使用 factory() 函數來建立服務的常見用法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不要使用-module-config"><span class="toc-number">2.10.</span> <span class="toc-text">不要使用 module.config</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#謹慎使用-scope-事件"><span class="toc-number">2.11.</span> <span class="toc-text">謹慎使用 scope 事件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#善加使用-exceptionHandler"><span class="toc-number">2.12.</span> <span class="toc-text">善加使用 $exceptionHandler</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#找到合適的方法上傳-log-到後端伺服器"><span class="toc-number">2.13.</span> <span class="toc-text">找到合適的方法上傳 log 到後端伺服器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用-angular-ui-router"><span class="toc-number">2.14.</span> <span class="toc-text">使用 angular-ui-router</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#小心使用-Promise-並且注意-AngularJS-對-Promise-錯誤的特殊處理"><span class="toc-number">2.15.</span> <span class="toc-text">小心使用 Promise 並且注意 AngularJS 對 Promise 錯誤的特殊處理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#避免使用延遲載入"><span class="toc-number">2.16.</span> <span class="toc-text">避免使用延遲載入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#了解-digest-循環的判斷方式"><span class="toc-number">2.17.</span> <span class="toc-text">了解 $digest 循環的判斷方式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#結論"><span class="toc-number">3.</span> <span class="toc-text">結論</span></a></li></ol>
+          </div>
+        
+        <!-- Post Contents -->
+        <p><a href="https://angularjs.org/" target="_blank" rel="external"><br><img src="https://angularjs.org/img/AngularJS-large.png" alt=""></a></p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文整理截至目前 AngularJS 1.5 為止， 個人以為的最佳實務做法。</p>
+<p>為什麼現在？基於以下三點理由：</p>
+<ul>
+<li>雖然 AngularJS 2.0 發佈在即，但是既有的 AngularJS 1.x 程式碼仍需要維護。</li>
+<li>由於 AngularJS 1.x 受到廣泛的歡迎，前後做了不少的改進，因此網路上到處可見其實已經過時的作法。</li>
+<li>基於向後相容的原則，有些功能雖然被保留下來，但未必是最佳作法。</li>
+</ul>
+<p>『你可以這麼做，不代表你必須這麼做』，基於『JavaScript: The Good Parts』的哲理，本文適合具有 AngularJS 1.x 實務開發經驗，然而卻隨著 AngularJS 的發展，逐漸對於網路上充斥各種主觀、矛盾的說法、用法感到困惑的開發者。</p>
+<p>雖然遵循本文提出的原則，可以以趨近於元件化的風格開發 AngularJS 1.5 應用程式，但本文不涉及 AngularJS 1.x 移轉到 AngularJS 2.0 議題。</p>
+<a id="more"></a>
+<p>在閱讀本文之前，建議讀者可以先閱讀 <a href="https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md" target="_blank" rel="external">Angular 1 Style Guide</a> 這篇文章，本文的程式碼基本上遵循該文倡導的風格，除了少數與下一篇參考文章的建議牴觸之外。</p>
+<p>本文主要內容則是基於 <a href="https://medium.com/@bluepnume/sane-scalable-angular-apps-are-tricky-but-not-impossible-lessons-learned-from-paypal-checkout-c5320558d4ef" target="_blank" rel="external">Sane, scalable Angular apps are tricky, but not impossible. Lessons learned from PayPal Checkout.</a> 這篇文章，並補充個人觀點。</p>
+<h2 id="最佳實務"><a href="#最佳實務" class="headerlink" title="最佳實務"></a>最佳實務</h2><h3 id="不要使用-ng-controller"><a href="#不要使用-ng-controller" class="headerlink" title="不要使用 ng-controller"></a>不要使用 <code>ng-controller</code></h3><p>出處：<a href="https://medium.com/@bluepnume/sane-scalable-angular-apps-are-tricky-but-not-impossible-lessons-learned-from-paypal-checkout-c5320558d4ef#0b67" target="_blank" rel="external">Don’t use ng-controller</a></p>
+<p>典型的 <code>ng-controller</code> 用法如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-controller</span>=<span class="string">“myController”</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">strong</span>&gt;</span>&#123;&#123;foo&#125;&#125;<span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>這有什麼問題呢？</p>
+<ul>
+<li><code>ng-controller</code> 違反元件封裝的原則：template 未能與 controller 程式碼封裝在一起，而獨自暴露在 html 中。</li>
+<li>無法重複使用：基於第一個理由，你的 controller 無法直接重複使用：必須複製 template。</li>
+</ul>
+<h3 id="不要在路由中指定-controller"><a href="#不要在路由中指定-controller" class="headerlink" title="不要在路由中指定 controller"></a>不要在路由中指定 controller</h3><p>出處：<a href="https://medium.com/@bluepnume/sane-scalable-angular-apps-are-tricky-but-not-impossible-lessons-learned-from-paypal-checkout-c5320558d4ef#5b61" target="_blank" rel="external">Don’t specify controllers in your routes</a></p>
+<p>不論是 AngularJS 內建的 router 或是一般常用的 ui-router，典型的寫法，都是同時指定 <code>template</code> / <code>templateUrl</code> 及 <code>controller</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$routeProvider.</span><br><span class="line">  when(<span class="string">‘/phones’</span>, &#123;</span><br><span class="line">    <span class="attr">templateUrl</span>: <span class="string">‘partials/phone-list.html’</span>,</span><br><span class="line">    <span class="attr">controller</span>: <span class="string">‘PhoneListController’</span></span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>這有什麼問題呢？</p>
+<p>其實跟『不要使用 <code>ng-controller</code>』的狀況類似，都是與封裝有關：</p>
+<ul>
+<li>若使用 <code>template</code> 來指定，那麼當要重複使用 controller 時，就必須複製該 template，</li>
+<li>若使用 <code>templateUrl</code> 來指定，那麼就有可能不小心指定了錯誤的 template 檔案，造成與 controller 不一致的狀況。</li>
+</ul>
+<h3 id="盡可能元件化-使用-component-取代-ng-controller"><a href="#盡可能元件化-使用-component-取代-ng-controller" class="headerlink" title="盡可能元件化 (使用 component 取代 ng-controller)"></a>盡可能元件化 (使用 component 取代 <code>ng-controller</code>)</h3><p>出處：</p>
+<ul>
+<li><a href="https://medium.com/@bluepnume/sane-scalable-angular-apps-are-tricky-but-not-impossible-lessons-learned-from-paypal-checkout-c5320558d4ef#e211" target="_blank" rel="external">Make everything a directive</a></li>
+<li><a href="https://toddmotto.com/exploring-the-angular-1-5-component-method" target="_blank" rel="external">Exploring the Angular 1.5 .component() method</a></li>
+</ul>
+<p>基於上面兩點，應該將原本可能使用到 <code>ng-controller</code> 的部份，一律改用 component 來寫。</p>
+<p>雖然還是可以使用 <a href="https://docs.angularjs.org/api/ng/provider/$compileProvider#directive" target="_blank" rel="external"><code>$compileProvider.directive()</code></a> 來定義 directive，在 AngularJS 1.5 下，則提供了新的 <a href="https://docs.angularjs.org/api/ng/provider/$compileProvider#component" target="_blank" rel="external"><code>component()</code></a> 函數。這是為了讓 AngularJS 1.X 程式移植到 AngularJS 2.0 比較容易，而特地提供，讓開發者以比較接近 AngularJS 2.0 component 寫法的方式來定義元件：</p>
+<p><strong>myComponent.html</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">strong</span>&gt;</span>&#123;&#123;vm.foo&#125;&#125;<span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>myComponent.js</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myTemplate = <span class="built_in">require</span>(<span class="string">‘./myComponent.html’</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> myComponent = &#123;</span><br><span class="line">true<span class="attr">bindings</span>: &#123;</span><br><span class="line">truetrue<span class="attr">foo</span>: <span class="string">‘=’</span>,</span><br><span class="line">truetrue<span class="attr">value</span>: <span class="string">‘@’</span>,</span><br><span class="line">truetrue<span class="attr">oneWay</span>: <span class="string">‘&lt;’</span>,</span><br><span class="line">truetrue<span class="attr">twoWay</span>: <span class="string">‘=’</span>,</span><br><span class="line">truetrue<span class="attr">callback</span>: <span class="string">‘&amp;’</span></span><br><span class="line">true&#125;,</span><br><span class="line">true<span class="attr">template</span>: myTemplate,</span><br><span class="line">true<span class="attr">controller</span>: MyComponentController,</span><br><span class="line">true<span class="attr">controllerAs</span>: <span class="string">‘vm’</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">myapp.component(<span class="string">‘myComponent’</span>, myComponent);</span><br><span class="line"></span><br><span class="line">MyComponentController.$inject = [<span class="string">‘$http’</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyComponentController</span>(<span class="params">$http</span>) </span>&#123;</span><br><span class="line">true<span class="keyword">this</span>.foo = <span class="string">‘bar’</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意，使用 <code>component()</code> 函數來建立元件時：</p>
+<ul>
+<li>必然以 <code>restrict: &#39;E&#39;</code> 的形式建立，也就是只能建立 element 形式的元件，</li>
+<li>必然以 <code>scope: {}</code> 的形式建立，也就是建立 “isolated scope”，不會繼承 parent scope。因此，若需要外部 scope 的資料，必須明確在 <code>bindings</code> 中定義屬性，並在使用 element tag 時傳入。</li>
+<li>承上，在 <code>component()</code> 函數中，已使用 <code>bindings</code> 取代 <code>scope</code> 及在 1.3 ~ 1.4 之間引入的 <code>bindToController</code> 屬性。所以在 <code>component()</code> 函數中，<code>scope</code> 及 <code>bindToController</code> 屬性無效，也不應再使用。</li>
+<li>如果你沒有自行指定 <code>controllerAs</code>，則會自動幫你指定為 <code>$ctrl</code>，也就是說，強迫必須使用 <code>controllerAs</code> 語法 (參考後面『永遠使用 “controllerAs” 語法』)。</li>
+</ul>
+<p>另外，</p>
+<ul>
+<li>由於 <code>component()</code> 函數只能用來建立 element 元件，如果元件必須同時或者只支援其他類型，譬如 attribute 形式，則必須使用 <code>directive()</code> 函數定義。</li>
+<li>上面使用 <code>require()</code> 引入 template 檔案的作法，是採用 Webpack 的作法。實務上可以直接使用 <code>templateUrl</code> 指定外部檔案, 或直接以內聯的形式定義 <code>template</code> 內容。</li>
+<li>推薦像上面這樣，將 <code>myComponent</code> 的設定獨立定義，甚至獨立為一個檔案，這樣將來要移轉為 AngularJS 2.0 元件會比較方便。</li>
+<li>將 controller 放在後面獨立定義，並以 constructor 的形式，開頭名稱大寫，是 John Papa <a href="https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md#named-vs-anonymous-functions" target="_blank" rel="external">推薦的作法</a>。</li>
+</ul>
+<p>最後，再提醒一下，定義元件時，使用 <code>myComponent</code> 名稱，這名稱就稱為該元件的 “directive name”。首字小寫，這是 AngularJS 定義元件的推薦慣例。(當作是定義 instance 變數，所以小寫開頭。)<br>而在 html 中使用時，則必須使用 <code>my-component</code>，這稱為該元件的 “tag name”。全部小寫，以 <code>-</code> 分隔單字，雖然 HTML 不區分大小寫，但是使用全小寫是推薦的慣例。<br>而 controller 的名稱為 <code>MyComponent</code>，因為它是一個 constructor。首字大寫，表示這是一個 class，這是 JavaScript 的慣例。</p>
+<p>一旦定義好 component，就可以如下使用：</p>
+<p><strong>在 markup 中使用</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">ng-app</span>=<span class="string">“myApp”</span>&gt;</span></span><br><span class="line">true<span class="tag">&lt;<span class="name">my-component</span> <span class="attr">foo</span>=<span class="string">“bar”</span>&gt;</span><span class="tag">&lt;/<span class="name">my-component</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>在路由中使用</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$routeProvider.</span><br><span class="line">  when(<span class="string">‘/phones’</span>, &#123;</span><br><span class="line">    <span class="attr">template</span>: <span class="string">‘&lt;my-component foo=”bar”&gt;&lt;/my-component&gt;’</span></span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>好處如下：</p>
+<ul>
+<li>完全封裝，不須再擔心 controller 與 template 不一致，</li>
+<li>需要的屬性可以由外部以偏好的方式，以 expression 的形式指定，傳入的是計算後的值，元件內部不再依賴於外部的特定屬性名稱，</li>
+<li>如果需要處理事件，也可以在 <code>bindings</code> 中以 <code>eventName: &#39;&amp;&#39;</code> 的方式定義，同樣由外部以偏好的方式指定，元件不需要依賴於外部 scope 的特定方法名稱，</li>
+<li>因為是 “isolated scope”，所以不必擔心 scope 之間的資料存取、覆蓋、同步問題。</li>
+</ul>
+<p><a href="http://teropa.info/blog/2015/10/18/refactoring-angular-apps-to-components.html" target="_blank" rel="external">Refactoring Angular Apps to Component Style</a> 這篇文章詳細介紹各種將 controller 改用 component 的形式撰寫的步驟，相當值得一讀，強烈推薦。</p>
+<h3 id="使用-component-定義-element-元件；使用-directive-定義-attribute-directive"><a href="#使用-component-定義-element-元件；使用-directive-定義-attribute-directive" class="headerlink" title="使用 component() 定義 element 元件；使用 directive() 定義 attribute directive"></a>使用 <code>component()</code> 定義 element 元件；使用 <code>directive()</code> 定義 attribute directive</h3><p>建議只要是 element 形式的 directive，都使用 <code>component()</code> 函數來建立。其它情況則使用 <code>directive()</code> 函數。這裡一併列出建議的 element 元件 及 attribute directive 的參考寫法，做為對照。</p>
+<ol>
+<li><p>定義 component / element directive：</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myTemplate = <span class="string">‘&lt;div&gt;&lt;/div&gt;’</span>;</span><br><span class="line"><span class="keyword">var</span> myComponent = &#123;</span><br><span class="line">true<span class="attr">bindings</span>: &#123;</span><br><span class="line">truetrue<span class="attr">value</span>: <span class="string">‘@’</span>,</span><br><span class="line">truetrue<span class="attr">oneWay</span>: <span class="string">‘&lt;’</span>,</span><br><span class="line">truetrue<span class="attr">twoWay</span>: <span class="string">‘=’</span>,</span><br><span class="line">truetrue<span class="attr">callback</span>: <span class="string">‘&amp;’</span></span><br><span class="line">true&#125;,</span><br><span class="line">true<span class="attr">template</span>: myTemplate,</span><br><span class="line">true<span class="attr">controller</span>: MyComponentController,</span><br><span class="line">true<span class="attr">controllerAs</span>: <span class="string">‘vm’</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">app.component(<span class="string">‘myComponent’</span>, myComponent);</span><br><span class="line"></span><br><span class="line">MyComponentController.$inject = [<span class="string">‘$http’</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyComponentController</span>(<span class="params">$http</span>) </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定義 attribute directive：</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myDirective = &#123;</span><br><span class="line">true<span class="attr">restrict</span>: <span class="string">‘A’</span>,</span><br><span class="line">true<span class="attr">scope</span>: &#123;</span><br><span class="line">truetrue<span class="attr">value</span>: <span class="string">‘@’</span>,</span><br><span class="line">truetrue<span class="attr">oneWay</span>: <span class="string">‘&lt;’</span>,</span><br><span class="line">truetrue<span class="attr">twoWay</span>: <span class="string">‘=’</span>,</span><br><span class="line">truetrue<span class="attr">callback</span>: <span class="string">‘&amp;’</span></span><br><span class="line">true&#125;,</span><br><span class="line">true<span class="attr">link</span>: myDirectiveLinker</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">app.directive(<span class="string">‘myDirective’</span>, myDirective);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myDirectiveLinker</span>(<span class="params">scope, element, attrs</span>) </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="永遠使用-isolated-scope"><a href="#永遠使用-isolated-scope" class="headerlink" title="永遠使用 isolated scope"></a>永遠使用 isolated scope</h3><p>出處：<a href="https://medium.com/@bluepnume/sane-scalable-angular-apps-are-tricky-but-not-impossible-lessons-learned-from-paypal-checkout-c5320558d4ef#f77d" target="_blank" rel="external">Always use an isolated scope</a></p>
+<p>首先，你只有在定義 directive 時，才能指定 scope 種類 (註)。而 scope 有三種：</p>
+<ol>
+<li><p>isolated scope: <code>scope: {}</code></p>
+<p> 建立一個獨立的 scope。要交換的資料必須明確定義。</p>
+</li>
+<li><p>new scope: <code>scope: true</code></p>
+<p> 建立新的 child scope，並且繼承 parent scope。</p>
+</li>
+<li><p>no scope: <code>scope: false</code></p>
+<p> 不建立 scope，直接使用 parent scope。</p>
+</li>
+</ol>
+<p>這有什麼問題呢？</p>
+<ul>
+<li><p>既然 directive 就是 element 和 attribute (還有 class 和 comment 但是官方不建議使用)，讓它們可以直接存取父元件的資料不是很奇怪嗎？標準 html 的標籤不都是要自行指定屬性？</p>
+</li>
+<li><p>繼承了 parent scope，也就意謂著依賴於 parent scope，因此元件的可重用性就大幅降低。</p>
+</li>
+<li><p>因為 scope 是以類似 prototpye 的方式繼承，親子 scope 之間會發生屬性遮蔽問題 (請參考下一段說明)。</p>
+</li>
+</ul>
+<p>因此，強烈建議一律使用 “isolated scope”，不要使用另外兩種。當需要 parent scope 資料時，請明確定義屬性，並由 parent scope 指定傳入。</p>
+<p>註：即使在 <code>ng-controller</code> 中使用 “controllerAs” 語法，也只是幫你以指定的名稱建立一個包裹物件而已，scope 類型仍然是 “new scope”，並無法指定 scope 類型。這也是一個不應該使用 <code>ng-controller</code> 的好理由。</p>
+<h3 id="永遠將屬性資料以物件加以包裹，或使用-“controllerAs”-語法"><a href="#永遠將屬性資料以物件加以包裹，或使用-“controllerAs”-語法" class="headerlink" title="永遠將屬性資料以物件加以包裹，或使用 “controllerAs” 語法"></a>永遠將屬性資料以物件加以包裹，或使用 “controllerAs” 語法</h3><p>出處：</p>
+<ul>
+<li><a href="https://medium.com/@bluepnume/sane-scalable-angular-apps-are-tricky-but-not-impossible-lessons-learned-from-paypal-checkout-c5320558d4ef#838c" target="_blank" rel="external">Only ever bind to sub-properties of an object</a></li>
+<li><a href="http://blog.thoughtram.io/angularjs/2015/01/02/exploring-angular-1.3-bindToController.html" target="_blank" rel="external">Exploring Angular 1.3: Binding to Directive Controllers</a></li>
+</ul>
+<p>只要遵循上面『盡可能元件化 (使用 component 取代 <code>ng-controller</code>)』的原則，即自動 (強制) 獲得使用 “controllerAs” 及 “isolated scope” 的好處。</p>
+<p>如果你不需要知道 AngularJS 過去最被詬病的 scope 黑暗歷史，或者，你已經了解什麼是 “controllerAs”，可以放心跳過這一段。</p>
+<p>像這樣的寫法：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">“text”</span> <span class="attr">ng-model</span>=<span class="string">“username”</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>username</code> 將直接繫結到上層 scope 的 <code>username</code> 屬性。這裡的關鍵字是『上層 scope』。</p>
+<p>這有什麼問題呢？</p>
+<ul>
+<li><p>由於某些 AngularJS 的 directive，譬如 <code>ngIf</code>，會建立新的 scope，也就是前面的提到的 “new scope”，注意 “new scope” 會繼承到 parent scope。意思是說，你的 binding 將會根據你的 element 所在的位置，因而繼承了你沒有預料到的『上層 scope』，因此而可能有不同的行為。</p>
+</li>
+<li><p>其次，由於屬性是以 prototype 的方式繼承，一旦 child scope 建立了同名的屬性，就同時遮蔽了 parent scope 的同名屬性。使得原本希望直接更新 parent scope 屬性的意圖落空。</p>
+</li>
+</ul>
+<p>注意，以下範例為了清楚起見，直接使用 <code>ng-controller</code> 建立新的 scope，實務上仍然建議『盡可能元件化 (使用 component 取代 <code>ng-controller</code>)』。</p>
+<p></p><p data-height="268" data-theme-id="0" data-slug-hash="NNywWd" data-default-tab="result" data-user="amobiz" class="codepen">See the Pen <a href="http://codepen.io/amobiz/pen/NNywWd/" target="_blank" rel="external">AngularJS Scope Problem</a> by amobiz (<a href="http://codepen.io/amobiz" target="_blank" rel="external">@amobiz</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<div class="hidden"><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-app</span>=<span class="string">“app”</span>&gt;</span></span><br><span class="line">true<span class="tag">&lt;<span class="name">h4</span>&gt;</span>Form 1<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line">true<span class="tag">&lt;<span class="name">form</span> <span class="attr">ng-controller</span>=<span class="string">“ParentController”</span>&gt;</span></span><br><span class="line">truetrue<span class="tag">&lt;<span class="name">label</span>&gt;</span>Username: <span class="tag">&lt;/<span class="name">label</span>&gt;</span>&#123;&#123;username&#125;&#125;<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">truetrue<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">“text”</span> <span class="attr">ng-model</span>=<span class="string">“username”</span> /&gt;</span></span><br><span class="line">true<span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"></span><br><span class="line">true<span class="tag">&lt;<span class="name">h4</span>&gt;</span>Form 2<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line">true<span class="tag">&lt;<span class="name">form</span> <span class="attr">ng-controller</span>=<span class="string">“ParentController”</span>&gt;</span></span><br><span class="line">truetrue<span class="tag">&lt;<span class="name">label</span>&gt;</span>Username: <span class="tag">&lt;/<span class="name">label</span>&gt;</span>&#123;&#123;username&#125;&#125;<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">truetrue<span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-if</span>=<span class="string">“!registered”</span>&gt;</span></span><br><span class="line">truetruetrue<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">“text”</span> <span class="attr">ng-model</span>=<span class="string">“username”</span> /&gt;</span></span><br><span class="line">truetrue<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">true<span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">‘app’</span>, [])</span><br><span class="line">.controller(<span class="string">‘ParentController’</span>, ParentController)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ParentController</span>(<span class="params">$scope</span>) </span>&#123;</span><br><span class="line">true$scope.username = <span class="string">‘My Name’</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</div>
+<p>注意上面 Form 2，當你輸入資料時，ParentController 的 <code>username</code> 並不會同步更新。</p>
+<p>為了避開巢狀 scope 的 prototype properties 繼承問題，可以在 parent scope 中以物件的形式將值包裝起來。<br>這樣，在 child scope 中，只要永遠不直接對 scope 設定屬性，就不用擔心 scope 屬性遮蔽問題。而透過該物件存取其屬性，就能自由與 parent scope 交換存取資料。</p>
+<p></p><p data-height="268" data-theme-id="0" data-slug-hash="oxEowv" data-default-tab="result" data-user="amobiz" class="codepen">See the Pen <a href="http://codepen.io/amobiz/pen/oxEowv/" target="_blank" rel="external">AngularJS Scope via Object</a> by amobiz (<a href="http://codepen.io/amobiz" target="_blank" rel="external">@amobiz</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<div class="hidden"><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-app</span>=<span class="string">“app”</span>&gt;</span></span><br><span class="line">true<span class="tag">&lt;<span class="name">h4</span>&gt;</span>Form 1<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line">true<span class="tag">&lt;<span class="name">form</span> <span class="attr">ng-controller</span>=<span class="string">“ParentController”</span>&gt;</span></span><br><span class="line">truetrue<span class="tag">&lt;<span class="name">label</span>&gt;</span>Username: <span class="tag">&lt;/<span class="name">label</span>&gt;</span>&#123;&#123;vm.username&#125;&#125;<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">truetrue<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">“text”</span> <span class="attr">ng-model</span>=<span class="string">“vm.username”</span> /&gt;</span></span><br><span class="line">true<span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"></span><br><span class="line">true<span class="tag">&lt;<span class="name">h4</span>&gt;</span>Form 2<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line">true<span class="tag">&lt;<span class="name">form</span> <span class="attr">ng-controller</span>=<span class="string">“ParentController”</span>&gt;</span></span><br><span class="line">truetrue<span class="tag">&lt;<span class="name">label</span>&gt;</span>Username: <span class="tag">&lt;/<span class="name">label</span>&gt;</span>&#123;&#123;vm.username&#125;&#125;<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line">truetrue<span class="tag">&lt;<span class="name">div</span> <span class="attr">ng-if</span>=<span class="string">“!vm.registered”</span>&gt;</span></span><br><span class="line">truetruetrue<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">“text”</span> <span class="attr">ng-model</span>=<span class="string">“vm.username”</span> /&gt;</span></span><br><span class="line">truetrue<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">true<span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">‘app’</span>, [])</span><br><span class="line">.controller(<span class="string">‘ParentController’</span>, ParentController)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ParentController</span>(<span class="params">$scope</span>) </span>&#123;</span><br><span class="line">true<span class="keyword">var</span> vm = &#123;&#125;;</span><br><span class="line">truevm.username = <span class="string">‘My Name’</span>;</span><br><span class="line"></span><br><span class="line">true$scope.vm = vm;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</div>
+<p>注意 <code>vm</code> 在這裡是可以任意自訂的名稱，取名 <code>vm</code> 是 “View Model” 的意思。</p>
+<h4 id="指定-“controllerAs”-之後，controller-中的-this-與-scope-有何不同？"><a href="#指定-“controllerAs”-之後，controller-中的-this-與-scope-有何不同？" class="headerlink" title="指定 “controllerAs” 之後，controller 中的 this 與 $scope 有何不同？"></a>指定 “controllerAs” 之後，controller 中的 this 與 $scope 有何不同？</h4><p>由於上面的作法，可以優雅地解決 scope 遮蔽問題，AngularJS 1.2 針對這個作法，新增了 “controllerAs” 語法。</p>
+<p>首先，不推薦，但你可以使用 <code>ng-controller=&quot;MyController as $ctrl&quot;</code> 的方式啟用這個功能；<br>再者，你可以在 <code>directive()</code> 及 <code>component()</code> 函數，使用 <code>controller: &#39;MyController as $ctrl&#39;</code> 的方式啟用，或者以 <code>controllerAs: &#39;$ctrl&#39;</code> 的方式另外指定。</p>
+<p>“ControllerAs” 語法，只是上面介紹的作法的語法蜜糖，當你寫 <code>controller as $ctrl</code> 時，AngularJS 在背後所做的事，基本上就跟上面一樣。</p>
+<p>細節是這樣的，首先，記住 controller 函數其實是一個 constructor，AngularJS 會以 <code>new</code> 操作子呼叫你的 controller 函數，以建立一個新的物件，然後，AngularJS 會自動幫你在 <code>$scope</code> 中，以 <code>$ctrl</code> 為屬性名稱，將該物件指定給 <code>$scope</code>。直接以程式展示的話，大概是像這樣：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyController</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">true<span class="keyword">this</span>.username = <span class="string">‘My Name’</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">$$MyControllerWrapper$$</span>(<span class="params">$scope</span>) </span>&#123;</span><br><span class="line">true$scope.$ctrl = <span class="keyword">new</span> MyController();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>所以，從另一個角度看，在上面的 controller 中的 <code>this</code>，只是一個普通的 JavaScript 物件，當然也就沒有 $scope 的功能。這就解釋了為什麼使用了 “controllerAs” 語法後，就無法在 controller 中使用 $scope 的功能。因此，如果在 controller 中需要 $scope 功能的話，就必須再另外透過 DI 注入 $scope 物件，就像這樣：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">MyController.$inject = [<span class="string">‘$scope’</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">MyController</span>(<span class="params">$scope</span>) </span>&#123;</span><br><span class="line">true<span class="keyword">this</span>.username = <span class="string">‘My Name’</span>;</span><br><span class="line"></span><br><span class="line">true$scope.$watch(<span class="string">‘registered’</span>, <span class="function"><span class="keyword">function</span> (<span class="params">newValue, oldValue</span>) </span>&#123;</span><br><span class="line">truetrue<span class="comment">// …</span></span><br><span class="line">true&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="參考資料-延伸閱讀"><a href="#參考資料-延伸閱讀" class="headerlink" title="參考資料 / 延伸閱讀"></a>參考資料 / 延伸閱讀</h4><p>這一篇解釋得很詳細：</p>
+<p><a href="http://codetunnel.io/angularjs-controller-as-or-scope/" target="_blank" rel="external">AngularJS: “Controller as” or “$scope”?</a></p>
+<p>這一篇說明為何 1.3 需要引進 <code>bindToController</code>，以及後來在 1.4 的演進：</p>
+<p><a href="http://blog.thoughtram.io/angularjs/2015/01/02/exploring-angular-1.3-bindToController.html" target="_blank" rel="external">Exploring Angular 1.3: Binding to Directive Controllers</a>。</p>
+<p>John Papa 是一直大力推廣 “controllerAs” 語法的人：</p>
+<p><a href="http://www.johnpapa.net/do-you-like-your-angular-controllers-with-or-without-sugar/" target="_blank" rel="external">Do You Like Your Angular Controllers with or without Sugar?</a><br><a href="http://www.johnpapa.net/angularjss-controller-as-and-the-vm-variable/" target="_blank" rel="external">AngularJS’s Controller As and the vm Variable</a></p>
+<p>然後，AngularJS 1.5 引進了上面介紹的 <code>component()</code> 函數，同時，似乎是為了有所區別，AngularJS team 決定 (沒有找到相關資料，請看下面的推論) 引入新的 <code>bindings</code> 屬性，用來完全取代 <code>scope</code> 及 <code>bindToController</code>。我想這應該是為了避免使用者誤用，而造成模稜兩可的狀況：</p>
+<ol>
+<li><p>退回到 1.4，強制定義 <code>scope: {}</code>，而使用 <code>bindToController</code> 定義屬性</p>
+<p> 因為在 1.4 時，<code>bindToController</code> 屬性就可以直接定義屬性，其意義與 <code>bindings</code> 完全相同，只不過並未強制 <code>scope: {}</code> 的定義。若這麼做的話，等於是期望使用者這樣定義：</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">true<span class="attr">scope</span>: &#123;&#125;,</span><br><span class="line">true<span class="attr">bindToController</span>: &#123;</span><br><span class="line">truetrue<span class="attr">attribute</span>: <span class="string">‘=’</span></span><br><span class="line">true&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 但是若使用者卻使用 1.3 的語法：</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">true<span class="attr">scope</span>: &#123;</span><br><span class="line">truetrue<span class="attr">attribute</span>: <span class="string">‘=’</span></span><br><span class="line">true&#125;,</span><br><span class="line">true<span class="attr">bindToController</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 那麼，哪個屬性有效呢？記住，我們已經強制定義 <code>scope: {}</code>，所以這裡的 <code>scope</code> 定義無效；而我們期望定義為 hash object 的 <code>bindToController</code>，在這裡當然也找不到正確的屬性定義。</p>
+</li>
+<li><p>退回到 1.3，仍然使用 <code>scope</code> 定義屬性，強制 <code>bindToController: true</code> 屬性。</p>
+<p> 也就是說，期望使用者這樣定義：</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">true<span class="attr">scope</span>: &#123;</span><br><span class="line">truetrue<span class="attr">attribute</span>: <span class="string">‘=’</span></span><br><span class="line">true&#125;,</span><br><span class="line">true<span class="attr">bindToController</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 但是若使用者卻使用 1.4 的功能：</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">true<span class="attr">scope</span>: &#123;&#125;,</span><br><span class="line">true<span class="attr">bindToController</span>: &#123;</span><br><span class="line">truetrue<span class="attr">attribute</span>: <span class="string">‘=’</span></span><br><span class="line">true&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 那麼，又是哪個屬性有效呢？同樣地，我們已經強制定義 <code>bindToController: true</code>，所以這裡的 <code>bindToController</code> 定義無效；而我們期望定義為 hash object 的 <code>scope</code>，在這裡當然也找不到正確的屬性定義。</p>
+</li>
+</ol>
+<p>所以，由此推論，AngularJS team 為了避免上述兩種模稜兩可的狀況，而決定乾脆同時忽略 <code>scope</code> 和 <code>bindToController</code> 的使用者定義，分別強制其值為 <code>{}</code> 及 <code>true</code>，而另外使用 <code>bindings</code> 來定義屬性。</p>
+<p>雖然不確定理由是否如上述推論，但同時有三個屬性 (<code>scope</code>, <code>bindToController</code>, <code>bindings</code>)，提供一樣的功能，顯然又是一個為了向後相容，而疊床架屋的例子，雖然解決了問題，但同時也造成了更多混淆。</p>
+<h3 id="少用-rootScope"><a href="#少用-rootScope" class="headerlink" title="少用 $rootScope"></a>少用 <code>$rootScope</code></h3><p>出處：<a href="https://medium.com/@bluepnume/sane-scalable-angular-apps-are-tricky-but-not-impossible-lessons-learned-from-paypal-checkout-c5320558d4ef#5a49" target="_blank" rel="external">Limit your use of $rootScope</a></p>
+<p>應該不須贅言，<code>$rootScope</code> 基本上就等於 global。</p>
+<h3 id="盡量讓狀態靠近使用的元件"><a href="#盡量讓狀態靠近使用的元件" class="headerlink" title="盡量讓狀態靠近使用的元件"></a>盡量讓狀態靠近使用的元件</h3><p>出處：<a href="https://medium.com/@bluepnume/sane-scalable-angular-apps-are-tricky-but-not-impossible-lessons-learned-from-paypal-checkout-c5320558d4ef#ce03" target="_blank" rel="external">Keep your state as close as possible to the components which need it.</a></p>
+<p>大部分情況下，你的元件應該能自給自足，或者，頂多需要由父元件提供資料。有些時候，你可能需要在多個元件之間共用資料。除非你是在開發通用的元件，譬如 Tab / TabPanel，這時你可能要考慮使用 <a href="https://toddmotto.com/directive-to-directive-communication-with-require/" target="_blank" rel="external"><code>require</code></a> 屬性。否則，開發一般應用程式時，應該盡量在最靠近它們的共同父元件上提供共用的資料。</p>
+<p><strong>index.html</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">ng-app</span>=<span class="string">“app”</span>&gt;</span></span><br><span class="line">true<span class="tag">&lt;<span class="name">parent</span>&gt;</span><span class="tag">&lt;/<span class="name">parent</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>parent.js</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> template = [</span><br><span class="line">true<span class="string">‘&lt;child-one foo=”vm.bar”&gt;&lt;/child-one&gt;’</span>,</span><br><span class="line">true<span class="string">‘&lt;child-two baz=”vm.bar”&gt;&lt;/child-two&gt;’</span></span><br><span class="line">].join(<span class="string">‘’</span>);</span><br><span class="line">app.component(<span class="string">‘parent’</span>, &#123;</span><br><span class="line">true<span class="attr">template</span>: template,</span><br><span class="line">true<span class="attr">controller</span>: ParentController,</span><br><span class="line">true<span class="attr">controllerAs</span>: <span class="string">‘vm’</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ParentController</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">true<span class="keyword">this</span>.bar = <span class="string">‘woo’</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>child-one.js</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">app.component(<span class="string">‘childOne’</span>, &#123;</span><br><span class="line">true<span class="attr">bindings</span>: &#123;</span><br><span class="line">truetrue<span class="attr">foo</span>: <span class="string">‘=’</span></span><br><span class="line">true&#125;,</span><br><span class="line">true<span class="attr">controller</span>: ChildOneController,</span><br><span class="line">true<span class="attr">controllerAs</span>: <span class="string">‘vm’</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ChildOneController</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">true<span class="built_in">console</span>.log(<span class="keyword">this</span>.foo);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>child-two.js</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">app.component(<span class="string">‘childTwo’</span>, &#123;</span><br><span class="line">true<span class="attr">bindings</span>: &#123;</span><br><span class="line">truetrue<span class="attr">baz</span>: <span class="string">‘=’</span></span><br><span class="line">true&#125;,</span><br><span class="line">true<span class="attr">controller</span>: ChildTwoController,</span><br><span class="line">true<span class="attr">controllerAs</span>: <span class="string">‘vm’</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">ChildTwoController</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">true<span class="built_in">console</span>.log(<span class="keyword">this</span>.baz);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="就使用-factory-函數-忘記-service-和-provider-吧"><a href="#就使用-factory-函數-忘記-service-和-provider-吧" class="headerlink" title="就使用 factory() 函數 (忘記 service() 和 provider() 吧)"></a>就使用 <code>factory()</code> 函數 (忘記 <code>service()</code> 和 <code>provider()</code> 吧)</h3><p>出處：<a href="https://medium.com/@bluepnume/sane-scalable-angular-apps-are-tricky-but-not-impossible-lessons-learned-from-paypal-checkout-c5320558d4ef#ca4a" target="_blank" rel="external">Forget about services and providers</a></p>
+<p>直接先講結論：</p>
+<p>在 AngularJS 中，能夠透過 DI 注入使用的，都是服務。</p>
+<p>一般常在爭論的，所謂 factory, service 及 provider，其實根本都不是真正的主體，它們都只是用來建立服務的方法。</p>
+<p>正確的說，我們透過 <code>factory()</code>, <code>service()</code>, <code>provider()</code>，甚至 <code>constant()</code>, <code>value()</code> 這些方法，建立服務。而不論是用哪一個方法建立的服務，它們本質上完全相同，唯一的不同就只有建立的形式不同。</p>
+<p>爭論什麼是 factory, service 及 provider，只是讓問題失焦。甚至於，我主張，不應該說『一個 factory』，而應該這麼說：『一個使用 <code>factory()</code> 函數建立的服務』。</p>
+<p>如果你了解它們背後的實作方式，全部都是基於同一個其界面具有 <code>$get()</code> 函數的物件，你就可以根據需要，自在地採用適合你的情境的『形式』來建立服務；如果還是不了解，就根據本項建議，全部採用 <code>factory()</code> 來建立服務。</p>
+<h4 id="詳細說明"><a href="#詳細說明" class="headerlink" title="詳細說明"></a>詳細說明</h4><p>許多人都建議只使用 factory，主要理由如下：</p>
+<ol>
+<li>不管是 factory, service 或 provider，其本質上都相同，背後的實作都是 provider，</li>
+<li>它們全都是 singleton，</li>
+<li>provider 的存在，只是為了提供更改預設值的初始化功能，但其實有許多方式可以做到，並不是非 provider 不可，</li>
+<li>factory 比 service 有彈性。</li>
+</ol>
+<p>我認為以上的說法還不夠精準，最好改為：</p>
+<aside class="cheatsheet"><h5>建議主要以 factory() 函數來建立服務</h5><p>因為：</p>
+<ol>
+<li>不管是透過 <code>factory()</code>, <code>service()</code> 或 <code>provider()</code> 函數建立的服務，其本質上都相同，背後的實作方式也相同，</li>
+<li>它們全都是 singleton，都只會在初始化過程中被執行一次，其執行產出結果就是唯一的 singleton，也就是最終被拿來做為注入使用的物件，</li>
+<li>provider 的存在，只是為了提供更改預設值的初始化功能，但其實有許多方式可以做到，並不是非 provider 不可， (作法可參考後面的範例)</li>
+<li>透過 <code>factory()</code> 函數建立服務，比透過 <code>service()</code> 函數建立服務更有彈性。</li>
+</ol>
+</aside>
+<p>以下透過模擬它們的實作方式，稍微說明一下它們的差異。簡單地說，它們的差別可以用下面這段虛擬碼表達，為了簡單起見，dependency injection 處理的部份完全不列入。</p>
+<p>首先，我們建立的 module，具有 (自動注入) 下列 <a href="https://docs.angularjs.org/api/auto/service/$provide" target="_blank" rel="external"><code>$provide</code></a> 提供的 <code>factory()</code>, <code>service()</code> 及 <code>provider()</code> 等函數 (其它略)：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> $provide = &#123;</span><br><span class="line">true<span class="attr">provider</span>: provider,</span><br><span class="line">true<span class="attr">factory</span>: factory,</span><br><span class="line">true<span class="attr">service</span>: service</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> $$providerRegistry = &#123;&#125;;</span><br><span class="line"><span class="keyword">var</span> $$serviceRegistry = &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">provider</span>(<span class="params">serviceName, ProviderConstructor</span>) </span>&#123;</span><br><span class="line">true<span class="keyword">var</span> serviceProvider = <span class="keyword">new</span> ProviderConstructor();</span><br><span class="line">true<span class="keyword">var</span> serviceProviderName = serviceName + <span class="string">‘Provider’</span>;</span><br><span class="line">true$$providerRegistry[ serviceProviderName ] = serviceProvider;</span><br><span class="line"></span><br><span class="line">true<span class="keyword">var</span> service = serviceProvider.$get();</span><br><span class="line">true$$serviceRegistry[ serviceName ] = service;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">factory</span>(<span class="params">serviceName, factoryFunction</span>) </span>&#123;</span><br><span class="line">true<span class="keyword">return</span> provider(serviceName, <span class="function"><span class="keyword">function</span> <span class="title">ProviderConstructor</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">truetrue<span class="keyword">this</span>.$get = factoryFunction;</span><br><span class="line">true&#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">service</span>(<span class="params">serviceName, ServiceConstructor</span>) </span>&#123;</span><br><span class="line">true<span class="keyword">return</span> factory(serviceName, <span class="function"><span class="keyword">function</span> <span class="title">factoryFunction</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">truetrue<span class="keyword">return</span> <span class="keyword">new</span> ServiceConstructor();</span><br><span class="line">true&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>provider()</code> 函數，做了這些事：</p>
+<ol>
+<li>以 <code>new</code> 運算子呼叫我們提供的 <code>ProviderConstructor()</code> 建構子，建立一個物件，這個物件也就是所謂的 Provider 服務，</li>
+<li>將此 Provider 服務物件以 <code>serviceName + &#39;Provider&#39;</code> 的名稱，註冊為一個服務，這個服務將只能透過 <code>config()</code> 函數注入使用，</li>
+<li>呼叫此物件的 <code>$get()</code> 方法，此方法回傳的物件才是真正的服務物件，</li>
+<li>將服務物件以我們提供的 <code>serviceName</code> 為名稱，註冊為一個服務，這個服務將能夠在 <code>run()</code>, <code>factory()</code>, <code>service()</code>, <code>provider()</code>, <code>controller()</code>, <code>directive()</code> … 等函數，以及任意建構子中注入使用。</li>
+<li>對每個服務而言，上面的過程，在整個應用程式生命週期中，只會執行一次。</li>
+</ol>
+<p>而 <code>factory()</code> 函數，則是:</p>
+<ol>
+<li>建立一個 <code>ProviderConstructor()</code> 建構子，以該建構子做為參數呼叫上面的 <code>provider()</code> 函數，</li>
+<li><code>provider()</code> 函數以 <code>new</code> 運算子呼叫該 <code>ProviderConstructor()</code> 建構子時，將建立一個具有 <code>$get()</code> 方法的物件，該 <code>$get()</code> 方法直接被設定為我們傳入的 <code>factoryFunction()</code> 函數，因此呼叫 <code>$get()</code> 方法，即等於呼叫 <code>factoryFunction()</code> 函數，</li>
+<li>根據上面 <code>provider()</code> 函數的說明， <code>ProviderConstructor()</code> 建構子建立的物件，將被以 <code>serviceName + &#39;Provider&#39;</code> 的名稱，註冊為一個所謂的 Provider 服務，</li>
+<li>根據上面 <code>provider()</code> 函數的說明，<code>$get()</code> 方法被呼叫，於是 <code>factoryFunction()</code> 函數回傳的任意值，將以我們提供的 <code>serviceName</code> 為名稱，註冊為一個服務，</li>
+<li>對每個服務而言，上面的過程，在整個應用程式生命週期中，只會執行一次。</li>
+</ol>
+<p>而 <code>service()</code> 函數，則是:</p>
+<ol>
+<li>建立一個 <code>factoryFunction()</code> 函數，以該函數做為參數呼叫上面的 <code>factory()</code> 函數，</li>
+<li>在剛剛的 <code>factoryFunction()</code> 函數中，以 <code>new</code> 運算子呼叫傳入的 <code>ServiceConstructor</code> 建構子，建立服務物件，並將其返回，</li>
+<li>根據上面 <code>factory()</code> 函數的說明，<code>factory()</code> 函數又會轉呼叫 <code>provider()</code> 函數，</li>
+<li><code>factoryFunction()</code> 函數返回的物件，也就是 <code>ServiceConstructor</code> 建構子建立的物件，最終被以 <code>serviceName</code> 為名稱，註冊為服務，</li>
+<li>同時，會有一個僅包含 <code>$get()</code> 方法的物件，被以 <code>serviceName + &#39;Provider&#39;</code> 的名稱，註冊為所謂的 Provider 服務。</li>
+<li>對每個服務而言，上面的過程，在整個應用程式生命週期中，只會執行一次。</li>
+</ol>
+<p>解釋起來似乎很麻煩，但是直接看程式碼，其實真的沒有什麼驚奇的地方。</p>
+<p>重點有兩個：</p>
+<ol>
+<li>每個服務，實際上都會伴隨著一個 Provider 服務，但只有透過 <code>provider()</code> 函數來建立，該 Provider 服務才有機會附加其他額外方法，而 <code>factory()</code> 和 <code>service()</code> 函數建立的 Provider 服務，都只會有 <code>$get()</code> 方法，</li>
+<li>它們全部都只有在註冊的時候，被執行唯一的一次，其結果就被儲存下來成為 singleton，再也沒有機會改變。</li>
+<li>不管在哪個模組註冊，註冊的服務都是全域共用的。</li>
+</ol>
+<p>我過去一直以為 <code>factory()</code> 函數與 <code>service()</code> 函數的差異是，它每次被要求注入的時候都會執行一次，畢竟它的名稱叫做 “factory”，而且又只是個普通函數，所以我一直以為它就是 “factory method”，應該每次都回傳新的物件。但事實上它卻不是這樣被設計的，它跟 使用 <code>service()</code> 函數來建立服務完全一樣，我們傳入的 factory function 總是只被呼叫一次。</p>
+<p>我從來沒有在任何一篇文章中看過有人強調這一點，最多只說它們全部都是 singleton。甚至大部分的文章在描述的時候，反而讓人誤以為每次都會呼叫 <code>$get()</code> 函數，譬如，在 <a href="http://blog.thoughtram.io/angular/2015/07/07/service-vs-factory-once-and-for-all.html#the-difference-between-services-and-factories" target="_blank" rel="external">Service vs Factory - Once and for all</a> 這篇文章中這樣描述：</p>
+<aside class="cheatsheet"><h5>Service vs Factory - Once and for all</h5><p>It takes the name and the factory function that is passed and basically returns a provider with the same name, that has a $get method which is our factory function. So what is it with this provider thing? Well, whenever you ask the injector for a specific dependency, it basically asks the corresponding provider for an instance of that service, by calling the $get() method. That’s why $get() is required, when creating providers. In other words, if we inject MyService somewhere, what happens behind the scenes is:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MyServiceProvider.$get(); <span class="comment">// return the instance of the service</span></span><br></pre></td></tr></table></figure>
+</aside>
+<p>大概的意思就是說，每次我們向 injector 要求時，就會呼叫 provider 的 <code>$get()</code> 函數。</p>
+<p>錯錯錯！ <code>$get()</code> 函數永遠只會被呼叫一次！</p>
+<p>正是因為只會被呼叫一次，並且其結果被儲存下來，所以不論是透過 <code>factory()</code>, <code>service()</code> 或 <code>provider()</code> 函數，實際上建立的服務都是 singleton，建立之後的行為完全一樣，<strong>它們之間真正的差別就是建立的形式不同</strong>。</p>
+<p>AngularJS team 真的是把一件簡單的事情極度複雜化了，而且明明同樣都是服務，卻用了三種不同的方式來建立，又偏偏取了很不好的一組名稱，才會導致連他們自己人，都會在所謂的解惑文中，用不正確的方式描述其行為。</p>
+<p>由下面的範例就可以看出來 (請打開 console 看 log)：</p>
+<ol>
+<li>雖然建立的是 <code>personFactory</code>，但是卻同時存在有 <code>personFactoryProvider</code>，</li>
+<li>console.log 中，”personFactory begin” 與 “personFactory end” 各只出現一次，表示 factory 函數只被呼叫一次，</li>
+<li><code>personFactory.rtti</code> 的值，在兩個 controller 中相同，表示 <code>personFactory</code> 的確是同一個物件，</li>
+<li>由 <code>PersonController1</code> 透過 <code>personFactory.defaults()</code> 函數設定的值，在 <code>PersonController2</code> 可以看得到。</li>
+</ol>
+<p></p><p data-height="268" data-theme-id="0" data-slug-hash="YqaGJr" data-default-tab="result" data-user="amobiz" class="codepen">See the Pen <a href="https://codepen.io/amobiz/pen/YqaGJr/" target="_blank" rel="external">Angular: factory function only got called once</a> by amobiz (<a href="http://codepen.io/amobiz" target="_blank" rel="external">@amobiz</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<p>了解背後的運作原理之後，再來看看實際上要建立服務時，我們如何透過 <code>factory()</code>, <code>service()</code> 或 <code>provider()</code> 函數來建立。</p>
+<p>基本定義方式如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">‘app’</span>, [])</span><br><span class="line">.provider(<span class="string">‘myProvider’</span>, <span class="function"><span class="keyword">function</span> <span class="title">ProviderConstructor</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">true<span class="keyword">this</span>.$get = <span class="function"><span class="keyword">function</span> <span class="title">getter</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">truetrue<span class="keyword">return</span> <span class="string">‘whatever’</span>;</span><br><span class="line">true&#125;;</span><br><span class="line">true<span class="keyword">this</span>.config = <span class="function"><span class="keyword">function</span> <span class="title">config</span>(<span class="params">options</span>) </span>&#123;</span><br><span class="line">true&#125;;</span><br><span class="line">&#125;</span><br><span class="line">.service(<span class="string">‘myService’</span>, <span class="function"><span class="keyword">function</span> <span class="title">ServiceConstructor</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">true<span class="keyword">this</span>.method = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">true&#125;;</span><br><span class="line">&#125;</span><br><span class="line">.factory(<span class="string">‘myFactory’</span>, <span class="function"><span class="keyword">function</span> <span class="title">factoryFunction</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">true<span class="keyword">return</span> <span class="string">‘whatever’</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>雖然透過 <code>provider()</code> 函數建立服務的彈性最大，也能提供設定功能，但是如同前面的範例的 <code>defaults()</code> 函數，設定功能有很多方式可以達成，因此並沒有非使用 <code>provider()</code> 函數不可的理由。而 <code>service()</code> 函數由於強制必須提供 constructor，所以服務本身只能是物件類型，彈性上多少受到一些限制。基於這些理由，多數的人才會建議：一律使用 <code>factory()</code> 函數來建立服務。</p>
+<h4 id="使用-factory-函數來建立服務的常見用法"><a href="#使用-factory-函數來建立服務的常見用法" class="headerlink" title="使用 factory() 函數來建立服務的常見用法"></a>使用 <code>factory()</code> 函數來建立服務的常見用法</h4><p><strong>回傳常數</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.factory(<span class="string">‘pi’</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">true<span class="keyword">return</span> <span class="number">3.14159</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">use.$inject = [<span class="string">‘pi’</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">use</span>(<span class="params">pi</span>) </span>&#123;</span><br><span class="line">true<span class="keyword">var</span> area = pi * <span class="keyword">this</span>.radius * <span class="keyword">this</span>.radius;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這個作法足以取代 <a href="https://docs.angularjs.org/api/auto/service/$provide#constant" target="_blank" rel="external"><code>constant()</code></a>, <a href="https://docs.angularjs.org/api/auto/service/$provide#value" target="_blank" rel="external"><code>.value()</code></a>。</p>
+<p><strong>回傳服務物件</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">app.factory(<span class="string">‘personFactory’</span>, personFactory);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, attributes</span>) </span>&#123;</span><br><span class="line">true<span class="keyword">this</span>.name = name;</span><br><span class="line">true<span class="keyword">this</span>.attributes = attributes;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.eat = <span class="function"><span class="keyword">function</span> (<span class="params">what</span>) </span>&#123;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">personFactory</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">true<span class="keyword">var</span> defaults = &#123;</span><br><span class="line">truetrue<span class="attr">gender</span>: <span class="string">‘unspecified’</span></span><br><span class="line">true&#125;;</span><br><span class="line"></span><br><span class="line">true<span class="keyword">return</span> &#123;</span><br><span class="line">truetrue<span class="attr">setDefaults</span>: <span class="function"><span class="keyword">function</span> (<span class="params">options</span>) </span>&#123;</span><br><span class="line">truetruetrue<span class="built_in">Object</span>.assign(defaults, options);</span><br><span class="line">truetrue&#125;,</span><br><span class="line">truetrue<span class="attr">create</span>: <span class="function"><span class="keyword">function</span> (<span class="params">name</span>) </span>&#123;</span><br><span class="line">truetruetrue<span class="keyword">return</span> <span class="keyword">new</span> Person(name, <span class="built_in">Object</span>.assign(&#123;&#125;, defaults));</span><br><span class="line">truetrue&#125;</span><br><span class="line">true&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app.run(run)</span><br><span class="line">.controller(<span class="string">‘PersonController’</span>, PersonController);</span><br><span class="line"></span><br><span class="line">run.$inject = [<span class="string">‘personFactory’</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run</span>(<span class="params">personFactory</span>) </span>&#123;</span><br><span class="line">truepersonFactory.setDefault(&#123;</span><br><span class="line">truetrue<span class="attr">country</span>: <span class="string">‘Taiwan’</span></span><br><span class="line">true&#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">PersonController.$inject = [<span class="string">‘personFactory’</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">PersonController</span>(<span class="params">personFactory</span>) </span>&#123;</span><br><span class="line">true<span class="keyword">var</span> person = personFactory.create(<span class="string">‘John’</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到：</p>
+<ul>
+<li>可以提供 factory method，如上面的 <code>create()</code> 函數。最重要的是，它能夠接受參數。</li>
+<li>可以提供 config 功能，如上面的 <code>setDefaults()</code> 函數，足以取代 provider。</li>
+</ul>
+<p><strong>回傳建構子</strong></p>
+<p>老實說，我比較不建議這個作法。使用 DI，就是不希望依賴於實作，不希望由 client 自行建構依賴物件。使用 DI 應該直接取得立即可用的物件或服務，應該依賴於其界面，而不是其實作。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">.factory(<span class="string">‘Person’</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">true<span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">true&#125;</span><br><span class="line"></span><br><span class="line">truePerson.prototype.eat = <span class="function"><span class="keyword">function</span> (<span class="params">what</span>) </span>&#123;</span><br><span class="line">true&#125;;</span><br><span class="line"></span><br><span class="line">true<span class="keyword">return</span> Person;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">use.$inject = [<span class="string">‘Person’</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">use</span>(<span class="params">Person</span>) </span>&#123;</span><br><span class="line">true<span class="keyword">var</span> person = <span class="keyword">new</span> Person();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="不要使用-module-config"><a href="#不要使用-module-config" class="headerlink" title="不要使用 module.config"></a>不要使用 module.config</h3><p>出處：<a href="https://medium.com/@bluepnume/sane-scalable-angular-apps-are-tricky-but-not-impossible-lessons-learned-from-paypal-checkout-c5320558d4ef#a583" target="_blank" rel="external">Forget about module.config</a></p>
+<p>大多數時候，<code>module.run()</code> 函數即可勝任模組的初始化工作，沒有必要非在 <code>module.config()</code> 中進行初始化。許多時候，基於封裝原則，甚至於應該在元件中進行初始化。</p>
+<p>唯一的例外，就是必須使用到 AngularJS 或第三方程式庫提供的 Provider 的時候，譬如 <code>$routeProvider</code>。這是因為 AngularJS 做了一個很不好的決定：強制 Provider 只能在 <code>module.config()</code> 中使用。你在開發自己的應用程式時，實在沒有必要跟著這麼做。</p>
+<h3 id="謹慎使用-scope-事件"><a href="#謹慎使用-scope-事件" class="headerlink" title="謹慎使用 scope 事件"></a>謹慎使用 scope 事件</h3><p>出處：<a href="https://medium.com/@bluepnume/sane-scalable-angular-apps-are-tricky-but-not-impossible-lessons-learned-from-paypal-checkout-c5320558d4ef#fb87" target="_blank" rel="external">Be careful with event publishing and listening</a></p>
+<p>透過 <code>$rootScope</code> 或 <code>$scope</code> 發佈事件，應該是針對不特定受眾所為，通常是設計 API 時才需要考慮。多數時候，你只是在開發應用程式，所有的元件都在你的掌握之中，你可以透過元件之間的屬性，或 callback 函數來傳遞資料。如果是服務，則應該考慮使用 Promise。如果隨意濫用 <code>$rootScope</code> 或 <code>$scope</code> 發佈事件，小心導致程式難以除錯的風險。</p>
+<h3 id="善加使用-exceptionHandler"><a href="#善加使用-exceptionHandler" class="headerlink" title="善加使用 $exceptionHandler"></a>善加使用 <code>$exceptionHandler</code></h3><p>出處：<a href="https://medium.com/@bluepnume/sane-scalable-angular-apps-are-tricky-but-not-impossible-lessons-learned-from-paypal-checkout-c5320558d4ef#7461" target="_blank" rel="external">Take advantage of $exceptionHandler</a></p>
+<p>你的程式中未捕獲的 exception 都會丟給 <a href="https://docs.angularjs.org/api/ng/service/$exceptionHandler" target="_blank" rel="external"><code>$exceptionHandler</code></a> 這個服務處理，這個服務預設的行為是輸出 log。你可以定義自己的 <code>$exceptionHandler</code> 服務，這將覆蓋原本的服務，讓你有機會自行處理錯誤：也許是上傳錯誤到後端伺服器進行記錄等等。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">angular.module(<span class="string">‘exceptionOverride’</span>, []).factory(<span class="string">‘$exceptionHandler’</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">true<span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">exception, cause</span>) </span>&#123;</span><br><span class="line">truetrueexception.message += <span class="string">‘ (caused by “‘</span> + cause + <span class="string">‘“)’</span>;</span><br><span class="line">truetrue<span class="keyword">throw</span> exception;</span><br><span class="line">true&#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="找到合適的方法上傳-log-到後端伺服器"><a href="#找到合適的方法上傳-log-到後端伺服器" class="headerlink" title="找到合適的方法上傳 log 到後端伺服器"></a>找到合適的方法上傳 log 到後端伺服器</h3><p>出處：<a href="https://medium.com/@bluepnume/sane-scalable-angular-apps-are-tricky-but-not-impossible-lessons-learned-from-paypal-checkout-c5320558d4ef#b375" target="_blank" rel="external">Find a good way to publish logs to the server side</a></p>
+<p>SPA 應用程式是在使用者的瀏覽器中執行，如果沒有適當地記錄 log 訊息，根本無從得知在使用者的瀏覽器中到底發生了什麼事。</p>
+<p>最底限至少應該在應用程式發生錯誤時，輸出錯誤訊息，請求使用者幫忙回報。若經過使用者同意，也可以考慮記錄整個執行過程，排除敏感資料，上傳到後端伺服器加以記錄分析。</p>
+<p>上傳的時候應該盡力減少發送次數及流量，並且務必做好加密的動作。</p>
+<p>另外，可以考慮使用商業化的產品，譬如 <a href="https://www.loggly.com/" target="_blank" rel="external">Loggy</a>、<a href="https://papertrailapp.com/" target="_blank" rel="external">Paper Trail</a> 等。</p>
+<h3 id="使用-angular-ui-router"><a href="#使用-angular-ui-router" class="headerlink" title="使用 angular-ui-router"></a>使用 angular-ui-router</h3><p>出處：<a href="https://medium.com/@bluepnume/sane-scalable-angular-apps-are-tricky-but-not-impossible-lessons-learned-from-paypal-checkout-c5320558d4ef#92ad" target="_blank" rel="external">Use angular-ui-router</a></p>
+<p>如果你的服務 API 遵循 RESTful 原則，你可能會有許多 resources 具有 sub-resources，而 RESTful 要求每個 resource 應該要有唯一的 URL。然而 AngularJS 內建的 <code>ngRoute</code> 不支援巢狀路由，因此並不算 RESTful 友好。</p>
+<p>稍具規模，支援 RESTful 的 AngularJS 1.X 應用程式，都應該考慮使用 <a href="https://github.com/angular-ui/ui-router" target="_blank" rel="external">ui-router</a>，甚至可以考慮搭配 <a href="https://github.com/christopherthielen/ui-router-extras" target="_blank" rel="external">ui-router-extras</a>，以提供更多進階功能。</p>
+<p>為什麼不使用新的 AngularJS 2.0 的 <a href="https://github.com/angular/router" target="_blank" rel="external">ngComponentRouter</a>？</p>
+<p>目前不推薦 ngComponentRouter 的主要原因，是因為：</p>
+<ol>
+<li><p>尚未正式發佈</p>
+<p> ngComponentRouter 原本計畫要隨同在 AngularJS 1.4 發佈，但是現在已 1.5 卻還是沒有正式發佈，想必 AngularJS team 也還有其他考量。或許只是因為 AngularJS 2.0 尚未正式發佈，而針對 AngularJS 1.x 的規格也仍然還在變動。</p>
+</li>
+<li><p>目前的參考文件比較缺乏。</p>
+<p> 最新的文件可以參考 <a href="https://docs.angularjs.org/guide/component-router" target="_blank" rel="external">Component Router</a>。其它目前在網路上可以找到的針對 AngularJS 1.x 的文章幾乎全部都已經過時，都是還是使用 controller 的方式。建議可以參考 StackOverflow 上 <a href="http://stackoverflow.com/a/33669885/726650" target="_blank" rel="external">Angular 1.5 and new Component Router</a> 的回答。或直接參考 ngComponentRouter 的 <a href="https://github.com/angular/router/tree/master/examples" target="_blank" rel="external">examples</a>。另外，我也寫了一個 sample 可以參考：</p>
+</li>
+</ol>
+<p></p><p data-height="266" data-theme-id="0" data-slug-hash="bpvOKj" data-default-tab="result" data-user="amobiz" data-embed-version="2" class="codepen">See the Pen <a href="http://codepen.io/amobiz/pen/bpvOKj/" target="_blank" rel="external">Angular 1.5 component router playground</a> by amobiz (<a href="http://codepen.io/amobiz" target="_blank" rel="external">@amobiz</a>) on <a href="http://codepen.io" target="_blank" rel="external">CodePen</a>.</p><p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+
+<h3 id="小心使用-Promise-並且注意-AngularJS-對-Promise-錯誤的特殊處理"><a href="#小心使用-Promise-並且注意-AngularJS-對-Promise-錯誤的特殊處理" class="headerlink" title="小心使用 Promise 並且注意 AngularJS 對 Promise 錯誤的特殊處理"></a>小心使用 Promise 並且注意 AngularJS 對 Promise 錯誤的特殊處理</h3><p>出處：<a href="https://medium.com/@bluepnume/sane-scalable-angular-apps-are-tricky-but-not-impossible-lessons-learned-from-paypal-checkout-c5320558d4ef#933e" target="_blank" rel="external">Be careful with promises and error handling</a></p>
+<p>首先，不論是透過 AngularJS 自己的 <a href="https://docs.angularjs.org/api/ng/service/$q" target="_blank" rel="external"><code>$q</code></a> 提供的 Promise，或是標準的 <a href="https://promisesaplus.com/" target="_blank" rel="external">Promise/A+</a>，如果你沒有使用 <code>catch()</code> 捕捉錯誤，任何錯誤，包括 throw 的錯誤以及沒有 fulfilled 的錯誤，都將無聲無息地被吃掉。</p>
+<p>再來，除非你是透過 <code>return $q.reject(err)</code> 回傳錯誤，否則任何其它被 throw 出來的錯誤，即使你已經使用 <code>catch()</code> 捕捉了，它們都還是會被丟到前面提到的 <code>$exceptionHandler</code> 服務。這就面臨了兩難的困境。意謂著，如果你使用 <code>catch()</code> 捕捉錯誤，同時也使用 <code>$exceptionHandler</code> 服務處理未捕捉的錯誤，結果是同一個錯誤你將處理兩次。</p>
+<p>為了避免這個問題，可以借用 Java 的 <a href="http://www.slideshare.net/teddysoft/javacheckedunchecked-exceptions" target="_blank" rel="external">checked exception</a> 的概念：屬於你的設計中，明確會丟出來的錯誤，把它們當作是 checked exception，一律使用 <code>$q.reject(err)</code> 來處理，這樣它們就不會進入到 <code>$exceptionHandler</code> 服務；至於哪些你沒有預料到，或者是程式設計錯誤造成的錯誤，則把它們當作是 unchecked exception，讓它們由 <code>$exceptionHandler</code> 服務來把捕捉。</p>
+<h3 id="避免使用延遲載入"><a href="#避免使用延遲載入" class="headerlink" title="避免使用延遲載入"></a>避免使用延遲載入</h3><p>出處：<a href="https://medium.com/@bluepnume/sane-scalable-angular-apps-are-tricky-but-not-impossible-lessons-learned-from-paypal-checkout-c5320558d4ef#71b6" target="_blank" rel="external">Try to avoid lazy loading</a></p>
+<p>AngularJS 1.x 的模組，只能在啟動階段定義，使用任何的 hack，即使是透過路由來做延遲載入，都無可避免的有其缺陷，更不用說這會無謂地增加程式的複雜度。</p>
+<h3 id="了解-digest-循環的判斷方式"><a href="#了解-digest-循環的判斷方式" class="headerlink" title="了解 $digest 循環的判斷方式"></a>了解 $digest 循環的判斷方式</h3><p>出處：<a href="https://medium.com/@bluepnume/sane-scalable-angular-apps-are-tricky-but-not-impossible-lessons-learned-from-paypal-checkout-c5320558d4ef#64a1" target="_blank" rel="external">Be careful with the digest cycle</a></p>
+<p>在 AngularJS 1.x 中，所謂的雙向資料繫結 (two way data binding)，是靠著不斷地檢查 scope 中的變數是否有變動，而在變動時做出反應：更新畫面或根據使用者輸入更新 scope 資料。由於資料之間可能有關聯性，所以某些資料更新後，可能會導致其它資料也需要更新，也就是發生所謂的漣漪效應。因此，AngularJS 會持續地進行檢查、更新，直到資料不再發生變動為止。如果資料持續不斷發生變動，則 <a href="https://github.com/angular/angular.js/blob/fa79eaa816aa27c6d1b3c084b8372f9c17c8d5a3/src/ng/rootScope.js#L39" target="_blank" rel="external">10 次</a>  $digest loop 之後，AngularJS 就會丟出 exception。</p>
+<p>AngularJS 如何檢查資料是否發生異動？它並不是靠傳說中的 <code>Object.observe()</code>(註)，而是藉由儲存舊值，透過比對舊值與現值，來判斷是否發生異動。然而，這裡存在著一個陷阱：由於資料可以經由函數回傳，如果函數將資料包裹在物件或陣列中回傳，雖然就『值』本身來看，並沒有發生異動，實際的包裹物件已經不是同一個了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$scope.foo = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">true<span class="keyword">return</span> &#123; <span class="attr">bar</span>: <span class="string">‘baz’</span> &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>JavaScript 並不像 Java 一樣，有所謂 <code>equals()</code> 和 <code>hashCode()</code> 方法，用來快速檢查兩個物件的『值』是否相等，也就是所謂的『等價』。因此，為了效率考量，AngularJS 並不會進行所謂 <code>deepEqual()</code> 檢查，而只是檢查物件是不是同一個 (位址相同)。由於每次要比對現值時，就會呼叫一次函數，而函數每次都會回傳一個新的包裹物件，因此每次都判定為資料發生異動，於是超過 10 次之後，就丟出錯誤了。</p>
+<p>因此，上面的例子比較好的作法，應該像這樣：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> foo = &#123; <span class="attr">bar</span>: <span class="string">‘baz’</span> &#125;;</span><br><span class="line"></span><br><span class="line">$scope.foo = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">true<span class="keyword">return</span> foo;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>這樣每次被呼叫時，回傳的都是同一個物件，AngularJS 就不會誤判了。</p>
+<p>註：<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/observe" target="_blank" rel="external"><code>Object.observe()</code></a> 提案已經於 2015 年 11 月<a href="https://esdiscuss.org/topic/an-update-on-object-observe" target="_blank" rel="external">撤銷</a>，因此未來也不可能使用 <code>Object.observe()</code> 來檢查資料異動。</p>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>AngularJS 可以算是最早引入自訂 html 元件概念的 framework，只是早期的推廣，強調 <code>ng-controller</code> 的使用方便性，導致許許多多程式將業務邏輯與畫面呈現全部混在 controller 中。雖然 AngularJS 2.0 發佈在即，也更趨近於 Web Component 標準，舊有使用 AngularJS 1.x 的應用程式，只要嚴守元件化的原則，仍然可以寫出相當容易維護的程式，甚至於更有利於將來移植到 AngularJS 2.0。</p>
+<p>以上整理，已盡力將參考資料完整列出，惟個人學識有限，如有謬誤或不足之處，歡迎補正，謝謝。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amobiz.github.io/2016/04/15/angularjs-1.5-best-practices/" data-id="cj4y0uftf008jk056osfy3r3b" class="article-share-link">Share</a>
+      
+        <a href="https://amobiz.github.io/2016/04/15/angularjs-1.5-best-practices/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/AngularJS/">AngularJS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/best-practices/">best practices</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/04/22/modular-css-notes/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Modular CSS
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/04/07/re-npm-left-pad-have-we-forgotten-how-to-program/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">反駁：NPM &amp; left-pad: Have We Forgotten How To Program?</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  
+    <ul class="nav"></ul>
+  
+  
+    <section class="comments" title="Disqus">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </section>
+  
+  
+    <section class="comments" title="Facebook">
+      <div class="fb-comments" data-href="https://amobiz.github.io/2016/04/15/angularjs-1.5-best-practices/" data-width="100%" data-numposts="5"></div>
+    </section>
+  
+</section>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hack/">Hack</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Productivity/">Productivity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">36</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Software/">Software</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Design/">Web Design</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/7-Zip/">7-Zip</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMD/">AMD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMP/">AMP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/APP2SD/">APP2SD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/">AngularJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/">Atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BEM/">BEM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backup/">Backup</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Batch/">Batch</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blogger/">Blogger</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS-modules/">CSS-modules</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CommonJS/">CommonJS</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DIY/">DIY</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Pattern/">Design Pattern</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ESLint/">ESLint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Facebook-Notes/">Facebook Notes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GTD/">GTD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Generator/">Generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ginger-yoshi/">Ginger yoshi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gist/">Gist</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/">GitHub</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google/">Google</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-App-Engine/">Google App Engine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-Code-Prettify/">Google Code Prettify</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grails/">Grails</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Groovy/">Groovy</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/">Gulp</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAX-RS/">JAX-RS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDOM/">JDOM</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSHint/">JSHint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/">JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jersey/">Jersey</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/">Jetty</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logdown/">Logdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/">Maven</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Medium/">Medium</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NPM/">NPM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Namespace/">Namespace</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Open-Source/">Open Source</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pomodoro-Technique/">Pomodoro Technique</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming/">Programming</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Promise/">Promise</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regular-Expression/">Regular Expression</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RequireJS/">RequireJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SUIT/">SUIT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SWAP/">SWAP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadow-DOM/">Shadow DOM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TagSoup/">TagSoup</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Time-Management/">Time Management</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UMD/">UMD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/URL/">URL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web-Components/">Web Components</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/">Webpack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/">XML</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XPath/">XPath</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yeoman/">Yeoman</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/advertising/">advertising</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/best-practices/">best practices</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/browser/">browser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cheatsheet/">cheatsheet</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/">cmd</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/custom-ROM/">custom ROM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dfp/">dfp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doubleclick/">doubleclick</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doubleclick-for-publishers/">doubleclick for publishers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpt/">gpt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/howto/">howto</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lint/">lint</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linter/">linter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linter-eslint/">linter-eslint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modular-css/">modular css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modularity/">modularity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/normalize/">normalize</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/normalizer/">normalizer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/notes/">notes</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/open-source/">open source</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pitfalls/">pitfalls</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/productivity/">productivity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regex/">regex</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rooted/">rooted</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svn/">svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time-management/">time management</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tutorial/">tutorial</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/7-Zip/" style="font-size: 11.25px;">7-Zip</a> <a href="/tags/AMD/" style="font-size: 11.25px;">AMD</a> <a href="/tags/AMP/" style="font-size: 10px;">AMP</a> <a href="/tags/APP2SD/" style="font-size: 11.25px;">APP2SD</a> <a href="/tags/Android/" style="font-size: 13.75px;">Android</a> <a href="/tags/AngularJS/" style="font-size: 10px;">AngularJS</a> <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/BEM/" style="font-size: 10px;">BEM</a> <a href="/tags/Backup/" style="font-size: 11.25px;">Backup</a> <a href="/tags/Batch/" style="font-size: 11.25px;">Batch</a> <a href="/tags/Blogger/" style="font-size: 12.5px;">Blogger</a> <a href="/tags/CSS-modules/" style="font-size: 10px;">CSS-modules</a> <a href="/tags/CommonJS/" style="font-size: 15px;">CommonJS</a> <a href="/tags/DIY/" style="font-size: 13.75px;">DIY</a> <a href="/tags/Design-Pattern/" style="font-size: 12.5px;">Design Pattern</a> <a href="/tags/ESLint/" style="font-size: 10px;">ESLint</a> <a href="/tags/Facebook-Notes/" style="font-size: 10px;">Facebook Notes</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Generator/" style="font-size: 10px;">Generator</a> <a href="/tags/Ginger-yoshi/" style="font-size: 11.25px;">Ginger yoshi</a> <a href="/tags/Gist/" style="font-size: 10px;">Gist</a> <a href="/tags/GitHub/" style="font-size: 16.25px;">GitHub</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/Google-App-Engine/" style="font-size: 10px;">Google App Engine</a> <a href="/tags/Google-Code-Prettify/" style="font-size: 10px;">Google Code Prettify</a> <a href="/tags/Grails/" style="font-size: 10px;">Grails</a> <a href="/tags/Groovy/" style="font-size: 12.5px;">Groovy</a> <a href="/tags/Gulp/" style="font-size: 11.25px;">Gulp</a> <a href="/tags/HTML/" style="font-size: 13.75px;">HTML</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/JAX-RS/" style="font-size: 10px;">JAX-RS</a> <a href="/tags/JDOM/" style="font-size: 12.5px;">JDOM</a> <a href="/tags/JSHint/" style="font-size: 10px;">JSHint</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Jersey/" style="font-size: 10px;">Jersey</a> <a href="/tags/Jetty/" style="font-size: 10px;">Jetty</a> <a href="/tags/Logdown/" style="font-size: 10px;">Logdown</a> <a href="/tags/Markdown/" style="font-size: 11.25px;">Markdown</a> <a href="/tags/Maven/" style="font-size: 16.25px;">Maven</a> <a href="/tags/Medium/" style="font-size: 10px;">Medium</a> <a href="/tags/NPM/" style="font-size: 10px;">NPM</a> <a href="/tags/Namespace/" style="font-size: 11.25px;">Namespace</a> <a href="/tags/Open-Source/" style="font-size: 11.25px;">Open Source</a> <a href="/tags/Pomodoro-Technique/" style="font-size: 10px;">Pomodoro Technique</a> <a href="/tags/Programming/" style="font-size: 10px;">Programming</a> <a href="/tags/Promise/" style="font-size: 11.25px;">Promise</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Regular-Expression/" style="font-size: 15px;">Regular Expression</a> <a href="/tags/RequireJS/" style="font-size: 10px;">RequireJS</a> <a href="/tags/SUIT/" style="font-size: 10px;">SUIT</a> <a href="/tags/SWAP/" style="font-size: 10px;">SWAP</a> <a href="/tags/Shadow-DOM/" style="font-size: 10px;">Shadow DOM</a> <a href="/tags/TagSoup/" style="font-size: 12.5px;">TagSoup</a> <a href="/tags/Time-Management/" style="font-size: 10px;">Time Management</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/UMD/" style="font-size: 11.25px;">UMD</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/Web-Components/" style="font-size: 10px;">Web Components</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Windows/" style="font-size: 11.25px;">Windows</a> <a href="/tags/XML/" style="font-size: 12.5px;">XML</a> <a href="/tags/XPath/" style="font-size: 12.5px;">XPath</a> <a href="/tags/Yeoman/" style="font-size: 12.5px;">Yeoman</a> <a href="/tags/advertising/" style="font-size: 10px;">advertising</a> <a href="/tags/best-practices/" style="font-size: 10px;">best practices</a> <a href="/tags/browser/" style="font-size: 10px;">browser</a> <a href="/tags/cheatsheet/" style="font-size: 11.25px;">cheatsheet</a> <a href="/tags/cmd/" style="font-size: 11.25px;">cmd</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/custom-ROM/" style="font-size: 11.25px;">custom ROM</a> <a href="/tags/dfp/" style="font-size: 10px;">dfp</a> <a href="/tags/doubleclick/" style="font-size: 10px;">doubleclick</a> <a href="/tags/doubleclick-for-publishers/" style="font-size: 10px;">doubleclick for publishers</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/glob/" style="font-size: 10px;">glob</a> <a href="/tags/gpt/" style="font-size: 10px;">gpt</a> <a href="/tags/howto/" style="font-size: 18.75px;">howto</a> <a href="/tags/lint/" style="font-size: 11.25px;">lint</a> <a href="/tags/linter/" style="font-size: 10px;">linter</a> <a href="/tags/linter-eslint/" style="font-size: 10px;">linter-eslint</a> <a href="/tags/modular-css/" style="font-size: 11.25px;">modular css</a> <a href="/tags/modularity/" style="font-size: 10px;">modularity</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/nodejs/" style="font-size: 13.75px;">nodejs</a> <a href="/tags/normalize/" style="font-size: 10px;">normalize</a> <a href="/tags/normalizer/" style="font-size: 10px;">normalizer</a> <a href="/tags/notes/" style="font-size: 11.25px;">notes</a> <a href="/tags/npm/" style="font-size: 13.75px;">npm</a> <a href="/tags/open-source/" style="font-size: 13.75px;">open source</a> <a href="/tags/pitfalls/" style="font-size: 17.5px;">pitfalls</a> <a href="/tags/productivity/" style="font-size: 10px;">productivity</a> <a href="/tags/regex/" style="font-size: 15px;">regex</a> <a href="/tags/rooted/" style="font-size: 11.25px;">rooted</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/time-management/" style="font-size: 10px;">time management</a> <a href="/tags/tutorial/" style="font-size: 11.25px;">tutorial</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">十二月 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">十一月 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">五月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">七月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/06/">六月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/08/11/react-dfp/">埋設 DFP - DoubleClick for Publishers 廣告</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/22/modular-css-notes/">Modular CSS</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/15/angularjs-1.5-best-practices/">AngularJS 1.5 最佳實務</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/07/re-npm-left-pad-have-we-forgotten-how-to-program/">反駁：NPM &amp; left-pad: Have We Forgotten How To Program?</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/09/npm-package-node-or-browser/">如何判斷 npmjs.com 上的套件，是否支援 node 或 browser</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Amobiz Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'amobiz';
+  
+  var disqus_url = 'https://amobiz.github.io/2016/04/15/angularjs-1.5-best-practices/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<div id="fb-root"></div>
+
+<!-- Facebook SDK -->
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.5&appId=1660468744166033";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- End Facebook SDK -->
+
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/script.js"></script>
+<script src="/js/nav.js"></script>
+
+  </div>
+</body>
+</html>

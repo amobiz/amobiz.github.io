@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Grails 專案維護 - 專案設定資料夾 | 格物致知</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Grails 雖然在專案根目錄下的 application.properties 檔案中，儲存了專案的設定資料。但是諸如於專案開發、編譯期間所需要的 resource、script 及 template 等，甚至 plugin 及其說明文件，卻都不是儲存於專案目錄下，而是另外存放在 user home 底下。每個專案，依其專案名稱（於建立專案時，由 grails create-app 命令指定），">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Grails 專案維護 - 專案設定資料夾">
+<meta property="og:url" content="https://amobiz.github.io/2010/12/15/grails/index.html">
+<meta property="og:site_name" content="格物致知">
+<meta property="og:description" content="Grails 雖然在專案根目錄下的 application.properties 檔案中，儲存了專案的設定資料。但是諸如於專案開發、編譯期間所需要的 resource、script 及 template 等，甚至 plugin 及其說明文件，卻都不是儲存於專案目錄下，而是另外存放在 user home 底下。每個專案，依其專案名稱（於建立專案時，由 grails create-app 命令指定），">
+<meta property="og:image" content="https://amobiz.github.io/0_grails_config.png">
+<meta property="og:image" content="https://amobiz.github.io/1_grails_errors_PersistenceManagerFactory.png">
+<meta property="og:updated_time" content="2016-06-28T03:07:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Grails 專案維護 - 專案設定資料夾">
+<meta name="twitter:description" content="Grails 雖然在專案根目錄下的 application.properties 檔案中，儲存了專案的設定資料。但是諸如於專案開發、編譯期間所需要的 resource、script 及 template 等，甚至 plugin 及其說明文件，卻都不是儲存於專案目錄下，而是另外存放在 user home 底下。每個專案，依其專案名稱（於建立專案時，由 grails create-app 命令指定），">
+<meta name="twitter:image" content="https://amobiz.github.io/0_grails_config.png">
+  
+    <link rel="alternative" href="/atom.xml" title="格物致知" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-68633744-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">格物致知</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Happiness only real when shared.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://amobiz.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-grails" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2010/12/15/grails/" class="article-date">
+  <time datetime="2010-12-15T13:10:00.000Z" itemprop="datePublished">2010-12-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Programming/">Programming</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2010/12/15/grails/">Grails 專案維護 - 專案設定資料夾</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <!-- Post Contents -->
+        <p><a href="http://www.grails.org/" target="_blank" rel="external">Grails</a> 雖然在專案根目錄下的 <a href="http://www.grails.org/Configuration" target="_blank" rel="external"><code>application.properties</code></a> 檔案中，儲存了專案的設定資料。但是諸如於專案開發、編譯期間所需要的 resource、script 及 template 等，甚至 plugin 及其說明文件，卻都不是儲存於專案目錄下，而是另外存放在 <a href="http://en.wikipedia.org/wiki/Home_directory" target="_blank" rel="external">user home</a> 底下。每個專案，依其專案名稱（於建立專案時，由 <a href="http://grails.org/doc/latest/ref/Command%20Line/create-app.html" target="_blank" rel="external"><code>grails create-app</code></a> 命令指定），皆有專屬目錄存放該專案的相關資源。</p>
+<p>該目錄所在位置，在 user home 的 <code>.grails\{grails 版本}\projects</code> 下，譬如：</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:<span class="symbol">\D</span>ocuments and Settings<span class="symbol">\A</span>dministrator<span class="symbol">.</span>grails<span class="symbol">\1</span>.3.5<span class="symbol">\p</span>rojects<span class="symbol">\&#123;</span>專案名稱&#125;</span><br></pre></td></tr></table></figure>
+
+<p>關於這一事實，有以下兩個問題必須加以關注：</p>
+<a id="more"></a>
+<h3 id="專案備份問題"><a href="#專案備份問題" class="headerlink" title="專案備份問題"></a>專案備份問題</h3><p><em>備份專案時，應考慮連同專案設定目錄一同備份</em></p>
+<p>雖然 Grails 會在專案根目錄下的 application.properties 檔案中，設置 plugin 等專案相關設定資訊，譬如，以 <a href="http://www.grails.org/plugin/app-engine" target="_blank" rel="external">Grails AppEngine plugin</a> 為例，可以透過 <a href="http://www.grails.org/doc/latest/ref/Command%20Line/install-plugin.html" target="_blank" rel="external"><code>grails install-plugin</code></a> 命令安裝此 plugin：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grails install-plugin app-engine</span><br></pre></td></tr></table></figure>
+
+<p>安裝完成後，application.properties 檔案將包含下列資訊：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">appengine.<span class="attribute">persistence</span>=jpa</span><br><span class="line">plugins.<span class="attribute">app-engine</span>=0.8.10</span><br><span class="line">plugins.<span class="attribute">gorm-jpa</span>=0.7.1</span><br></pre></td></tr></table></figure>
+
+<p>但是若前述專案的對應設定目錄不存在，譬如將專案移轉到新的電腦環境中，在建置或執行專案時，過程中將必須重新下載並安裝相關 plugin。也就是說，若於命令列首次以 <a href="http://www.grails.org/doc/latest/ref/Command%20Line/compile.html" target="_blank" rel="external"><code>grails compile</code></a> 命令建置專案，或以 <a href="http://www.grails.org/doc/latest/ref/Command%20Line/run-app.html" target="_blank" rel="external"><code>grails run-app</code></a> 命令直接執行專案，因為此時 plugin 相關檔案尚不存在，因此，在建置過程中，Grails 將根據 application.properties 檔案中的設定， 重新下載、安裝 plugin。</p>
+<p>這個過程，可能會遇到兩個意外。</p>
+<p>首先，雖然在網路如此普及的現在，很少人會有此問題，但萬一碰巧此時電腦無法存取 Internet，將會立即遇到無法下載 plugin，無法建置專案的窘境。</p>
+<p>另外，可能是 plugin 的 <a href="http://gant.codehaus.org/" target="_blank" rel="external">Gant</a> 的寫法的問題（尚未深究），再以 Grails AppEngine plugin 為例，plugin 的下載、初始設定都沒遇到問題：</p>
+<p><img src="0_grails_config.png" alt="圖一：在新環境首次建置專案時，將重新下載、安裝 plugin。此例中，依據 Grails AppEngine plugin 的提示，選擇安裝 jpa 或 jdo 支援，這裡選擇 jpa。注意最後一行顯示 app-engine-0.8.10 安裝成功。" title="(圖一)"></p>
+<p>但當 plugin 設置完成後，要開始建置專案時，此時 plugin 似乎尚未能與專案設定充分連結：無法存取專案相關 classpath；或者可能是還未確實獲得正確的設定；導致執行 plugin 的建置過程中，發生 <a href="http://groovy.codehaus.org/api/org/codehaus/groovy/control/MultipleCompilationErrorsException.html" target="_blank" rel="external"><code>MultipleCompilationErrorsException</code></a>: <code>unable to resolve class xxx</code> 等錯誤，而使專案建置失敗。（在這裡，還是以 Grails AppEngine plugin 為例，是找不到 JDO 的 <a href="http://db.apache.org/jdo/api20/apidocs/javax/jdo/PersistenceManagerFactory.html" target="_blank" rel="external"><code>PersistenceManagerFactory</code></a>。）（沒錯，雖然選擇了 jpa，但是顯然 Grails AppEngine plugin 還是在專案中含入了 JDO 的相關檔案。）</p>
+<p><img src="1_grails_errors_PersistenceManagerFactory.png" alt="圖二：plugin 安裝完成，開始建置專案。但在編譯 gorm-jpa-0.7.1 （安裝 Grails AppEngine plugin 時自動安裝的 plugin）時，卻出現找不到 PersistenceManagerFactory 類別的訊息。" title="(圖二)"></p>
+<p>雖然再次執行上述任一命令，即不再發生上述錯誤，但若是開發者未意識到此問題其實已於上述命令首次執行時已自動消失，而在看到錯誤的第一時間，即嘗試去解決問題，反而會找不到答案，徒增困擾。</p>
+<p>若要驗證此問題，只需將 user home 裡的專案相關設定目錄刪除，然後重新建置專案，即可驗證。</p>
+<p>總之，根據以上的實務經驗：</p>
+<aside class="cheatsheet"><h5>在不同電腦環境下建置既有專案，需要注意專案初始化問題</h5><p>若要在不同電腦環境下建置既有專案，下列應對方式最好擇一進行：</p>
+<ul>
+<li>妥善備份既有專案：備份專案設定目錄以及專案目錄。在新的環境中，於 user home 回復專案相關設定資料。或者</li>
+<li>確認電腦可連上 Internet，先執行 <code>grails compile</code> 指令（Grails 似乎沒有初始化專案環境上設定的專用命令，包括 <a href="#grails-init"><code>init</code></a>, <a href="#grails-install-dependency"><code>install-dependency</code></a> 等命令都不是。）建置專案，然後依據提示設定 plugin 相關資訊，待相關 plugin 都下載、設定完畢，要開始建置專案時，忽略建置錯誤訊息。待建置結束（或失敗），重新執行即可。</li>
+</ul>
+</aside>
+<h3 id="專案命名問題"><a href="#專案命名問題" class="headerlink" title="專案命名問題"></a>專案命名問題</h3><p><em>建立新專案或欲手動修改既有專案名稱時，需注意在 user home 裡，是否已存在相同專案名稱的設定目錄。</em></p>
+<p>這個問題其實相當困擾初學者，尤其是經常反覆建立、刪除測試用專案的時候。簡直是在懲罰積極（但可能不是很瞭解 Grails 專案設定）的初學者…。</p>
+<p>最常見的情況，莫過於在開發了許多專案之後，難免會碰巧在不同目錄下，建立了相同名稱的專案；又或者，在專案初期，評估可行性時建立測試用專案，而將專案取名為 test 等常用名稱而導致名稱衝突。專案名稱一旦發生衝突，最常導致的結果，不外乎無法安裝 plugin （使用 <code>install-plugin</code> 安裝時無動作）、專案或是 plugin 的設定不正確等…，都是一些相當惱人的問題。</p>
+<aside class="cheatsheet"><h5>要避免專案名稱衝突問題，應該養成習慣檢查既有同名專案的習慣</h5><p>在建立專案或重新命名專案前，先查看 user home 底下的專案設定目錄是否已有同名專案存在。若有，則應該擇一採取下列方式避開問題：</p>
+<ul>
+<li>新專案取用不同的名稱，以避免衝突。或者</li>
+<li>妥善備份該同名專案：備份專案設定目錄以及專案目錄。刪除或重新命名該專案目錄及專案設定目錄，將名稱留給新專案使用。</li>
+</ul>
+</aside>
+<h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><p>以上兩個問題，雖然對有經驗的人來說，可能真的不算什麼，但對於初學者而言，很可能會是一個萬一不幸遇上時，抓破頭也找不出原因，成為一道無法跨過的門檻。若初學者因為這樣就放棄了 Grails，那真是太可惜了。或許，以『<a href="http://en.wikipedia.org/wiki/Convention_over_configuration" target="_blank" rel="external">約定優於配置</a>』的 Grails，實在應該將專案相關設定檔案，都放在專案目錄下才對。</p>
+<p>歡迎大家的回饋與心得分享。</p>
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料:"></a>參考資料:</h3><ul>
+<li><a href="http://www.grails.org/" target="_blank" rel="external">Grails</a></li>
+<li><a href="http://www.grails.org/Configuration" target="_blank" rel="external">application.properties</a></li>
+<li><a href="http://grails.org/doc/latest/ref/Command%20Line/create-app.html" target="_blank" rel="external">grails create-app</a></li>
+<li><a href="http://www.grails.org/doc/latest/ref/Command%20Line/install-plugin.html" target="_blank" rel="external">grails install-plugin</a></li>
+<li><a href="http://www.grails.org/doc/latest/ref/Command%20Line/compile.html" target="_blank" rel="external">grails compile</a></li>
+<li><a href="http://www.grails.org/doc/latest/ref/Command%20Line/run-app.html" target="_blank" rel="external">grails run-app</a></li>
+<li><span id="grails-init"></span><a href="http://www.grails.org/doc/latest/ref/Command%20Line/init.html" target="_blank" rel="external">grails init</a></li>
+<li><span id="grails-install-dependency"></span><a href="http://www.grails.org/doc/latest/ref/Command%20Line/install-dependency.html" target="_blank" rel="external">grails install-dependency</a></li>
+<li><a href="http://gant.codehaus.org/" target="_blank" rel="external">Gant</a></li>
+<li><a href="http://www.oracle.com/technetwork/articles/javaee/jpa-137156.html" target="_blank" rel="external">jpa</a></li>
+<li><a href="http://www.oracle.com/technetwork/java/index-jsp-135919.html" target="_blank" rel="external">jdo</a></li>
+<li><a href="http://groovy.codehaus.org/api/org/codehaus/groovy/control/MultipleCompilationErrorsException.html" target="_blank" rel="external">MultipleCompilationErrorsException</a></li>
+<li><a href="http://db.apache.org/jdo/api20/apidocs/javax/jdo/PersistenceManagerFactory.html" target="_blank" rel="external">PersistenceManagerFactory</a></li>
+<li><a href="http://en.wikipedia.org/wiki/Convention_over_configuration" target="_blank" rel="external">Convention over Configuration</a></li>
+<li><a href="http://www.grails.org/plugin/app-engine" target="_blank" rel="external">Grails AppEngine plugin</a></li>
+</ul>
+<!-- cross references -->
+<!-- external references -->
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amobiz.github.io/2010/12/15/grails/" data-id="cj4y0ufpl004jk0562qu22foy" class="article-share-link">Share</a>
+      
+        <a href="https://amobiz.github.io/2010/12/15/grails/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Google-App-Engine/">Google App Engine</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Grails/">Grails</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cheatsheet/">cheatsheet</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pitfalls/">pitfalls</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2011/02/15/html-data-mining-part-1-jdom-tagsoup-xpath/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          HTML 資訊汲取（上篇） - 使用 JDOM 、 TagSoup 及 XPath
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  
+    <ul class="nav"></ul>
+  
+  
+    <section class="comments" title="Disqus">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </section>
+  
+  
+    <section class="comments" title="Facebook">
+      <div class="fb-comments" data-href="https://amobiz.github.io/2010/12/15/grails/" data-width="100%" data-numposts="5"></div>
+    </section>
+  
+</section>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hack/">Hack</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Productivity/">Productivity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">36</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Software/">Software</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Design/">Web Design</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/7-Zip/">7-Zip</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMD/">AMD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMP/">AMP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/APP2SD/">APP2SD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/">AngularJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/">Atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BEM/">BEM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backup/">Backup</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Batch/">Batch</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blogger/">Blogger</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS-modules/">CSS-modules</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CommonJS/">CommonJS</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DIY/">DIY</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Pattern/">Design Pattern</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ESLint/">ESLint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Facebook-Notes/">Facebook Notes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GTD/">GTD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Generator/">Generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ginger-yoshi/">Ginger yoshi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gist/">Gist</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/">GitHub</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google/">Google</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-App-Engine/">Google App Engine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-Code-Prettify/">Google Code Prettify</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grails/">Grails</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Groovy/">Groovy</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/">Gulp</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAX-RS/">JAX-RS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDOM/">JDOM</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSHint/">JSHint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/">JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jersey/">Jersey</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/">Jetty</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logdown/">Logdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/">Maven</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Medium/">Medium</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NPM/">NPM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Namespace/">Namespace</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Open-Source/">Open Source</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pomodoro-Technique/">Pomodoro Technique</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming/">Programming</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Promise/">Promise</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regular-Expression/">Regular Expression</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RequireJS/">RequireJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SUIT/">SUIT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SWAP/">SWAP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadow-DOM/">Shadow DOM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TagSoup/">TagSoup</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Time-Management/">Time Management</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UMD/">UMD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/URL/">URL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web-Components/">Web Components</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/">Webpack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/">XML</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XPath/">XPath</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yeoman/">Yeoman</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/advertising/">advertising</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/best-practices/">best practices</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/browser/">browser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cheatsheet/">cheatsheet</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/">cmd</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/custom-ROM/">custom ROM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dfp/">dfp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doubleclick/">doubleclick</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doubleclick-for-publishers/">doubleclick for publishers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpt/">gpt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/howto/">howto</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lint/">lint</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linter/">linter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linter-eslint/">linter-eslint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modular-css/">modular css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modularity/">modularity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/normalize/">normalize</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/normalizer/">normalizer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/notes/">notes</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/open-source/">open source</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pitfalls/">pitfalls</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/productivity/">productivity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regex/">regex</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rooted/">rooted</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svn/">svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time-management/">time management</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tutorial/">tutorial</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/7-Zip/" style="font-size: 11.25px;">7-Zip</a> <a href="/tags/AMD/" style="font-size: 11.25px;">AMD</a> <a href="/tags/AMP/" style="font-size: 10px;">AMP</a> <a href="/tags/APP2SD/" style="font-size: 11.25px;">APP2SD</a> <a href="/tags/Android/" style="font-size: 13.75px;">Android</a> <a href="/tags/AngularJS/" style="font-size: 10px;">AngularJS</a> <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/BEM/" style="font-size: 10px;">BEM</a> <a href="/tags/Backup/" style="font-size: 11.25px;">Backup</a> <a href="/tags/Batch/" style="font-size: 11.25px;">Batch</a> <a href="/tags/Blogger/" style="font-size: 12.5px;">Blogger</a> <a href="/tags/CSS-modules/" style="font-size: 10px;">CSS-modules</a> <a href="/tags/CommonJS/" style="font-size: 15px;">CommonJS</a> <a href="/tags/DIY/" style="font-size: 13.75px;">DIY</a> <a href="/tags/Design-Pattern/" style="font-size: 12.5px;">Design Pattern</a> <a href="/tags/ESLint/" style="font-size: 10px;">ESLint</a> <a href="/tags/Facebook-Notes/" style="font-size: 10px;">Facebook Notes</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Generator/" style="font-size: 10px;">Generator</a> <a href="/tags/Ginger-yoshi/" style="font-size: 11.25px;">Ginger yoshi</a> <a href="/tags/Gist/" style="font-size: 10px;">Gist</a> <a href="/tags/GitHub/" style="font-size: 16.25px;">GitHub</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/Google-App-Engine/" style="font-size: 10px;">Google App Engine</a> <a href="/tags/Google-Code-Prettify/" style="font-size: 10px;">Google Code Prettify</a> <a href="/tags/Grails/" style="font-size: 10px;">Grails</a> <a href="/tags/Groovy/" style="font-size: 12.5px;">Groovy</a> <a href="/tags/Gulp/" style="font-size: 11.25px;">Gulp</a> <a href="/tags/HTML/" style="font-size: 13.75px;">HTML</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/JAX-RS/" style="font-size: 10px;">JAX-RS</a> <a href="/tags/JDOM/" style="font-size: 12.5px;">JDOM</a> <a href="/tags/JSHint/" style="font-size: 10px;">JSHint</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Jersey/" style="font-size: 10px;">Jersey</a> <a href="/tags/Jetty/" style="font-size: 10px;">Jetty</a> <a href="/tags/Logdown/" style="font-size: 10px;">Logdown</a> <a href="/tags/Markdown/" style="font-size: 11.25px;">Markdown</a> <a href="/tags/Maven/" style="font-size: 16.25px;">Maven</a> <a href="/tags/Medium/" style="font-size: 10px;">Medium</a> <a href="/tags/NPM/" style="font-size: 10px;">NPM</a> <a href="/tags/Namespace/" style="font-size: 11.25px;">Namespace</a> <a href="/tags/Open-Source/" style="font-size: 11.25px;">Open Source</a> <a href="/tags/Pomodoro-Technique/" style="font-size: 10px;">Pomodoro Technique</a> <a href="/tags/Programming/" style="font-size: 10px;">Programming</a> <a href="/tags/Promise/" style="font-size: 11.25px;">Promise</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Regular-Expression/" style="font-size: 15px;">Regular Expression</a> <a href="/tags/RequireJS/" style="font-size: 10px;">RequireJS</a> <a href="/tags/SUIT/" style="font-size: 10px;">SUIT</a> <a href="/tags/SWAP/" style="font-size: 10px;">SWAP</a> <a href="/tags/Shadow-DOM/" style="font-size: 10px;">Shadow DOM</a> <a href="/tags/TagSoup/" style="font-size: 12.5px;">TagSoup</a> <a href="/tags/Time-Management/" style="font-size: 10px;">Time Management</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/UMD/" style="font-size: 11.25px;">UMD</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/Web-Components/" style="font-size: 10px;">Web Components</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Windows/" style="font-size: 11.25px;">Windows</a> <a href="/tags/XML/" style="font-size: 12.5px;">XML</a> <a href="/tags/XPath/" style="font-size: 12.5px;">XPath</a> <a href="/tags/Yeoman/" style="font-size: 12.5px;">Yeoman</a> <a href="/tags/advertising/" style="font-size: 10px;">advertising</a> <a href="/tags/best-practices/" style="font-size: 10px;">best practices</a> <a href="/tags/browser/" style="font-size: 10px;">browser</a> <a href="/tags/cheatsheet/" style="font-size: 11.25px;">cheatsheet</a> <a href="/tags/cmd/" style="font-size: 11.25px;">cmd</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/custom-ROM/" style="font-size: 11.25px;">custom ROM</a> <a href="/tags/dfp/" style="font-size: 10px;">dfp</a> <a href="/tags/doubleclick/" style="font-size: 10px;">doubleclick</a> <a href="/tags/doubleclick-for-publishers/" style="font-size: 10px;">doubleclick for publishers</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/glob/" style="font-size: 10px;">glob</a> <a href="/tags/gpt/" style="font-size: 10px;">gpt</a> <a href="/tags/howto/" style="font-size: 18.75px;">howto</a> <a href="/tags/lint/" style="font-size: 11.25px;">lint</a> <a href="/tags/linter/" style="font-size: 10px;">linter</a> <a href="/tags/linter-eslint/" style="font-size: 10px;">linter-eslint</a> <a href="/tags/modular-css/" style="font-size: 11.25px;">modular css</a> <a href="/tags/modularity/" style="font-size: 10px;">modularity</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/nodejs/" style="font-size: 13.75px;">nodejs</a> <a href="/tags/normalize/" style="font-size: 10px;">normalize</a> <a href="/tags/normalizer/" style="font-size: 10px;">normalizer</a> <a href="/tags/notes/" style="font-size: 11.25px;">notes</a> <a href="/tags/npm/" style="font-size: 13.75px;">npm</a> <a href="/tags/open-source/" style="font-size: 13.75px;">open source</a> <a href="/tags/pitfalls/" style="font-size: 17.5px;">pitfalls</a> <a href="/tags/productivity/" style="font-size: 10px;">productivity</a> <a href="/tags/regex/" style="font-size: 15px;">regex</a> <a href="/tags/rooted/" style="font-size: 11.25px;">rooted</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/time-management/" style="font-size: 10px;">time management</a> <a href="/tags/tutorial/" style="font-size: 11.25px;">tutorial</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">十二月 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">十一月 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">五月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">七月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/06/">六月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/08/11/react-dfp/">埋設 DFP - DoubleClick for Publishers 廣告</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/22/modular-css-notes/">Modular CSS</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/15/angularjs-1.5-best-practices/">AngularJS 1.5 最佳實務</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/07/re-npm-left-pad-have-we-forgotten-how-to-program/">反駁：NPM &amp; left-pad: Have We Forgotten How To Program?</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/09/npm-package-node-or-browser/">如何判斷 npmjs.com 上的套件，是否支援 node 或 browser</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Amobiz Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'amobiz';
+  
+  var disqus_url = 'https://amobiz.github.io/2010/12/15/grails/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<div id="fb-root"></div>
+
+<!-- Facebook SDK -->
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.5&appId=1660468744166033";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- End Facebook SDK -->
+
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/script.js"></script>
+<script src="/js/nav.js"></script>
+
+  </div>
+</body>
+</html>

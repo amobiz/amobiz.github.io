@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Gulp 學習筆記 - Glob 篇 | 格物致知</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="意象說明glob &amp;lt; pattern &amp;lt; 在眾多相似物中尋找
+Oliver Wendel
+前言Glob 類似於 regular expression，但是僅用來匹配檔案路徑名稱。名稱由來是 UNIX 一個負責解析匹配檔案、叫做 global command 的模組。
+本文針對 gulp 使用的 node-glob 所支援的語法及選項進行說明，詳細的使用方法可參考 node-glob">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gulp 學習筆記 - Glob 篇">
+<meta property="og:url" content="https://amobiz.github.io/2015/11/14/gulp-glob/index.html">
+<meta property="og:site_name" content="格物致知">
+<meta property="og:description" content="意象說明glob &amp;lt; pattern &amp;lt; 在眾多相似物中尋找
+Oliver Wendel
+前言Glob 類似於 regular expression，但是僅用來匹配檔案路徑名稱。名稱由來是 UNIX 一個負責解析匹配檔案、叫做 global command 的模組。
+本文針對 gulp 使用的 node-glob 所支援的語法及選項進行說明，詳細的使用方法可參考 node-glob">
+<meta property="og:image" content="https://images.unsplash.com/photo-1445551712021-28753c605094?crop=entropy&fit=crop&fm=jpg&h=975&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1075">
+<meta property="og:updated_time" content="2016-06-28T03:07:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Gulp 學習筆記 - Glob 篇">
+<meta name="twitter:description" content="意象說明glob &amp;lt; pattern &amp;lt; 在眾多相似物中尋找
+Oliver Wendel
+前言Glob 類似於 regular expression，但是僅用來匹配檔案路徑名稱。名稱由來是 UNIX 一個負責解析匹配檔案、叫做 global command 的模組。
+本文針對 gulp 使用的 node-glob 所支援的語法及選項進行說明，詳細的使用方法可參考 node-glob">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1445551712021-28753c605094?crop=entropy&fit=crop&fm=jpg&h=975&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1075">
+  
+    <link rel="alternative" href="/atom.xml" title="格物致知" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-68633744-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">格物致知</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Happiness only real when shared.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://amobiz.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-gulp-glob" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/14/gulp-glob/" class="article-date">
+  <time datetime="2015-11-13T21:43:00.000Z" itemprop="datePublished">2015-11-14</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Programming/">Programming</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/14/gulp-glob/">Gulp 學習筆記 - Glob 篇</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <!-- Post Contents -->
+        <div class="Credit"><p><img src="https://images.unsplash.com/photo-1445551712021-28753c605094?crop=entropy&amp;fit=crop&amp;fm=jpg&amp;h=975&amp;ixjsv=2.1.0&amp;ixlib=rb-0.3.5&amp;q=80&amp;w=1075" alt=""></p>
+<div class="Credit-backdrop"><div class="Credit-info"><div class="Credit-desc"><p>意象說明<br><br>glob &lt; pattern &lt; 在眾多相似物中尋找</p>
+</div><div><a class="Credit-link" target="_blank" href="https://unsplash.com/c_ow">Oliver Wendel</a></div></div></div></div>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p><a href="http://en.wikipedia.org/wiki/Glob_(programming)" target="_blank" rel="external">Glob</a> 類似於 <a href="/2014/08/04/regular-expression-javascript-study-notes-3-informal-bnf-grammar/" title="regular expression">regular expression</a>，但是僅用來匹配檔案路徑名稱。名稱由來是 UNIX 一個負責解析匹配檔案、叫做 global command 的模組。</p>
+<p>本文針對 gulp 使用的 <a href="https://github.com/isaacs/node-glob" title="node-glob" target="_blank" rel="external">node-glob</a> 所支援的語法及選項進行說明，詳細的使用方法可參考 <a href="https://github.com/isaacs/node-glob" title="node-glob" target="_blank" rel="external">node-glob</a> 的說明。</p>
+<a id="more"></a>
+<h3 id="gulp-src-基本使用方式"><a href="#gulp-src-基本使用方式" class="headerlink" title="gulp.src() 基本使用方式"></a><code>gulp.src()</code> 基本使用方式</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">‘gulp’</span>);</span><br><span class="line"><span class="keyword">var</span> uglify = <span class="built_in">require</span>(<span class="string">‘gulp-uglify’</span>);</span><br><span class="line"></span><br><span class="line">gulp.src(<span class="string">‘<em>*/</em>.js’</span>)</span><br><span class="line">    .pipe(uglify())</span><br><span class="line">    .pipe(gulp.dest(<span class="string">‘dist’</span>));</span><br></pre></td></tr></table></figure>
+
+<p><code>gulp.src()</code> 還支援陣列形式的多組 glob 參數：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gulp.src([<span class="string">‘<strong>/*.js’</strong></span>, <span class="string">‘/*.ts’</span>])</span><br><span class="line">    .pipe(uglify())</span><br><span class="line">    .pipe(gulp.dest(<span class="string">‘dist’</span>));</span><br></pre></td></tr></table></figure>
+
+<p>不過這個例子，可以使用後面介紹的『多選結構』加以簡化，而不必使用陣列：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gulp.src(<span class="string">‘<em>*/</em>.&#123;js,ts&#125;’</span>)</span><br><span class="line">    .pipe(uglify())</span><br><span class="line">    .pipe(gulp.dest(<span class="string">‘dist’</span>));</span><br></pre></td></tr></table></figure>
+
+<h3 id="或者，直接使用-node-glob-來匹配檔案"><a href="#或者，直接使用-node-glob-來匹配檔案" class="headerlink" title="或者，直接使用 node-glob 來匹配檔案"></a>或者，直接使用 <code>node-glob</code> 來匹配檔案</h3><p>安裝</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install –save glob</span><br></pre></td></tr></table></figure>
+
+<p>注意，雖然 GitHub 上的名稱為 <code>node-glob</code>，但是 npm 上卻是註冊為 <code>glob</code>，因此安裝時名稱必須為 <code>glob</code>。</p>
+<p>呼叫 glob() 函數</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> glob = <span class="built_in">require</span>(<span class="string">‘glob’</span>);</span><br><span class="line"><span class="keyword">var</span> files = glob(<span class="string">‘<em>*/</em>‘</span>, &#123; <span class="attr">dot</span>: <span class="literal">true</span> &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>檔案路徑匹配結果以陣列回傳，如果沒有匹配任何路徑或檔案，將回傳空陣列。</p>
+<h3 id="Glob-元字元"><a href="#Glob-元字元" class="headerlink" title="Glob 元字元"></a>Glob 元字元</h3><p>前面兩個例子中，呼叫 <code>gulp.src()</code> 及 <code>glob()</code> 函數的第一個字串參數，就是所謂的 glob，其中 <code>*</code> 及 <code>/</code> 字元，就是所謂的 Glob 元字元。就是這些元字元，讓我們可以以簡單的模式，即可對應各種不同的檔案名稱。</p>
+<h4 id="多選結構，『-』及『-』元字元："><a href="#多選結構，『-』及『-』元字元：" class="headerlink" title="多選結構，『{』及『}』元字元："></a>多選結構，『{』及『}』元字元：</h4><p>首先，在開始解析 glob 之前，其中的『{}』部份，會先被擴展開來，每個以『,』隔開的部份，都會造成整個 glob 被複製一次，成為個別的 glob。系統再分別針對這些個別的 glob，一一去比對檔案系統，然後將吻合的檔案，綜合起來，去除重複的檔案後傳回。</p>
+<ol>
+<li>若 glob 中包含兩個以上的『{}』部份，可想而知，被擴展的 glob 將以等比級數比例增加。譬如，<code>a{b,c}{d,e}?</code>，將擴展為：<code>abd?</code>, <code>abe?</code>, <code>acd?</code>, <code>ace?</code>。</li>
+<li>『{}』中的部份，可以包含路徑分隔符號『/』，譬如，<code>a{/b/c,bc}</code> 將被擴展為 <code>a/b/c</code> 及 <code>abc</code>。</li>
+</ol>
+<h4 id="匹配路徑分隔符號，『-』元字元："><a href="#匹配路徑分隔符號，『-』元字元：" class="headerlink" title="匹配路徑分隔符號，『/』元字元："></a>匹配路徑分隔符號，『/』元字元：</h4><p>『/』元字元用來標示路徑分隔符號。除了『/』元字元及後面介紹的『**』元字元之外，其他元字元所能夠匹配的檔案路徑字元，皆不包含路徑分隔符號。</p>
+<h4 id="任意字元，『-』元字元："><a href="#任意字元，『-』元字元：" class="headerlink" title="任意字元，『*』元字元："></a>任意字元，『*』元字元：</h4><p>在 glob 中若出現『*』元字元，則在該元字元的位置，可以匹配任意數量的任意檔案路徑字元，包含 0 個字元，也就是可以不匹配任何字元</p>
+<p>譬如，<code>a*.js</code> 可以匹配 <code>a.js</code>, <code>a4.js</code>, <code>about.js</code>，但是不包含 <code>app/about.js</code>，因為不匹配『/』路徑分隔符號 (如前所述，匹配的字元不包含『/』路徑分隔符號，後不再贅述)。</p>
+<h4 id="任意單一字元，『-』元字元："><a href="#任意單一字元，『-』元字元：" class="headerlink" title="任意單一字元，『?』元字元："></a>任意單一字元，『?』元字元：</h4><p>在 glob 中若出現『?』元字元，則在該元字元的位置，必須且只能匹配一個任意路徑字元。</p>
+<p>譬如，<code>a?.js</code> 可以匹配 <code>a4.js</code> 及 <code>ax.js</code>，但是不能匹配 <code>a.js</code>,  <code>about.js</code>。</p>
+<h4 id="字元組，『-』及『-』元字元："><a href="#字元組，『-』及『-』元字元：" class="headerlink" title="字元組，『[』及『]』元字元："></a>字元組，『[』及『]』元字元：</h4><p>與 regular expression 類似，字元組的意義為，匹配若干字元之一，且僅匹配一個路徑字元。同樣與 regular expression 類似地，若字元組的第一個字元為『!』或『^』，則為『排除型字元組』，代表該位置不得匹配字元組中列出的字元。</p>
+<p>譬如，<code>a[bc].js</code> 可以匹配 <code>ab.js</code> 及 <code>ac.js</code>，但是不能匹配任何其他檔案路徑。<br>而，<code>a[!bc].js</code> 或 <code>a[^bc].js</code>，兩種寫法意義相同，可以匹配 <code>a4.js</code> 及 <code>ax.js</code> 及任何其他 <code>a</code> 開頭 <code>.js</code> 結尾的兩個字元檔名的檔案，但是就是不能匹配 <code>ab.js</code> 及 <code>ac.js</code>。</p>
+<h4 id="模式匹配，『-pattern-pattern-pattern-』："><a href="#模式匹配，『-pattern-pattern-pattern-』：" class="headerlink" title="模式匹配，『@(pattern|pattern|pattern)』："></a>模式匹配，『@(pattern|pattern|pattern)』：</h4><p>匹配的路徑，必須吻合任一 pattern，實際的意義由開頭的字元決定：</p>
+<ul>
+<li>『!』：不得與列出的任一 pattern 吻合 (0)</li>
+<li>『?』：可選的吻合，即可以不吻合，或者有一次吻合 (0~1)</li>
+<li>『*』：可選的吻合，即可以不吻合，或者有一次以上吻合 (0~n)</li>
+<li>『+』：必須吻合，至少一次，或一次以上 (1~n)</li>
+<li>『@』：必須吻合，一次，且僅能一次吻合 (1)</li>
+</ul>
+<p>注意，『(』與『)』皆是合法的檔案名稱，所以若少了前面的『!』,『?』,『*』,『+』及『@』等元字元，則『(』與『)』不會被當作是模式匹配元字元。</p>
+<h4 id="任意路徑，『-』元字元："><a href="#任意路徑，『-』元字元：" class="headerlink" title="任意路徑，『**』元字元："></a>任意路徑，『**』元字元：</h4><p>又稱為 <code>globstar</code> 元字元，只有當單獨出現在路徑中時才有效，也就是必須以 <code>**/</code> 或 <code>/**/</code>  的形式出現才有效。一旦發揮作用，可以匹配包含任意子目錄的任意路徑。也就是說，全部任意深度的子目錄都將被匹配。但是不包含 symlinked 目錄，即不包含目錄捷徑。</p>
+<h3 id="選項"><a href="#選項" class="headerlink" title="選項"></a>選項</h3><p><code>gulp.src()</code> 及 <code>glob()</code> 函數的第二個參數是 <code>options</code>，可以用來改變 glob 匹配的行為。</p>
+<h4 id="dot-選項與-字元"><a href="#dot-選項與-字元" class="headerlink" title="dot 選項與 . 字元"></a><code>dot</code> 選項與 <code>.</code> 字元</h4><p><code>.</code> 字元並非元字元。在 Linux 下，目錄或檔案名稱若以 <code>.</code> 字元開頭，則為隱藏檔案。因此，glob 預設不會匹配以 <code>.</code> 字元開頭的檔案，除非明確在 glob 中明確寫出 <code>.</code> 字元。即使在 Windows 底下，也保留相同的行為。</p>
+<p>譬如：<code>a*</code> 不會匹配 <code>.access</code> 檔案或目錄，<code>**/b*</code> 不會匹配 <code>abc/.batch</code> 檔案或目錄，除非分別明確寫為 <code>.a*</code> 及 <code>**/.b*</code>。</p>
+<p>如果程式經常需要匹配隱藏檔案，可以在呼叫 <code>glob()</code> 函數時，在第二個參數提供 <code>{ dot: true }</code> 選項，讓 <code>glob()</code> 函數像一般字元一樣，對待 <code>.</code> 字元。</p>
+<h4 id="base-選項"><a href="#base-選項" class="headerlink" title="base 選項"></a><code>base</code> 選項</h4><p>在 gulp 中，要特別注意的是 base 的決定與作用。</p>
+<p>base 的作用，是匹配檔案的路徑參考原點。簡單地說，就是『匹配檔案的路徑，要從哪裡算起』。</p>
+<p>所有匹配的檔案，其路徑必須以相對於 base 所指定的路徑為起點，以相對路徑表示。也可以這樣解讀：base 的作用是，最終匹配的檔案路徑及名稱，將排除 base 路徑部分。所以，base 的值，將會影響檔案輸出時是否包含目錄、若包含目錄，又是哪些目錄路徑。</p>
+<p>那麼，base 是如何決定的呢? Gulp 關於 base 屬性的預設值的說明提到：</p>
+<blockquote>
+<p>Default: everything before a glob starts</p>
+</blockquote>
+<p>這恐怕有點誤導，事實上整個 pattern 都是 glob，而 gulp 的說明恐怕把 glob 狹義解釋為是指普通文字以外的部分，譬如 <code>*</code>, <code>?</code> 等通配字元。</p>
+<p>正確地說，base 的預設值，是指未動用到通配字元而能夠匹配的路徑的部分。只有兩種可能情況符合：</p>
+<p>1.glob 中不含路徑分隔符號，也就是不匹配任何目錄。所以 base 就是 <code>.</code>。<br>2.glob 中含有路徑分隔符號，但是路徑是直接寫出，不含任何通配字元。一旦路徑中含有通配字元，就會被排除在 base 路徑之外。</p>
+<p>譬如：</p>
+<table>
+<thead>
+<tr>
+<th>glob</th>
+<th>exists</th>
+<th>base</th>
+<th>match</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><b>app/js/</b>&#42;.js</td>
+<td><b>app/js/</b>app.js</td>
+<td><b>app/js/</b></td>
+<td>app.js</td>
+</tr>
+<tr>
+<td><b>app/views/</b><span style="color:red">&#42;&#42;/</span>&#42;.html</td>
+<td><b>app/views/</b><span style="color:red">options/</span>options.html</td>
+<td><b>app/views/</b></td>
+<td><span style="color:red">options/</span>options.html</td>
+</tr>
+<tr>
+<td><b>app/i18n/</b><span style="color:red">zh&#42;/</span>&#42;.json</td>
+<td><b>app/i18n/</b><span style="color:red">zh_TW/</span>message.json</td>
+<td><b>app/i18n/</b></td>
+<td><span style="color:red">zh_TW/</span>message.json</td>
+</tr>
+</tbody>
+</table>
+<p>上面是以 base 的觀點來說明。反過來說，對於匹配的檔案來說，一旦匹配成功，若匹配的檔案含有路徑，而該路徑是透過通配字元匹配的，則匹配的路徑將包含在匹配檔案的匹配路徑中。</p>
+<p>所以：</p>
+<ol>
+<li><p>在指定 glob 時若不含目錄通配字元，則找到的檔案，將忽視其路徑部分，因此，由 <code>gulp.src(&#39;src/*.js&#39;)</code> 對應到 <code>gulp.dest()</code> 時，檔案將不含目錄，直接寫到 <code>gulp.dest()</code> 指定的目錄。</p>
+</li>
+<li><p>若指定了 <code>?</code>, <code>*</code> 或 <code>**</code> 目錄通用字元，由於目錄通用字元將被視為檔案的一部分，所以輸出到 <code>gulp.dest()</code> 時，檔案將被寫入到目錄通用字元所匹配的路徑下。</p>
+</li>
+</ol>
+<p>譬如：</p>
+<p>假設存在 <code>app/views/options/options.html</code>，且一律指定 <code>dest(&#39;dist&#39;)</code>：</p>
+<table>
+<thead>
+<tr>
+<th>gulp.src(glob)</th>
+<th>base (粗體部分) / match path (紅色部分)</th>
+<th>gulp.dest(‘dist’)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>src(‘<b>app/</b>&#42;/&#42;.html’)</td>
+<td><b>app/</b><span style="color:red">views/</span> (假設 app/views 目錄下無 .html 檔案。)</td>
+<td>N/A (假設 app/views 目錄下無 .html 檔案。)</td>
+</tr>
+<tr>
+<td>src(‘<b>app/</b>&#42;&#42;/&#42;.html’)</td>
+<td><b>app/</b><span style="color:red">views/options/</span>options.html</td>
+<td>dist/<span style="color:red">views/options/</span>options.html</td>
+</tr>
+<tr>
+<td>src(‘<b>app/views/</b>&#42;/&#42;.html’)</td>
+<td><b>app/views/</b><span style="color:red">options/</span>options.html</td>
+<td>dist/<span style="color:red">options/</span>options.html</td>
+</tr>
+<tr>
+<td>src(‘<b>app/views/</b>&#42;&#42;/&#42;.html’)</td>
+<td><b>app/views/</b><span style="color:red">options/</span>options.html</td>
+<td>dist/<span style="color:red">options/</span>options.html</td>
+</tr>
+<tr>
+<td>src(‘<b>app/views/options/</b>&#42;.html’)</td>
+<td><b>app/views/options/</b>options.html</td>
+<td>dist/options.html</td>
+</tr>
+<tr>
+<td>src(‘&#42;/views/&#42;&#42;/&#42;.html’)</td>
+<td><span style="color:red">app/views/options/</span>options.html</td>
+<td>dist/<span style="color:red">app/views/options/</span>options.html</td>
+</tr>
+</tbody>
+</table>
+<p>3.透過指定 “base” property 來改變參照路徑；或者，在 <code>gulp.dest()</code> 指定輸出路徑。</p>
+<p>下面的範例中，對 <code>gulp.src()</code> 指定了兩個不同的 glob：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">gulp.src([ <span class="string">‘bower.json’</span>, <span class="string">‘app/manifest.json’</span> ])</span><br><span class="line">      .pipe(plugins.configSync(&#123;</span><br><span class="line">           <span class="attr">fields</span>: [ <span class="string">‘version’</span> ]</span><br><span class="line">      &#125;))</span><br><span class="line">      <span class="comment">// 注意這裡若指定為 gulp.dest(‘/‘) 則真的會輸出到磁碟的根目錄。</span></span><br><span class="line">      .pipe(gulp.dest(<span class="string">‘.’</span>));</span><br></pre></td></tr></table></figure>
+
+<p>但是由於兩個檔案的根目錄不同，同時目錄也都未使用通配字元，所以最後匹配的檔案都不含路徑，因此，使用 <code>gulp.dest(&#39;.&#39;)</code> 輸出時，將輸出到專案目錄 (假設專案叫做 project) 下：</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">project</span><br><span class="line">    +<span class="comment">– bower.json</span></span><br><span class="line">    +<span class="comment">– manifest.json</span></span><br></pre></td></tr></table></figure>
+
+<p>這裡當然也可以藉由指定通配字元 <code>&quot;*/manifest.json&quot;</code> 從而避免 base 的指定。但是，這樣的寫法，很可能會殃及無辜檔案。同時，最重要的是，反而不容易看出我們真正的意圖：就是只要 app/manifest.json 這個檔案。</p>
+<p>因此，這裡可以藉由指定 <code>base</code> property 來改變參照路徑，強迫匹配的檔案以目前目錄為相對路徑表示，從而，得以保留檔案的目錄資訊。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gulp.src([ <span class="string">‘bower.json’</span>, <span class="string">‘app/manifest.json’</span> ], &#123; <span class="attr">base</span>: <span class="string">‘.’</span> &#125;)</span><br><span class="line">      .pipe(plugins.configSync(&#123;</span><br><span class="line">           <span class="attr">fields</span>: [ <span class="string">‘version’</span> ]</span><br><span class="line">      &#125;))</span><br><span class="line">      .pipe(gulp.dest(<span class="string">‘.’</span>));</span><br></pre></td></tr></table></figure>
+
+<p>輸出如下：</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">project</span><br><span class="line">    +<span class="comment">– app</span></span><br><span class="line">            +<span class="comment">– manifest.json</span></span><br><span class="line">    +<span class="comment">– bower.json</span></span><br></pre></td></tr></table></figure>
+
+<p>當匹配的檔案都在共同的子目錄之下時，若輸出目錄仍然希望含有特定目錄，則可以在 <code>gulp.dest()</code> 指定輸出路徑：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gulp.src(<span class="string">‘app/scripts/<em>*/</em>.js’</span>)</span><br><span class="line">    .pipe(uglify())</span><br><span class="line">    .pipe(gulp.dest(<span class="string">‘dist/scripts’</span>));</span><br></pre></td></tr></table></figure>
+
+<p>4.透過 <a href="https://github.com/armed/gulp-flatten" target="_blank" rel="external"><code>gulp-flatten</code></a> 可消除匹配的路徑。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> flatten = <span class="built_in">require</span>(<span class="string">‘gulp-flatten’</span>);</span><br><span class="line">gulp.src(<span class="string">‘bower_components/<em>*/</em>.min.js’</span>)</span><br><span class="line">    .pipe(flatten())</span><br><span class="line">    .pipe(gulp.dest(<span class="string">‘build/js’</span>));</span><br></pre></td></tr></table></figure>
+
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ul>
+<li><a href="http://en.wikipedia.org/wiki/Glob_(programming)" target="_blank" rel="external">Glob</a></li>
+<li><a href="https://github.com/gulpjs/gulp/blob/master/docs/recipes/maintain-directory-structure-while-globbing.md" title="Maintain Directory Structure while Globbing" target="_blank" rel="external">Maintain Directory Structure while Globbing</a></li>
+<li><a href="https://github.com/gulpjs/gulp/blob/master/docs/API.md#optionsbase" title="gulp.src() options.base" target="_blank" rel="external">gulp.src(): options.base</a></li>
+<li><a href="https://github.com/isaacs/node-glob" title="node-glob" target="_blank" rel="external">node-glob</a></li>
+<li><a href="https://github.com/armed/gulp-flatten" title="gulp-flatten" target="_blank" rel="external">gulp-flatten</a></li>
+</ul>
+<h3 id="相關文章"><a href="#相關文章" class="headerlink" title="相關文章"></a>相關文章</h3><!-- cross references -->
+<div><ul>
+<li><a href="/2015/11/12/gulp-internals/" title="Gulp 學習筆記 - Gulp Internals (3.x)">Gulp 學習筆記 - Gulp Internals (3.x)</a></li>
+</ul>
+</div>
+<!-- external references -->
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amobiz.github.io/2015/11/14/gulp-glob/" data-id="cj4y0ufsv007ok0568t21ty9p" class="article-share-link">Share</a>
+      
+        <a href="https://amobiz.github.io/2015/11/14/gulp-glob/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gulp/">Gulp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/glob/">glob</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/notes/">notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/11/15/logdown-notes/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Logdown 學習筆記
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/11/12/gulp-internals/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Gulp 學習筆記 - Gulp Internals (3.x)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  
+    <ul class="nav"></ul>
+  
+  
+    <section class="comments" title="Disqus">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </section>
+  
+  
+    <section class="comments" title="Facebook">
+      <div class="fb-comments" data-href="https://amobiz.github.io/2015/11/14/gulp-glob/" data-width="100%" data-numposts="5"></div>
+    </section>
+  
+</section>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hack/">Hack</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Productivity/">Productivity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">36</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Software/">Software</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Design/">Web Design</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/7-Zip/">7-Zip</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMD/">AMD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMP/">AMP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/APP2SD/">APP2SD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/">AngularJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/">Atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BEM/">BEM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backup/">Backup</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Batch/">Batch</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blogger/">Blogger</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS-modules/">CSS-modules</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CommonJS/">CommonJS</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DIY/">DIY</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Pattern/">Design Pattern</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ESLint/">ESLint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Facebook-Notes/">Facebook Notes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GTD/">GTD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Generator/">Generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ginger-yoshi/">Ginger yoshi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gist/">Gist</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/">GitHub</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google/">Google</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-App-Engine/">Google App Engine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-Code-Prettify/">Google Code Prettify</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grails/">Grails</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Groovy/">Groovy</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/">Gulp</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAX-RS/">JAX-RS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDOM/">JDOM</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSHint/">JSHint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/">JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jersey/">Jersey</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/">Jetty</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logdown/">Logdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/">Maven</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Medium/">Medium</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NPM/">NPM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Namespace/">Namespace</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Open-Source/">Open Source</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pomodoro-Technique/">Pomodoro Technique</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming/">Programming</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Promise/">Promise</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regular-Expression/">Regular Expression</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RequireJS/">RequireJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SUIT/">SUIT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SWAP/">SWAP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadow-DOM/">Shadow DOM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TagSoup/">TagSoup</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Time-Management/">Time Management</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UMD/">UMD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/URL/">URL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web-Components/">Web Components</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/">Webpack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/">XML</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XPath/">XPath</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yeoman/">Yeoman</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/advertising/">advertising</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/best-practices/">best practices</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/browser/">browser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cheatsheet/">cheatsheet</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/">cmd</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/custom-ROM/">custom ROM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dfp/">dfp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doubleclick/">doubleclick</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doubleclick-for-publishers/">doubleclick for publishers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpt/">gpt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/howto/">howto</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lint/">lint</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linter/">linter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linter-eslint/">linter-eslint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modular-css/">modular css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modularity/">modularity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/normalize/">normalize</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/normalizer/">normalizer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/notes/">notes</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/open-source/">open source</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pitfalls/">pitfalls</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/productivity/">productivity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regex/">regex</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rooted/">rooted</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svn/">svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time-management/">time management</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tutorial/">tutorial</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/7-Zip/" style="font-size: 11.25px;">7-Zip</a> <a href="/tags/AMD/" style="font-size: 11.25px;">AMD</a> <a href="/tags/AMP/" style="font-size: 10px;">AMP</a> <a href="/tags/APP2SD/" style="font-size: 11.25px;">APP2SD</a> <a href="/tags/Android/" style="font-size: 13.75px;">Android</a> <a href="/tags/AngularJS/" style="font-size: 10px;">AngularJS</a> <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/BEM/" style="font-size: 10px;">BEM</a> <a href="/tags/Backup/" style="font-size: 11.25px;">Backup</a> <a href="/tags/Batch/" style="font-size: 11.25px;">Batch</a> <a href="/tags/Blogger/" style="font-size: 12.5px;">Blogger</a> <a href="/tags/CSS-modules/" style="font-size: 10px;">CSS-modules</a> <a href="/tags/CommonJS/" style="font-size: 15px;">CommonJS</a> <a href="/tags/DIY/" style="font-size: 13.75px;">DIY</a> <a href="/tags/Design-Pattern/" style="font-size: 12.5px;">Design Pattern</a> <a href="/tags/ESLint/" style="font-size: 10px;">ESLint</a> <a href="/tags/Facebook-Notes/" style="font-size: 10px;">Facebook Notes</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Generator/" style="font-size: 10px;">Generator</a> <a href="/tags/Ginger-yoshi/" style="font-size: 11.25px;">Ginger yoshi</a> <a href="/tags/Gist/" style="font-size: 10px;">Gist</a> <a href="/tags/GitHub/" style="font-size: 16.25px;">GitHub</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/Google-App-Engine/" style="font-size: 10px;">Google App Engine</a> <a href="/tags/Google-Code-Prettify/" style="font-size: 10px;">Google Code Prettify</a> <a href="/tags/Grails/" style="font-size: 10px;">Grails</a> <a href="/tags/Groovy/" style="font-size: 12.5px;">Groovy</a> <a href="/tags/Gulp/" style="font-size: 11.25px;">Gulp</a> <a href="/tags/HTML/" style="font-size: 13.75px;">HTML</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/JAX-RS/" style="font-size: 10px;">JAX-RS</a> <a href="/tags/JDOM/" style="font-size: 12.5px;">JDOM</a> <a href="/tags/JSHint/" style="font-size: 10px;">JSHint</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Jersey/" style="font-size: 10px;">Jersey</a> <a href="/tags/Jetty/" style="font-size: 10px;">Jetty</a> <a href="/tags/Logdown/" style="font-size: 10px;">Logdown</a> <a href="/tags/Markdown/" style="font-size: 11.25px;">Markdown</a> <a href="/tags/Maven/" style="font-size: 16.25px;">Maven</a> <a href="/tags/Medium/" style="font-size: 10px;">Medium</a> <a href="/tags/NPM/" style="font-size: 10px;">NPM</a> <a href="/tags/Namespace/" style="font-size: 11.25px;">Namespace</a> <a href="/tags/Open-Source/" style="font-size: 11.25px;">Open Source</a> <a href="/tags/Pomodoro-Technique/" style="font-size: 10px;">Pomodoro Technique</a> <a href="/tags/Programming/" style="font-size: 10px;">Programming</a> <a href="/tags/Promise/" style="font-size: 11.25px;">Promise</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Regular-Expression/" style="font-size: 15px;">Regular Expression</a> <a href="/tags/RequireJS/" style="font-size: 10px;">RequireJS</a> <a href="/tags/SUIT/" style="font-size: 10px;">SUIT</a> <a href="/tags/SWAP/" style="font-size: 10px;">SWAP</a> <a href="/tags/Shadow-DOM/" style="font-size: 10px;">Shadow DOM</a> <a href="/tags/TagSoup/" style="font-size: 12.5px;">TagSoup</a> <a href="/tags/Time-Management/" style="font-size: 10px;">Time Management</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/UMD/" style="font-size: 11.25px;">UMD</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/Web-Components/" style="font-size: 10px;">Web Components</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Windows/" style="font-size: 11.25px;">Windows</a> <a href="/tags/XML/" style="font-size: 12.5px;">XML</a> <a href="/tags/XPath/" style="font-size: 12.5px;">XPath</a> <a href="/tags/Yeoman/" style="font-size: 12.5px;">Yeoman</a> <a href="/tags/advertising/" style="font-size: 10px;">advertising</a> <a href="/tags/best-practices/" style="font-size: 10px;">best practices</a> <a href="/tags/browser/" style="font-size: 10px;">browser</a> <a href="/tags/cheatsheet/" style="font-size: 11.25px;">cheatsheet</a> <a href="/tags/cmd/" style="font-size: 11.25px;">cmd</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/custom-ROM/" style="font-size: 11.25px;">custom ROM</a> <a href="/tags/dfp/" style="font-size: 10px;">dfp</a> <a href="/tags/doubleclick/" style="font-size: 10px;">doubleclick</a> <a href="/tags/doubleclick-for-publishers/" style="font-size: 10px;">doubleclick for publishers</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/glob/" style="font-size: 10px;">glob</a> <a href="/tags/gpt/" style="font-size: 10px;">gpt</a> <a href="/tags/howto/" style="font-size: 18.75px;">howto</a> <a href="/tags/lint/" style="font-size: 11.25px;">lint</a> <a href="/tags/linter/" style="font-size: 10px;">linter</a> <a href="/tags/linter-eslint/" style="font-size: 10px;">linter-eslint</a> <a href="/tags/modular-css/" style="font-size: 11.25px;">modular css</a> <a href="/tags/modularity/" style="font-size: 10px;">modularity</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/nodejs/" style="font-size: 13.75px;">nodejs</a> <a href="/tags/normalize/" style="font-size: 10px;">normalize</a> <a href="/tags/normalizer/" style="font-size: 10px;">normalizer</a> <a href="/tags/notes/" style="font-size: 11.25px;">notes</a> <a href="/tags/npm/" style="font-size: 13.75px;">npm</a> <a href="/tags/open-source/" style="font-size: 13.75px;">open source</a> <a href="/tags/pitfalls/" style="font-size: 17.5px;">pitfalls</a> <a href="/tags/productivity/" style="font-size: 10px;">productivity</a> <a href="/tags/regex/" style="font-size: 15px;">regex</a> <a href="/tags/rooted/" style="font-size: 11.25px;">rooted</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/time-management/" style="font-size: 10px;">time management</a> <a href="/tags/tutorial/" style="font-size: 11.25px;">tutorial</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">十二月 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">十一月 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">五月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">七月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/06/">六月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/08/11/react-dfp/">埋設 DFP - DoubleClick for Publishers 廣告</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/22/modular-css-notes/">Modular CSS</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/15/angularjs-1.5-best-practices/">AngularJS 1.5 最佳實務</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/07/re-npm-left-pad-have-we-forgotten-how-to-program/">反駁：NPM &amp; left-pad: Have We Forgotten How To Program?</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/09/npm-package-node-or-browser/">如何判斷 npmjs.com 上的套件，是否支援 node 或 browser</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Amobiz Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'amobiz';
+  
+  var disqus_url = 'https://amobiz.github.io/2015/11/14/gulp-glob/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<div id="fb-root"></div>
+
+<!-- Facebook SDK -->
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.5&appId=1660468744166033";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- End Facebook SDK -->
+
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/script.js"></script>
+<script src="/js/nav.js"></script>
+
+  </div>
+</body>
+</html>

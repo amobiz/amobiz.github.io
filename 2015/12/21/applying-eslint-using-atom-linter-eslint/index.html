@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[ESLint 學習筆記] Applying ESLint - Using Atom &amp; linter-eslint | 格物致知</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="意象說明筆記、筆記、再筆記
+Calum MacAulay
+使用 Atom 編輯器，安裝上 linter-eslint 外掛，再加上一個現成的 ESLint  範本，就可以無痛投入到 ESLint 的懷抱了。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="[ESLint 學習筆記] Applying ESLint - Using Atom & linter-eslint">
+<meta property="og:url" content="https://amobiz.github.io/2015/12/21/applying-eslint-using-atom-linter-eslint/index.html">
+<meta property="og:site_name" content="格物致知">
+<meta property="og:description" content="意象說明筆記、筆記、再筆記
+Calum MacAulay
+使用 Atom 編輯器，安裝上 linter-eslint 外掛，再加上一個現成的 ESLint  範本，就可以無痛投入到 ESLint 的懷抱了。">
+<meta property="og:image" content="https://images.unsplash.com/photo-1453946610176-6be21147c400?crop=entropy&fit=crop&fm=jpg&h=975&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1075">
+<meta property="og:image" content="https://amobiz.github.io/linter-eslint.png">
+<meta property="og:updated_time" content="2016-06-28T03:07:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="[ESLint 學習筆記] Applying ESLint - Using Atom & linter-eslint">
+<meta name="twitter:description" content="意象說明筆記、筆記、再筆記
+Calum MacAulay
+使用 Atom 編輯器，安裝上 linter-eslint 外掛，再加上一個現成的 ESLint  範本，就可以無痛投入到 ESLint 的懷抱了。">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1453946610176-6be21147c400?crop=entropy&fit=crop&fm=jpg&h=975&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1075">
+  
+    <link rel="alternative" href="/atom.xml" title="格物致知" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-68633744-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">格物致知</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Happiness only real when shared.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://amobiz.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-applying-eslint-using-atom-linter-eslint" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/12/21/applying-eslint-using-atom-linter-eslint/" class="article-date">
+  <time datetime="2015-12-21T04:48:30.000Z" itemprop="datePublished">2015-12-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Programming/">Programming</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/12/21/applying-eslint-using-atom-linter-eslint/">[ESLint 學習筆記] Applying ESLint - Using Atom &amp; linter-eslint</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <!-- Post Contents -->
+        <div class="Credit"><p><img src="https://images.unsplash.com/photo-1453946610176-6be21147c400?crop=entropy&amp;fit=crop&amp;fm=jpg&amp;h=975&amp;ixjsv=2.1.0&amp;ixlib=rb-0.3.5&amp;q=80&amp;w=1075" alt=""></p>
+<div class="Credit-backdrop"><div class="Credit-info"><div class="Credit-desc"><p>意象說明<br><br>筆記、筆記、再筆記</p>
+</div><div><a class="Credit-link" target="_blank" href="https://unsplash.com/calum_mac">Calum MacAulay</a></div></div></div></div>
+<p>使用 Atom 編輯器，安裝上 linter-eslint 外掛，再加上一個現成的 ESLint  範本，就可以無痛投入到 ESLint 的懷抱了。</p>
+<a id="more"></a>
+<h3 id="轉移到-ESLint"><a href="#轉移到-ESLint" class="headerlink" title="轉移到 ESLint"></a>轉移到 ESLint</h3><p>老實說，很慶幸我恰巧選擇了使用 <a href="https://atom.io/" target="_blank" rel="external">Atom</a> 編輯器，及 <a href="https://atom.io/packages/linter-eslint" target="_blank" rel="external">linter-eslint</a> package 外掛來進行轉換工作，整個過程輕鬆愉快，一個晚上，就把所有的專案都移轉到 <a href="http://eslint.org/" target="_blank" rel="external">ESLint</a> 下了。(其實不一定要 Atom，任何可以支援 linter-eslint 的編輯器都可以。)</p>
+<p>我的作法如下：</p>
+<ol>
+<li><p>安裝 <a href="https://atom.io/" target="_blank" rel="external">Atom</a><br>安裝後，執行起來。</p>
+</li>
+<li><p>安裝 <a href="https://atom.io/packages/linter-eslint" target="_blank" rel="external">linter-eslint</a></p>
+<ol>
+<li>點選 Edit / Preferences 選單，</li>
+<li>點選 Install 標籤，</li>
+<li>在 Search packages 輸入框中輸入 <code>linter-eslint</code>，</li>
+<li>按下右邊的 Package 按鈕，</li>
+<li>找到之後，按下 Install 按鈕。它會自動安裝相依的 linter 模組，</li>
+<li>重新啟動 Atom。</li>
+</ol>
+</li>
+<li><p>找一個現成的規則檔做為起點<br>最好是包含完整規則的範本，譬如<a href="https://gist.github.com/Corhero/856c9612ce61d22bf100" target="_blank" rel="external">這個</a>，直接放到專案根目錄下，就可以開始移轉了。</p>
+</li>
+<li><p>修正錯誤<br>打開專案目錄，開啟程式碼，根據發生的錯誤，依自己的喜好，或所屬公司、組織的標準， 決定處理方式：</p>
+<ul>
+<li>關閉規則</li>
+<li>調整規則</li>
+<li>修正程式碼</li>
+</ul>
+</li>
+<li><p>修正所有的專案</p>
+<ol>
+<li>針對每個專案，複製上個步驟所修正的最新規則檔，重複步驟 4。</li>
+<li>將最後完成的專案的規則檔，複製到所有修正過的專案下，重複步驟 4，確認這個規則檔適用於所有的專案。若不適用於所有的專案，則可以考慮在個別專案 source 目錄下，另增一個只適用於個別專案的規則檔，或是只針對特定檔案以 directives 的形式設定。</li>
+</ol>
+</li>
+<li><p>把最終的規則檔，放到範本專案中，讓未來的新專案可以一體適用。</p>
+</li>
+</ol>
+<h3 id="借助-linter-eslint-查詢錯誤規則"><a href="#借助-linter-eslint-查詢錯誤規則" class="headerlink" title="借助 linter-eslint 查詢錯誤規則"></a>借助 linter-eslint 查詢錯誤規則</h3><p>linter-eslint 其實是 <a href="https://atom.io/packages/linter" target="_blank" rel="external">linter</a> 的 plugin，而 linter 的界面做的相當好：</p>
+<p><img src="linter-eslint.png" alt="圖：(1) 可以在程式碼中直接看到錯誤的地方與發生錯誤的規則。 (2) 可以在下方的錯誤列表中直接複製規則名稱。"></p>
+<ol>
+<li><p>在編輯器中直接強調錯誤的程式碼，以及違反的規則名稱<br>到底是那一段程式碼發生錯誤，以及違反了那一條規則，一目了然。</p>
+</li>
+<li><p>在下方的錯誤列表中，可以使用滑鼠圈選文字的方式，複製錯誤規則名稱<br>如果懶的自己打規則名稱，或者怕打錯，還可以直接複製，然後到網站上查詢。</p>
+</li>
+</ol>
+<p>這一點是我覺得 ESLint 這麼好用的最重要原因。所有的規則，一一對應，沒有模糊不清的地方。你只要根據規則名稱，到 <a href="http://eslint.org/docs/rules/" target="_blank" rel="external">Rules</a> 搜尋一下，就可以找到對應的說明，然後就可以判斷自己要不要遵守這條規則，或是根據自己的喜好或習慣，開關或調整規則的選項。</p>
+<h3 id="ESLint-超簡單入門"><a href="#ESLint-超簡單入門" class="headerlink" title="ESLint 超簡單入門"></a>ESLint 超簡單入門</h3><p>ESLint 完全可以自行決定是否套用特定規則，以及套用到何種程度。</p>
+<h4 id="1-配置規則可以使用下列各種方式："><a href="#1-配置規則可以使用下列各種方式：" class="headerlink" title="1. 配置規則可以使用下列各種方式："></a>1. 配置規則可以使用下列各種方式：</h4><ol>
+<li><p>直接以 directives 的形式寫在檔案中。只對該檔案生效，並且覆蓋其他方式的配置。同時</p>
+</li>
+<li><p>以 <a href="http://eslint.org/docs/user-guide/configuring#configuration-file-formats" target="_blank" rel="external"><code>.eslintrc.*</code> 檔案</a>的方式獨立配置。對該目錄及所有子目錄的檔案<a href="http://eslint.org/docs/user-guide/configuring#configuration-cascading-and-hierarchy" target="_blank" rel="external">生效</a>；每個子目錄都可以有自己的 <code>.eslintrc.*</code> 檔案配置，並且覆蓋其父目錄的配置。注意，繼承規則時，會一路往磁碟的根目錄查詢規則，任何目錄若不想繼承其父目錄的規則，可以使用 <code>&quot;root&quot;: true</code> 加以阻絕。最後</p>
+</li>
+<li><p>如果是以 npm 管理模組，可以直接在 <code>pacakge.json</code> 中的 “eslintConfig” 區段直接配置。(以重複使用的角度，我個人不建議使用這種方式。)</p>
+</li>
+</ol>
+<h4 id="2-支援-ES2015-及-JSX-語法規則"><a href="#2-支援-ES2015-及-JSX-語法規則" class="headerlink" title="2. 支援 ES2015 及 JSX 語法規則"></a>2. 支援 ES2015 及 JSX 語法規則</h4><p>可以在規則檔中以 <a href="http://eslint.org/docs/user-guide/configuring#specifying-language-options" target="_blank" rel="external">“ecmaFeatures”</a> 區塊，指定要套用那些語法規則。(文件中沒有提到如何以 directives 的方式在檔案中指定。不過我想最好還是整個專案採用一致的標準會比較好。)</p>
+<h4 id="3-指定可執行環境"><a href="#3-指定可執行環境" class="headerlink" title="3. 指定可執行環境"></a>3. 指定可執行環境</h4><p>以 <code>/* eslint-env node, mocha */</code> 或在配置檔中以 <a href="http://eslint.org/docs/user-guide/configuring#specifying-environments" target="_blank" rel="external">“env”</a> 區塊指定模組或應用程式的可執行環境，譬如 <code>browser</code>, <code>es6</code>, <code>node</code>, <code>amd</code>, <code>mocha</code> 及 <code>jasmine</code> 等。ESLint 將假設這些環境的 global 變數的存在，而不會報告錯誤：『使用未定義的變數』。譬如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">true<span class="string">“env”</span>: &#123;</span><br><span class="line">truetrue<span class="string">“browser”</span>: <span class="literal">true</span>,</span><br><span class="line">truetrue<span class="string">“node”</span>: <span class="literal">true</span></span><br><span class="line">true&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-自行指定既存的-global-變數"><a href="#4-自行指定既存的-global-變數" class="headerlink" title="4. 自行指定既存的 global 變數"></a>4. 自行指定既存的 global 變數</h4><p>如果某些程式庫仍使用 global 變數的方式匯出功能，則必須以 <code>/* global angular, bootstrap */</code> (注意沒有 <code>s</code>，這是為了與 JSLint/JSHit 相容。其實我是覺得可以 <code>globals</code> 和 <code>global</code> 兩種都支援)。或在配置檔中以 <a href="http://eslint.org/docs/user-guide/configuring#specifying-globals" target="_blank" rel="external">“globals”</a> 區塊加以指定，以免報告錯誤。譬如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">true<span class="string">“globals”</span>: &#123;</span><br><span class="line">truetrue<span class="string">“angular”</span>: <span class="literal">false</span>,</span><br><span class="line">truetrue<span class="string">“bootstrap”</span>: <span class="literal">true</span></span><br><span class="line">true&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>true</code> 代表該 global 變數可以被覆寫。</p>
+<h4 id="5-支援外掛"><a href="#5-支援外掛" class="headerlink" title="5. 支援外掛"></a>5. 支援外掛</h4><p>外掛必須先以 npm 安裝，然後以 <a href="http://eslint.org/docs/user-guide/configuring#configuring-plugins" target="_blank" rel="external">“plugins”</a> 區塊指定要使用的外掛名稱，外掛名稱如果以 <code>eslint-plugin-</code> 開頭，最好省略不寫 <code>eslint-plugin-</code> 前置名稱 (配置外掛選項時會用到)。譬如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">true<span class="string">“plugins”</span>: [</span><br><span class="line">truetrue<span class="string">“plugin1”</span>,</span><br><span class="line">truetrue<span class="string">“eslint-plugin-plugin2”</span></span><br><span class="line">true]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-可以關閉或調整規則"><a href="#6-可以關閉或調整規則" class="headerlink" title="6. 可以關閉或調整規則"></a>6. 可以關閉或調整規則</h4><p>規則的 directives 格式完整形式如下：</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/<em> eslint rule-name: <span class="string">[severity, options …]</span>, <span class="string">“plugin-name/rule-name”</span>: <span class="string">[severity, options …]</span> </em>/</span><br></pre></td></tr></table></figure>
+
+<p>若以規則檔指定，則以 <a href="http://eslint.org/docs/user-guide/configuring#configuring-rules" target="_blank" rel="external">“rules”</a> 區指定規則。規則的 JSON 格式完整形式如下：</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">“rule-name”</span>: <span class="string">[severity, options …]</span>,</span><br><span class="line"><span class="string">“plugin-name/rule-name”</span>: <span class="string">[severity, options …]</span></span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>severity</code> 的值可以是下列三個：</p>
+<table>
+<thead>
+<tr>
+<th>值</th>
+<th>說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>關閉</td>
+</tr>
+<tr>
+<td>1</td>
+<td>警告</td>
+</tr>
+<tr>
+<td>2</td>
+<td>錯誤</td>
+</tr>
+</tbody>
+</table>
+<p>而 <code>options</code> 的部份，則每一條規則不同，需要查<a href="http://eslint.org/docs/rules/" target="_blank" rel="external">文件</a>。若不需要指定 <code>options</code> 部份，則可以省略 <code>[]</code> 括號。</p>
+<p>如果使用的外掛需要調整設定，則必須以 <code>&quot;plugin-name/rule-name&quot;</code> 的形式指定。注意，這時候<strong>不能</strong>指定 <code>eslint-plugin-</code> 前置名稱。</p>
+<p>譬如：</p>
+<p><strong>directives</strong></p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/<em> eslint <span class="string">“plugin1/rule1”</span>: <span class="number">2</span>, <span class="string">“plugin2/rule1”</span>: [<span class="number">1</span>, <span class="string">“always”</span>] </em>/</span><br></pre></td></tr></table></figure>
+
+<p><strong>.eslintrc.json</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">true<span class="string">“rules”</span>: &#123;</span><br><span class="line">truetrue<span class="string">“eqeqeq”</span>: <span class="number">0</span>,</span><br><span class="line">truetrue<span class="string">“quotes”</span>: [<span class="number">2</span>, <span class="string">“double”</span>],</span><br><span class="line">truetrue<span class="string">“yoda”</span>: [<span class="number">1</span>, <span class="string">“never”</span>, &#123; <span class="string">“exceptRange”</span>: <span class="literal">true</span> &#125;]</span><br><span class="line">true&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="7-可以使用擴展的方式重複使用設定檔"><a href="#7-可以使用擴展的方式重複使用設定檔" class="headerlink" title="7. 可以使用擴展的方式重複使用設定檔"></a>7. 可以使用擴展的方式重複使用設定檔</h4><p>為了確保設定檔只有一份，而不是散落在各個專案中，可以利用 <a href="http://eslint.org/docs/user-guide/configuring#extending-configuration-files" target="_blank" rel="external">“extends”</a> 區塊，指定規則檔，然後再加以補正。譬如說，可以有一個模組，實際上不含任何功能，唯一的目的就是提供 <code>.eslintrc.*</code> 檔案供其他專案引用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">true<span class="string">“extends”</span>: [</span><br><span class="line">truetrue<span class="string">“./node_modules/coding-standard/.eslintrc.json”</span>,</span><br><span class="line">truetrue<span class="string">“./node_modules/coding-standard/.eslintrc-jsx.json”</span></span><br><span class="line">true],</span><br><span class="line">true<span class="string">“rules”</span>: &#123;</span><br><span class="line">truetrue<span class="comment">// Override any settings from the “parent” configuration</span></span><br><span class="line">truetrue<span class="string">“eqeqeq”</span>: <span class="number">1</span></span><br><span class="line">true&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由上面例子也可以看到，ESLint 允許在 JSON 檔案中撰寫註解 (雖然標準的 JSON 不允許，譬如 <code>package.json</code>)。</p>
+<h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><p>利用上述的方式套用範本，只需要針對衝突的規則加以處理，調整到最適合自己的方式，一點都不難。還不快投入 ESLint 的懷抱！</p>
+<p>想參考我的 Open Source 專案 (符合 ECMAScript 5，未使用 ES2015 的語法) 的 <a href="https://github.com/amobiz/configurable-gulp-recipes/blob/master/.eslintrc.json" target="_blank" rel="external"><code>.eslintrc.json</code></a> 做為起點的朋友，請自行<a href="https://github.com/amobiz/configurable-gulp-recipes/blob/master/.eslintrc.json" target="_blank" rel="external">取用</a>。</p>
+<p>歡迎大家的回饋與心得分享。</p>
+<h3 id="參考文章："><a href="#參考文章：" class="headerlink" title="參考文章："></a>參考文章：</h3><ul>
+<li><a href="http://eslint.org/docs/user-guide/configuring" target="_blank" rel="external">ESLint Configuring</a></li>
+<li><a href="http://eslint.org/docs/rules/" target="_blank" rel="external">ESLint Rules</a></li>
+<li><a href="http://www.sitepoint.com/comparison-javascript-linting-tools/" title="A Comparison of JavaScript Linting Tools" target="_blank" rel="external">Linting Tools Comparison</a></li>
+</ul>
+<h3 id="相關文章："><a href="#相關文章：" class="headerlink" title="相關文章："></a>相關文章：</h3><!-- cross references -->
+<div><ul>
+<li><a href="/2015/12/20/problems-of-jshint/" title="The Problems of JSHint (JSHint 的問題)">The Problems of JSHint (JSHint 的問題)</a></li>
+</ul>
+</div>
+<!-- external references -->
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amobiz.github.io/2015/12/21/applying-eslint-using-atom-linter-eslint/" data-id="cj4y0uft30082k0564i2rgvro" class="article-share-link">Share</a>
+      
+        <a href="https://amobiz.github.io/2015/12/21/applying-eslint-using-atom-linter-eslint/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Atom/">Atom</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ESLint/">ESLint</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lint/">lint</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linter/">linter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linter-eslint/">linter-eslint</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tutorial/">tutorial</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/02/28/amp-intro/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          AMP - Accelerated Mobile Pages 技術預覽
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/12/20/problems-of-jshint/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">The Problems of JSHint (JSHint 的問題)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  
+    <ul class="nav"></ul>
+  
+  
+    <section class="comments" title="Disqus">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </section>
+  
+  
+    <section class="comments" title="Facebook">
+      <div class="fb-comments" data-href="https://amobiz.github.io/2015/12/21/applying-eslint-using-atom-linter-eslint/" data-width="100%" data-numposts="5"></div>
+    </section>
+  
+</section>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hack/">Hack</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Productivity/">Productivity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">36</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Software/">Software</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Design/">Web Design</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/7-Zip/">7-Zip</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMD/">AMD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMP/">AMP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/APP2SD/">APP2SD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/">AngularJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/">Atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BEM/">BEM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backup/">Backup</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Batch/">Batch</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blogger/">Blogger</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS-modules/">CSS-modules</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CommonJS/">CommonJS</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DIY/">DIY</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Pattern/">Design Pattern</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ESLint/">ESLint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Facebook-Notes/">Facebook Notes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GTD/">GTD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Generator/">Generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ginger-yoshi/">Ginger yoshi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gist/">Gist</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/">GitHub</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google/">Google</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-App-Engine/">Google App Engine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-Code-Prettify/">Google Code Prettify</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grails/">Grails</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Groovy/">Groovy</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/">Gulp</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAX-RS/">JAX-RS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDOM/">JDOM</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSHint/">JSHint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/">JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jersey/">Jersey</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/">Jetty</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logdown/">Logdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/">Maven</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Medium/">Medium</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NPM/">NPM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Namespace/">Namespace</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Open-Source/">Open Source</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pomodoro-Technique/">Pomodoro Technique</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming/">Programming</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Promise/">Promise</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regular-Expression/">Regular Expression</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RequireJS/">RequireJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SUIT/">SUIT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SWAP/">SWAP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadow-DOM/">Shadow DOM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TagSoup/">TagSoup</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Time-Management/">Time Management</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UMD/">UMD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/URL/">URL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web-Components/">Web Components</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/">Webpack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/">XML</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XPath/">XPath</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yeoman/">Yeoman</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/advertising/">advertising</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/best-practices/">best practices</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/browser/">browser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cheatsheet/">cheatsheet</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/">cmd</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/custom-ROM/">custom ROM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dfp/">dfp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doubleclick/">doubleclick</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doubleclick-for-publishers/">doubleclick for publishers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpt/">gpt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/howto/">howto</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lint/">lint</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linter/">linter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linter-eslint/">linter-eslint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modular-css/">modular css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modularity/">modularity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/normalize/">normalize</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/normalizer/">normalizer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/notes/">notes</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/open-source/">open source</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pitfalls/">pitfalls</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/productivity/">productivity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regex/">regex</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rooted/">rooted</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svn/">svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time-management/">time management</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tutorial/">tutorial</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/7-Zip/" style="font-size: 11.25px;">7-Zip</a> <a href="/tags/AMD/" style="font-size: 11.25px;">AMD</a> <a href="/tags/AMP/" style="font-size: 10px;">AMP</a> <a href="/tags/APP2SD/" style="font-size: 11.25px;">APP2SD</a> <a href="/tags/Android/" style="font-size: 13.75px;">Android</a> <a href="/tags/AngularJS/" style="font-size: 10px;">AngularJS</a> <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/BEM/" style="font-size: 10px;">BEM</a> <a href="/tags/Backup/" style="font-size: 11.25px;">Backup</a> <a href="/tags/Batch/" style="font-size: 11.25px;">Batch</a> <a href="/tags/Blogger/" style="font-size: 12.5px;">Blogger</a> <a href="/tags/CSS-modules/" style="font-size: 10px;">CSS-modules</a> <a href="/tags/CommonJS/" style="font-size: 15px;">CommonJS</a> <a href="/tags/DIY/" style="font-size: 13.75px;">DIY</a> <a href="/tags/Design-Pattern/" style="font-size: 12.5px;">Design Pattern</a> <a href="/tags/ESLint/" style="font-size: 10px;">ESLint</a> <a href="/tags/Facebook-Notes/" style="font-size: 10px;">Facebook Notes</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Generator/" style="font-size: 10px;">Generator</a> <a href="/tags/Ginger-yoshi/" style="font-size: 11.25px;">Ginger yoshi</a> <a href="/tags/Gist/" style="font-size: 10px;">Gist</a> <a href="/tags/GitHub/" style="font-size: 16.25px;">GitHub</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/Google-App-Engine/" style="font-size: 10px;">Google App Engine</a> <a href="/tags/Google-Code-Prettify/" style="font-size: 10px;">Google Code Prettify</a> <a href="/tags/Grails/" style="font-size: 10px;">Grails</a> <a href="/tags/Groovy/" style="font-size: 12.5px;">Groovy</a> <a href="/tags/Gulp/" style="font-size: 11.25px;">Gulp</a> <a href="/tags/HTML/" style="font-size: 13.75px;">HTML</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/JAX-RS/" style="font-size: 10px;">JAX-RS</a> <a href="/tags/JDOM/" style="font-size: 12.5px;">JDOM</a> <a href="/tags/JSHint/" style="font-size: 10px;">JSHint</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Jersey/" style="font-size: 10px;">Jersey</a> <a href="/tags/Jetty/" style="font-size: 10px;">Jetty</a> <a href="/tags/Logdown/" style="font-size: 10px;">Logdown</a> <a href="/tags/Markdown/" style="font-size: 11.25px;">Markdown</a> <a href="/tags/Maven/" style="font-size: 16.25px;">Maven</a> <a href="/tags/Medium/" style="font-size: 10px;">Medium</a> <a href="/tags/NPM/" style="font-size: 10px;">NPM</a> <a href="/tags/Namespace/" style="font-size: 11.25px;">Namespace</a> <a href="/tags/Open-Source/" style="font-size: 11.25px;">Open Source</a> <a href="/tags/Pomodoro-Technique/" style="font-size: 10px;">Pomodoro Technique</a> <a href="/tags/Programming/" style="font-size: 10px;">Programming</a> <a href="/tags/Promise/" style="font-size: 11.25px;">Promise</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Regular-Expression/" style="font-size: 15px;">Regular Expression</a> <a href="/tags/RequireJS/" style="font-size: 10px;">RequireJS</a> <a href="/tags/SUIT/" style="font-size: 10px;">SUIT</a> <a href="/tags/SWAP/" style="font-size: 10px;">SWAP</a> <a href="/tags/Shadow-DOM/" style="font-size: 10px;">Shadow DOM</a> <a href="/tags/TagSoup/" style="font-size: 12.5px;">TagSoup</a> <a href="/tags/Time-Management/" style="font-size: 10px;">Time Management</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/UMD/" style="font-size: 11.25px;">UMD</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/Web-Components/" style="font-size: 10px;">Web Components</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Windows/" style="font-size: 11.25px;">Windows</a> <a href="/tags/XML/" style="font-size: 12.5px;">XML</a> <a href="/tags/XPath/" style="font-size: 12.5px;">XPath</a> <a href="/tags/Yeoman/" style="font-size: 12.5px;">Yeoman</a> <a href="/tags/advertising/" style="font-size: 10px;">advertising</a> <a href="/tags/best-practices/" style="font-size: 10px;">best practices</a> <a href="/tags/browser/" style="font-size: 10px;">browser</a> <a href="/tags/cheatsheet/" style="font-size: 11.25px;">cheatsheet</a> <a href="/tags/cmd/" style="font-size: 11.25px;">cmd</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/custom-ROM/" style="font-size: 11.25px;">custom ROM</a> <a href="/tags/dfp/" style="font-size: 10px;">dfp</a> <a href="/tags/doubleclick/" style="font-size: 10px;">doubleclick</a> <a href="/tags/doubleclick-for-publishers/" style="font-size: 10px;">doubleclick for publishers</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/glob/" style="font-size: 10px;">glob</a> <a href="/tags/gpt/" style="font-size: 10px;">gpt</a> <a href="/tags/howto/" style="font-size: 18.75px;">howto</a> <a href="/tags/lint/" style="font-size: 11.25px;">lint</a> <a href="/tags/linter/" style="font-size: 10px;">linter</a> <a href="/tags/linter-eslint/" style="font-size: 10px;">linter-eslint</a> <a href="/tags/modular-css/" style="font-size: 11.25px;">modular css</a> <a href="/tags/modularity/" style="font-size: 10px;">modularity</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/nodejs/" style="font-size: 13.75px;">nodejs</a> <a href="/tags/normalize/" style="font-size: 10px;">normalize</a> <a href="/tags/normalizer/" style="font-size: 10px;">normalizer</a> <a href="/tags/notes/" style="font-size: 11.25px;">notes</a> <a href="/tags/npm/" style="font-size: 13.75px;">npm</a> <a href="/tags/open-source/" style="font-size: 13.75px;">open source</a> <a href="/tags/pitfalls/" style="font-size: 17.5px;">pitfalls</a> <a href="/tags/productivity/" style="font-size: 10px;">productivity</a> <a href="/tags/regex/" style="font-size: 15px;">regex</a> <a href="/tags/rooted/" style="font-size: 11.25px;">rooted</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/time-management/" style="font-size: 10px;">time management</a> <a href="/tags/tutorial/" style="font-size: 11.25px;">tutorial</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">十二月 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">十一月 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">五月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">七月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/06/">六月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/08/11/react-dfp/">埋設 DFP - DoubleClick for Publishers 廣告</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/22/modular-css-notes/">Modular CSS</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/15/angularjs-1.5-best-practices/">AngularJS 1.5 最佳實務</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/07/re-npm-left-pad-have-we-forgotten-how-to-program/">反駁：NPM &amp; left-pad: Have We Forgotten How To Program?</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/09/npm-package-node-or-browser/">如何判斷 npmjs.com 上的套件，是否支援 node 或 browser</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Amobiz Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'amobiz';
+  
+  var disqus_url = 'https://amobiz.github.io/2015/12/21/applying-eslint-using-atom-linter-eslint/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<div id="fb-root"></div>
+
+<!-- Facebook SDK -->
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.5&appId=1660468744166033";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- End Facebook SDK -->
+
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/script.js"></script>
+<script src="/js/nav.js"></script>
+
+  </div>
+</body>
+</html>

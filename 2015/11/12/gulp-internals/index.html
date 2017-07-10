@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Gulp 學習筆記 - Gulp Internals (3.x) | 格物致知</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="意象說明Gulp
+Maria Vernigora
+前言最近正在開發一個幫助重複使用 gulp task 的工具：gulp-chef，所以分別研究了 Gulp 3.9 和 Gulp 4.0 的原始碼，以下是 Gulp 3.9 的快速筆記。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gulp 學習筆記 - Gulp Internals (3.x)">
+<meta property="og:url" content="https://amobiz.github.io/2015/11/12/gulp-internals/index.html">
+<meta property="og:site_name" content="格物致知">
+<meta property="og:description" content="意象說明Gulp
+Maria Vernigora
+前言最近正在開發一個幫助重複使用 gulp task 的工具：gulp-chef，所以分別研究了 Gulp 3.9 和 Gulp 4.0 的原始碼，以下是 Gulp 3.9 的快速筆記。">
+<meta property="og:image" content="https://images.unsplash.com/photo-1458217222755-d1c4985b0852?crop=entropy&fit=crop&fm=jpg&h=975&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1075">
+<meta property="og:updated_time" content="2016-06-28T03:07:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Gulp 學習筆記 - Gulp Internals (3.x)">
+<meta name="twitter:description" content="意象說明Gulp
+Maria Vernigora
+前言最近正在開發一個幫助重複使用 gulp task 的工具：gulp-chef，所以分別研究了 Gulp 3.9 和 Gulp 4.0 的原始碼，以下是 Gulp 3.9 的快速筆記。">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1458217222755-d1c4985b0852?crop=entropy&fit=crop&fm=jpg&h=975&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1075">
+  
+    <link rel="alternative" href="/atom.xml" title="格物致知" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-68633744-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">格物致知</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Happiness only real when shared.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://amobiz.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-gulp-internals" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/12/gulp-internals/" class="article-date">
+  <time datetime="2015-11-12T12:38:00.000Z" itemprop="datePublished">2015-11-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Programming/">Programming</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/12/gulp-internals/">Gulp 學習筆記 - Gulp Internals (3.x)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <!-- Post Contents -->
+        <div class="Credit"><p><img src="https://images.unsplash.com/photo-1458217222755-d1c4985b0852?crop=entropy&amp;fit=crop&amp;fm=jpg&amp;h=975&amp;ixjsv=2.1.0&amp;ixlib=rb-0.3.5&amp;q=80&amp;w=1075" alt=""></p>
+<div class="Credit-backdrop"><div class="Credit-info"><div class="Credit-desc"><p>意象說明<br><br>Gulp</p>
+</div><div><a class="Credit-link" target="_blank" href="https://unsplash.com/mrs_m">Maria Vernigora</a></div></div></div></div>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>最近正在開發一個幫助重複使用 gulp task 的工具：<a href="https://gulp-cookery.github.io/gulp-chef/" target="_blank" rel="external">gulp-chef</a>，所以分別研究了 Gulp 3.9 和 Gulp 4.0 的原始碼，以下是 Gulp 3.9 的快速筆記。</p>
+<a id="more"></a>
+<h3 id="解析-Gulp-原始碼"><a href="#解析-Gulp-原始碼" class="headerlink" title="解析 Gulp 原始碼"></a>解析 Gulp 原始碼</h3><p>進入點：</p>
+<p><a href="https://github.com/gulpjs/gulp/blob/master/index.js" target="_blank" rel="external">gulp/index.js</a></p>
+<p><code>Gulp</code> 繼承 <code>Orchestrator</code>:</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> util = <span class="keyword">require</span>(<span class="string">‘util’</span>);</span><br><span class="line"><span class="keyword">var</span> Orchestrator = <span class="keyword">require</span>(<span class="string">‘orchestrator’</span>);</span><br><span class="line"><span class="keyword">var</span> gutil = <span class="keyword">require</span>(<span class="string">‘gulp-util’</span>);</span><br><span class="line"><span class="keyword">var</span> <span class="keyword">deprecated</span> = <span class="keyword">require</span>(<span class="string">‘deprecated’</span>);</span><br><span class="line"><span class="keyword">var</span> vfs = <span class="keyword">require</span>(<span class="string">‘vinyl-fs’</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Gulp</span><span class="params">()</span> <span class="comment">&#123;</span><br><span class="line">trueOrchestrator.call(this);</span><br><span class="line">&#125;</span></span><br><span class="line"><span class="title">util</span>.<span class="title">inherits</span><span class="params">(Gulp, Orchestrator)</span>;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>Orchestrator</code> 的定義：</p>
+<p><a href="https://github.com/orchestrator/orchestrator" target="_blank" rel="external">orchestrator/orchestrator</a></p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Orchestrator.prototype.add = <span class="function"><span class="keyword">function</span></span> (<span class="keyword">name</span>, dep, fn) &#123;</span><br><span class="line">true…</span><br><span class="line"></span><br><span class="line">truethis.tasks[<span class="keyword">name</span>] = &#123;</span><br><span class="line">truetruefn: fn,</span><br><span class="line">truetruedep: dep,</span><br><span class="line">truetrue<span class="keyword">name</span>: <span class="keyword">name</span></span><br><span class="line">true&#125;;</span><br><span class="line">true<span class="keyword">return</span> this;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Orchestrator.prototype.task = <span class="function"><span class="keyword">function</span></span> (<span class="keyword">name</span>, dep, fn) &#123;</span><br><span class="line">true<span class="keyword">if</span> (dep || fn) &#123;</span><br><span class="line">truetrue// alias for add, <span class="keyword">return</span> nothing rather than this</span><br><span class="line">truetruethis.add(<span class="keyword">name</span>, dep, fn);</span><br><span class="line">true&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">truetrue<span class="keyword">return</span> this.tasks[<span class="keyword">name</span>];</span><br><span class="line">true&#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到：</p>
+<ol>
+<li><code>gulp.task()</code> 透過 <code>gulp.add()</code> 函數，將定義的 task 包裝為物件，儲存在 <code>gulp.tasks[]</code> 陣列中。</li>
+<li>透過 <code>gulp.task()</code> 函數，其實可以取得特定名稱的 task 物件的完整定義。</li>
+</ol>
+<p>下面這一行乍看之下似乎是多餘的，因為 <code>Gulp</code> 繼承 <code>Orchestrator</code> 時，就已經同時取得 <code>.add()</code> 及 <code>.task()</code> 函數，但是 <code>Orchestrator.prototype.task()</code> 實際上將工作委託給 <code>Orchestrator.prototype.add()</code> 函數，然而<code>task()</code> 並未改變任何行為，因此，其實只要讓 <code>task()</code> 也指向 <code>add()</code> 即可：</p>
+<p><code>gulp.task()</code> 改直接引用自 <code>Orchestrator.prototype.add</code> 成為別名:</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Gulp</span>.proto<span class="keyword">type</span>.task = <span class="type">Gulp</span>.prototype.add;</span><br></pre></td></tr></table></figure>
+
+<p><code>gulp.src()</code>, <code>gulp.dest()</code> 直接引用自 <code>vinyl-fs</code>:</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Gulp</span>.proto<span class="keyword">type</span>.src = vfs.src;</span><br><span class="line"><span class="type">Gulp</span>.proto<span class="keyword">type</span>.dest = vfs.dest;</span><br></pre></td></tr></table></figure>
+
+<p><code>gulp.watch()</code> 將監看對象陣列攤平，丟給 <code>vinyl-fs</code> 的 <code>.watch()</code> 函數：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Gulp.prototype.watch = <span class="function"><span class="keyword">function</span>(<span class="params">glob, opt, fn</span>) </span>&#123;</span><br><span class="line">true<span class="keyword">if</span> (<span class="keyword">typeof</span> opt === <span class="string">‘function’</span> || <span class="built_in">Array</span>.isArray(opt)) &#123;</span><br><span class="line">truetruefn = opt;</span><br><span class="line">truetrueopt = <span class="literal">null</span>;</span><br><span class="line">true&#125;</span><br><span class="line"></span><br><span class="line">true<span class="comment">// Array of tasks given</span></span><br><span class="line">true<span class="keyword">if</span> (<span class="built_in">Array</span>.isArray(fn)) &#123;</span><br><span class="line">truetrue<span class="keyword">return</span> vfs.watch(glob, opt, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">truetruetrue<span class="keyword">this</span>.start.apply(<span class="keyword">this</span>, fn);</span><br><span class="line">truetrue&#125;.bind(<span class="keyword">this</span>));</span><br><span class="line">true&#125;</span><br><span class="line"></span><br><span class="line">true<span class="keyword">return</span> vfs.watch(glob, opt, fn);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><code>gulp.src()</code> 透過 <code>glob-stream</code> 將 glob 轉換為 <code>vinyl</code> (File)(vinyl 是黑膠唱片的意思，表示承載內容的物品)：</p>
+<p><a href="https://github.com/wearefractal/vinyl-fs/blob/master/lib/src/index.js" target="_blank" rel="external">vinyl-fs/lib/src/index.js</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> assign = <span class="built_in">require</span>(<span class="string">‘object-assign’</span>);</span><br><span class="line"><span class="keyword">var</span> through = <span class="built_in">require</span>(<span class="string">‘through2’</span>);</span><br><span class="line"><span class="keyword">var</span> gs = <span class="built_in">require</span>(<span class="string">‘glob-stream’</span>);</span><br><span class="line"><span class="keyword">var</span> File = <span class="built_in">require</span>(<span class="string">‘vinyl’</span>);</span><br><span class="line"><span class="keyword">var</span> duplexify = <span class="built_in">require</span>(<span class="string">‘duplexify’</span>);</span><br><span class="line"><span class="keyword">var</span> merge = <span class="built_in">require</span>(<span class="string">‘merge-stream’</span>);</span><br><span class="line"><span class="keyword">var</span> sourcemaps = <span class="built_in">require</span>(<span class="string">‘gulp-sourcemaps’</span>);</span><br><span class="line"><span class="keyword">var</span> filterSince = <span class="built_in">require</span>(<span class="string">‘../filterSince’</span>);</span><br><span class="line"><span class="keyword">var</span> isValidGlob = <span class="built_in">require</span>(<span class="string">‘is-valid-glob’</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> getContents = <span class="built_in">require</span>(<span class="string">‘./getContents’</span>);</span><br><span class="line"><span class="keyword">var</span> resolveSymlinks = <span class="built_in">require</span>(<span class="string">‘./resolveSymlinks’</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createFile</span>(<span class="params">globFile, enc, cb</span>) </span>&#123;</span><br><span class="line">truecb(<span class="literal">null</span>, <span class="keyword">new</span> File(globFile));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">src</span>(<span class="params">glob, opt</span>) </span>&#123;</span><br><span class="line">true<span class="keyword">var</span> options = assign(&#123;</span><br><span class="line">truetrue<span class="attr">read</span>: <span class="literal">true</span>,</span><br><span class="line">truetrue<span class="attr">buffer</span>: <span class="literal">true</span>,</span><br><span class="line">truetrue<span class="attr">sourcemaps</span>: <span class="literal">false</span>,</span><br><span class="line">truetrue<span class="attr">passthrough</span>: <span class="literal">false</span></span><br><span class="line">true&#125;, opt);</span><br><span class="line"></span><br><span class="line">true<span class="keyword">var</span> inputPass;</span><br><span class="line"></span><br><span class="line">true<span class="keyword">if</span> (!isValidGlob(glob)) &#123;</span><br><span class="line">truetrue<span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">‘Invalid glob argument: ‘</span> + glob);</span><br><span class="line">true&#125;</span><br><span class="line"></span><br><span class="line">true<span class="keyword">var</span> globStream = gs.create(glob, options);</span><br><span class="line"></span><br><span class="line">true<span class="keyword">var</span> outputStream = globStream</span><br><span class="line">truetrue.pipe(resolveSymlinks())</span><br><span class="line">truetrue.pipe(through.obj(createFile));</span><br><span class="line"></span><br><span class="line">true<span class="keyword">if</span> (options.since != <span class="literal">null</span>) &#123;</span><br><span class="line">truetrueoutputStream = outputStream</span><br><span class="line">truetrue.pipe(filterSince(options.since));</span><br><span class="line">true&#125;</span><br><span class="line"></span><br><span class="line">true<span class="keyword">if</span> (options.read !== <span class="literal">false</span>) &#123;</span><br><span class="line">truetrueoutputStream = outputStream</span><br><span class="line">truetruetrue.pipe(getContents(options));</span><br><span class="line">true&#125;</span><br><span class="line"></span><br><span class="line">true<span class="keyword">if</span> (options.passthrough === <span class="literal">true</span>) &#123;</span><br><span class="line">truetrueinputPass = through.obj();</span><br><span class="line">truetrueoutputStream = duplexify.obj(inputPass, merge(outputStream, inputPass));</span><br><span class="line">true&#125;</span><br><span class="line">true<span class="keyword">if</span> (options.sourcemaps === <span class="literal">true</span>) &#123;</span><br><span class="line">truetrueoutputStream = outputStream</span><br><span class="line">truetruetrue.pipe(sourcemaps.init(&#123;<span class="attr">loadMaps</span>: <span class="literal">true</span>&#125;));</span><br><span class="line">true&#125;</span><br><span class="line">trueglobStream.on(<span class="string">‘error’</span>, outputStream.emit.bind(outputStream, <span class="string">‘error’</span>));</span><br><span class="line">true<span class="keyword">return</span> outputStream;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = src;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://github.com/wearefractal/glob-stream/blob/master/index.js" target="_blank" rel="external">glob-stream/index.js</a></p>
+<figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// <span class="built_in">create</span> globbing stuff</span><br><span class="line">var globber = new glob.Glob(ourGlob, ourOpt);</span><br><span class="line"></span><br><span class="line">…</span><br><span class="line"></span><br><span class="line">globber.on(<span class="string">‘match’</span>, <span class="function"><span class="keyword">function</span><span class="params">(filename)</span></span> &#123;</span><br><span class="line">truefound = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">truestream.<span class="built_in">write</span>(&#123;</span><br><span class="line">truetruecwd: opt.cwd,</span><br><span class="line">truetruebase: basePath,</span><br><span class="line">truetrue<span class="built_in">path</span>: <span class="built_in">path</span>.resolve(opt.cwd, filename)</span><br><span class="line">true&#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><code>vinyl</code> 雖然有專屬的 module （class），也有許多 method 可用:</p>
+<p><a href="https://github.com/wearefractal/vinyl" target="_blank" rel="external">wearefractal/vinyl</a></p>
+<p>但是對於 <code>Gulp</code> 來說，它只需要四個欄位：</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">true<span class="keyword">base</span>: <span class="keyword">string</span>,</span><br><span class="line">truecwd: <span class="keyword">string</span>,</span><br><span class="line">truepath: <span class="keyword">string</span>, <span class="comment">// filename</span></span><br><span class="line">truecontents: any <span class="comment">// file content</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 <code>Gulp</code> 中，由 <code>gulp.src()</code> 開始，一直到 <code>gulp.dest()</code> 為止，傳遞的都是只有上面四個欄位的 <code>vinyl</code>。</p>
+<p>所以，像 <a href="http://browserify.org/" target="_blank" rel="external"><code>Browserify</code></a> 這樣的工具若要能夠供 <code>Gulp</code> 使用，必須透過 <a href="https://github.com/hughsk/vinyl-source-stream" target="_blank" rel="external"><code>vinyl-source-stream</code></a> 這樣的工具，將輸出的文字內容，轉換為 vinyl 的格式，同時賦予檔案名稱：</p>
+<h3 id="同場加映，解析-vinyl-source-stream-原始碼"><a href="#同場加映，解析-vinyl-source-stream-原始碼" class="headerlink" title="同場加映，解析 vinyl-source-stream 原始碼"></a>同場加映，解析 vinyl-source-stream 原始碼</h3><p><a href="https://github.com/hughsk/vinyl-source-stream" target="_blank" rel="external">hughsk/vinyl-source-stream</a> / <a href="https://github.com/hughsk/vinyl-source-stream/blob/master/index.js" target="_blank" rel="external">index.js</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> through2 = <span class="built_in">require</span>(<span class="string">‘through2’</span>)</span><br><span class="line"><span class="keyword">var</span> File = <span class="built_in">require</span>(<span class="string">‘vinyl’</span>)</span><br><span class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">‘path’</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> (<span class="params">filename, baseDir</span>) </span>&#123;</span><br><span class="line">true<span class="keyword">var</span> ins = through2();    <span class="comment">// ……………………………………………….(3)</span></span><br><span class="line">true<span class="keyword">var</span> out = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">true<span class="keyword">var</span> opts = &#123;</span><br><span class="line">truetrue<span class="attr">contents</span>: ins        <span class="comment">// ………………………………………..(3)</span></span><br><span class="line">true&#125;</span><br><span class="line"></span><br><span class="line">true<span class="comment">// <span class="doctag">NOTE:</span> 注意其 opts.path 的決定方式</span></span><br><span class="line">true<span class="keyword">if</span> (filename) opts.path = path.resolve(baseDir || process.cwd(), filename)</span><br><span class="line">true<span class="keyword">if</span> (baseDir) opts.base = baseDir</span><br><span class="line"></span><br><span class="line">true<span class="keyword">var</span> file = <span class="keyword">new</span> File(opts);    <span class="comment">//  ………………………………………..(2)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 回傳的是 through2 物件，注意 objectMode: true。………………………………….(1)</span></span><br><span class="line">true<span class="keyword">return</span> through2(&#123;</span><br><span class="line">truetrue<span class="attr">objectMode</span>: <span class="literal">true</span></span><br><span class="line">true&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">chunk, enc, next</span>) </span>&#123;</span><br><span class="line">truetrue<span class="keyword">if</span> (!out) &#123;</span><br><span class="line">truetruetrue<span class="keyword">this</span>.push(file) <span class="comment">// <span class="doctag">NOTE:</span> 這裡推入 vinyl 物件。…………………..(2)</span></span><br><span class="line">truetruetrueout = <span class="literal">true</span></span><br><span class="line">truetrue&#125;</span><br><span class="line"></span><br><span class="line">truetrueins.push(chunk)     <span class="comment">// …………………………………………(4)</span></span><br><span class="line">truetruenext()</span><br><span class="line">true&#125;, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">truetrueins.push(<span class="literal">null</span>)        <span class="comment">// …………………………………………(5)</span></span><br><span class="line">truetrue<span class="keyword">this</span>.push(<span class="literal">null</span>)</span><br><span class="line">true&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到：</p>
+<ol>
+<li>回傳的是 <a href="https://github.com/rvagg/through2" target="_blank" rel="external"><code>through2</code></a> 物件 (<code>through2</code> 是 node 常用的 stream 包裝函數，可以避免使用繼承的方式撰寫 stream 物件)。</li>
+<li><code>through2</code> 接受的第一個函數，稱為 <code>transformFunction</code>，是當 stream 在傳輸資料時，負責進行內容轉換工作。<br> 使用 <code>through2</code> 時，透過 <code>push()</code> 函數將實際上要輸出的內容，加到輸出 stream 中。可以看到這裡要傳輸的是 <code>vinyl</code> 物件，所以回傳的 <code>through2</code> 物件，在定義的時候，必須指定 <code>objectMode: true</code>。</li>
+<li>前面提到 <code>vinyl</code> 物件最重要的四大屬性，其中 <code>contents</code> 是用來傳輸 / 存放檔案內容的。在這裡，<code>contents</code> 實際上又是一個 <code>through2</code> 物件，注意這裡沒有定義 <code>objectMode</code>，所以這是一個 <code>byte stream</code>。</li>
+<li>在每當 up stream 有資料傳送進來時，便呼叫 <code>push()</code> 函數，將資料推送到 buffer 中。</li>
+<li><code>through2</code> 接受的第二個函數，稱為 <code>flushFunction</code>，是當 stream 資料傳輸完畢時，負責進行最後的收尾清理工作。在這裡都 <code>push(null)</code> 表示資料結尾。</li>
+</ol>
+<h3 id="相關文章"><a href="#相關文章" class="headerlink" title="相關文章"></a>相關文章</h3><!-- cross references -->
+<div><ul>
+<li><a href="/2015/11/14/gulp-glob/" title="Gulp 學習筆記 - Glob 篇">Gulp 學習筆記 - Glob 篇</a></li>
+</ul>
+</div>
+<!-- external references -->
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amobiz.github.io/2015/11/12/gulp-internals/" data-id="cj4y0ufss007kk0566qh6a4wk" class="article-share-link">Share</a>
+      
+        <a href="https://amobiz.github.io/2015/11/12/gulp-internals/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gulp/">Gulp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/notes/">notes</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/11/14/gulp-glob/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Gulp 學習筆記 - Glob 篇
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/11/09/medium-vs-facebook-notes/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Medium 與 Facebook Notes 簡短試用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  
+    <ul class="nav"></ul>
+  
+  
+    <section class="comments" title="Disqus">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </section>
+  
+  
+    <section class="comments" title="Facebook">
+      <div class="fb-comments" data-href="https://amobiz.github.io/2015/11/12/gulp-internals/" data-width="100%" data-numposts="5"></div>
+    </section>
+  
+</section>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hack/">Hack</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Productivity/">Productivity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">36</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Software/">Software</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Design/">Web Design</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/7-Zip/">7-Zip</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMD/">AMD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMP/">AMP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/APP2SD/">APP2SD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/">AngularJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/">Atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BEM/">BEM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backup/">Backup</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Batch/">Batch</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blogger/">Blogger</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS-modules/">CSS-modules</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CommonJS/">CommonJS</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DIY/">DIY</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Pattern/">Design Pattern</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ESLint/">ESLint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Facebook-Notes/">Facebook Notes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GTD/">GTD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Generator/">Generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ginger-yoshi/">Ginger yoshi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gist/">Gist</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/">GitHub</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google/">Google</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-App-Engine/">Google App Engine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-Code-Prettify/">Google Code Prettify</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grails/">Grails</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Groovy/">Groovy</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/">Gulp</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAX-RS/">JAX-RS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDOM/">JDOM</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSHint/">JSHint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/">JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jersey/">Jersey</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/">Jetty</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logdown/">Logdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/">Maven</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Medium/">Medium</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NPM/">NPM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Namespace/">Namespace</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Open-Source/">Open Source</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pomodoro-Technique/">Pomodoro Technique</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming/">Programming</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Promise/">Promise</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regular-Expression/">Regular Expression</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RequireJS/">RequireJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SUIT/">SUIT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SWAP/">SWAP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadow-DOM/">Shadow DOM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TagSoup/">TagSoup</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Time-Management/">Time Management</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UMD/">UMD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/URL/">URL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web-Components/">Web Components</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/">Webpack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/">XML</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XPath/">XPath</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yeoman/">Yeoman</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/advertising/">advertising</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/best-practices/">best practices</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/browser/">browser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cheatsheet/">cheatsheet</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/">cmd</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/custom-ROM/">custom ROM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dfp/">dfp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doubleclick/">doubleclick</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doubleclick-for-publishers/">doubleclick for publishers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpt/">gpt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/howto/">howto</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lint/">lint</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linter/">linter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linter-eslint/">linter-eslint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modular-css/">modular css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modularity/">modularity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/normalize/">normalize</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/normalizer/">normalizer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/notes/">notes</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/open-source/">open source</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pitfalls/">pitfalls</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/productivity/">productivity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regex/">regex</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rooted/">rooted</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svn/">svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time-management/">time management</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tutorial/">tutorial</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/7-Zip/" style="font-size: 11.25px;">7-Zip</a> <a href="/tags/AMD/" style="font-size: 11.25px;">AMD</a> <a href="/tags/AMP/" style="font-size: 10px;">AMP</a> <a href="/tags/APP2SD/" style="font-size: 11.25px;">APP2SD</a> <a href="/tags/Android/" style="font-size: 13.75px;">Android</a> <a href="/tags/AngularJS/" style="font-size: 10px;">AngularJS</a> <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/BEM/" style="font-size: 10px;">BEM</a> <a href="/tags/Backup/" style="font-size: 11.25px;">Backup</a> <a href="/tags/Batch/" style="font-size: 11.25px;">Batch</a> <a href="/tags/Blogger/" style="font-size: 12.5px;">Blogger</a> <a href="/tags/CSS-modules/" style="font-size: 10px;">CSS-modules</a> <a href="/tags/CommonJS/" style="font-size: 15px;">CommonJS</a> <a href="/tags/DIY/" style="font-size: 13.75px;">DIY</a> <a href="/tags/Design-Pattern/" style="font-size: 12.5px;">Design Pattern</a> <a href="/tags/ESLint/" style="font-size: 10px;">ESLint</a> <a href="/tags/Facebook-Notes/" style="font-size: 10px;">Facebook Notes</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Generator/" style="font-size: 10px;">Generator</a> <a href="/tags/Ginger-yoshi/" style="font-size: 11.25px;">Ginger yoshi</a> <a href="/tags/Gist/" style="font-size: 10px;">Gist</a> <a href="/tags/GitHub/" style="font-size: 16.25px;">GitHub</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/Google-App-Engine/" style="font-size: 10px;">Google App Engine</a> <a href="/tags/Google-Code-Prettify/" style="font-size: 10px;">Google Code Prettify</a> <a href="/tags/Grails/" style="font-size: 10px;">Grails</a> <a href="/tags/Groovy/" style="font-size: 12.5px;">Groovy</a> <a href="/tags/Gulp/" style="font-size: 11.25px;">Gulp</a> <a href="/tags/HTML/" style="font-size: 13.75px;">HTML</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/JAX-RS/" style="font-size: 10px;">JAX-RS</a> <a href="/tags/JDOM/" style="font-size: 12.5px;">JDOM</a> <a href="/tags/JSHint/" style="font-size: 10px;">JSHint</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Jersey/" style="font-size: 10px;">Jersey</a> <a href="/tags/Jetty/" style="font-size: 10px;">Jetty</a> <a href="/tags/Logdown/" style="font-size: 10px;">Logdown</a> <a href="/tags/Markdown/" style="font-size: 11.25px;">Markdown</a> <a href="/tags/Maven/" style="font-size: 16.25px;">Maven</a> <a href="/tags/Medium/" style="font-size: 10px;">Medium</a> <a href="/tags/NPM/" style="font-size: 10px;">NPM</a> <a href="/tags/Namespace/" style="font-size: 11.25px;">Namespace</a> <a href="/tags/Open-Source/" style="font-size: 11.25px;">Open Source</a> <a href="/tags/Pomodoro-Technique/" style="font-size: 10px;">Pomodoro Technique</a> <a href="/tags/Programming/" style="font-size: 10px;">Programming</a> <a href="/tags/Promise/" style="font-size: 11.25px;">Promise</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Regular-Expression/" style="font-size: 15px;">Regular Expression</a> <a href="/tags/RequireJS/" style="font-size: 10px;">RequireJS</a> <a href="/tags/SUIT/" style="font-size: 10px;">SUIT</a> <a href="/tags/SWAP/" style="font-size: 10px;">SWAP</a> <a href="/tags/Shadow-DOM/" style="font-size: 10px;">Shadow DOM</a> <a href="/tags/TagSoup/" style="font-size: 12.5px;">TagSoup</a> <a href="/tags/Time-Management/" style="font-size: 10px;">Time Management</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/UMD/" style="font-size: 11.25px;">UMD</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/Web-Components/" style="font-size: 10px;">Web Components</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Windows/" style="font-size: 11.25px;">Windows</a> <a href="/tags/XML/" style="font-size: 12.5px;">XML</a> <a href="/tags/XPath/" style="font-size: 12.5px;">XPath</a> <a href="/tags/Yeoman/" style="font-size: 12.5px;">Yeoman</a> <a href="/tags/advertising/" style="font-size: 10px;">advertising</a> <a href="/tags/best-practices/" style="font-size: 10px;">best practices</a> <a href="/tags/browser/" style="font-size: 10px;">browser</a> <a href="/tags/cheatsheet/" style="font-size: 11.25px;">cheatsheet</a> <a href="/tags/cmd/" style="font-size: 11.25px;">cmd</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/custom-ROM/" style="font-size: 11.25px;">custom ROM</a> <a href="/tags/dfp/" style="font-size: 10px;">dfp</a> <a href="/tags/doubleclick/" style="font-size: 10px;">doubleclick</a> <a href="/tags/doubleclick-for-publishers/" style="font-size: 10px;">doubleclick for publishers</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/glob/" style="font-size: 10px;">glob</a> <a href="/tags/gpt/" style="font-size: 10px;">gpt</a> <a href="/tags/howto/" style="font-size: 18.75px;">howto</a> <a href="/tags/lint/" style="font-size: 11.25px;">lint</a> <a href="/tags/linter/" style="font-size: 10px;">linter</a> <a href="/tags/linter-eslint/" style="font-size: 10px;">linter-eslint</a> <a href="/tags/modular-css/" style="font-size: 11.25px;">modular css</a> <a href="/tags/modularity/" style="font-size: 10px;">modularity</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/nodejs/" style="font-size: 13.75px;">nodejs</a> <a href="/tags/normalize/" style="font-size: 10px;">normalize</a> <a href="/tags/normalizer/" style="font-size: 10px;">normalizer</a> <a href="/tags/notes/" style="font-size: 11.25px;">notes</a> <a href="/tags/npm/" style="font-size: 13.75px;">npm</a> <a href="/tags/open-source/" style="font-size: 13.75px;">open source</a> <a href="/tags/pitfalls/" style="font-size: 17.5px;">pitfalls</a> <a href="/tags/productivity/" style="font-size: 10px;">productivity</a> <a href="/tags/regex/" style="font-size: 15px;">regex</a> <a href="/tags/rooted/" style="font-size: 11.25px;">rooted</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/time-management/" style="font-size: 10px;">time management</a> <a href="/tags/tutorial/" style="font-size: 11.25px;">tutorial</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">十二月 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">十一月 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">五月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">七月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/06/">六月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/08/11/react-dfp/">埋設 DFP - DoubleClick for Publishers 廣告</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/22/modular-css-notes/">Modular CSS</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/15/angularjs-1.5-best-practices/">AngularJS 1.5 最佳實務</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/07/re-npm-left-pad-have-we-forgotten-how-to-program/">反駁：NPM &amp; left-pad: Have We Forgotten How To Program?</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/09/npm-package-node-or-browser/">如何判斷 npmjs.com 上的套件，是否支援 node 或 browser</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Amobiz Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'amobiz';
+  
+  var disqus_url = 'https://amobiz.github.io/2015/11/12/gulp-internals/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<div id="fb-root"></div>
+
+<!-- Facebook SDK -->
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.5&appId=1660468744166033";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- End Facebook SDK -->
+
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/script.js"></script>
+<script src="/js/nav.js"></script>
+
+  </div>
+</body>
+</html>

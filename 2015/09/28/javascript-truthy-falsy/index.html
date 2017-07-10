@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JavaScript: Truthy? Falsy? | 格物致知</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="意象說明Truthy? Falsy? &amp;lt; 迷惘
+Genta Mochizawa
+簡介在 JavaScript 中，有許多數值，在邏輯判斷中，其結果與 false 等價。由於其數值實際上並非 false，因此，特別稱此類數值為 falsy value。
+
+falsy values
+
+
+
+Value
+Type
+Implementation
+
+
+
+
+0
+Number
+Constant
+
+
+NaN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript: Truthy? Falsy?">
+<meta property="og:url" content="https://amobiz.github.io/2015/09/28/javascript-truthy-falsy/index.html">
+<meta property="og:site_name" content="格物致知">
+<meta property="og:description" content="意象說明Truthy? Falsy? &amp;lt; 迷惘
+Genta Mochizawa
+簡介在 JavaScript 中，有許多數值，在邏輯判斷中，其結果與 false 等價。由於其數值實際上並非 false，因此，特別稱此類數值為 falsy value。
+
+falsy values
+
+
+
+Value
+Type
+Implementation
+
+
+
+
+0
+Number
+Constant
+
+
+NaN">
+<meta property="og:image" content="https://images.unsplash.com/photo-1431051047106-f1e17d81042f?fit=crop&fm=jpg&h=725&q=80&w=1075">
+<meta property="og:updated_time" content="2016-06-28T03:07:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript: Truthy? Falsy?">
+<meta name="twitter:description" content="意象說明Truthy? Falsy? &amp;lt; 迷惘
+Genta Mochizawa
+簡介在 JavaScript 中，有許多數值，在邏輯判斷中，其結果與 false 等價。由於其數值實際上並非 false，因此，特別稱此類數值為 falsy value。
+
+falsy values
+
+
+
+Value
+Type
+Implementation
+
+
+
+
+0
+Number
+Constant
+
+
+NaN">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1431051047106-f1e17d81042f?fit=crop&fm=jpg&h=725&q=80&w=1075">
+  
+    <link rel="alternative" href="/atom.xml" title="格物致知" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-68633744-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">格物致知</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Happiness only real when shared.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://amobiz.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-javascript-truthy-falsy" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/09/28/javascript-truthy-falsy/" class="article-date">
+  <time datetime="2015-09-28T05:21:18.000Z" itemprop="datePublished">2015-09-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Programming/">Programming</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/28/javascript-truthy-falsy/">JavaScript: Truthy? Falsy?</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <!-- Post Contents -->
+        <div class="Credit"><p><img src="https://images.unsplash.com/photo-1431051047106-f1e17d81042f?fit=crop&amp;fm=jpg&amp;h=725&amp;q=80&amp;w=1075" alt=""></p>
+<div class="Credit-backdrop"><div class="Credit-info"><div class="Credit-desc"><p>意象說明<br><br>Truthy? Falsy? &lt; 迷惘</p>
+</div><div><a class="Credit-link" target="_blank" href="https://unsplash.com/foxwalk">Genta Mochizawa</a></div></div></div></div>
+<h3 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h3><p>在 JavaScript 中，有許多數值，在邏輯判斷中，其結果與 <code>false</code> 等價。由於其數值實際上並非 <code>false</code>，因此，特別稱此類數值為 <strong>falsy</strong> value。</p>
+<!-- JavaScript - The Good Parts, P.106 -->
+<p><strong>falsy values</strong></p>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Type</th>
+<th>Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Number</td>
+<td>Constant</td>
+</tr>
+<tr>
+<td>NaN</td>
+<td>Number</td>
+<td>Global Variable</td>
+</tr>
+<tr>
+<td>‘’</td>
+<td>String</td>
+<td>Constant</td>
+</tr>
+<tr>
+<td>false</td>
+<td>Boolean</td>
+<td>Constant</td>
+</tr>
+<tr>
+<td>null</td>
+<td>Object</td>
+<td>Constant</td>
+</tr>
+<tr>
+<td>undefined</td>
+<td>Undefined</td>
+<td>Global Variable</td>
+</tr>
+</tbody>
+</table>
+<a id="more"></a>
+<h4 id="基本邏輯判斷方法"><a href="#基本邏輯判斷方法" class="headerlink" title="基本邏輯判斷方法"></a>基本邏輯判斷方法</h4><p>下面使用 <code>if</code> 敘述直接進行 truthy / falsy 判斷，上表中所有的 falsy 值皆無法通過 <code>if</code> 敘述的判斷，而其餘的值皆會通過：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (value) &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>等同於：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">value ? <span class="literal">true</span> : <span class="literal">false</span></span><br></pre></td></tr></table></figure>
+
+<p>下面這個例子比較特別，注意 <code>===</code> 運算子<strong>不會</strong>進行型別轉換，所以唯一會通過邏輯判斷的情況，是 value 的值恰好為 <code>true</code> 的情況，其餘的所有值，結果都是 <code>false</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">value === <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<p>下面這個例子，由於 <code>==</code> 運算子<strong>會</strong>進行型別轉換，上表中所有的 falsy 值，都將先轉換為 <code>false</code>，然後才與 <code>true</code> 進行比較，結果當然為 <code>false</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">value == <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<aside class="cheatsheet warning"><h5>警告</h5><p>不建議使用 <code>==</code> 運算子，詳見 <a href="http://shop.oreilly.com/product/9780596517748.do" target="_blank" rel="external">JavaScript - The Good Parts</a></p>
+</aside>
+<p>Falsy 值測試範例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> falsy = [<span class="number">0</span>, <span class="literal">NaN</span>, <span class="string">‘’</span>, <span class="literal">false</span>, <span class="literal">null</span>, <span class="literal">undefined</span>];</span><br><span class="line"><span class="keyword">var</span> tests = &#123;</span><br><span class="line">    <span class="string">‘if statement’</span>: <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (value) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">‘truthy’</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">‘falsy’</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">‘?: operator’</span>: <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> value ? <span class="string">‘truthy’</span> : <span class="string">‘falsy’</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">‘=== operator’</span>: <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (value === <span class="literal">true</span>) ? <span class="string">‘truthy’</span> : <span class="string">‘falsy’</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="string">‘== operator’</span>: <span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (value == <span class="literal">true</span>) ? <span class="string">‘truthy’</span> : <span class="string">‘falsy’</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">falsy.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">Object</span>.keys(tests).forEach(<span class="function"><span class="keyword">function</span> (<span class="params">test</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(test + <span class="string">‘: ‘</span> + (value === <span class="string">‘’</span> ? <span class="string">“‘’”</span> : value) + <span class="string">‘: ‘</span> + tests<a href="value">test</a>);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="判斷-string-值的方法"><a href="#判斷-string-值的方法" class="headerlink" title="判斷 string 值的方法"></a>判斷 string 值的方法</h4><p>要判斷字串是否等於特定值，毫無疑問，可以使用 <code>===</code> 運算子直接進行判斷：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (title === <span class="string">‘untitled’</span>) &#123;</span><br><span class="line">    <span class="comment">// …</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然而，需要特別注意的是，<code>&#39;&#39;</code> (空字串) 也是 falsy。</p>
+<p>如果程式不接受空字串，也就是說，可以把空字串直接當作是未定義值，那麼可以直接進行邏輯判斷：</p>
+<p>下面的例子，假設 <code>title</code> 是字串，且唯有當 <code>title</code> 字串長度大於 <code>0</code> 時，才進行處理：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (title) &#123;</span><br><span class="line">    <span class="comment">// …</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>或者，當 <code>title</code> 未給定值，或者是空字串時，則給予預設值：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setTitle(title || DEFAULT_VALUE);</span><br></pre></td></tr></table></figure>
+
+<p>但是，若空字串也是有效值，則反而需要特別的處理。問題是，該如何判斷字串有給值 (包含空字串也算有值)？</p>
+<p>以下皆是不佳甚至錯誤的處理方式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// title 可能為 null</span></span><br><span class="line">setTitle(title === <span class="literal">undefined</span> ? DEFAULT_VALUE : title);</span><br><span class="line"><span class="comment">// title 可能為 undefined</span></span><br><span class="line">setTitle(title === <span class="literal">null</span> ? DEFAULT_VALUE : title);</span><br><span class="line"><span class="comment">// 檢查兩次</span></span><br><span class="line">setTitle((title === <span class="literal">null</span> || title === <span class="literal">undefined</span>) ? DEFAULT_VALUE : title);</span><br><span class="line"><span class="comment">// title 可能為 null，此時 typeof title === ‘object’</span></span><br><span class="line">setTitle(<span class="keyword">typeof</span> title === <span class="string">‘undefined’</span> ? DEFAULT_VALUE : title);</span><br><span class="line"><span class="comment">// 檢查兩次，若不了解 falsy，可能會以為第二個判斷是多餘的</span></span><br><span class="line"><span class="keyword">if</span> (title || title === <span class="string">‘’</span>) &#123;</span><br><span class="line">    setTitle(title);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    setTitle(DEFAULT_VALUE);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>比較好的方法，是<strong>利用 <code>typeof</code> 輔助判斷</strong>，直接檢查該值的型態是否為 <code>string</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> value === <span class="string">‘string’</span>                   <span class="comment">// 有給值，至少是空字串</span></span><br><span class="line"><span class="keyword">typeof</span> value === <span class="string">‘string’</span> &amp;&amp; value.length   <span class="comment">// 有給值，而且是長度大於 0 的字串</span></span><br></pre></td></tr></table></figure>
+
+<p>譬如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setTitle(<span class="keyword">typeof</span> title === <span class="string">‘string’</span> ? title : DEFAULT_VALUE);</span><br></pre></td></tr></table></figure>
+
+<h4 id="判斷-number-值的方法"><a href="#判斷-number-值的方法" class="headerlink" title="判斷 number 值的方法"></a>判斷 number 值的方法</h4><p>由於 <code>0</code> 也是 falsy，因此有著與字串類似的問題：</p>
+<p>不允許 <code>0</code> 的情況，可以直接進行邏輯判斷：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (value) &#123;</span><br><span class="line">    <span class="comment">// …</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>允許 <code>0</code> 的情況，則建議<strong>利用 <code>typeof</code> 輔助判斷</strong>，直接檢查該值的型態是否為 <code>number</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setValue(<span class="keyword">typeof</span> value === <span class="string">‘number’</span> ? value : DEFAULT_VALUE);</span><br></pre></td></tr></table></figure>
+
+<h4 id="判斷物件屬性是否存在的方法"><a href="#判斷物件屬性是否存在的方法" class="headerlink" title="判斷物件屬性是否存在的方法"></a>判斷物件屬性是否存在的方法</h4><p>判斷物件的屬性值，方法與上述的一般數值相同，當然也包括對於字串和數值的 falsy 值的特別處理。</p>
+<p>如果要判斷物件是否具有某個特定的屬性的話，則又有以下不同的方式。假設要判斷 <code>object</code> 物件中是否具有 <code>property</code> 這個屬性，以下都是可行的方式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">object.property === <span class="literal">undefined</span></span><br><span class="line">object[<span class="string">‘property’</span>] === <span class="literal">undefined</span></span><br><span class="line"><span class="keyword">typeof</span> object.property === <span class="string">‘undefined’</span></span><br><span class="line"><span class="keyword">typeof</span> object[<span class="string">‘property’</span>] === <span class="string">‘undefined’</span></span><br></pre></td></tr></table></figure>
+
+<p>然而，最好的方式，是使用 <code>in</code> 運算子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="string">‘property’</span> <span class="keyword">in</span> object) &#123;</span><br><span class="line">    <span class="comment">// …</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果需要忽略繼承的屬性的話，可以使用 <code>.hasOwnProperty()</code> 函數：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (object.hasOwnProperty(<span class="string">‘property’</span>)) &#123;</span><br><span class="line">    <span class="comment">// …</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="undefined-與-null，使用時機？"><a href="#undefined-與-null，使用時機？" class="headerlink" title="undefined 與 null，使用時機？"></a><code>undefined</code> 與 <code>null</code>，使用時機？</h4><p>除了 falsy 值容易造成困擾，<code>undefined</code> 與 <code>null</code> 也是另一個容易讓人不知所措的特性。</p>
+<p>上面的例子已經可以看到，對 <code>undefined</code> 與 <code>null</code> 直接進行邏輯判斷時，兩者皆表現為 falsy：</p>
+<figure class="highlight ceylon"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var <span class="keyword">value</span><span class="number">1</span>;                 <span class="comment">// undefined</span></span><br><span class="line"><span class="keyword">value</span><span class="number">1</span> ? <span class="string">‘truthy’</span> : <span class="string">‘falsy’</span> <span class="comment">// ‘falsy’</span></span><br><span class="line"></span><br><span class="line">var <span class="keyword">value</span><span class="number">2</span> = null;          <span class="comment">// null</span></span><br><span class="line"><span class="keyword">value</span><span class="number">2</span> ? <span class="string">‘truthy’</span> : <span class="string">‘falsy’</span> <span class="comment">// ‘falsy’</span></span><br></pre></td></tr></table></figure>
+
+<p>而要加以區別的話，可以如下處理：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 判斷是否為 undefined</span></span><br><span class="line">value === <span class="literal">undefined</span></span><br><span class="line"><span class="keyword">typeof</span> value === <span class="string">‘undefined’</span></span><br><span class="line"><span class="comment">// 判斷是否為 null</span></span><br><span class="line">value === <span class="literal">null</span></span><br></pre></td></tr></table></figure>
+
+<aside class="cheatsheet"><h5>注意</h5><p>無法使用 <code>typeof</code> 運算子判斷數值是否為 <code>null</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> value === <span class="string">‘object’</span></span><br></pre></td></tr></table></figure>
+</aside>
+<aside class="cheatsheet"><h5>注意</h5><p>在 JavaScript 中，<code>undefined</code> 不是關鍵字，而是以 global 變數的方式實作。在無法完全控制的環境下，可以像這樣確保 <code>undefined</code> 不受影響：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">undefined</span> = <span class="string">‘not undefined’</span>;</span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">value, undefined</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (value === <span class="literal">undefined</span>) &#123;</span><br><span class="line">        <span class="comment">// …</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)(value);</span><br></pre></td></tr></table></figure>
+</aside>
+<p>關於兩者的使用時機：</p>
+<h5 id="undefined-如同其字面上的意義：『未定義』，應該使用在可以省略，或是可以略過定義的場合"><a href="#undefined-如同其字面上的意義：『未定義』，應該使用在可以省略，或是可以略過定義的場合" class="headerlink" title="undefined 如同其字面上的意義：『未定義』，應該使用在可以省略，或是可以略過定義的場合"></a><code>undefined</code> 如同其字面上的意義：『未定義』，應該使用在可以省略，或是可以略過定義的場合</h5><p>通常使用時機如下：</p>
+<ol>
+<li>物件的可選屬性，</li>
+<li>函數的可選參數，以及</li>
+<li>函數的區域變數，在特定流程下也許不會用到的變數。</li>
+</ol>
+<p>由於通常我們只關心其是否定義，並且 falsy 的狀況剛好可以當作未定義來處理，因此可以直接進行邏輯判斷，即使實際上該值可能為 <code>null</code> 也無妨：</p>
+<p><strong>範例</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">post</span>(<span class="params">url, data, options</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> headers;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// options 是函數的可選參數</span></span><br><span class="line">    options = options || &#123;&#125;;</span><br><span class="line">    <span class="comment">// options.headers 是 options 物件的可選屬性</span></span><br><span class="line">    <span class="keyword">if</span> (options.headers) &#123;</span><br><span class="line">        headers = <span class="built_in">Object</span>.assign(&#123;&#125;, options.headers);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">Object</span>.isObject(data)) &#123;</span><br><span class="line">        data = <span class="built_in">JSON</span>.stringify(data);</span><br><span class="line">        headers = <span class="built_in">Object</span>.assign(headers || &#123;&#125;, &#123; <span class="string">“data-type”</span>: <span class="string">“application/json”</span> &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// headers 是函數的區域變數，在特定流程下也許不會用到的變數。</span></span><br><span class="line">    <span class="keyword">if</span> (headers) &#123;</span><br><span class="line">        <span class="comment">// …</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// …</span></span><br><span class="line">    <span class="comment">// options.success 是 options 物件的可選屬性</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> options.success === <span class="string">‘function’</span>) &#123;</span><br><span class="line">        options.success(<span class="literal">null</span>, result);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="null-則應該用於明確表達『不具有值』的情況。"><a href="#null-則應該用於明確表達『不具有值』的情況。" class="headerlink" title="null 則應該用於明確表達『不具有值』的情況。"></a><code>null</code> 則應該用於明確表達『不具有值』的情況。</h5><p>譬如資料庫在儲存欄位的時候，必須明確表示該欄位是否具有值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">employee.save(&#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">‘Jack’</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">15</span>,</span><br><span class="line">    <span class="attr">license</span>: <span class="literal">null</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>再舉例，node.js 的 callback 函數，依慣例其形式為 <code>callback(err, result)</code>。</p>
+<p>其中 <code>err</code> 是用來標示錯誤的發生，當其值不為 falsy 時，表示發生錯誤，而 <code>err</code> 通常就是錯誤訊息或存放錯誤訊息的物件。</p>
+<p>相反地，當 <code>err</code> 為 falsy 時 (依慣例通常是 <code>null</code>，以表示：沒有 error)，這時候，<code>result</code> 用來表示回傳的結果。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">read</span>(<span class="params">file, callback</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> data;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">// do read file</span></span><br><span class="line">        data = …;</span><br><span class="line">        <span class="comment">// 明確地使用 null 表示沒有錯誤發生</span></span><br><span class="line">        callback(<span class="literal">null</span>, data);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span> (ex) &#123;</span><br><span class="line">        <span class="comment">// 明確地使用 ex 做為實際參數，傳遞給 callback 做為 err 形式參數，以表示發生錯誤</span></span><br><span class="line">        callback(ex);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">read(<span class="string">‘readme.md’</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err, data</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">        <span class="keyword">throw</span> err;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(data);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="總結：一般原則"><a href="#總結：一般原則" class="headerlink" title="總結：一般原則"></a>總結：一般原則</h3><ol>
+<li><p>若需要檢查是否給值，而不論其 falsy 狀態，則直接使用 <code>typeof</code> 對目標型別進行確認：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> title === <span class="string">‘string’</span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.title = title;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> options.zIndex === <span class="string">‘number’</span>) &#123;</span><br><span class="line">    <span class="keyword">this</span>.zIndex = options.zIndex;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> callback === <span class="string">‘function’</span>) &#123;</span><br><span class="line">    callback(<span class="literal">null</span>, result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>若 falsy 狀態恰巧是期望的行為，則直接進行邏輯判斷：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">options = options || &#123;&#125;;</span><br><span class="line"><span class="keyword">this</span>.title = title || DEFAULT_VALUE;</span><br><span class="line"><span class="keyword">if</span> (message) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(message);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><p>由於 JavaScript 對於 falsy 值的認定過於寬鬆，甚至比 C/C++ 還寬鬆，導致在處理有效值的時候，反而需要進行額外的處理。這當然是 bad parts，而且還是無法避開的部份。希望經過本文的詳細探討之後，能幫助初學者掌握到其中的關鍵。</p>
+<p>歡迎大家的回饋與心得分享。</p>
+<h3 id="參考文章："><a href="#參考文章：" class="headerlink" title="參考文章："></a>參考文章：</h3><ul>
+<li><a href="http://shop.oreilly.com/product/9780596517748.do" target="_blank" rel="external">JavaScript: The Good Parts</a></li>
+</ul>
+<h3 id="相關文章："><a href="#相關文章：" class="headerlink" title="相關文章："></a>相關文章：</h3><!-- cross references -->
+<div><ul>
+<li><a href="/2015/09/30/javascript-programming-pattern-resolver/" title="JavaScript Programming Pattern: Resolver">JavaScript Programming Pattern: Resolver</a></li>
+<li><a href="/2015/10/01/javascript-resolver-vs-promise/" title="JavaScript: Resolver vs. Promise">JavaScript: Resolver vs. Promise</a></li>
+<li><a href="/2015/10/02/javascript-promise-resolver-vs-handler/" title="JavaScript Promise: resolver vs. handler">JavaScript Promise: resolver vs. handler</a></li>
+</ul>
+</div>
+<!-- external references -->
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amobiz.github.io/2015/09/28/javascript-truthy-falsy/" data-id="cj4y0ufsf0071k056fq5zh0rg" class="article-share-link">Share</a>
+      
+        <a href="https://amobiz.github.io/2015/09/28/javascript-truthy-falsy/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pitfalls/">pitfalls</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/09/30/javascript-programming-pattern-resolver/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JavaScript Programming Pattern: Resolver
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/09/06/open-source-json-normalizer/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Open Source json-normalizer</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  
+    <ul class="nav"></ul>
+  
+  
+    <section class="comments" title="Disqus">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </section>
+  
+  
+    <section class="comments" title="Facebook">
+      <div class="fb-comments" data-href="https://amobiz.github.io/2015/09/28/javascript-truthy-falsy/" data-width="100%" data-numposts="5"></div>
+    </section>
+  
+</section>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hack/">Hack</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Productivity/">Productivity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">36</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Software/">Software</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Design/">Web Design</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/7-Zip/">7-Zip</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMD/">AMD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMP/">AMP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/APP2SD/">APP2SD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/">AngularJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/">Atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BEM/">BEM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backup/">Backup</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Batch/">Batch</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blogger/">Blogger</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS-modules/">CSS-modules</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CommonJS/">CommonJS</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DIY/">DIY</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Pattern/">Design Pattern</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ESLint/">ESLint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Facebook-Notes/">Facebook Notes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GTD/">GTD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Generator/">Generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ginger-yoshi/">Ginger yoshi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gist/">Gist</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/">GitHub</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google/">Google</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-App-Engine/">Google App Engine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-Code-Prettify/">Google Code Prettify</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grails/">Grails</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Groovy/">Groovy</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/">Gulp</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAX-RS/">JAX-RS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDOM/">JDOM</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSHint/">JSHint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/">JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jersey/">Jersey</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/">Jetty</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logdown/">Logdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/">Maven</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Medium/">Medium</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NPM/">NPM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Namespace/">Namespace</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Open-Source/">Open Source</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pomodoro-Technique/">Pomodoro Technique</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming/">Programming</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Promise/">Promise</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regular-Expression/">Regular Expression</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RequireJS/">RequireJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SUIT/">SUIT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SWAP/">SWAP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadow-DOM/">Shadow DOM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TagSoup/">TagSoup</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Time-Management/">Time Management</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UMD/">UMD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/URL/">URL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web-Components/">Web Components</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/">Webpack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/">XML</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XPath/">XPath</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yeoman/">Yeoman</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/advertising/">advertising</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/best-practices/">best practices</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/browser/">browser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cheatsheet/">cheatsheet</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/">cmd</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/custom-ROM/">custom ROM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dfp/">dfp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doubleclick/">doubleclick</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doubleclick-for-publishers/">doubleclick for publishers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpt/">gpt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/howto/">howto</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lint/">lint</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linter/">linter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linter-eslint/">linter-eslint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modular-css/">modular css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modularity/">modularity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/normalize/">normalize</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/normalizer/">normalizer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/notes/">notes</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/open-source/">open source</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pitfalls/">pitfalls</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/productivity/">productivity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regex/">regex</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rooted/">rooted</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svn/">svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time-management/">time management</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tutorial/">tutorial</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/7-Zip/" style="font-size: 11.25px;">7-Zip</a> <a href="/tags/AMD/" style="font-size: 11.25px;">AMD</a> <a href="/tags/AMP/" style="font-size: 10px;">AMP</a> <a href="/tags/APP2SD/" style="font-size: 11.25px;">APP2SD</a> <a href="/tags/Android/" style="font-size: 13.75px;">Android</a> <a href="/tags/AngularJS/" style="font-size: 10px;">AngularJS</a> <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/BEM/" style="font-size: 10px;">BEM</a> <a href="/tags/Backup/" style="font-size: 11.25px;">Backup</a> <a href="/tags/Batch/" style="font-size: 11.25px;">Batch</a> <a href="/tags/Blogger/" style="font-size: 12.5px;">Blogger</a> <a href="/tags/CSS-modules/" style="font-size: 10px;">CSS-modules</a> <a href="/tags/CommonJS/" style="font-size: 15px;">CommonJS</a> <a href="/tags/DIY/" style="font-size: 13.75px;">DIY</a> <a href="/tags/Design-Pattern/" style="font-size: 12.5px;">Design Pattern</a> <a href="/tags/ESLint/" style="font-size: 10px;">ESLint</a> <a href="/tags/Facebook-Notes/" style="font-size: 10px;">Facebook Notes</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Generator/" style="font-size: 10px;">Generator</a> <a href="/tags/Ginger-yoshi/" style="font-size: 11.25px;">Ginger yoshi</a> <a href="/tags/Gist/" style="font-size: 10px;">Gist</a> <a href="/tags/GitHub/" style="font-size: 16.25px;">GitHub</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/Google-App-Engine/" style="font-size: 10px;">Google App Engine</a> <a href="/tags/Google-Code-Prettify/" style="font-size: 10px;">Google Code Prettify</a> <a href="/tags/Grails/" style="font-size: 10px;">Grails</a> <a href="/tags/Groovy/" style="font-size: 12.5px;">Groovy</a> <a href="/tags/Gulp/" style="font-size: 11.25px;">Gulp</a> <a href="/tags/HTML/" style="font-size: 13.75px;">HTML</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/JAX-RS/" style="font-size: 10px;">JAX-RS</a> <a href="/tags/JDOM/" style="font-size: 12.5px;">JDOM</a> <a href="/tags/JSHint/" style="font-size: 10px;">JSHint</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Jersey/" style="font-size: 10px;">Jersey</a> <a href="/tags/Jetty/" style="font-size: 10px;">Jetty</a> <a href="/tags/Logdown/" style="font-size: 10px;">Logdown</a> <a href="/tags/Markdown/" style="font-size: 11.25px;">Markdown</a> <a href="/tags/Maven/" style="font-size: 16.25px;">Maven</a> <a href="/tags/Medium/" style="font-size: 10px;">Medium</a> <a href="/tags/NPM/" style="font-size: 10px;">NPM</a> <a href="/tags/Namespace/" style="font-size: 11.25px;">Namespace</a> <a href="/tags/Open-Source/" style="font-size: 11.25px;">Open Source</a> <a href="/tags/Pomodoro-Technique/" style="font-size: 10px;">Pomodoro Technique</a> <a href="/tags/Programming/" style="font-size: 10px;">Programming</a> <a href="/tags/Promise/" style="font-size: 11.25px;">Promise</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Regular-Expression/" style="font-size: 15px;">Regular Expression</a> <a href="/tags/RequireJS/" style="font-size: 10px;">RequireJS</a> <a href="/tags/SUIT/" style="font-size: 10px;">SUIT</a> <a href="/tags/SWAP/" style="font-size: 10px;">SWAP</a> <a href="/tags/Shadow-DOM/" style="font-size: 10px;">Shadow DOM</a> <a href="/tags/TagSoup/" style="font-size: 12.5px;">TagSoup</a> <a href="/tags/Time-Management/" style="font-size: 10px;">Time Management</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/UMD/" style="font-size: 11.25px;">UMD</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/Web-Components/" style="font-size: 10px;">Web Components</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Windows/" style="font-size: 11.25px;">Windows</a> <a href="/tags/XML/" style="font-size: 12.5px;">XML</a> <a href="/tags/XPath/" style="font-size: 12.5px;">XPath</a> <a href="/tags/Yeoman/" style="font-size: 12.5px;">Yeoman</a> <a href="/tags/advertising/" style="font-size: 10px;">advertising</a> <a href="/tags/best-practices/" style="font-size: 10px;">best practices</a> <a href="/tags/browser/" style="font-size: 10px;">browser</a> <a href="/tags/cheatsheet/" style="font-size: 11.25px;">cheatsheet</a> <a href="/tags/cmd/" style="font-size: 11.25px;">cmd</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/custom-ROM/" style="font-size: 11.25px;">custom ROM</a> <a href="/tags/dfp/" style="font-size: 10px;">dfp</a> <a href="/tags/doubleclick/" style="font-size: 10px;">doubleclick</a> <a href="/tags/doubleclick-for-publishers/" style="font-size: 10px;">doubleclick for publishers</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/glob/" style="font-size: 10px;">glob</a> <a href="/tags/gpt/" style="font-size: 10px;">gpt</a> <a href="/tags/howto/" style="font-size: 18.75px;">howto</a> <a href="/tags/lint/" style="font-size: 11.25px;">lint</a> <a href="/tags/linter/" style="font-size: 10px;">linter</a> <a href="/tags/linter-eslint/" style="font-size: 10px;">linter-eslint</a> <a href="/tags/modular-css/" style="font-size: 11.25px;">modular css</a> <a href="/tags/modularity/" style="font-size: 10px;">modularity</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/nodejs/" style="font-size: 13.75px;">nodejs</a> <a href="/tags/normalize/" style="font-size: 10px;">normalize</a> <a href="/tags/normalizer/" style="font-size: 10px;">normalizer</a> <a href="/tags/notes/" style="font-size: 11.25px;">notes</a> <a href="/tags/npm/" style="font-size: 13.75px;">npm</a> <a href="/tags/open-source/" style="font-size: 13.75px;">open source</a> <a href="/tags/pitfalls/" style="font-size: 17.5px;">pitfalls</a> <a href="/tags/productivity/" style="font-size: 10px;">productivity</a> <a href="/tags/regex/" style="font-size: 15px;">regex</a> <a href="/tags/rooted/" style="font-size: 11.25px;">rooted</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/time-management/" style="font-size: 10px;">time management</a> <a href="/tags/tutorial/" style="font-size: 11.25px;">tutorial</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">十二月 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">十一月 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">五月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">七月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/06/">六月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/08/11/react-dfp/">埋設 DFP - DoubleClick for Publishers 廣告</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/22/modular-css-notes/">Modular CSS</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/15/angularjs-1.5-best-practices/">AngularJS 1.5 最佳實務</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/07/re-npm-left-pad-have-we-forgotten-how-to-program/">反駁：NPM &amp; left-pad: Have We Forgotten How To Program?</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/09/npm-package-node-or-browser/">如何判斷 npmjs.com 上的套件，是否支援 node 或 browser</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Amobiz Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'amobiz';
+  
+  var disqus_url = 'https://amobiz.github.io/2015/09/28/javascript-truthy-falsy/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<div id="fb-root"></div>
+
+<!-- Facebook SDK -->
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.5&appId=1660468744166033";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- End Facebook SDK -->
+
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/script.js"></script>
+<script src="/js/nav.js"></script>
+
+  </div>
+</body>
+</html>

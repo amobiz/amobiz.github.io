@@ -1,0 +1,18 @@
+<h1 id="Kubtctl"><a href="#Kubtctl" class="headerlink" title="Kubtctl"></a>Kubtctl</h1><h3 id="安裝-gcloud"><a href="#安裝-gcloud" class="headerlink" title="安裝 gcloud"></a>安裝 gcloud</h3><p><a href="https://cloud.google.com/sdk/">https://cloud.google.com/sdk/</a></p>
+<p>參考：</p>
+<p><a href="https://dcard.quip.com/9ogKAIcPyIlw">V2 deployment guide</a></p>
+<h3 id="安裝-kubectl"><a href="#安裝-kubectl" class="headerlink" title="安裝 kubectl"></a>安裝 kubectl</h3><p><code>gcloud components install kubectl</code></p>
+<h3 id="找出名稱特別長的"><a href="#找出名稱特別長的" class="headerlink" title="找出名稱特別長的"></a>找出名稱特別長的</h3><pre><code class="bash">kubectl get rc
+</code></pre>
+<p>dcard-web-dskfodihvdslknfsdf    49  29 0d</p>
+<h3 id="砍掉它"><a href="#砍掉它" class="headerlink" title="砍掉它"></a>砍掉它</h3><pre><code class="bash">kubectl delete rc/dcard-web-dskfodihvdslknfsdf
+</code></pre>
+<h3 id="如果還是不行，要先-scale-down，然後-rebuild"><a href="#如果還是不行，要先-scale-down，然後-rebuild" class="headerlink" title="如果還是不行，要先 scale down，然後 rebuild:"></a>如果還是不行，要先 scale down，然後 rebuild:</h3><pre><code class="bash">kubectl scale  --replicas=20 rc/dcard-web
+</code></pre>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a href="http://qiita.com/minodisk/items/547741b73763f2bab6b8">Kubernetesのポッドが起動しない原因と対策</a></li>
+<li><a href="https://github.com/kubernetes/kubernetes/blob/master/docs/design/simple-rolling-update.md#aborting-a-rollout">Simple rolling update</a></li>
+<li><a href="http://kubernetes.io/docs/user-guide/rolling-updates/">Rolling Updates Guides</a></li>
+<li><a href="http://kubernetes.io/docs/user-guide/kubectl/kubectl_rolling-update/">kubectl rolling-update</a></li>
+<li><a href="http://kubernetes.io/docs/user-guide/update-demo/">Rolling Update Demo</a></li>
+</ul>

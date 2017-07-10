@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>格物致知</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="格物致知">
+<meta property="og:url" content="https://amobiz.github.io/page/3/index.html">
+<meta property="og:site_name" content="格物致知">
+<meta property="og:description">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="格物致知">
+<meta name="twitter:description">
+  
+    <link rel="alternative" href="/atom.xml" title="格物致知" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-68633744-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">格物致知</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Happiness only real when shared.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://amobiz.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-why-i-developed-javascript-regular-expression-generator-regexgenjs" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/08/05/why-i-developed-javascript-regular-expression-generator-regexgenjs/" class="article-date">
+  <time datetime="2014-08-05T08:42:19.000Z" itemprop="datePublished">2014-08-05</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Programming/">Programming</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/08/05/why-i-developed-javascript-regular-expression-generator-regexgenjs/">為什麼我要開發 Regular Expression Generator - RegexGen.js</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <div class="Credit"><p><img src="https://images.unsplash.com/42/cA4aKEIPQrerBnp1yGHv_IMG_9534-3-2.jpg?crop=entropy&amp;fit=crop&amp;fm=jpg&amp;h=975&amp;ixjsv=2.1.0&amp;ixlib=rb-0.3.5&amp;q=80&amp;w=1000" alt=""></p>
+<div class="Credit-backdrop"><div class="Credit-info"><div class="Credit-desc"><p>意象說明<br><br>Regular expression &lt; 文字處理 &lt; 打字機</p>
+</div><div><a class="Credit-link" target="_blank" href="https://unsplash.com/szolkin">Sergey Zolkin</a></div></div></div></div>
+<p><a href="https://github.com/amobiz/regexgen.js" title="RegexGen.js is a JavaScript Regular Expression Generator that helps to construct complex regular expressions">RegexGen.js</a> is a JavaScript Regular Expression Generator that helps to construct complex regular expressions.</p>
+<p>如同我在 <a href="/2014/08/03/regular-expression-javascript-study-notes-1-theory-1/" title="Regular Expression 學習筆記">Regular Expression 學習筆記</a> 所說明的：「學習 regular expression 的關鍵，不在於記憶簡寫符號，而是對引擎匹配原理的掌握。」最佳的 regular expression 學習方法，就是先學習正則引擎的匹配原理。想要快速查閱重點的話，可以參考前三篇學習筆記: <a href="/2014/08/03/regular-expression-javascript-study-notes-1-theory-1/" title="(1)">(1)</a>, <a href="/2014/08/03/regular-expression-javascript-study-notes-2-theory-2/" title="(2)">(2)</a>, <a href="/2014/08/04/regular-expression-javascript-study-notes-3-informal-bnf-grammar/" title="(3)">(3)</a>，如果有充足的時間的話，當然還是建議詳閱 <a href="http://shop.oreilly.com/product/9780596528126.do">Mastering Regular Expressions</a> 這本書。</p>
+<p>然而，畢竟正則表達式的語法相當緊湊，想要一眼看懂複雜的表達式，幾乎是不可能的。首先必須熟悉正則表達式的 meta-character (元字元)，然後一步一步拆解。雖然有 <a href="http://www.regexbuddy.com/" title="Learn, Create, Understand, Test, Use and Save Regular Expressions with RegexBuddy">RegexBuddy</a> 、 <a href="https://regexper.com/" title="regexper">regexper</a> 這樣的軟體可以幫忙拆解，但即使能正確的拆解，也可能無法了解作者 (通常是自己) 原本的思考邏輯，或者要避免的問題。</p>
+        
+          <p class="article-more-link">
+            <a href="/2014/08/05/why-i-developed-javascript-regular-expression-generator-regexgenjs/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amobiz.github.io/2014/08/05/why-i-developed-javascript-regular-expression-generator-regexgenjs/" data-id="cj4y0ufs1006hk0568pjo4xk6" class="article-share-link">Share</a>
+      
+        <a href="https://amobiz.github.io/2014/08/05/why-i-developed-javascript-regular-expression-generator-regexgenjs/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CommonJS/">CommonJS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GitHub/">GitHub</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Regular-Expression/">Regular Expression</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/">npm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/open-source/">open source</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/regex/">regex</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-regular-expression-javascript-study-notes-3-informal-bnf-grammar" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/08/04/regular-expression-javascript-study-notes-3-informal-bnf-grammar/" class="article-date">
+  <time datetime="2014-08-03T16:06:06.000Z" itemprop="datePublished">2014-08-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Programming/">Programming</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/08/04/regular-expression-javascript-study-notes-3-informal-bnf-grammar/">Regular Expression (JavaScript) 學習筆記 (3) - Informal BNF 語法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Informal-BNF-of-Regular-Expression-of-JavaScript-語法篇"><a href="#Informal-BNF-of-Regular-Expression-of-JavaScript-語法篇" class="headerlink" title="Informal BNF of Regular Expression of JavaScript (語法篇)"></a>Informal BNF of Regular Expression of JavaScript (語法篇)</h2><p><a href="http://www.cs.sfu.ca/%7Ecameron/Teaching/384/99-3/regexp-plg.html" title="找到的 regular expression 的 BNF 語法">能夠找得到的</a> regular expression 的 <a href="http://en.wikipedia.org/wiki/Backus%E2%80%93Naur_Form">BNF</a> 語法不太多，以下是自己整理的 JavaScript 的 regular expression 的非正式語法，是依照自己的理解與體會所整理出來的，一定有許多錯誤、遺漏以及命名不當的地方，但還是把它列出來，幫助自己快速複習目前已掌握的 regular expression 的完整語法。讀者如果發現有任何錯誤或是有更好的表示方式，請不吝多多指教。</p>
+        
+          <p class="article-more-link">
+            <a href="/2014/08/04/regular-expression-javascript-study-notes-3-informal-bnf-grammar/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amobiz.github.io/2014/08/04/regular-expression-javascript-study-notes-3-informal-bnf-grammar/" data-id="cj4y0ufs3006kk056wvj1ua1g" class="article-share-link">Share</a>
+      
+        <a href="https://amobiz.github.io/2014/08/04/regular-expression-javascript-study-notes-3-informal-bnf-grammar/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Regular-Expression/">Regular Expression</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/regex/">regex</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-regular-expression-javascript-study-notes-2-theory-2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/08/03/regular-expression-javascript-study-notes-2-theory-2/" class="article-date">
+  <time datetime="2014-08-02T16:06:55.000Z" itemprop="datePublished">2014-08-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Programming/">Programming</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/08/03/regular-expression-javascript-study-notes-2-theory-2/">Regular Expression (JavaScript) 學習筆記 (2) - 原理篇 (下)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><a href="/2014/08/03/regular-expression-javascript-study-notes-1-theory-1/" title="上一篇">上一篇</a> 介紹了正則引擎的基本功能與原理，接下來介紹功能更為強大的 lookaround (環視)。<br><br> 
+<h3 id="Lookaround-環視-不會佔用匹配字元"><a href="#Lookaround-環視-不會佔用匹配字元" class="headerlink" title="Lookaround (環視) 不會佔用匹配字元"></a>Lookaround (環視) 不會佔用匹配字元</h3><p>有時候，要匹配的文本主體，需要滿足的條件不只一個；或者，需要對上下文進行多重約束。</p>
+<p>然而，對於一般的表達式而言，一旦文本匹配成功，便會由表達式所佔有；也就是說，同一段文本，絕不可能同時由兩個表達式所匹配。</p>
+<p>另一方面，有時候，需要確保匹配的文本主體不含特定的內容，但是這個特定的內容，不是一個單一字元。在單一字元的情況下，我們可以使用否定型字元組來處理。但是在多重字元的情況下，卻很難使用一般的表達式辦到。</p>
+<p>在這樣的需求下，許多新的 flavor (流派) 開始支援 lookaround (環視) 的功能。</p>
+<p>對於環視表達式，最重要的特性就是，它們不會 consume (吃掉) 任何字元：不論匹配結果是否成功、不論是肯定型還是否定型、不論是順序還是逆序，引擎都會回到開始匹配前的原點，並且丟棄所有匹配的內容以及過程中儲存的備選狀態。在此之後，引擎才會根據環視表達式的匹配成功與否，進行下一個動作：當匹配成功時，引擎由目前位置繼續下一個表達式的匹配；當匹配失敗時，引擎回溯 (請參考前面回溯的說明) 到上一個儲存點 (這是由上一個表達式所儲存)，繼續由上一個表達式儲存的下一個選擇進行嘗試 (或繼續回溯到上上個表達式)。</p>
+<p>(環視使用的是一種擴展的 NFA：<a href="http://en.wikipedia.org/wiki/Nondeterministic_finite_automaton_with_%CE%B5-moves" title="NFA-λ (也叫做 NFA-ε 或有 ε 移動的 NFA)">NFA-λ (也叫做 NFA-ε 或有 ε 移動的 NFA)</a>，它允許轉換到新狀態的變換不消耗任何輸入符號。)</p>
+<p>可以這樣想像，lookaround (環視) 就像是站在原地不動，向前或向後觀望。依照環視檢視文本的方向，可以區分為 lookahead (順序環視) 和 lookbehind (逆序環視)。</p>
+        
+          <p class="article-more-link">
+            <a href="/2014/08/03/regular-expression-javascript-study-notes-2-theory-2/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amobiz.github.io/2014/08/03/regular-expression-javascript-study-notes-2-theory-2/" data-id="cj4y0ufs7006qk056t66j9b3o" class="article-share-link">Share</a>
+      
+        <a href="https://amobiz.github.io/2014/08/03/regular-expression-javascript-study-notes-2-theory-2/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Regular-Expression/">Regular Expression</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/regex/">regex</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-regular-expression-javascript-study-notes-1-theory-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/08/03/regular-expression-javascript-study-notes-1-theory-1/" class="article-date">
+  <time datetime="2014-08-02T16:06:54.000Z" itemprop="datePublished">2014-08-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Programming/">Programming</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/08/03/regular-expression-javascript-study-notes-1-theory-1/">Regular Expression (JavaScript) 學習筆記 (1) - 原理篇 (上)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>過去初學 regular expression 時，看了許多入門教學及參考資料，但多數資料幾乎都只是將一些表達式符號一一列出，然後再舉一些無關緊要的範例，以為這樣就可以弄懂 regular expression 了。做為初學者，看到這麼多的表達式符號，就以為 regular expression 很難學。直到看了 <a href="http://shop.oreilly.com/product/9780596528126.do">Mastering Regular Expressions, 3rd Edition</a> 這本書，才知道其實是被誤導了。雖然 regular expression 提供了許多簡寫符號，但是大多數的簡寫符號多半只是為了縮短表達式的長度，這些簡寫符號只要在使用的時候查一下，實際使用過就可以熟悉了，根本不需要特別花時間記憶。其實學習 regular expression 的關鍵，不在於記憶簡寫符號，而是對引擎匹配原理的掌握。</p>
+        
+          <p class="article-more-link">
+            <a href="/2014/08/03/regular-expression-javascript-study-notes-1-theory-1/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amobiz.github.io/2014/08/03/regular-expression-javascript-study-notes-1-theory-1/" data-id="cj4y0ufry006ak056br507tay" class="article-share-link">Share</a>
+      
+        <a href="https://amobiz.github.io/2014/08/03/regular-expression-javascript-study-notes-1-theory-1/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Regular-Expression/">Regular Expression</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/regex/">regex</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-open-sourced-my-javascript-regular-expression-generator-regexgenjs" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/07/04/open-sourced-my-javascript-regular-expression-generator-regexgenjs/" class="article-date">
+  <time datetime="2014-07-04T06:53:38.000Z" itemprop="datePublished">2014-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Programming/">Programming</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/07/04/open-sourced-my-javascript-regular-expression-generator-regexgenjs/">Open Sourced my JavaScript Regular Expression Generator - RegexGen.js</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://github.com/"><br><img src="http://2.bp.blogspot.com/-0nmrdX7VFbs/U-eoW6u1oZI/AAAAAAAAAHg/ogSeGtS54sY/s320/Octocat.png" alt="">
+</a></p>
+<p>Hi there, I’ve open-sourced my new library, <a href="https://github.com/amobiz/regexgen.js">RegexGen.js, a JavaScript regular expression generator</a>, please give it a try. Comments and issue reports are welcome. Thank you!</p>
+<h2 id="RegexGen-js-JavaScript-Regular-Expression-Generator"><a href="#RegexGen-js-JavaScript-Regular-Expression-Generator" class="headerlink" title="RegexGen.js - JavaScript Regular Expression Generator"></a>RegexGen.js - JavaScript Regular Expression Generator</h2><p>RegexGen.js is a JavaScript regular expression generator that helps to construct complex regular expressions, inspired by <a href="https://github.com/VerbalExpressions/JSVerbalExpressions">JSVerbalExpressions</a>.</p>
+<p>RegexGen.js is basically designed for people who know how the regular expression engine works, but not working with it regularly, i.e., they know how to make the regex works but may not remember every meta-characters that constructs the regex.</p>
+<p>RegexGen.js helps people don’t have to remember: meta-characters, shortcuts, what characters to escape and tricks about corner cases (<a href="http://stackoverflow.com/questions/5484084/what-literal-characters-should-be-escaped-in-a-regex/5484178#5484178">http://stackoverflow.com/questions/5484084/what-literal-characters-should-be-escaped-in-a-regex/5484178#5484178</a>).</p>
+<p>RegexGen.js helps reusing regex patterns. (checkout the [Matching an IP Address] example bellow.)</p>
+        
+          <p class="article-more-link">
+            <a href="/2014/07/04/open-sourced-my-javascript-regular-expression-generator-regexgenjs/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amobiz.github.io/2014/07/04/open-sourced-my-javascript-regular-expression-generator-regexgenjs/" data-id="cj4y0ufrz006dk056env8m5qb" class="article-share-link">Share</a>
+      
+        <a href="https://amobiz.github.io/2014/07/04/open-sourced-my-javascript-regular-expression-generator-regexgenjs/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CommonJS/">CommonJS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Generator/">Generator</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GitHub/">GitHub</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Regular-Expression/">Regular Expression</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/">npm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/open-source/">open source</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/regex/">regex</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-integrating-maven-and-yeoman-study-notes-6-versions-maven-plugin" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/12/28/integrating-maven-and-yeoman-study-notes-6-versions-maven-plugin/" class="article-date">
+  <time datetime="2013-12-27T21:00:00.000Z" itemprop="datePublished">2013-12-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Programming/">Programming</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/12/28/integrating-maven-and-yeoman-study-notes-6-versions-maven-plugin/">整合 Maven 與 Yeoman，學習筆記 (6) - versions-maven-plugin</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="使用-versions-maven-plugin-來檢查相依-library-plugin-的更新"><a href="#使用-versions-maven-plugin-來檢查相依-library-plugin-的更新" class="headerlink" title="使用 versions-maven-plugin 來檢查相依 library, plugin 的更新"></a>使用 <a href="http://mojo.codehaus.org/versions-maven-plugin/" title="Versions Maven Plugin"><code>versions-maven-plugin</code></a> 來檢查相依 library, plugin 的更新</h3><p>專案開發一段時間之後，相依的 library, plugin 或許已經有更新的版本，要如何找出有哪些已經更新? 更新後的版號為何? 可以使用這裡介紹的  <a href="http://mojo.codehaus.org/versions-maven-plugin/" title="Versions Maven Plugin"><code>versions-maven-plugin</code></a> 來檢查。</p>
+<p>至於更新的 library 是否與專案相容，則需要根據版本編號，也就是「<a href="http://semver.org/lang/zh-TW/">語意化版本</a>」來判斷，並且使用自動化測試來保證。</p>
+<p>另外，當專案版本更新時，也不必手動修改 pom.xml，一樣可以使用 <code>versions-maven-plugin</code> 來更新。</p>
+        
+          <p class="article-more-link">
+            <a href="/2013/12/28/integrating-maven-and-yeoman-study-notes-6-versions-maven-plugin/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amobiz.github.io/2013/12/28/integrating-maven-and-yeoman-study-notes-6-versions-maven-plugin/" data-id="cj4y0ufro0067k056gxb6s866" class="article-share-link">Share</a>
+      
+        <a href="https://amobiz.github.io/2013/12/28/integrating-maven-and-yeoman-study-notes-6-versions-maven-plugin/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maven/">Maven</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yeoman/">Yeoman</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/howto/">howto</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-integrating-maven-and-yeoman-study-notes-5-multi-source-dir" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/12/28/integrating-maven-and-yeoman-study-notes-5-multi-source-dir/" class="article-date">
+  <time datetime="2013-12-27T19:50:00.000Z" itemprop="datePublished">2013-12-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Programming/">Programming</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/12/28/integrating-maven-and-yeoman-study-notes-5-multi-source-dir/">整合 Maven 與 Yeoman，學習筆記 (5) - 使用 build-helper-maven-plugin 支援多 src 目錄</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="使用-build-helper-maven-plugin-支援多-src-目錄"><a href="#使用-build-helper-maven-plugin-支援多-src-目錄" class="headerlink" title="使用 build-helper-maven-plugin 支援多 src 目錄"></a>使用 <a href="http://mojo.codehaus.org/build-helper-maven-plugin/"><code>build-helper-maven-plugin</code></a> 支援多 src 目錄</h3><p>對於一些較複雜的專案，為了明確區分不同類型的 source code，要求將它們分別放在專屬的目錄下。譬如將 model, view, controller 分開來放。Maven 預設的 <code>maven-compiler-plugin</code> 只允許單一 source 目錄，因此無法支援這樣的設定。這時候，就可以利用 <a href="http://mojo.codehaus.org/build-helper-maven-plugin/"><code>build-helper-maven-plugin</code></a> 來支援多 src 目錄 (不過官方並不推薦使用這種方法)：</p>
+        
+          <p class="article-more-link">
+            <a href="/2013/12/28/integrating-maven-and-yeoman-study-notes-5-multi-source-dir/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amobiz.github.io/2013/12/28/integrating-maven-and-yeoman-study-notes-5-multi-source-dir/" data-id="cj4y0ufrl0063k056dgfv66me" class="article-share-link">Share</a>
+      
+        <a href="https://amobiz.github.io/2013/12/28/integrating-maven-and-yeoman-study-notes-5-multi-source-dir/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maven/">Maven</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/howto/">howto</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-integrating-maven-and-yeoman-study-notes-4-tomcat-maven-plugin" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/12/28/integrating-maven-and-yeoman-study-notes-4-tomcat-maven-plugin/" class="article-date">
+  <time datetime="2013-12-27T17:46:00.000Z" itemprop="datePublished">2013-12-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Programming/">Programming</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/12/28/integrating-maven-and-yeoman-study-notes-4-tomcat-maven-plugin/">整合 Maven 與 Yeoman，學習筆記 (4) - tomcat-maven-plugin</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="支援-Tomcat-啟動"><a href="#支援-Tomcat-啟動" class="headerlink" title="支援 Tomcat 啟動"></a>支援 Tomcat 啟動</h3><p>如果偏好使用 Tomcat，為方便在 deploy 前直接啟動 web app 檢視，可以在 <code>pom.xml</code> 加入 <a href="http://tomcat.apache.org/maven-plugin.html"><code>tomcat-maven-plugin</code></a>，引用的版本最好在 properties 區塊定義，方便更新：</p>
+        
+          <p class="article-more-link">
+            <a href="/2013/12/28/integrating-maven-and-yeoman-study-notes-4-tomcat-maven-plugin/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amobiz.github.io/2013/12/28/integrating-maven-and-yeoman-study-notes-4-tomcat-maven-plugin/" data-id="cj4y0ufri0061k056irlrhaob" class="article-share-link">Share</a>
+      
+        <a href="https://amobiz.github.io/2013/12/28/integrating-maven-and-yeoman-study-notes-4-tomcat-maven-plugin/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maven/">Maven</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Tomcat/">Tomcat</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/howto/">howto</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-integrating-maven-and-yeoman-study-notes-3-jetty-maven-plugin" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/12/27/integrating-maven-and-yeoman-study-notes-3-jetty-maven-plugin/" class="article-date">
+  <time datetime="2013-12-26T19:24:11.000Z" itemprop="datePublished">2013-12-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Programming/">Programming</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/12/27/integrating-maven-and-yeoman-study-notes-3-jetty-maven-plugin/">整合 Maven 與 Yeoman，學習筆記 (3) - jetty-maven-plugin</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="支援-Jetty-啟動"><a href="#支援-Jetty-啟動" class="headerlink" title="支援 Jetty 啟動"></a>支援 Jetty 啟動</h3><p>為方便在 deploy 前直接啟動 web app 檢視，可以在 <code>pom.xml</code> 加入 <a href="http://www.eclipse.org/jetty/documentation/current/jetty-maven-plugin.html"><code>jetty-maven-plugin</code></a>，引用的版本最好在 <code>properties</code> 區塊定義，方便更新：</p>
+        
+          <p class="article-more-link">
+            <a href="/2013/12/27/integrating-maven-and-yeoman-study-notes-3-jetty-maven-plugin/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amobiz.github.io/2013/12/27/integrating-maven-and-yeoman-study-notes-3-jetty-maven-plugin/" data-id="cj4y0ufrg005yk056s7f48awm" class="article-share-link">Share</a>
+      
+        <a href="https://amobiz.github.io/2013/12/27/integrating-maven-and-yeoman-study-notes-3-jetty-maven-plugin/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jetty/">Jetty</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maven/">Maven</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/howto/">howto</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-integrating-maven-and-yeoman-study-notes-2-mvn-archetype-generate-jersey" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/12/27/integrating-maven-and-yeoman-study-notes-2-mvn-archetype-generate-jersey/" class="article-date">
+  <time datetime="2013-12-26T16:56:01.000Z" itemprop="datePublished">2013-12-27</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Programming/">Programming</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/12/27/integrating-maven-and-yeoman-study-notes-2-mvn-archetype-generate-jersey/">整合 Maven 與 Yeoman，學習筆記 (2) - 使用 mvn archetype:generate 建立 JAX-RS / Jersey 專案</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>建立整合專案時，可以使用 Maven 的 template 機制，建立需要的專案架構。這時候可以執行 <code>mvn archetype:generate</code> 指令，從中選取適合的範本。執行該指令時，若不指定 <code>filter</code> 或 <code>archetypeGroupId</code> 及 <code>archetypeArtifactId</code> 參數，會進入 interactive mode，Maven 會列出在中央倉庫中所有的 archetypes，目前有 800 多個範本可選。</p>
+        
+          <p class="article-more-link">
+            <a href="/2013/12/27/integrating-maven-and-yeoman-study-notes-2-mvn-archetype-generate-jersey/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amobiz.github.io/2013/12/27/integrating-maven-and-yeoman-study-notes-2-mvn-archetype-generate-jersey/" data-id="cj4y0ufrd005uk056n8wifxm9" class="article-share-link">Share</a>
+      
+        <a href="https://amobiz.github.io/2013/12/27/integrating-maven-and-yeoman-study-notes-2-mvn-archetype-generate-jersey/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JAX-RS/">JAX-RS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Jersey/">Jersey</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Maven/">Maven</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Yeoman/">Yeoman</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/howto/">howto</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+    </nav>
+  
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hack/">Hack</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Productivity/">Productivity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">36</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Software/">Software</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Design/">Web Design</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/7-Zip/">7-Zip</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMD/">AMD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMP/">AMP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/APP2SD/">APP2SD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/">AngularJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/">Atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BEM/">BEM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backup/">Backup</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Batch/">Batch</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blogger/">Blogger</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS-modules/">CSS-modules</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CommonJS/">CommonJS</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DIY/">DIY</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Pattern/">Design Pattern</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ESLint/">ESLint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Facebook-Notes/">Facebook Notes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GTD/">GTD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Generator/">Generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ginger-yoshi/">Ginger yoshi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gist/">Gist</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/">GitHub</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google/">Google</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-App-Engine/">Google App Engine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-Code-Prettify/">Google Code Prettify</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grails/">Grails</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Groovy/">Groovy</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/">Gulp</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAX-RS/">JAX-RS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDOM/">JDOM</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSHint/">JSHint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/">JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jersey/">Jersey</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/">Jetty</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logdown/">Logdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/">Maven</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Medium/">Medium</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NPM/">NPM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Namespace/">Namespace</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Open-Source/">Open Source</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pomodoro-Technique/">Pomodoro Technique</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming/">Programming</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Promise/">Promise</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regular-Expression/">Regular Expression</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RequireJS/">RequireJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SUIT/">SUIT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SWAP/">SWAP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadow-DOM/">Shadow DOM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TagSoup/">TagSoup</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Time-Management/">Time Management</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UMD/">UMD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/URL/">URL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web-Components/">Web Components</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/">Webpack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/">XML</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XPath/">XPath</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yeoman/">Yeoman</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/advertising/">advertising</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/best-practices/">best practices</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/browser/">browser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cheatsheet/">cheatsheet</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/">cmd</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/custom-ROM/">custom ROM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dfp/">dfp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doubleclick/">doubleclick</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doubleclick-for-publishers/">doubleclick for publishers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpt/">gpt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/howto/">howto</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lint/">lint</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linter/">linter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linter-eslint/">linter-eslint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modular-css/">modular css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modularity/">modularity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/normalize/">normalize</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/normalizer/">normalizer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/notes/">notes</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/open-source/">open source</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pitfalls/">pitfalls</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/productivity/">productivity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regex/">regex</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rooted/">rooted</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svn/">svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time-management/">time management</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tutorial/">tutorial</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/7-Zip/" style="font-size: 11.25px;">7-Zip</a> <a href="/tags/AMD/" style="font-size: 11.25px;">AMD</a> <a href="/tags/AMP/" style="font-size: 10px;">AMP</a> <a href="/tags/APP2SD/" style="font-size: 11.25px;">APP2SD</a> <a href="/tags/Android/" style="font-size: 13.75px;">Android</a> <a href="/tags/AngularJS/" style="font-size: 10px;">AngularJS</a> <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/BEM/" style="font-size: 10px;">BEM</a> <a href="/tags/Backup/" style="font-size: 11.25px;">Backup</a> <a href="/tags/Batch/" style="font-size: 11.25px;">Batch</a> <a href="/tags/Blogger/" style="font-size: 12.5px;">Blogger</a> <a href="/tags/CSS-modules/" style="font-size: 10px;">CSS-modules</a> <a href="/tags/CommonJS/" style="font-size: 15px;">CommonJS</a> <a href="/tags/DIY/" style="font-size: 13.75px;">DIY</a> <a href="/tags/Design-Pattern/" style="font-size: 12.5px;">Design Pattern</a> <a href="/tags/ESLint/" style="font-size: 10px;">ESLint</a> <a href="/tags/Facebook-Notes/" style="font-size: 10px;">Facebook Notes</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Generator/" style="font-size: 10px;">Generator</a> <a href="/tags/Ginger-yoshi/" style="font-size: 11.25px;">Ginger yoshi</a> <a href="/tags/Gist/" style="font-size: 10px;">Gist</a> <a href="/tags/GitHub/" style="font-size: 16.25px;">GitHub</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/Google-App-Engine/" style="font-size: 10px;">Google App Engine</a> <a href="/tags/Google-Code-Prettify/" style="font-size: 10px;">Google Code Prettify</a> <a href="/tags/Grails/" style="font-size: 10px;">Grails</a> <a href="/tags/Groovy/" style="font-size: 12.5px;">Groovy</a> <a href="/tags/Gulp/" style="font-size: 11.25px;">Gulp</a> <a href="/tags/HTML/" style="font-size: 13.75px;">HTML</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/JAX-RS/" style="font-size: 10px;">JAX-RS</a> <a href="/tags/JDOM/" style="font-size: 12.5px;">JDOM</a> <a href="/tags/JSHint/" style="font-size: 10px;">JSHint</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Jersey/" style="font-size: 10px;">Jersey</a> <a href="/tags/Jetty/" style="font-size: 10px;">Jetty</a> <a href="/tags/Logdown/" style="font-size: 10px;">Logdown</a> <a href="/tags/Markdown/" style="font-size: 11.25px;">Markdown</a> <a href="/tags/Maven/" style="font-size: 16.25px;">Maven</a> <a href="/tags/Medium/" style="font-size: 10px;">Medium</a> <a href="/tags/NPM/" style="font-size: 10px;">NPM</a> <a href="/tags/Namespace/" style="font-size: 11.25px;">Namespace</a> <a href="/tags/Open-Source/" style="font-size: 11.25px;">Open Source</a> <a href="/tags/Pomodoro-Technique/" style="font-size: 10px;">Pomodoro Technique</a> <a href="/tags/Programming/" style="font-size: 10px;">Programming</a> <a href="/tags/Promise/" style="font-size: 11.25px;">Promise</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Regular-Expression/" style="font-size: 15px;">Regular Expression</a> <a href="/tags/RequireJS/" style="font-size: 10px;">RequireJS</a> <a href="/tags/SUIT/" style="font-size: 10px;">SUIT</a> <a href="/tags/SWAP/" style="font-size: 10px;">SWAP</a> <a href="/tags/Shadow-DOM/" style="font-size: 10px;">Shadow DOM</a> <a href="/tags/TagSoup/" style="font-size: 12.5px;">TagSoup</a> <a href="/tags/Time-Management/" style="font-size: 10px;">Time Management</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/UMD/" style="font-size: 11.25px;">UMD</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/Web-Components/" style="font-size: 10px;">Web Components</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Windows/" style="font-size: 11.25px;">Windows</a> <a href="/tags/XML/" style="font-size: 12.5px;">XML</a> <a href="/tags/XPath/" style="font-size: 12.5px;">XPath</a> <a href="/tags/Yeoman/" style="font-size: 12.5px;">Yeoman</a> <a href="/tags/advertising/" style="font-size: 10px;">advertising</a> <a href="/tags/best-practices/" style="font-size: 10px;">best practices</a> <a href="/tags/browser/" style="font-size: 10px;">browser</a> <a href="/tags/cheatsheet/" style="font-size: 11.25px;">cheatsheet</a> <a href="/tags/cmd/" style="font-size: 11.25px;">cmd</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/custom-ROM/" style="font-size: 11.25px;">custom ROM</a> <a href="/tags/dfp/" style="font-size: 10px;">dfp</a> <a href="/tags/doubleclick/" style="font-size: 10px;">doubleclick</a> <a href="/tags/doubleclick-for-publishers/" style="font-size: 10px;">doubleclick for publishers</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/glob/" style="font-size: 10px;">glob</a> <a href="/tags/gpt/" style="font-size: 10px;">gpt</a> <a href="/tags/howto/" style="font-size: 18.75px;">howto</a> <a href="/tags/lint/" style="font-size: 11.25px;">lint</a> <a href="/tags/linter/" style="font-size: 10px;">linter</a> <a href="/tags/linter-eslint/" style="font-size: 10px;">linter-eslint</a> <a href="/tags/modular-css/" style="font-size: 11.25px;">modular css</a> <a href="/tags/modularity/" style="font-size: 10px;">modularity</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/nodejs/" style="font-size: 13.75px;">nodejs</a> <a href="/tags/normalize/" style="font-size: 10px;">normalize</a> <a href="/tags/normalizer/" style="font-size: 10px;">normalizer</a> <a href="/tags/notes/" style="font-size: 11.25px;">notes</a> <a href="/tags/npm/" style="font-size: 13.75px;">npm</a> <a href="/tags/open-source/" style="font-size: 13.75px;">open source</a> <a href="/tags/pitfalls/" style="font-size: 17.5px;">pitfalls</a> <a href="/tags/productivity/" style="font-size: 10px;">productivity</a> <a href="/tags/regex/" style="font-size: 15px;">regex</a> <a href="/tags/rooted/" style="font-size: 11.25px;">rooted</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/time-management/" style="font-size: 10px;">time management</a> <a href="/tags/tutorial/" style="font-size: 11.25px;">tutorial</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">十二月 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">十一月 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">五月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">七月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/06/">六月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/08/11/react-dfp/">埋設 DFP - DoubleClick for Publishers 廣告</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/22/modular-css-notes/">Modular CSS</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/15/angularjs-1.5-best-practices/">AngularJS 1.5 最佳實務</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/07/re-npm-left-pad-have-we-forgotten-how-to-program/">反駁：NPM &amp; left-pad: Have We Forgotten How To Program?</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/09/npm-package-node-or-browser/">如何判斷 npmjs.com 上的套件，是否支援 node 或 browser</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Amobiz Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'amobiz';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<div id="fb-root"></div>
+
+<!-- Facebook SDK -->
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.5&appId=1660468744166033";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- End Facebook SDK -->
+
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/script.js"></script>
+<script src="/js/nav.js"></script>
+
+  </div>
+</body>
+</html>

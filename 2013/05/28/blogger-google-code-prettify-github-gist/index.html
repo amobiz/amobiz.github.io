@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>在 Blogger 上用 Google Code Prettify 及 GitHub Gist 顯示程式碼 (不修改範本的懶人招數) | 格物致知</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="異動說明由於部落格已經改用 GitHub Pages 並搬家到 這裡，現在改用 Markdown 語法撰寫文章，然後使用 Hexo 進行轉換，所以新的部落格已經不再使用這裡提到的技巧。不過，這些技巧對於使用 Google Blogger 的朋友仍然有效。
+
+簡介本文介紹以下五個 Blogger 樣式修改及顯示程式碼的小技巧：
+
+利用「新增小工具」功能，不必修改範本即可改變部落格的 CSS 樣式的方">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在 Blogger 上用 Google Code Prettify 及 GitHub Gist 顯示程式碼 (不修改範本的懶人招數)">
+<meta property="og:url" content="https://amobiz.github.io/2013/05/28/blogger-google-code-prettify-github-gist/index.html">
+<meta property="og:site_name" content="格物致知">
+<meta property="og:description" content="異動說明由於部落格已經改用 GitHub Pages 並搬家到 這裡，現在改用 Markdown 語法撰寫文章，然後使用 Hexo 進行轉換，所以新的部落格已經不再使用這裡提到的技巧。不過，這些技巧對於使用 Google Blogger 的朋友仍然有效。
+
+簡介本文介紹以下五個 Blogger 樣式修改及顯示程式碼的小技巧：
+
+利用「新增小工具」功能，不必修改範本即可改變部落格的 CSS 樣式的方">
+<meta property="og:updated_time" content="2016-06-28T03:07:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在 Blogger 上用 Google Code Prettify 及 GitHub Gist 顯示程式碼 (不修改範本的懶人招數)">
+<meta name="twitter:description" content="異動說明由於部落格已經改用 GitHub Pages 並搬家到 這裡，現在改用 Markdown 語法撰寫文章，然後使用 Hexo 進行轉換，所以新的部落格已經不再使用這裡提到的技巧。不過，這些技巧對於使用 Google Blogger 的朋友仍然有效。
+
+簡介本文介紹以下五個 Blogger 樣式修改及顯示程式碼的小技巧：
+
+利用「新增小工具」功能，不必修改範本即可改變部落格的 CSS 樣式的方">
+  
+    <link rel="alternative" href="/atom.xml" title="格物致知" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-68633744-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">格物致知</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Happiness only real when shared.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://amobiz.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-blogger-google-code-prettify-github-gist" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2013/05/28/blogger-google-code-prettify-github-gist/" class="article-date">
+  <time datetime="2013-05-27T17:16:59.000Z" itemprop="datePublished">2013-05-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Programming/">Programming</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2013/05/28/blogger-google-code-prettify-github-gist/">在 Blogger 上用 Google Code Prettify 及 GitHub Gist 顯示程式碼 (不修改範本的懶人招數)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <!-- Post Contents -->
+        <aside class="cheatsheet"><h5>異動說明</h5><p>由於部落格已經改用 <a href="https://pages.github.com/" target="_blank" rel="external">GitHub Pages</a> 並搬家到 <a href="/">這裡</a>，現在改用 Markdown 語法撰寫文章，然後使用 <a href="https:/hexo.io/" target="_blank" rel="external">Hexo</a> 進行轉換，所以新的部落格已經不再使用這裡提到的技巧。不過，<strong>這些技巧對於使用 <a href="http://www.blogger.com/" target="_blank" rel="external">Google Blogger</a> 的朋友仍然有效</strong>。</p>
+</aside>
+<h3 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h3><p>本文介紹以下五個 <a href="http://www.blogger.com/" target="_blank" rel="external">Blogger</a> 樣式修改及顯示程式碼的小技巧：</p>
+<ul>
+<li><a href="#利用「新增小工具」功能，不必修改範本即可改變部落格的_CSS_樣式的方法">利用「新增小工具」功能，不必修改範本即可改變部落格的 CSS 樣式的方法</a>，</li>
+<li><a href="#利用_Google_Code_Prettify_顯示程式碼的最簡單方法">利用</a> <a href="https://github.com/google/code-prettify/" target="_blank" rel="external">Google Code Prettify</a> <a href="#利用_Google_Code_Prettify_顯示程式碼的最簡單方法">顯示程式碼的最簡單方法</a>，</li>
+<li><a href="#利用前處理工具處理要貼上網頁的程式碼">利用前處理工具處理要貼上網頁的程式碼</a>，</li>
+<li><a href="#美化並強調程式碼區塊">美化並強調程式碼區塊</a>，以及</li>
+<li><a href="#顯示_GitHub_Gist_程式碼，並且套用（比較）一致的顯示風格">顯示</a> <a href="https://github.com/" target="_blank" rel="external">GitHub</a> <a href="https://gist.github.com/" target="_blank" rel="external">Gist</a> <a href="#顯示_GitHub_Gist_程式碼，並且套用（比較）一致的顯示風格">程式碼，並且套用（比較）一致的顯示風格</a>。</li>
+</ul>
+<a id="more"></a>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>昨天突然心血來潮，玩起 Blogger 的範本，想換換不同的外觀、換換不同的心情。</p>
+<p>玩著玩著，發現「新的」動態檢視 (Dynamic Views) 功能蠻有趣的，把玩了一陣子之後，才發現很多功能在動態檢視功能下都無法使用，尤其是不支援 範本理嵌入 JavaScript，所以之前設定好的 <a href="https://github.com/google/code-prettify/" target="_blank" rel="external">Google Code Prettify</a> 程式碼都無法作用。結果，切換回一般範本時，忘記先保留之前的修改，直接套用的結果，竟然就把整個 Google Code Prettify 程式碼都移除了。</p>
+<p>只好再重新查找作法。同時，想到可以利用「新增小工具」的功能，直接插入 HTML/JavaScript 碼，就可以避免直接修改 HTML 範本，免得日後又再次手殘…。</p>
+<h4 id="利用「新增小工具」功能，不必修改範本即可改變部落格的-CSS-樣式的方法"><a href="#利用「新增小工具」功能，不必修改範本即可改變部落格的-CSS-樣式的方法" class="headerlink" title="利用「新增小工具」功能，不必修改範本即可改變部落格的 CSS 樣式的方法"></a>利用「新增小工具」功能，不必修改範本即可改變部落格的 CSS 樣式的方法</h4><p>其實很簡單：</p>
+<ul>
+<li>進入「版面配置」，</li>
+<li>按下「新增小工具」，選擇「HTML/JavaScript」 - 將第三方功能或其他程式碼加入您的網誌，然後</li>
+<li>直接在「內容」區塊裡面輸入任何想要的 script, style 標籤即可。</li>
+</ul>
+<p>後面會看到實際作法。另外，小工具放在哪裡都無所謂。</p>
+<p>雖然這樣做不符合將 <code>style</code>, <code>script</code> 元素放在 <code>head</code> 區塊的慣例，但其實現在網頁設計的趨勢，已經趨向於將 <code>script</code> 元素放在網頁最後面，待頁面整體架構顯示完畢後，才開始處理 script 的邏輯部分。至於 style 的部分，由於 Google Code Prettify 需要更動 <code>pre</code> / <code>code</code> 區塊的結構之後，才能以正確的方式顯示程式碼，因此在 script 尚未處理程式碼之前，css 也無法完全發揮作用。所以…為了避免直接修改 html 範本，就狠心按下去吧!</p>
+<h4 id="利用-Google-Code-Prettify-顯示程式碼的最簡單方法"><a href="#利用-Google-Code-Prettify-顯示程式碼的最簡單方法" class="headerlink" title="利用 Google Code Prettify 顯示程式碼的最簡單方法"></a>利用 Google Code Prettify 顯示程式碼的最簡單方法</h4><p>網路上找到的 Google Code Prettify 中文資訊，似乎還是很久以前剛做設定時同樣的那幾篇文章，做法都還是不免要直接編輯 HTML 範本，並且要修改兩、三個地方。</p>
+<p>這是由於 Google Code Prettify 需要處理以下三個步驟：</p>
+<aside class="cheatsheet"><h5>Google Code Prettify 對程式碼的處理需要三個步驟</h5><ul>
+<li>載入 css 樣式表，設定程式碼顯示的樣式，</li>
+<li>載入 javascript 檔案，這時候頁面很可能還沒顯示完畢，為避免遺漏，所以…</li>
+<li>等待頁面顯示完畢後，再執行 javascript 程式碼，搜尋網頁中的 <code>&lt;pre&gt;</code>, <code>&lt;code&gt;</code>, <code>&lt;xmp&gt;</code> 元素，進行加工處理。</li>
+</ul>
+</aside>
+<p>我直接找到 <a href="https://github.com/google/code-prettify/" target="_blank" rel="external">Google Code Prettify</a> 的官網，在 <a href="https://github.com/google/code-prettify/blob/master/docs/getting_started.md" target="_blank" rel="external">Getting Started</a> 這篇文章，說明了其實可以一個步驟自動載入必要的 CSS 檔案與 JavaScript 檔案，並且能自動在部落格頁面載入完畢後，自動尋找 <code>&lt;pre&gt;</code>, <code>&lt;code&gt;</code>, <code>&lt;xmp&gt;</code> 元素，處理程式碼美化。也就是說，現在啟用 Google Code Prettify 只要一行程式碼即可：</p>
+<aside class="cheatsheet"><h5>啟用 Google Code Prettify 只要一行程式碼</h5><p>如果還沒有新增的話，利用前面介紹的「新增小工具」方法，插入這一行程式碼：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">“<a href="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js" target="_blank" rel="external">https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js</a>“</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</aside>
+<p>其實 Google Code Prettify 還有許多功能，譬如可以利用 <code>skin</code> 參數選擇外觀，利用 <code>lang</code> 參數以程式語言的副檔名指定語言：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">“<a href="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst&amp;lang=js" target="_blank" rel="external">https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?skin=sunburst&amp;lang=js</a>“</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>目前官方支援的外觀可以在 <a href="http://google-code-prettify.googlecode.com/svn/trunk/styles/index.html" title="Gallery of themes for code prettify" target="_blank" rel="external">skin gallery</a> 查找，指定參數時，指定 skin gallery 列表中的標題名稱即可。或者，也可以自己設計 css 檔案，自行修改外觀。</p>
+<p>由於在 <code>script</code> 標籤中指定語言會套用到所有的網頁，因此 Google Code Prettify 也支援利用 <code>class</code> 屬性 <code>lang-*</code> 的方式，指明程式語言：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">pre</span> <span class="attr">class</span>=<span class="string">“prettyprint lang-scm”</span>&gt;</span>(friends ‘of ‘(parentheses))<span class="tag">&lt;/<span class="name">pre</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>或者，採用 HTML5 標準，在 <code>code</code> 標籤以 <code>language-*</code> 的 <code>class</code> 屬性，指明程式語言：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">pre</span> <span class="attr">class</span>=<span class="string">“prettyprint”</span>&gt;</span><span class="tag">&lt;<span class="name">code</span> <span class="attr">class</span>=<span class="string">“language-java”</span>&gt;</span>…<span class="tag">&lt;/<span class="name">code</span>&gt;</span><span class="tag">&lt;/<span class="name">pre</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>要顯示行號的話，要在 <code>class</code> 上加上 <code>linenums</code>：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">pre</span> <span class="attr">class</span>=<span class="string">“prettyprint linenums”</span>&gt;</span><span class="tag">&lt;<span class="name">code</span>&gt;</span>…<span class="tag">&lt;/<span class="name">code</span>&gt;</span><span class="tag">&lt;/<span class="name">pre</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果貼上的程式碼不是從頭開始，還可以指定開始的行號：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">pre</span> <span class="attr">class</span>=<span class="string">“prettyprint linenums:40”</span>&gt;</span><span class="tag">&lt;<span class="name">code</span>&gt;</span>…<span class="tag">&lt;/<span class="name">code</span>&gt;</span><span class="tag">&lt;/<span class="name">pre</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="利用前處理工具處理要貼上網頁的程式碼"><a href="#利用前處理工具處理要貼上網頁的程式碼" class="headerlink" title="利用前處理工具處理要貼上網頁的程式碼"></a>利用前處理工具處理要貼上網頁的程式碼</h4><p>程式碼要貼在 html 檔案前，要先進行處理，轉換與 html 標籤有關的文字，否則會導致 html 網頁結構錯亂。</p>
+<aside class="cheatsheet"><h5>使用工具處理程式碼中的 HTML 特殊字元</h5><p>我目前使用這個工具：[Javascript Tools]。開啟該網站後：</p>
+<ul>
+<li>先選擇 <strong>JS Encode,Decode</strong>，</li>
+<li>貼上程式碼之後，按下 <strong>Encode</strong> 按鈕，</li>
+<li>然後複製 <strong>HTML special chars</strong> 的文字內容，就可以貼到 html 檔案的 code 區塊上了。</li>
+</ul>
+</aside>
+<h4 id="美化並強調程式碼區塊"><a href="#美化並強調程式碼區塊" class="headerlink" title="美化並強調程式碼區塊"></a>美化並強調程式碼區塊</h4><p>我還蠻喜歡程式碼區塊前面加上 code 標籤，凸顯程式碼區塊的做法，就如同現在各位所看到的樣子。這部分直接借用網友的做法；不過，還是放在 HTML/JavaScript 小工具中：</p>
+<aside class="cheatsheet"><h5>為程式碼區塊加上 [code] 圖樣</h5><p>如果還沒有新增的話，利用前面介紹的「新增小工具」方法，插入這些程式碼：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span><br><span class="line"><span class="selector-tag">pre</span><span class="selector-class">.code</span> &#123;</span><br><span class="line"><span class="attribute">display</span>: block;</span><br><span class="line"><span class="attribute">overflow</span>: auto;</span><br><span class="line"><span class="attribute">min-height</span>: <span class="number">30px</span>;</span><br><span class="line"><span class="attribute">max-height</span>:<span class="number">800px</span>;</span><br><span class="line"><span class="attribute">padding</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">11px</span>;</span><br><span class="line"><span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#ccc</span>;</span><br><span class="line"><span class="attribute">background</span>: <span class="number">#f8f8ff</span> <span class="built_in">url</span>(<span class="string">“data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAASwCAYAAAAt7rCDAAAABHNCSVQICAgIfAhkiAAAAQJJREFUeJzt0kEKhDAMBdA4zFmbM+W0upqFOhXrDILwsimFR5pfMrXW5jhZr7PwRlxVX8//jNHrGhExjXzdu9c5IiIz+7iqVmB7Hwp4OMa2nhhwN/PRGEMBh3Zjt6KfpzPztxW9MSAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzB8HS+J9kUTvzEDMwAAAABJRU5ErkJggg==”</span>) left top repeat-y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">code</span><span class="selector-class">.prettyprint</span> &#123;</span><br><span class="line"><span class="attribute">line-height</span>: <span class="number">1.2em</span>;</span><br><span class="line"><span class="attribute">margin</span>: <span class="number">1px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">“<a href="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js" target="_blank" rel="external">https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js</a>“</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>要注意這裡設定了 <code>max-height: 800px;</code> 限制程式碼區塊的最大長度，這裡的值可以依照個人喜好需求調整。</p>
+</aside>
+<p>另外，改成這樣之後，<code>pre</code> 標籤負責顯示 <code>[code]</code> 這個圖形標籤，而 <code>code</code> 標籤則負責程式碼美化，所以要貼上程式碼時，要這樣寫：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">pre</span> <span class="attr">class</span>=<span class="string">“code”</span>&gt;</span><span class="tag">&lt;<span class="name">code</span> <span class="attr">class</span>=<span class="string">“prettyprint linenums”</span>&gt;</span>…<span class="tag">&lt;/<span class="name">code</span>&gt;</span><span class="tag">&lt;/<span class="name">pre</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="顯示-GitHub-Gist-程式碼，並且套用（比較）一致的顯示風格"><a href="#顯示-GitHub-Gist-程式碼，並且套用（比較）一致的顯示風格" class="headerlink" title="顯示 GitHub Gist 程式碼，並且套用（比較）一致的顯示風格"></a>顯示 GitHub Gist 程式碼，並且套用（比較）一致的顯示風格</h4><p>GitHub 是現在很熱門的程式碼管理工具，它甚至也提供了純粹用來分享程式碼片段的功能: <a href="https://gist.github.com/" target="_blank" rel="external">Gist</a>。甚至不需要註冊，就可以使用，也支援版本管理。當然，它也提供了在網頁上顯示程式碼的功能，只要複製要 <a href="https://gist.github.com/amobiz/d0be531a7c109c785845" target="_blank" rel="external">分享的程式碼片段的頁面</a> 左邊的 <strong>Embed this gist</strong> 內容，貼到 html 上即可。</p>
+<p>貼上的 html 程式碼，長得像這個樣子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">“<a href="https://gist.github.com/amobiz/c1d9f88c5a159cd040a5.js" target="_blank" rel="external">https://gist.github.com/amobiz/c1d9f88c5a159cd040a5.js</a>“</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>實際在網頁中顯示的樣子，可以參考後面的例子，或是可以參考這篇文章：<a href="http://andmobiz.blogspot.tw/2012/07/differential-backup-using-7-zip-windows.html" title="直接連結到 blogger 以顯示正確的效果" target="_blank" rel="external">Differential backup using 7-Zip for Windows (Part 1) - 利用 7-Zip 進行差異備份（上篇）</a>。</p>
+<p>要挑剔的話，應該說可惜 Gist 不提供目錄和標籤功能，且一定要有檔名，如果我們不提供，系統將自動產生如 <code>gistfile1.js</code> 這樣的檔名。當分享的程式碼片段變多了，就不是很好管理。我的策略是使用文章的名稱當作前綴，這樣至少還能透過排序找出相關檔案。另外就是，我似乎找不到分享一般 GitHub 專案檔案，在網頁上直接嵌入的方法。如果有朋友知道該怎麼做的話，懇請指導一下。</p>
+<p>我在 <a href="https://gist.github.com/amobiz" target="_blank" rel="external">amobiz’s gists</a> 上面分享部落格中的程式碼，歡迎大家利用。</p>
+<p>最後，就是要讓 Gist 的顯示，與我前面的設定盡量一致，所以還要修改之前的 style 標籤內容:</p>
+<!-- blogger-google-code-prettify-github-gist-style.html -->
+<!-- gist inno-v/5658792 -->
+<aside class="cheatsheet"><h5>為 Gist 程式碼區塊加上 [code] 圖樣</h5><p>如果還沒有新增的話，利用前面介紹的「新增小工具」方法，插入這些程式碼，完整取代之前的 HTML/JavaScript 小工具的內容：</p>
+<script src="//gist.github.com/amobiz/c1d9f88c5a159cd040a5.js"></script></aside>
+<aside class="cheatsheet hidden"><h5>完整程式碼</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span><br><span class="line"><span class="selector-class">.cheatsheet</span> &#123;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">8px</span> <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">8px</span>;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#ccc</span>;</span><br><span class="line">  <span class="attribute">-webkit-border-radius</span>: <span class="number">3px</span>;</span><br><span class="line">  <span class="attribute">-moz-border-radius</span>: <span class="number">3px</span>;</span><br><span class="line">  <span class="attribute">-ms-border-radius</span>: <span class="number">3px</span>;</span><br><span class="line">  <span class="attribute">-o-border-radius</span>: <span class="number">3px</span>;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">3px</span>;</span><br><span class="line">  <span class="attribute">-moz-box-shadow</span>: <span class="number">0</span> <span class="number">1px</span> <span class="number">4px</span> <span class="number">0</span> <span class="built_in">rgba</span>(0,0,0,0.44);</span><br><span class="line">  <span class="attribute">-ms-box-shadow</span>: <span class="number">0</span> <span class="number">1px</span> <span class="number">4px</span> <span class="number">0</span> <span class="built_in">rgba</span>(0,0,0,0.44);</span><br><span class="line">  <span class="attribute">-o-box-shadow</span>: <span class="number">0</span> <span class="number">1px</span> <span class="number">4px</span> <span class="number">0</span> <span class="built_in">rgba</span>(0,0,0,0.44);</span><br><span class="line">  <span class="attribute">-webkit-box-shadow</span>: <span class="number">0</span> <span class="number">1px</span> <span class="number">4px</span> <span class="number">0</span> <span class="built_in">rgba</span>(0,0,0,0.44);</span><br><span class="line">  <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">1px</span> <span class="number">4px</span> <span class="number">0</span> <span class="built_in">rgba</span>(0,0,0,0.44);</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.hentry</span> <span class="selector-class">.gist</span> <span class="selector-class">.gist-file</span> &#123;</span><br><span class="line">  <span class="attribute">margin-bottom</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">border</span>: none;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.gist</span>, <span class="selector-tag">pre</span><span class="selector-class">.code</span> &#123;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">  <span class="attribute">overflow</span>: auto;</span><br><span class="line">  <span class="attribute">min-height</span>: <span class="number">30px</span>;</span><br><span class="line">  <span class="attribute">max-height</span>:<span class="number">800px</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">11px</span>;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#ccc</span>;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#f8f8ff</span> <span class="built_in">url</span>(<span class="string">“data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAASwCAYAAAAt7rCDAAAABHNCSVQICAgIfAhkiAAAAQJJREFUeJzt0kEKhDAMBdA4zFmbM+W0upqFOhXrDILwsimFR5pfMrXW5jhZr7PwRlxVX8//jNHrGhExjXzdu9c5IiIz+7iqVmB7Hwp4OMa2nhhwN/PRGEMBh3Zjt6KfpzPztxW9MSAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzAMwzB8HS+J9kUTvzEDMwAAAABJRU5ErkJggg==”</span>) left top repeat-y;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">code</span><span class="selector-class">.prettyprint</span> &#123;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">1.2em</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">1px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">“//google-code-prettify.googlecode.com/svn/loader/run_prettify.js”</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</aside>
+<h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><p>終於把處理顯示程式碼的方法，完整地整理在一起了，日後又癡呆的時候，就可以回頭參考了。</p>
+<p>歡迎大家的回饋與心得分享。</p>
+<h3 id="參考資料："><a href="#參考資料：" class="headerlink" title="參考資料："></a>參考資料：</h3><ul>
+<li><a href="http://werdna1222coldcodes.blogspot.tw/2012/02/blog-post.html" title="在網頁中嵌入顯示程式碼：全系列效果比較及教學整理" target="_blank" rel="external">在網頁中嵌入顯示程式碼：全系列效果比較及教學整理</a></li>
+<li><a href="http://fly2sky999.blogspot.tw/2012/03/blogger-css-block-google-code-prettify.html" title="在 Blogger 文章中利用 CSS Block 及 Google Code Prettify 顯示程式碼" target="_blank" rel="external">在 Blogger 文章中利用 CSS Block 及 Google Code Prettify 顯示程式碼</a></li>
+<li><a href="http://blog.cookys.net/2012/10/blogger-google-code-prettify.html" title="在 Blogger 上用 Google Code Prettify 顯示程式碼" target="_blank" rel="external">在 Blogger 上用 Google Code Prettify 顯示程式碼</a></li>
+<li><a href="https://github.com/google/code-prettify/" target="_blank" rel="external">Google Code Prettify</a></li>
+<li><a href="https://github.com/google/code-prettify/blob/master/docs/getting_started.md" target="_blank" rel="external">Getting Started</a></li>
+<li><a href="http://google-code-prettify.googlecode.com/svn/trunk/styles/index.html" title="Gallery of themes for code prettify" target="_blank" rel="external">Gallery of themes for code prettify</a></li>
+<li><a href="http://google-code-prettify.googlecode.com/svn/trunk/README.html" target="_blank" rel="external">Javascript code prettifier</a></li>
+<li><a href="http://blog.moski.me/2012/01/gist-with-bloggers-dynamic-views.html" title="Gist with Blogger&#39;s Dynamic Views" target="_blank" rel="external">Gist with Blogger’s “Dynamic Views”</a></li>
+<li><a href="http://iblogbox.com/devtools/js/" target="_blank" rel="external">Javascript Tools</a></li>
+</ul>
+<!-- cross references -->
+<!-- external references -->
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amobiz.github.io/2013/05/28/blogger-google-code-prettify-github-gist/" data-id="cj4y0ufr9005nk0560smvwgvu" class="article-share-link">Share</a>
+      
+        <a href="https://amobiz.github.io/2013/05/28/blogger-google-code-prettify-github-gist/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Blogger/">Blogger</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gist/">Gist</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GitHub/">GitHub</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Google-Code-Prettify/">Google Code Prettify</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/howto/">howto</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2013/11/11/pomodoro-technique/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          『Pomodoro Technique - 蕃茄時鐘工作法』 原理與實踐
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2012/07/22/differential-backup-using-7-zip-part2-secrets-of-batch-files/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Differential backup using 7-Zip for Windows (Part 2) - Secrets of batch files - 利用 7-Zip 進行差異備份（下篇） - 批次檔案的秘密</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  
+    <ul class="nav"></ul>
+  
+  
+    <section class="comments" title="Disqus">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </section>
+  
+  
+    <section class="comments" title="Facebook">
+      <div class="fb-comments" data-href="https://amobiz.github.io/2013/05/28/blogger-google-code-prettify-github-gist/" data-width="100%" data-numposts="5"></div>
+    </section>
+  
+</section>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hack/">Hack</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Productivity/">Productivity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">36</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Software/">Software</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Design/">Web Design</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/7-Zip/">7-Zip</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMD/">AMD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMP/">AMP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/APP2SD/">APP2SD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/">AngularJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/">Atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BEM/">BEM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backup/">Backup</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Batch/">Batch</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blogger/">Blogger</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS-modules/">CSS-modules</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CommonJS/">CommonJS</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DIY/">DIY</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Pattern/">Design Pattern</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ESLint/">ESLint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Facebook-Notes/">Facebook Notes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GTD/">GTD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Generator/">Generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ginger-yoshi/">Ginger yoshi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gist/">Gist</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/">GitHub</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google/">Google</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-App-Engine/">Google App Engine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-Code-Prettify/">Google Code Prettify</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grails/">Grails</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Groovy/">Groovy</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/">Gulp</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAX-RS/">JAX-RS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDOM/">JDOM</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSHint/">JSHint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/">JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jersey/">Jersey</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/">Jetty</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logdown/">Logdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/">Maven</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Medium/">Medium</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NPM/">NPM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Namespace/">Namespace</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Open-Source/">Open Source</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pomodoro-Technique/">Pomodoro Technique</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming/">Programming</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Promise/">Promise</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regular-Expression/">Regular Expression</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RequireJS/">RequireJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SUIT/">SUIT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SWAP/">SWAP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadow-DOM/">Shadow DOM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TagSoup/">TagSoup</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Time-Management/">Time Management</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UMD/">UMD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/URL/">URL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web-Components/">Web Components</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/">Webpack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/">XML</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XPath/">XPath</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yeoman/">Yeoman</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/advertising/">advertising</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/best-practices/">best practices</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/browser/">browser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cheatsheet/">cheatsheet</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/">cmd</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/custom-ROM/">custom ROM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dfp/">dfp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doubleclick/">doubleclick</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doubleclick-for-publishers/">doubleclick for publishers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpt/">gpt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/howto/">howto</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lint/">lint</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linter/">linter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linter-eslint/">linter-eslint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modular-css/">modular css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modularity/">modularity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/normalize/">normalize</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/normalizer/">normalizer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/notes/">notes</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/open-source/">open source</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pitfalls/">pitfalls</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/productivity/">productivity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regex/">regex</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rooted/">rooted</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svn/">svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time-management/">time management</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tutorial/">tutorial</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/7-Zip/" style="font-size: 11.25px;">7-Zip</a> <a href="/tags/AMD/" style="font-size: 11.25px;">AMD</a> <a href="/tags/AMP/" style="font-size: 10px;">AMP</a> <a href="/tags/APP2SD/" style="font-size: 11.25px;">APP2SD</a> <a href="/tags/Android/" style="font-size: 13.75px;">Android</a> <a href="/tags/AngularJS/" style="font-size: 10px;">AngularJS</a> <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/BEM/" style="font-size: 10px;">BEM</a> <a href="/tags/Backup/" style="font-size: 11.25px;">Backup</a> <a href="/tags/Batch/" style="font-size: 11.25px;">Batch</a> <a href="/tags/Blogger/" style="font-size: 12.5px;">Blogger</a> <a href="/tags/CSS-modules/" style="font-size: 10px;">CSS-modules</a> <a href="/tags/CommonJS/" style="font-size: 15px;">CommonJS</a> <a href="/tags/DIY/" style="font-size: 13.75px;">DIY</a> <a href="/tags/Design-Pattern/" style="font-size: 12.5px;">Design Pattern</a> <a href="/tags/ESLint/" style="font-size: 10px;">ESLint</a> <a href="/tags/Facebook-Notes/" style="font-size: 10px;">Facebook Notes</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Generator/" style="font-size: 10px;">Generator</a> <a href="/tags/Ginger-yoshi/" style="font-size: 11.25px;">Ginger yoshi</a> <a href="/tags/Gist/" style="font-size: 10px;">Gist</a> <a href="/tags/GitHub/" style="font-size: 16.25px;">GitHub</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/Google-App-Engine/" style="font-size: 10px;">Google App Engine</a> <a href="/tags/Google-Code-Prettify/" style="font-size: 10px;">Google Code Prettify</a> <a href="/tags/Grails/" style="font-size: 10px;">Grails</a> <a href="/tags/Groovy/" style="font-size: 12.5px;">Groovy</a> <a href="/tags/Gulp/" style="font-size: 11.25px;">Gulp</a> <a href="/tags/HTML/" style="font-size: 13.75px;">HTML</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/JAX-RS/" style="font-size: 10px;">JAX-RS</a> <a href="/tags/JDOM/" style="font-size: 12.5px;">JDOM</a> <a href="/tags/JSHint/" style="font-size: 10px;">JSHint</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Jersey/" style="font-size: 10px;">Jersey</a> <a href="/tags/Jetty/" style="font-size: 10px;">Jetty</a> <a href="/tags/Logdown/" style="font-size: 10px;">Logdown</a> <a href="/tags/Markdown/" style="font-size: 11.25px;">Markdown</a> <a href="/tags/Maven/" style="font-size: 16.25px;">Maven</a> <a href="/tags/Medium/" style="font-size: 10px;">Medium</a> <a href="/tags/NPM/" style="font-size: 10px;">NPM</a> <a href="/tags/Namespace/" style="font-size: 11.25px;">Namespace</a> <a href="/tags/Open-Source/" style="font-size: 11.25px;">Open Source</a> <a href="/tags/Pomodoro-Technique/" style="font-size: 10px;">Pomodoro Technique</a> <a href="/tags/Programming/" style="font-size: 10px;">Programming</a> <a href="/tags/Promise/" style="font-size: 11.25px;">Promise</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Regular-Expression/" style="font-size: 15px;">Regular Expression</a> <a href="/tags/RequireJS/" style="font-size: 10px;">RequireJS</a> <a href="/tags/SUIT/" style="font-size: 10px;">SUIT</a> <a href="/tags/SWAP/" style="font-size: 10px;">SWAP</a> <a href="/tags/Shadow-DOM/" style="font-size: 10px;">Shadow DOM</a> <a href="/tags/TagSoup/" style="font-size: 12.5px;">TagSoup</a> <a href="/tags/Time-Management/" style="font-size: 10px;">Time Management</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/UMD/" style="font-size: 11.25px;">UMD</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/Web-Components/" style="font-size: 10px;">Web Components</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Windows/" style="font-size: 11.25px;">Windows</a> <a href="/tags/XML/" style="font-size: 12.5px;">XML</a> <a href="/tags/XPath/" style="font-size: 12.5px;">XPath</a> <a href="/tags/Yeoman/" style="font-size: 12.5px;">Yeoman</a> <a href="/tags/advertising/" style="font-size: 10px;">advertising</a> <a href="/tags/best-practices/" style="font-size: 10px;">best practices</a> <a href="/tags/browser/" style="font-size: 10px;">browser</a> <a href="/tags/cheatsheet/" style="font-size: 11.25px;">cheatsheet</a> <a href="/tags/cmd/" style="font-size: 11.25px;">cmd</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/custom-ROM/" style="font-size: 11.25px;">custom ROM</a> <a href="/tags/dfp/" style="font-size: 10px;">dfp</a> <a href="/tags/doubleclick/" style="font-size: 10px;">doubleclick</a> <a href="/tags/doubleclick-for-publishers/" style="font-size: 10px;">doubleclick for publishers</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/glob/" style="font-size: 10px;">glob</a> <a href="/tags/gpt/" style="font-size: 10px;">gpt</a> <a href="/tags/howto/" style="font-size: 18.75px;">howto</a> <a href="/tags/lint/" style="font-size: 11.25px;">lint</a> <a href="/tags/linter/" style="font-size: 10px;">linter</a> <a href="/tags/linter-eslint/" style="font-size: 10px;">linter-eslint</a> <a href="/tags/modular-css/" style="font-size: 11.25px;">modular css</a> <a href="/tags/modularity/" style="font-size: 10px;">modularity</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/nodejs/" style="font-size: 13.75px;">nodejs</a> <a href="/tags/normalize/" style="font-size: 10px;">normalize</a> <a href="/tags/normalizer/" style="font-size: 10px;">normalizer</a> <a href="/tags/notes/" style="font-size: 11.25px;">notes</a> <a href="/tags/npm/" style="font-size: 13.75px;">npm</a> <a href="/tags/open-source/" style="font-size: 13.75px;">open source</a> <a href="/tags/pitfalls/" style="font-size: 17.5px;">pitfalls</a> <a href="/tags/productivity/" style="font-size: 10px;">productivity</a> <a href="/tags/regex/" style="font-size: 15px;">regex</a> <a href="/tags/rooted/" style="font-size: 11.25px;">rooted</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/time-management/" style="font-size: 10px;">time management</a> <a href="/tags/tutorial/" style="font-size: 11.25px;">tutorial</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">十二月 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">十一月 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">五月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">七月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/06/">六月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/08/11/react-dfp/">埋設 DFP - DoubleClick for Publishers 廣告</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/22/modular-css-notes/">Modular CSS</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/15/angularjs-1.5-best-practices/">AngularJS 1.5 最佳實務</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/07/re-npm-left-pad-have-we-forgotten-how-to-program/">反駁：NPM &amp; left-pad: Have We Forgotten How To Program?</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/09/npm-package-node-or-browser/">如何判斷 npmjs.com 上的套件，是否支援 node 或 browser</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Amobiz Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'amobiz';
+  
+  var disqus_url = 'https://amobiz.github.io/2013/05/28/blogger-google-code-prettify-github-gist/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<div id="fb-root"></div>
+
+<!-- Facebook SDK -->
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.5&appId=1660468744166033";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- End Facebook SDK -->
+
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/script.js"></script>
+<script src="/js/nav.js"></script>
+
+  </div>
+</body>
+</html>

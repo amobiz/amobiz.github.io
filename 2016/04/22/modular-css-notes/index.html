@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Modular CSS | 格物致知</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="意象說明模組化 &amp;lt; 封裝 &amp;lt; 與世隔絕 &amp;lt; 受困於小船絕佳搭配 &amp;lt; 天作之合 &amp;lt; 俊男美女
+Sweet Ice Cream Photography
+前言這篇文章記錄個人嘗試 CSS-modules 過程中所遇到的問題，並且順便將目前業界各種對 modular css 的嘗試/進展，做一個相關資訊的摘錄。
+還沒有找到適合自己偏好作法的讀者，可以將此文視為簡單的技術選型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Modular CSS">
+<meta property="og:url" content="https://amobiz.github.io/2016/04/22/modular-css-notes/index.html">
+<meta property="og:site_name" content="格物致知">
+<meta property="og:description" content="意象說明模組化 &amp;lt; 封裝 &amp;lt; 與世隔絕 &amp;lt; 受困於小船絕佳搭配 &amp;lt; 天作之合 &amp;lt; 俊男美女
+Sweet Ice Cream Photography
+前言這篇文章記錄個人嘗試 CSS-modules 過程中所遇到的問題，並且順便將目前業界各種對 modular css 的嘗試/進展，做一個相關資訊的摘錄。
+還沒有找到適合自己偏好作法的讀者，可以將此文視為簡單的技術選型">
+<meta property="og:image" content="https://images.unsplash.com/photo-1460750860062-82a52139a0d6?crop=entropy&fit=crop&fm=jpg&h=975&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1000">
+<meta property="og:updated_time" content="2016-06-28T03:07:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Modular CSS">
+<meta name="twitter:description" content="意象說明模組化 &amp;lt; 封裝 &amp;lt; 與世隔絕 &amp;lt; 受困於小船絕佳搭配 &amp;lt; 天作之合 &amp;lt; 俊男美女
+Sweet Ice Cream Photography
+前言這篇文章記錄個人嘗試 CSS-modules 過程中所遇到的問題，並且順便將目前業界各種對 modular css 的嘗試/進展，做一個相關資訊的摘錄。
+還沒有找到適合自己偏好作法的讀者，可以將此文視為簡單的技術選型">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1460750860062-82a52139a0d6?crop=entropy&fit=crop&fm=jpg&h=975&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1000">
+  
+    <link rel="alternative" href="/atom.xml" title="格物致知" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-68633744-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">格物致知</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Happiness only real when shared.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://amobiz.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-modular-css-notes" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/22/modular-css-notes/" class="article-date">
+  <time datetime="2016-04-22T14:42:00.000Z" itemprop="datePublished">2016-04-22</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Programming/">Programming</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/22/modular-css-notes/">Modular CSS</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+          <div id="toc" class="toc-article">
+            <strong class="toc-title">文章目錄</strong>
+            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#模組化的-CSS"><span class="toc-number">2.</span> <span class="toc-text">模組化的 CSS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS-in-JS-Inline-Styles"><span class="toc-number">2.1.</span> <span class="toc-text">CSS-in-JS (Inline Styles)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Naming-Conventions"><span class="toc-number">2.2.</span> <span class="toc-text">Naming Conventions</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS-modules"><span class="toc-number">2.3.</span> <span class="toc-text">CSS-modules</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web-Components-Shadow-DOM"><span class="toc-number">2.4.</span> <span class="toc-text">Web Components / Shadow DOM</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Houdini"><span class="toc-number">2.5.</span> <span class="toc-text">Houdini</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#結論"><span class="toc-number">3.</span> <span class="toc-text">結論</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#參考資料"><span class="toc-number">4.</span> <span class="toc-text">參考資料</span></a></li></ol>
+          </div>
+        
+        <!-- Post Contents -->
+        <div class="Credit"><p><img src="https://images.unsplash.com/photo-1460750860062-82a52139a0d6?crop=entropy&amp;fit=crop&amp;fm=jpg&amp;h=975&amp;ixjsv=2.1.0&amp;ixlib=rb-0.3.5&amp;q=80&amp;w=1000" alt=""></p>
+<div class="Credit-backdrop"><div class="Credit-info"><div class="Credit-desc"><p>意象說明<br><br>模組化 &lt; 封裝 &lt; 與世隔絕 &lt; 受困於小船<br>絕佳搭配 &lt; 天作之合 &lt; 俊男美女</p>
+</div><div><a class="Credit-link" target="_blank" href="https://unsplash.com/sweeticecreamphotography">Sweet Ice Cream Photography</a></div></div></div></div>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>這篇文章記錄個人嘗試 CSS-modules 過程中所遇到的問題，並且順便將目前業界各種對 modular css 的嘗試/進展，做一個相關資訊的摘錄。</p>
+<p>還沒有找到適合自己偏好作法的讀者，可以將此文視為簡單的<a href="http://www.gegugu.com/2016/01/11/20196.html" target="_blank" rel="external">技術選型</a>指南，從中挑選適合自己的作法。</p>
+<a id="more"></a>
+<h2 id="模組化的-CSS"><a href="#模組化的-CSS" class="headerlink" title="模組化的 CSS"></a>模組化的 CSS</h2><p>學過網頁設計的人都知道，CSS 作用的對象，是整個 html 文件。這在過去網頁都是靜態文件為主的年代，完全是合情合理的設計，不過到現代大量 Web App 為主的 SPA 時代，這樣的特性，反而造成 Web App 開發的困擾。而 CSS 規格的發展，又遠遠落後於 JavaScript / HTML5 的發展，因此，出現了各種不同的模組化嘗試。</p>
+<h3 id="CSS-in-JS-Inline-Styles"><a href="#CSS-in-JS-Inline-Styles" class="headerlink" title="CSS-in-JS (Inline Styles)"></a>CSS-in-JS (Inline Styles)</h3><p>在這一兩年引起廣泛注目的 ReactJS，其引入的 JSX 語法，倡導在 JavaScript 中撰寫 html markup。更早，甚至於在發表 ReactJS 之前，其團隊就有人介紹 CSS-in-JS 的構想 (YouTube 影片找到後補上)：以 JavaScript 撰寫 CSS，從而避開 global scope 的問題。</p>
+<p>原理就是使用 JSON 語法取代 css rule，然後使用程式轉換為 css inline style，再設定給元件。譬如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">head.style.cssText = <span class="string">‘width:200px;height:70px;display:bolck’</span>;</span><br></pre></td></tr></table></figure>
+
+<p>現在最受歡迎的 <a href="https://github.com/FormidableLabs/radium" target="_blank" rel="external">radium</a>，引用其 readme 介紹，用法像這樣：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Radium = <span class="built_in">require</span>(<span class="string">‘radium’</span>);</span><br><span class="line"><span class="keyword">var</span> React = <span class="built_in">require</span>(<span class="string">‘react’</span>);</span><br><span class="line"><span class="keyword">var</span> color = <span class="built_in">require</span>(<span class="string">‘color’</span>);</span><br><span class="line"></span><br><span class="line">@Radium</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Button</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> propTypes = &#123;</span><br><span class="line">    <span class="attr">kind</span>: React.PropTypes.oneOf([<span class="string">‘primary’</span>, <span class="string">‘warning’</span>]).isRequired</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="comment">// Radium extends the style attribute to accept an array. It will merge</span></span><br><span class="line">    <span class="comment">// the styles in order. We use this feature here to apply the primary</span></span><br><span class="line">    <span class="comment">// or warning styles depending on the value of the kind prop. Since its</span></span><br><span class="line">    <span class="comment">// all just JavaScript, you can use whatever logic you want to decide which</span></span><br><span class="line">    <span class="comment">// styles are applied (props, state, context, etc).</span></span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="xml"><span class="tag">&lt;<span class="name">button</span></span><br><span class="line">        <span class="attr">style</span>=<span class="string">&#123;[</span></span><br><span class="line">          <span class="attr">styles.base</span>,</span><br><span class="line">          <span class="attr">styles</span>[<span class="attr">this.props.kind</span>]</span><br><span class="line">        ]&#125;&gt;</span></span><br><span class="line">        &#123;this.props.children&#125;</span><br><span class="line">      <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// You can create your style objects dynamically or share them for</span></span><br><span class="line"><span class="comment">// every instance of the component.</span></span><br><span class="line"><span class="keyword">var</span> styles = &#123;</span><br><span class="line">  <span class="attr">base</span>: &#123;</span><br><span class="line">    <span class="attr">color</span>: <span class="string">‘#fff’</span>,</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Adding interactive state couldn’t be easier! Add a special key to your</span></span><br><span class="line">    <span class="comment">// style object (:hover, :focus, :active, or @media) with the additional rules.</span></span><br><span class="line">    <span class="string">‘:hover’</span>: &#123;</span><br><span class="line">      <span class="attr">background</span>: color(<span class="string">‘#0074d9’</span>).lighten(<span class="number">0.2</span>).hexString()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="attr">primary</span>: &#123;</span><br><span class="line">    <span class="attr">background</span>: <span class="string">‘#0074D9’</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="attr">warning</span>: &#123;</span><br><span class="line">    <span class="attr">background</span>: <span class="string">‘#FF4136’</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>雖然解決了 global scope 問題，但似乎引入了更多問題：</p>
+<ol>
+<li><p>難以搭配使用前處理器，</p>
+<p> 這應該是致命問題，至少，autoprefixer 應該已經是標準配備了吧。</p>
+</li>
+<li><p>難以調整、除錯。</p>
+<p> 由於 inline style 只對單一元件有效，在 Chrome DevTools 中，一次也只能改一個元件，不像平常只要修改 rule，馬上就可以套用到所有的對應元件上。</p>
+</li>
+</ol>
+<h3 id="Naming-Conventions"><a href="#Naming-Conventions" class="headerlink" title="Naming Conventions"></a>Naming Conventions</h3><p>使用人為的命名規範方式，來區別模組名稱。</p>
+<p>這方面的嘗試堪稱代表的有：<a href="http://oocss.org/" target="_blank" rel="external">OOCSS</a>, <a href="https://smacss.com/" target="_blank" rel="external">SMACSS</a>, <a href="https://en.bem.info/" target="_blank" rel="external">BEM</a>, <a href="https://suitcss.github.io/" target="_blank" rel="external">SUIT</a>，其中又以 BEM 及 SUIT 最受到歡迎。許多人認為 SUIT 是 BEM 的改良，而其語法除了 camelCase 較不討喜之外，相對於 BEM 使用 <code>__</code> 及 <code>--</code> 來區別層級，SUIT 的語法更容易理解。</p>
+<p>採用命名規範來處理 css 的模組化問題，最重要的守則，就是：</p>
+<aside class="cheatsheet"><p>Blocks should only be used inside a component of the same name.</p>
+<p>『最上層區塊的命名必須與元件同名，並且其下的子元素，只能用在元件內部。』</p>
+<p>—– <a href="https://medium.com/seek-ui-engineering/block-element-modifying-your-javascript-components-d7f99fcab52b#.lc19hxlo7" target="_blank" rel="external">Block, Element, Modifying Your JavaScript Components</a></p>
+</aside>
+<p>採用這些方案的好處是，由於是 100% 原生的 CSS 語法，因此有以下優點:</p>
+<ol>
+<li>不須要任何前處理器工具，導入、除錯最容易，</li>
+<li>可以輕易與既有的前處理器工具搭配，</li>
+<li>可以避免使用巢狀的選擇器，提昇效能，並且避免結構依賴問題。</li>
+</ol>
+<p>上面第二項，譬如可以使用 <a href="https://github.com/postcss/postcss" target="_blank" rel="external">PostCSS</a> 外掛 <a href="https://github.com/ileri/postcss-bem" target="_blank" rel="external">postcss-bem</a>，就可以使用巢狀的宣告方式，省卻繁複的名稱重複撰寫問題，輕鬆撰寫符合 SUIT 規範的 CSS：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@namespace</span> app &#123;</span><br><span class="line">  <span class="variable">@component</span> SearchForm &#123;</span><br><span class="line">    <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Typically, place modifiers above descendents</span></span><br><span class="line">    <span class="variable">@modifier</span> advanced &#123;</span><br><span class="line">      <span class="attribute">padding</span>: <span class="number">1rem</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="variable">@descendent</span> textField &#123;</span><br><span class="line">      <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#ccc</span>;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// This creates a state for the textField descendant</span></span><br><span class="line">      <span class="variable">@when</span> invalid &#123;</span><br><span class="line">        <span class="attribute">border</span>: <span class="number">1px</span> solid red;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>輸出：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.app-SearchForm</span> &#123;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.app-SearchForm</span>–<span class="selector-tag">advanced</span> &#123;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">1rem</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.app-SearchForm-textField</span> &#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#ccc</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.app-SearchForm-textField</span><span class="selector-class">.is-invalid</span> &#123;</span><br><span class="line">  <span class="attribute">border</span>: <span class="number">1px</span> solid red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>每個輸出的 class，都將直接對應到目標元件上，從而避免使用巢狀的選擇器：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">name</span>=<span class="string">“search”</span> <span class="attr">class</span>=<span class="string">“app-SearchForm”</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">input</span> <span class="attr">name</span>=<span class="string">“name”</span> <span class="attr">class</span>=<span class="string">“app-SearchForm-textField”</span> <span class="attr">required</span>&gt;</span><span class="tag">&lt;/<span class="name">input</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>缺點：</p>
+<ol>
+<li><p>仍然是 global scope</p>
+<p> 雖然稍後會介紹的 CSS-modules 基本上也是 global scope，不過相較於 CSS-modules，BEM/SUIT 不小心出現重複命名的機會還是比較高，不過，當然這可以透過下面提到的 linter 來避免。</p>
+</li>
+<li><p>手動處理容易出錯</p>
+<p> 我一直覺得很奇怪，可能是我自己閱讀的還不夠多，好像很少看到有人提到/抱怨，目前還缺乏 markup 處理工具，幫忙將同樣的結果套用到 html 上。雖然有 <a href="https://github.com/ileri/postcss-bem" target="_blank" rel="external">postcss-bem</a> 幫忙處理 css 部份，但目前只能手動將最終的名稱套用到 html 上，仍然相當不方便，而且容易出錯。雖然有 <a href="https://github.com/postcss/postcss-bem-linter" target="_blank" rel="external">postcss-bem-linter</a> 來幫忙檢查 css 是否符合 BEM/SUIT 規範，卻沒有工具可以用來檢查 html。</p>
+</li>
+<li><p>名稱太長</p>
+<p> 如果認為 class 名稱太長，可以使用 <a href="https://github.com/calebthebrewer/gulp-selectors" target="_blank" rel="external">gulp-selectors</a> 這類工具，進一步做處理。不過也有不少反對意見，主要是認為<a href="http://stackoverflow.com/a/8067603/726650" target="_blank" rel="external">開啟 GZip 壓縮</a>即可，甚至也有人認為這樣會影響 SEO，但是應該是除非動到 <a href="http://microformats.org/" target="_blank" rel="external">microformat</a>，否則<a href="http://webmasters.stackexchange.com/a/25477" target="_blank" rel="external">沒有影響</a>。</p>
+</li>
+</ol>
+<h3 id="CSS-modules"><a href="#CSS-modules" class="headerlink" title="CSS-modules"></a>CSS-modules</h3><p><a href="https://github.com/css-modules/css-modules" target="_blank" rel="external">CSS-modules</a> 基本上只是一個規格，描述使用 <code>:local</code> 與 <code>:global</code> 關鍵字來區別 scope；使用 <code>composes</code> 關鍵字來引用其它規則。</p>
+<p>CSS-modules 的作者 <a href="https://github.com/markdalgleish" target="_blank" rel="external">Mark Dalgleish</a>，在他的 <a href="https://medium.com/seek-ui-engineering/the-end-of-global-css-90d2a4a06284#.muzqdfjs7" target="_blank" rel="external">The End of Global CSS</a> 一文中提到，利用 Webpack 在 <a href="https://github.com/webpack/css-loader/commit/d2c9c25721a711b0fe041c597b43646e82d9f145" target="_blank" rel="external">2015/04/22 發佈</a>的 <a href="https://github.com/webpack/css-loader#local-scope" target="_blank" rel="external">local scope</a> 功能，我們可以透過 <code>:local(.className)</code> 的語法，得到轉化之後的 class 名稱：</p>
+<p><strong>MyComponent.css</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">:local(.foo)</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-pseudo">:local(.bar)</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>MyComponent.jsx</strong></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> styles <span class="keyword">from</span> <span class="string">‘./MyComponent.css’</span>;</span><br><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">‘react’</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">MyComponent</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&#123;styles.foo&#125;</span>&gt;</span>Foo<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&#123;styles.bar&#125;</span>&gt;</span>Bar<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面 import 得到的 <code>styles</code>，實際上是一個 JSON 物件，內容是透過 <code>:local()</code> 定義的 class 名稱做為鍵值，對應到計算處理過、保證不重複的亂數名稱數值，像這樣：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">“foo”</span>: <span class="string">“_1rJwx92-gmbvaLiDdzgXiJ”</span>,</span><br><span class="line">  <span class="attr">“bar”</span>: <span class="string">“_13LGdX8RMStbBE9w-t0gZ1”</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然後再利用插入字串的方式，將產出的 class 名稱，注入到 template 中，而達成某種程度隱藏 class 名稱，避免名稱污染問題。不過雖然 class 名稱已經處理過，基本上卻仍然是全域可見。</p>
+<p>Mark Dalgleish 認為，一直不斷地重複寫 <code>:local</code> 太麻煩了，大多時候他都是使用 local scope，僅有極少數時候，才需要用到 global scope，所以後來 css-loader 就同意預設為 local scope 了：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.root</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.primary</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面透過 <code>styles.foo</code> 的方式，手動以插值的方式注入 class 名稱的作法，還是比較繁瑣。我個人比較傾向於 <a href="https://github.com/gajus/react-css-modules" target="_blank" rel="external">react-css-modules</a> 的作法，既然要用到工具來處理，既然已經使用 JSX 語法，就應該一次到位，避免再寫多餘的程式碼來引用 style：</p>
+<p><strong>dialog.css</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.root</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.primary</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>dialog.jsx</strong></p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">‘react’</span>;</span><br><span class="line"><span class="keyword">import</span> CSSModules <span class="keyword">from</span> <span class="string">‘react-css-modules’</span>;</span><br><span class="line"><span class="keyword">import</span> styles <span class="keyword">from</span> <span class="string">‘./dialog.css’</span>;</span><br><span class="line"></span><br><span class="line">@CSSModules(styles)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">Dialog</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">styleName</span>=<span class="string">‘root’</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">a</span> <span class="attr">styleName</span>=<span class="string">‘primary’</span>&gt;</span>Confirm<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意這裡使用 <code>styleName</code> 來引用 class，同時也不再需要寫 <code>styles.</code> 部份。另外，react-css-modules 還做了檢查，若引用的 class 不存在，會提出警告。</p>
+<p>一切都非常美好。</p>
+<p>而我個人碰到的問題則是：</p>
+<ol>
+<li><p>與 PostCSS 搭配的取捨</p>
+<p> 原有的專案採用 PostCSS 及 cssnext 外掛，尤其是用到了 <a href="https://github.com/jonathantneal/postcss-nesting" target="_blank" rel="external">nesting</a> 功能，在與 css-loader 搭配上，遇到了『雞生蛋、蛋生雞』問題，無法正確設定套用的順序。目前只能先停用遇到問題的語法。</p>
+</li>
+<li><p>預設 local scope</p>
+<p> 我認為 css-loader 衝過頭了，預設不應該是 local scope，<strong>Local scope 只有在撰寫元件的時候需要用到</strong>。整個網頁還是有許多共用元素需要使用 global scope css。Webpack css-loader 預設開啟 local scope，會造成引用其他 framework 的 style 的極大困難。</p>
+<p> 譬如，無法使用這樣的語法來引用 global style：</p>
+ <figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:<span class="keyword">global</span> &#123;</span><br><span class="line">truetrue<span class="symbol">@import</span> <span class="string">‘normalize.css’</span><span class="comment">;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 其實我個人傾向於希望能夠在要使用 local scope 時，才以 <code>:local</code> block 的方式啟用：</p>
+ <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">:local &#123;</span><br><span class="line">true.root &#123;</span><br><span class="line">true&#125;</span><br><span class="line"></span><br><span class="line">true.primary &#123;</span><br><span class="line">true&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 這樣就不會影響到既有的程式。</p>
+<p> 可惜 css-loader 只能透過 <code>modules</code> 參數啟動，否則就完全不支援 local scope。因此，目前這個問題只能透過針對不同路徑套用不同的 css-loader 的方式解決：</p>
+<p> <strong>webpack.config.js</strong></p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>: &#123;</span><br><span class="line">true<span class="attr">loaders</span>: [&#123;</span><br><span class="line">truetrue<span class="attr">test</span>: <span class="regexp">/.jsx?$/</span>,</span><br><span class="line">truetrue<span class="attr">loader</span>: <span class="string">‘babel’</span></span><br><span class="line">true&#125;, &#123;</span><br><span class="line">truetrue<span class="attr">test</span>: <span class="regexp">/.css$/</span>,</span><br><span class="line">truetrue<span class="attr">exclude</span>: path.resolve(dirname, <span class="string">‘client’</span>),</span><br><span class="line">truetrue<span class="attr">loader</span>: <span class="string">‘style!css?modules&amp;localIdentName=[name][local]’</span></span><br><span class="line">true&#125;, &#123;</span><br><span class="line">truetrue<span class="attr">test</span>: <span class="regexp">/.css$/</span>,</span><br><span class="line">truetrue<span class="attr">include</span>: path.resolve(__dirname, <span class="string">‘node_modules’</span>),</span><br><span class="line">truetrue<span class="attr">loader</span>: <span class="string">‘style!css’</span></span><br><span class="line">true&#125;]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Webpack + ReactJS 以外的選擇？</p>
+</li>
+</ol>
+<p>由於目前 CSS-modules 的實作，主要還是基於 Webpack 的 css-loader。而 Webpack 的思維，是以 JavaScript 為核心，透過 <code>require()</code> 函數來描述相關資源的關係，剛好與 ReactJS 的 JSX 的作法相同，兩者可說是天作之合。然而，明明要套用 class 的對象是 html/template，卻必須勞動 JavaScript 在<strong>執行期間</strong>來處理，似乎不是那麼經濟。</p>
+<p>雖然 <a href="https://github.com/substack/node-browserify" target="_blank" rel="external">Browserify</a> 有 <a href="https://github.com/css-modules/css-modulesify" target="_blank" rel="external">css-modulesify</a>，但 Browserify 其實是更加以 JavaScript 為中心，因此採用的是與 css-loader 完全相同的作法。</p>
+<p>我個人傾向於，工具應該要能夠在前處理期間就做好這些轉換工作，最終的 css 和 html template 都能直接處理好 local class 名稱對應，在 JavaScript 中，只要直接引用 template 即可。</p>
+<p>輸入：</p>
+<p><strong>dialog.css</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.root</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.primary</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>dialog.html</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">“./dialog.css”</span> <span class="attr">rel</span>=<span class="string">“stylesheet”</span> <span class="attr">type</span>=<span class="string">“text/localcss”</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">“root”</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">“primary”</span>&gt;</span>Confirm<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>輸出：</p>
+<p><strong>dialog.html</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">“text/css”</span>&gt;</span><span class="css"></span><br><span class="line"><span class="selector-class">.root1rJwx92-gmbvaLiDdzgXiJ</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.primary13LGdX8RMStbBE9w-t0gZ1</span> &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">“root1rJwx92-gmbvaLiDdzgXiJ”</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">class</span>=<span class="string">“primary13LGdX8RMStbBE9w-t0gZ1”</span>&gt;</span>Confirm<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>當然，這只是目前實作的問題，除了實作預設為 local scope 值得商榷之外，CSS-modules 規範本身並沒有太大的問題。</p>
+<p><a href="http://zhuanlan.zhihu.com/p/20495964" target="_blank" rel="external">CSS Modules 详解及 React 中实践</a> 這篇文章有相當深入精闢的技術解說，想進一步了解 CSS-modules 的朋友千萬不要錯過。</p>
+<h3 id="Web-Components-Shadow-DOM"><a href="#Web-Components-Shadow-DOM" class="headerlink" title="Web Components / Shadow DOM"></a>Web Components / Shadow DOM</h3><p><a href="https://www.w3.org/TR/2015/WD-shadow-dom-20151215/" target="_blank" rel="external">Shadow DOM</a> 是 <a href="http://webcomponents.org/" target="_blank" rel="external">Web Components</a> 的附屬規格，目前仍在草案階段，瀏覽器的支援也許還不足，但是實際上已經有相當多成熟的實作。最好的例子就是 <a href="https://www.polymer-project.org/1.0/" target="_blank" rel="external">Polymer</a>，已經正式發表 1.0 版，而 AngularJS 2.0 也即將正式發佈。即使不使用 framework，也可以直接透過 <a href="https://github.com/webcomponents/webcomponentsjs/" target="_blank" rel="external">polyfill</a> 使用。</p>
+<p>重點是，在 Shadow DOM 中，不論 markup 或 style，都是私有的，外界只能看到最外層的元件。換句話說，對 Shadow DOM 而言，CSS 就是 local scope 的！</p>
+<p>使用 Polymer 定義元件的範例：</p>
+<p><strong>contact-card.html_</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dom-module</span> <span class="attr">id</span>=<span class="string">“contact-card”</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">“import”</span> <span class="attr">type</span>=<span class="string">“css”</span> <span class="attr">href</span>=<span class="string">“contact-card.css”</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">content</span>&gt;</span><span class="tag">&lt;/<span class="name">content</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">iron-icon</span> <span class="attr">icon</span>=<span class="string">“star”</span> <span class="attr">hidden</span>$=<span class="string">“&#123;&#123;!starred&#125;&#125;”</span>&gt;</span><span class="tag">&lt;/<span class="name">iron-icon</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="actionscript"></span><br><span class="line">    Polymer(&#123;</span><br><span class="line">      <span class="keyword">is</span>: <span class="string">‘contact-card’</span>,</span><br><span class="line">      properties: &#123;</span><br><span class="line">        starred: Boolean</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dom-module</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>使用方式：</p>
+<p><strong>index.html</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">contact-card</span> <span class="attr">starred</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">“profile.jpg”</span> <span class="attr">alt</span>=<span class="string">“Eric’s photo”</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>Eric Bidelman<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">contact-card</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>使用 AngularJS 2.0 定義元件的的範例：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; Component &#125; <span class="keyword">from</span> <span class="string">‘angular2/core’</span>;</span><br><span class="line"></span><br><span class="line">@Component(&#123;</span><br><span class="line">  <span class="attr">selector</span>: <span class="string">‘contact-card’</span>,</span><br><span class="line">  <span class="attr">templateUrl</span>: <span class="string">‘components/contact.component.html’</span>,</span><br><span class="line">  <span class="attr">styleUrls</span>:  [<span class="string">‘components/contact.component.css’</span>]</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcatCard</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>就是這麼簡單。即使是使用 polyfill，它也會幫忙處理好 CSS scope 問題 (雖然無法真正隱藏)。只是，又回到在執行期間處理轉換的問題。</p>
+<p>2016/04/28 補充：剛<a href="https://medium.com/the-vue-point/announcing-vue-js-2-0-8af1bde7ab9#.36j94ry4c" target="_blank" rel="external">發表 2.0 版</a>的 <a href="https://vuejs.org/" target="_blank" rel="external">Vue.js</a>，早在 1.0 時即有 <a href="https://vuejs.org/guide/application.html#Single-File-Components" target="_blank" rel="external">“Single File Components”</a> 的作法，透過 <a href="http://vuejs.github.io/vue-loader/" target="_blank" rel="external">vue-loader</a> 或 <a href="https://github.com/vuejs/vueify" target="_blank" rel="external">vueify</a> 處理之後，也同樣具有 local scope CSS (注意 <code>scoped</code> 屬性):</p>
+<p><strong>my-component.vue</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">scoped</span>&gt;</span><span class="css"></span><br><span class="line"><span class="selector-class">.my-component</span> <span class="selector-tag">h2</span> &#123;</span><br><span class="line">true<span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">true<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">“my-component”</span>&gt;</span></span><br><span class="line">truetrue<span class="tag">&lt;<span class="name">h2</span>&gt;</span>&#123;&#123;msg&#125;&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">true<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">true<span class="attr">data</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">truetrue<span class="keyword">return</span> &#123;</span><br><span class="line">truetruetrue<span class="attr">msg</span>: <span class="string">‘hello!’</span></span><br><span class="line">truetrue&#125;</span><br><span class="line">true&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Houdini"><a href="#Houdini" class="headerlink" title="Houdini"></a>Houdini</h3><p><a href="https://www.smashingmagazine.com/2016/03/houdini-maybe-the-most-exciting-development-in-css-youve-never-heard-of/" target="_blank" rel="external">Houdini: Maybe The Most Exciting Development In CSS You’ve Never Heard Of</a>， 脫逃大師胡迪尼，將為我們在瀏覽器上面留下隱密的後門、看不見的掛勾，讓我們可以在最千鈞一髮的時刻全身而退。</p>
+<p>這方面的資訊雖然還不多，不過，如同上文作者所言，這將發生在不久的將來。屆時一旦 <a href="https://www.smashingmagazine.com/2016/03/houdini-maybe-the-most-exciting-development-in-css-youve-never-heard-of/#css-parser-api" target="_blank" rel="external">CSS PARSER API</a> 完成，要添加客製化的 local scope 語法，應該不是難事。</p>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>若專案選擇使用 ReactJS/JSX，得力於 <a href="https://github.com/gajus/react-css-modules" target="_blank" rel="external">react-css-modules</a> 及 <a href="https://webpack.github.io/" target="_blank" rel="external">Webpack</a> 的功勞，可以使用直覺的語法，不用放棄慣用的前處理器，就可以享用 CSS-modules 的好處。</p>
+<p>若是喜歡追求業界標準，可以考慮直接採用 Web Components/Shadow DOM，或是架構在此基礎之上的 framework 來實作。</p>
+<p>如果不想把專案的建構搞得太複雜，則可以考慮最通用的 BEM/SUIT 命名規範方案。</p>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><ul>
+<li><a href="https://github.com/css-modules/css-modules" target="_blank" rel="external">CSS Modules</a></li>
+<li><a href="http://www.sitepoint.com/bem-smacss-advice-from-developers/" target="_blank" rel="external">BEM and SMACSS: Advice From Developers Who’ve Been There</a></li>
+<li><a href="http://webdesign.tutsplus.com/tutorials/using-postcss-with-bem-and-suit-methodologies--cms-24592" target="_blank" rel="external">Using PostCSS with BEM and SUIT Methodologies</a></li>
+<li><a href="https://hsinyu00.wordpress.com/2016/02/21/cssconf-2015-%E7%AD%86%E8%A8%98%E4%BA%8C-css-modules/" target="_blank" rel="external">CSSConf 2015 筆記(二) – CSS Modules</a></li>
+<li><a href="https://boke.io/tan-tan-css-modules/" target="_blank" rel="external">谈谈 CSS Modules</a></li>
+<li><a href="http://zhuanlan.zhihu.com/p/20495964" target="_blank" rel="external">CSS Modules 详解及 React 中实践</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amobiz.github.io/2016/04/22/modular-css-notes/" data-id="cj4y0uftd008gk056yn4no155" class="article-share-link">Share</a>
+      
+        <a href="https://amobiz.github.io/2016/04/22/modular-css-notes/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BEM/">BEM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CSS-modules/">CSS-modules</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SUIT/">SUIT</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Shadow-DOM/">Shadow DOM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web-Components/">Web Components</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Webpack/">Webpack</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/modular-css/">modular css</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/11/react-dfp/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          埋設 DFP - DoubleClick for Publishers 廣告
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/04/15/angularjs-1.5-best-practices/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">AngularJS 1.5 最佳實務</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  
+    <ul class="nav"></ul>
+  
+  
+    <section class="comments" title="Disqus">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </section>
+  
+  
+    <section class="comments" title="Facebook">
+      <div class="fb-comments" data-href="https://amobiz.github.io/2016/04/22/modular-css-notes/" data-width="100%" data-numposts="5"></div>
+    </section>
+  
+</section>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hack/">Hack</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Productivity/">Productivity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">36</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Software/">Software</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Design/">Web Design</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/7-Zip/">7-Zip</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMD/">AMD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMP/">AMP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/APP2SD/">APP2SD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/">AngularJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/">Atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BEM/">BEM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backup/">Backup</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Batch/">Batch</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blogger/">Blogger</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS-modules/">CSS-modules</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CommonJS/">CommonJS</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DIY/">DIY</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Pattern/">Design Pattern</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ESLint/">ESLint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Facebook-Notes/">Facebook Notes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GTD/">GTD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Generator/">Generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ginger-yoshi/">Ginger yoshi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gist/">Gist</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/">GitHub</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google/">Google</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-App-Engine/">Google App Engine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-Code-Prettify/">Google Code Prettify</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grails/">Grails</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Groovy/">Groovy</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/">Gulp</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAX-RS/">JAX-RS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDOM/">JDOM</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSHint/">JSHint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/">JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jersey/">Jersey</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/">Jetty</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logdown/">Logdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/">Maven</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Medium/">Medium</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NPM/">NPM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Namespace/">Namespace</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Open-Source/">Open Source</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pomodoro-Technique/">Pomodoro Technique</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming/">Programming</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Promise/">Promise</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regular-Expression/">Regular Expression</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RequireJS/">RequireJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SUIT/">SUIT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SWAP/">SWAP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadow-DOM/">Shadow DOM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TagSoup/">TagSoup</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Time-Management/">Time Management</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UMD/">UMD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/URL/">URL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web-Components/">Web Components</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/">Webpack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/">XML</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XPath/">XPath</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yeoman/">Yeoman</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/advertising/">advertising</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/best-practices/">best practices</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/browser/">browser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cheatsheet/">cheatsheet</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/">cmd</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/custom-ROM/">custom ROM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dfp/">dfp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doubleclick/">doubleclick</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doubleclick-for-publishers/">doubleclick for publishers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpt/">gpt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/howto/">howto</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lint/">lint</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linter/">linter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linter-eslint/">linter-eslint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modular-css/">modular css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modularity/">modularity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/normalize/">normalize</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/normalizer/">normalizer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/notes/">notes</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/open-source/">open source</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pitfalls/">pitfalls</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/productivity/">productivity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regex/">regex</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rooted/">rooted</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svn/">svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time-management/">time management</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tutorial/">tutorial</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/7-Zip/" style="font-size: 11.25px;">7-Zip</a> <a href="/tags/AMD/" style="font-size: 11.25px;">AMD</a> <a href="/tags/AMP/" style="font-size: 10px;">AMP</a> <a href="/tags/APP2SD/" style="font-size: 11.25px;">APP2SD</a> <a href="/tags/Android/" style="font-size: 13.75px;">Android</a> <a href="/tags/AngularJS/" style="font-size: 10px;">AngularJS</a> <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/BEM/" style="font-size: 10px;">BEM</a> <a href="/tags/Backup/" style="font-size: 11.25px;">Backup</a> <a href="/tags/Batch/" style="font-size: 11.25px;">Batch</a> <a href="/tags/Blogger/" style="font-size: 12.5px;">Blogger</a> <a href="/tags/CSS-modules/" style="font-size: 10px;">CSS-modules</a> <a href="/tags/CommonJS/" style="font-size: 15px;">CommonJS</a> <a href="/tags/DIY/" style="font-size: 13.75px;">DIY</a> <a href="/tags/Design-Pattern/" style="font-size: 12.5px;">Design Pattern</a> <a href="/tags/ESLint/" style="font-size: 10px;">ESLint</a> <a href="/tags/Facebook-Notes/" style="font-size: 10px;">Facebook Notes</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Generator/" style="font-size: 10px;">Generator</a> <a href="/tags/Ginger-yoshi/" style="font-size: 11.25px;">Ginger yoshi</a> <a href="/tags/Gist/" style="font-size: 10px;">Gist</a> <a href="/tags/GitHub/" style="font-size: 16.25px;">GitHub</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/Google-App-Engine/" style="font-size: 10px;">Google App Engine</a> <a href="/tags/Google-Code-Prettify/" style="font-size: 10px;">Google Code Prettify</a> <a href="/tags/Grails/" style="font-size: 10px;">Grails</a> <a href="/tags/Groovy/" style="font-size: 12.5px;">Groovy</a> <a href="/tags/Gulp/" style="font-size: 11.25px;">Gulp</a> <a href="/tags/HTML/" style="font-size: 13.75px;">HTML</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/JAX-RS/" style="font-size: 10px;">JAX-RS</a> <a href="/tags/JDOM/" style="font-size: 12.5px;">JDOM</a> <a href="/tags/JSHint/" style="font-size: 10px;">JSHint</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Jersey/" style="font-size: 10px;">Jersey</a> <a href="/tags/Jetty/" style="font-size: 10px;">Jetty</a> <a href="/tags/Logdown/" style="font-size: 10px;">Logdown</a> <a href="/tags/Markdown/" style="font-size: 11.25px;">Markdown</a> <a href="/tags/Maven/" style="font-size: 16.25px;">Maven</a> <a href="/tags/Medium/" style="font-size: 10px;">Medium</a> <a href="/tags/NPM/" style="font-size: 10px;">NPM</a> <a href="/tags/Namespace/" style="font-size: 11.25px;">Namespace</a> <a href="/tags/Open-Source/" style="font-size: 11.25px;">Open Source</a> <a href="/tags/Pomodoro-Technique/" style="font-size: 10px;">Pomodoro Technique</a> <a href="/tags/Programming/" style="font-size: 10px;">Programming</a> <a href="/tags/Promise/" style="font-size: 11.25px;">Promise</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Regular-Expression/" style="font-size: 15px;">Regular Expression</a> <a href="/tags/RequireJS/" style="font-size: 10px;">RequireJS</a> <a href="/tags/SUIT/" style="font-size: 10px;">SUIT</a> <a href="/tags/SWAP/" style="font-size: 10px;">SWAP</a> <a href="/tags/Shadow-DOM/" style="font-size: 10px;">Shadow DOM</a> <a href="/tags/TagSoup/" style="font-size: 12.5px;">TagSoup</a> <a href="/tags/Time-Management/" style="font-size: 10px;">Time Management</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/UMD/" style="font-size: 11.25px;">UMD</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/Web-Components/" style="font-size: 10px;">Web Components</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Windows/" style="font-size: 11.25px;">Windows</a> <a href="/tags/XML/" style="font-size: 12.5px;">XML</a> <a href="/tags/XPath/" style="font-size: 12.5px;">XPath</a> <a href="/tags/Yeoman/" style="font-size: 12.5px;">Yeoman</a> <a href="/tags/advertising/" style="font-size: 10px;">advertising</a> <a href="/tags/best-practices/" style="font-size: 10px;">best practices</a> <a href="/tags/browser/" style="font-size: 10px;">browser</a> <a href="/tags/cheatsheet/" style="font-size: 11.25px;">cheatsheet</a> <a href="/tags/cmd/" style="font-size: 11.25px;">cmd</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/custom-ROM/" style="font-size: 11.25px;">custom ROM</a> <a href="/tags/dfp/" style="font-size: 10px;">dfp</a> <a href="/tags/doubleclick/" style="font-size: 10px;">doubleclick</a> <a href="/tags/doubleclick-for-publishers/" style="font-size: 10px;">doubleclick for publishers</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/glob/" style="font-size: 10px;">glob</a> <a href="/tags/gpt/" style="font-size: 10px;">gpt</a> <a href="/tags/howto/" style="font-size: 18.75px;">howto</a> <a href="/tags/lint/" style="font-size: 11.25px;">lint</a> <a href="/tags/linter/" style="font-size: 10px;">linter</a> <a href="/tags/linter-eslint/" style="font-size: 10px;">linter-eslint</a> <a href="/tags/modular-css/" style="font-size: 11.25px;">modular css</a> <a href="/tags/modularity/" style="font-size: 10px;">modularity</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/nodejs/" style="font-size: 13.75px;">nodejs</a> <a href="/tags/normalize/" style="font-size: 10px;">normalize</a> <a href="/tags/normalizer/" style="font-size: 10px;">normalizer</a> <a href="/tags/notes/" style="font-size: 11.25px;">notes</a> <a href="/tags/npm/" style="font-size: 13.75px;">npm</a> <a href="/tags/open-source/" style="font-size: 13.75px;">open source</a> <a href="/tags/pitfalls/" style="font-size: 17.5px;">pitfalls</a> <a href="/tags/productivity/" style="font-size: 10px;">productivity</a> <a href="/tags/regex/" style="font-size: 15px;">regex</a> <a href="/tags/rooted/" style="font-size: 11.25px;">rooted</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/time-management/" style="font-size: 10px;">time management</a> <a href="/tags/tutorial/" style="font-size: 11.25px;">tutorial</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">十二月 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">十一月 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">五月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">七月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/06/">六月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/08/11/react-dfp/">埋設 DFP - DoubleClick for Publishers 廣告</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/22/modular-css-notes/">Modular CSS</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/15/angularjs-1.5-best-practices/">AngularJS 1.5 最佳實務</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/07/re-npm-left-pad-have-we-forgotten-how-to-program/">反駁：NPM &amp; left-pad: Have We Forgotten How To Program?</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/09/npm-package-node-or-browser/">如何判斷 npmjs.com 上的套件，是否支援 node 或 browser</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Amobiz Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'amobiz';
+  
+  var disqus_url = 'https://amobiz.github.io/2016/04/22/modular-css-notes/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<div id="fb-root"></div>
+
+<!-- Facebook SDK -->
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.5&appId=1660468744166033";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- End Facebook SDK -->
+
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/script.js"></script>
+<script src="/js/nav.js"></script>
+
+  </div>
+</body>
+</html>

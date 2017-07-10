@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Regular Expression (JavaScript) 學習筆記 (2) - 原理篇 (下) | 格物致知</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前言上一篇 介紹了正則引擎的基本功能與原理，接下來介紹功能更為強大的 lookaround (環視)。 
+Lookaround (環視) 不會佔用匹配字元有時候，要匹配的文本主體，需要滿足的條件不只一個；或者，需要對上下文進行多重約束。
+然而，對於一般的表達式而言，一旦文本匹配成功，便會由表達式所佔有；也就是說，同一段文本，絕不可能同時由兩個表達式所匹配。
+另一方面，有時候，需要確保匹配的文本主體">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Regular Expression (JavaScript) 學習筆記 (2) - 原理篇 (下)">
+<meta property="og:url" content="https://amobiz.github.io/2014/08/03/regular-expression-javascript-study-notes-2-theory-2/index.html">
+<meta property="og:site_name" content="格物致知">
+<meta property="og:description" content="前言上一篇 介紹了正則引擎的基本功能與原理，接下來介紹功能更為強大的 lookaround (環視)。 
+Lookaround (環視) 不會佔用匹配字元有時候，要匹配的文本主體，需要滿足的條件不只一個；或者，需要對上下文進行多重約束。
+然而，對於一般的表達式而言，一旦文本匹配成功，便會由表達式所佔有；也就是說，同一段文本，絕不可能同時由兩個表達式所匹配。
+另一方面，有時候，需要確保匹配的文本主體">
+<meta property="og:updated_time" content="2016-06-28T03:07:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Regular Expression (JavaScript) 學習筆記 (2) - 原理篇 (下)">
+<meta name="twitter:description" content="前言上一篇 介紹了正則引擎的基本功能與原理，接下來介紹功能更為強大的 lookaround (環視)。 
+Lookaround (環視) 不會佔用匹配字元有時候，要匹配的文本主體，需要滿足的條件不只一個；或者，需要對上下文進行多重約束。
+然而，對於一般的表達式而言，一旦文本匹配成功，便會由表達式所佔有；也就是說，同一段文本，絕不可能同時由兩個表達式所匹配。
+另一方面，有時候，需要確保匹配的文本主體">
+  
+    <link rel="alternative" href="/atom.xml" title="格物致知" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-68633744-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">格物致知</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Happiness only real when shared.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://amobiz.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-regular-expression-javascript-study-notes-2-theory-2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/08/03/regular-expression-javascript-study-notes-2-theory-2/" class="article-date">
+  <time datetime="2014-08-02T16:06:55.000Z" itemprop="datePublished">2014-08-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Programming/">Programming</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/08/03/regular-expression-javascript-study-notes-2-theory-2/">Regular Expression (JavaScript) 學習筆記 (2) - 原理篇 (下)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <!-- Post Contents -->
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><a href="/2014/08/03/regular-expression-javascript-study-notes-1-theory-1/" title="上一篇">上一篇</a> 介紹了正則引擎的基本功能與原理，接下來介紹功能更為強大的 lookaround (環視)。<br><br> 
+<h3 id="Lookaround-環視-不會佔用匹配字元"><a href="#Lookaround-環視-不會佔用匹配字元" class="headerlink" title="Lookaround (環視) 不會佔用匹配字元"></a>Lookaround (環視) 不會佔用匹配字元</h3><p>有時候，要匹配的文本主體，需要滿足的條件不只一個；或者，需要對上下文進行多重約束。</p>
+<p>然而，對於一般的表達式而言，一旦文本匹配成功，便會由表達式所佔有；也就是說，同一段文本，絕不可能同時由兩個表達式所匹配。</p>
+<p>另一方面，有時候，需要確保匹配的文本主體不含特定的內容，但是這個特定的內容，不是一個單一字元。在單一字元的情況下，我們可以使用否定型字元組來處理。但是在多重字元的情況下，卻很難使用一般的表達式辦到。</p>
+<p>在這樣的需求下，許多新的 flavor (流派) 開始支援 lookaround (環視) 的功能。</p>
+<p>對於環視表達式，最重要的特性就是，它們不會 consume (吃掉) 任何字元：不論匹配結果是否成功、不論是肯定型還是否定型、不論是順序還是逆序，引擎都會回到開始匹配前的原點，並且丟棄所有匹配的內容以及過程中儲存的備選狀態。在此之後，引擎才會根據環視表達式的匹配成功與否，進行下一個動作：當匹配成功時，引擎由目前位置繼續下一個表達式的匹配；當匹配失敗時，引擎回溯 (請參考前面回溯的說明) 到上一個儲存點 (這是由上一個表達式所儲存)，繼續由上一個表達式儲存的下一個選擇進行嘗試 (或繼續回溯到上上個表達式)。</p>
+<p>(環視使用的是一種擴展的 NFA：<a href="http://en.wikipedia.org/wiki/Nondeterministic_finite_automaton_with_%CE%B5-moves" title="NFA-λ (也叫做 NFA-ε 或有 ε 移動的 NFA)" target="_blank" rel="external">NFA-λ (也叫做 NFA-ε 或有 ε 移動的 NFA)</a>，它允許轉換到新狀態的變換不消耗任何輸入符號。)</p>
+<p>可以這樣想像，lookaround (環視) 就像是站在原地不動，向前或向後觀望。依照環視檢視文本的方向，可以區分為 lookahead (順序環視) 和 lookbehind (逆序環視)。</p>
+<a id="more"></a>
+<h4 id="Lookahead-順序環視"><a href="#Lookahead-順序環視" class="headerlink" title="Lookahead (順序環視)"></a>Lookahead (順序環視)</h4><p>Lookahead (順序環視)，或稱為「順向環視」、「向前環視」，顧名思義是在原地向前看的意思。也就是先偷看還沒看過的內容，確認是否符合預期，只有在接下來的內容能夠滿足指定條件的前提下，才繼續由下一個表達式、由目前位置開始後續的測試。(注意這裡的「前」，是 ahead 的意思，是指對引擎而言，擺在引擎前方尚未測試過的文本。與中文的「先前」，英文的 previous 意思不同。由於在中文裡，ahead 與 previous 的翻譯都有「前」這個字眼，但是實際上方向卻完全相反，為避免混淆，建議使用「順序環視」（依照檢視的順序），以強調環視測試文本的方向與引擎測試文本的方向，兩者之間的關係。)</p>
+<p>順序環視表達式的語法為：</p>
+<p>肯定型：</p>
+<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">?=expression</span>)</span><br></pre></td></tr></table></figure>
+
+<p>否定型：</p>
+<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">?!expression</span>)</span><br></pre></td></tr></table></figure>
+
+<p>其中，對於肯定型順序環視表達式，其子表達式必需匹配文本，才算匹配成功。對於否定型順序環視表達式，其子表達式必需不匹配文本，才算匹配成功。 (請參考後面 <a href="#bnf-grammar">BNF 語法</a> 的說明)</p>
+<h5 id="Lookbehind-逆序環視"><a href="#Lookbehind-逆序環視" class="headerlink" title="Lookbehind (逆序環視)"></a>Lookbehind (逆序環視)</h5><p>Lookbehind (逆序環視)，或稱為「逆向環視」、「向後環視」，顧名思義是在原地往後看的意思。也就是由目前位置回頭測試文本。只有在目前位置之前的內容能夠滿足指定條件的前提下，才繼續由下一個表達式、由目前位置開始後續的測試。(注意這裡的「後」，是 behind 的意思，是指對引擎而言，擺在引擎後方已經測試過的文本。與中文的「後續」，英文的 next 意思不同。由於在中文裡，behind 與 next 的翻譯都有「後」這個字眼，但是實際上方向卻完全相反，為避免混淆，建議使用「逆序環視」（依照檢視的相反順序），以強調環視測試文本的方向與引擎測試文本的方向，兩者之間的關係。)</p>
+<p>逆序環視表達式的語法為：</p>
+<p>肯定型：</p>
+<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">?&lt;=expression</span>)</span><br></pre></td></tr></table></figure>
+
+<p>否定型：</p>
+<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">?&lt;!expression</span>)</span><br></pre></td></tr></table></figure>
+
+<p>其中，對於肯定型逆序環視表達式，其子表達式必需匹配文本，才算匹配成功。對於否定型逆序環視表達式，其子表達式必需不匹配文本，才算匹配成功。 (請參考後面 <a href="#bnf-grammar">BNF 語法</a> 的說明)</p>
+<p>注意，JavaScript 只支援 lookahead，不支援 lookbehind。這裡特意列出以完整說明 NFA 引擎的正則表達式的能力。</p>
+<p>注意：lookahead (順序環視表達式) 所允許的子表達式，在多數的流派中都沒有特殊限制。而的 lookbehind (逆序環視表達式) (JavaScript 不支援) 通常限定子表達式的匹配長度必須固定。</p>
+<h5 id="匹配的文本主體需要滿足多重條件"><a href="#匹配的文本主體需要滿足多重條件" class="headerlink" title="匹配的文本主體需要滿足多重條件"></a>匹配的文本主體需要滿足多重條件</h5><p>針對本節開頭所描述的問題，當要匹配的文本主體，需要滿足的條件不只一個時，可以將順序環視表達式置於用來匹配主體的表達式的前方。或者將逆序環視表達式置於其後方。像這樣：</p>
+<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">?=lookahead-expression-1</span>)(<span class="name">?!lookahead-expression-2</span>)(<span class="name">main-expression</span>)</span><br></pre></td></tr></table></figure>
+
+<p>或</p>
+<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">main-expression</span>)(<span class="name">?&lt;=lookbehind-expression-1</span>)(<span class="name">?&lt;!lookbehind-expression-2</span>)</span><br></pre></td></tr></table></figure>
+
+<p>譬如，下面的表達式，來自於 <a href="http://www.rexegg.com/regex-lookarounds.html" title="Mastering Lookahead and Lookbehind" target="_blank" rel="external">Mastering Lookahead and Lookbehind</a> 這篇文章，用來檢查密碼是否符合規範：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^(?=.<em>?[a-z])(?=.</em>?[A-Z])(?=.*?\d)\w&#123;<span class="number">6</span>,<span class="number">10</span>&#125;$/</span><br></pre></td></tr></table></figure>
+
+<p>其中：</p>
+<p>「<code>\w{6,10}</code>」 就是匹配主體，要求匹配文本必須是英數字或底線，包含最少 6 個字元，最多 10 個字元。</p>
+<p>「<code>(?=.*?[a-z])</code>」 是肯定型順序環視，要求匹配的文本中，必須含有小寫的英文字母。</p>
+<p>「<code>(?=.*?[A-Z])</code>」 是肯定型順序環視，要求匹配的文本中，必須含有大寫的英文字母。</p>
+<p>「<code>(?=.*?\d)</code>」 是肯定型順序環視，要求匹配的文本中，必須含有數字字母。</p>
+<p>注意，其中「<code>.*?</code>」是前面介紹過的忽略優先量詞，意思是，先忽略，直接匹配後面的表達式。若後面的表達式匹配失敗，再回過頭來由「<code>.</code>」匹配一個任意字元，然後又繼續嘗試匹配後面的表達式。在這裡的效果，就是不斷地測試文本是否含有後面的表達式指定的字元，直到測試成功 (匹配)，或抵達文本的結尾，然後失敗 (不匹配)。由於這裡都是肯定型，整個表達式，意義就是：匹配 6 到 10 個英數字或底線字母，其中必須包含大寫英文字母、小寫英文字母、數字字母至少各一個字元。</p>
+<h5 id="匹配文本的上下文需要滿足指定條件"><a href="#匹配文本的上下文需要滿足指定條件" class="headerlink" title="匹配文本的上下文需要滿足指定條件"></a>匹配文本的上下文需要滿足指定條件</h5><p>當要匹配的內容，必須出現在特定的字元之後。</p>
+<p>由於 JavaScript 不支援 lookbehind，這裡只列出 <a href="http://books.google.com.tw/books?id=ucwR4KIvExMC&amp;pg=PA66&amp;source=gbs_toc_r&amp;cad=4#v=onepage&amp;q&amp;f=false" title="Mastering Regular Expressions 一書 66 頁的 Perl 語言的範例" target="_blank" rel="external">Mastering Regular Expressions 一書 66 頁的 Perl 語言的範例</a>，該範例利用逆序環視來為數值加上每三位數出現一次的 <code>&quot;,&quot;</code> 逗號，使數值的位數更容易分辨：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$text =~ <span class="regexp">s/(?&lt;=\d)(?=(\d\d\d)+(?!\d))/,/g</span>;</span><br></pre></td></tr></table></figure>
+
+<p>基本原理就是，添加逗號時必須由個位數開始計算，每三位數添加一個逗號。實際上，要插入逗號的「位置」是，左邊有數字 (上文)，右邊的數字的個數正好是 3 的倍數 (下文)。以下讓我們一步一步來看建構的過程：</p>
+<p>要找出個位數，先要找出一整串數字，因為這整串數字最右邊的數字就是個位數字。由此導出「<code>\d+</code>」。</p>
+<p>由於要每三位數添加一個逗號，這串數字至少要含有三位數，少於三位數就不需要添加逗號了。由此導出「<code>\d\d\d</code>」。</p>
+<p>但是這樣一來，超過三位數的數字，匹配到的就會是最高位數開始往右算的三個數字，而不是由個位數往左算的三個數字。譬如 <code>&quot;12345&quot;</code> 這串數字，匹配到的將是 <code>&quot;123&quot;</code> 而不是 <code>&quot;345&quot;</code>。仔細想想個位數有什麼特別的地方呢? 就是它的右邊 (下文) 沒有數字。這時候第一個否定型向前環視登場了，我們可以使用「<code>(?!\d)</code>」來保證右邊沒有數字，也就是確保匹配的是由個位數往左算的三個數字。由此導出的是「<code>(\d\d\d)(?!\d)</code>」。</p>
+<p>由於每三位數都要添加一個逗號。因此應該是「<code>(\d\d\d)+(?!\d)</code>」。</p>
+<p>由於要添加逗號的位置，是位於連續三位數的左邊的「位置」，上述的表達式卻會吃掉字元，因此需要使用順序環視來進行測試，以保持位置不變。由此導出「<code>(?=(\d\d\d)+(?!\d))</code>」。</p>
+<p>同上，找到的這個「位置」，它的左邊 (上文) 也必須有數字。否則，這表示已經到達整串數字的最高位數，那麼這個「位置」也不需要添加逗號。這時候，就必須使用肯定型逆序環視表達式，來確保這個位置的左邊確實有數字存在。由此導出「<code>(?&lt;=\d)(?=(\d\d\d)+(?!\d))</code>」。</p>
+<p>上面的表達式，一次只會匹配一個「位置」(在數值字串所有需要插入逗號的位置的最左邊那個)。同時字串中可能包含多個數值字串，必須全部處理。所以必須使用 global search，找出所有的數值字串的適當「位置」。由此導出「<code>/(?&lt;=\d)(?=(\d\d\d)+(?!\d))/g</code>」。</p>
+<p>配合 Perl 語言提供的功能，可以在以上每個找到的「位置」，插入 <code>&quot;,&quot;</code> 逗號。由此導出「<code>$text =~ s/(?&lt;=\d)(?=(\d\d\d)+(?!\d))/,/g</code>」。</p>
+<p>書中也指出，可以使用捕獲型群組，來模擬逆序環視：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$text =~ <span class="regexp">s/(\d)(?=(\d\d\d)+(?!\d))/$1,/g</span>;</span><br></pre></td></tr></table></figure>
+
+<p>這裡最前面的「<code>(\d)</code>」捕捉的，正是上面第 6 點提到的肯定型逆序環視表達式捕捉到的那個數字字元，所以使用置換功能來插入逗號時，必須包含該字元，所以取代字串為「<code>$1,</code>」。</p>
+<p>另外，舉個簡單的例子，若需要匹配 <code>$9999</code> 這樣的字串，又不想包含前面的 <code>&quot;$&quot;</code>，只想要取得數值字串時，可以使用下列表達式：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/(?&lt;=$)\d+<span class="regexp">/</span></span><br></pre></td></tr></table></figure>
+
+<p>同樣，若不使用逆序環視，可以使用：</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/$(\d+)/</span><br></pre></td></tr></table></figure>
+
+<p>這裡與前面插入逗號的例子相反，捕捉的是數值字串本身，所以「<code>$1</code>」代表的就是我們所要的結果。</p>
+<h5 id="確保匹配的文本主體不含特定內容"><a href="#確保匹配的文本主體不含特定內容" class="headerlink" title="確保匹配的文本主體不含特定內容"></a>確保匹配的文本主體不含特定內容</h5><p>到這裡應該很清楚了，這個情況可以使用否定型順序環視來實現。</p>
+<p>這裡引用 <a href="http://books.google.com.tw/books?id=ucwR4KIvExMC&amp;pg=PA167&amp;source=gbs_toc_r&amp;cad=4#v=onepage&amp;q&amp;f=false" title="Mastering Regular Expressions, 167 頁" target="_blank" rel="external">Mastering Regular Expressions, 167 頁</a> 的例子，用來匹配一個 HTML 中，完整的 <code>&lt;b&gt;&lt;/b&gt;</code> 標籤。</p>
+<p>首先，若使用匹配優先量詞，「<code>&lt;b&gt;.*&lt;/b&gt;</code>」，非常有可能會匹配到 <code>&quot;&lt;b&gt; ... &lt;/b&gt; ... &lt;b&gt; ... &lt;/b&gt;&quot;</code> 這樣的結果。</p>
+<p>使用忽略優先量詞，「<code>&lt;b&gt;.*?&lt;/b&gt;</code>」，仍然有可能匹配到 <code>&quot;&lt;b&gt; ... &lt;b&gt; ... &lt;/b&gt;&quot;</code> 這樣的結果。</p>
+<p>由這一點可以知道，忽略優先量詞並不是排除型字元組的多字元版的完美替代方案。</p>
+<p>使用否定型順序環視，就可以安全地排除多重字元：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/<span class="xml"><span class="tag">&lt;<span class="name">b</span>&gt;</span>(?:(?!<span class="tag">&lt;<span class="name">\</span>/?<span class="attr">b</span>&gt;</span>).)*<span class="tag">&lt;<span class="name">\</span>/<span class="attr">b</span>&gt;</span></span><span class="regexp">/</span></span><br></pre></td></tr></table></figure>
+
+<aside class="cheatsheet"><h5>Regular Expression 語法快速說明</h5><p>這裡的「<code>(?: ... )</code>」代表非捕獲型群組。請參考後面 <a href="#bnf-grammar">BNF 語法</a> 的說明。</p>
+</aside>
+<p>注意，在這個例子裡，<code>&quot;&lt;b&gt;&quot;</code> 及 <code>&quot;&lt;/b&gt;&quot;</code> 同時是必須包含的內容 (也就是做為標籤的邊界符號)，同時又是 <code>&quot;&lt;b&gt;&quot;</code> 及 <code>&quot;&lt;/b&gt;&quot;</code> 標籤之間的內文 (對 JavaScript 而言，就是 <code>innerHTML</code>) 中不可出現的內容 (否則找到的就不是一個獨立的標籤了)。因此，這裡的否定型順序環視表達式，必須與「<code>.</code>」元字元，一同由「<code>*</code>」量詞一起修飾。也就是說，在開頭的「<code>&lt;b&gt;</code>」表達式匹配完之後，在匹配內文時，必須逐字元檢視，確認該字元起始的文本，不是 <code>&quot;&lt;b&gt;&quot;</code> 或 <code>&quot;&lt;/b&gt;&quot;</code>，如果不是，就可以把該字元視為內文，由「<code>.</code>」匹配。否則，一旦遭遇 <code>&quot;&lt;b&gt;&quot;</code> 或 <code>&quot;&lt;/b&gt;&quot;</code>，否定型順序環視表達式匹配失敗，導致「<code>*</code>」量詞回溯到上一個儲存位置，也就是 <code>&quot;&lt;&quot;</code> 之前的位置，然後「<code>*</code>」量詞結束 (並成功) 匹配 (記住「<code>*</code>」量詞可以匹配 0 次)。接著，再由「<code>&lt;\/b&gt;</code>」繼續匹配。</p>
+<h5 id="完全排除特定內容"><a href="#完全排除特定內容" class="headerlink" title="完全排除特定內容"></a>完全排除特定內容</h5><p>有一個簡化的特別情況，如果要排除的內容本身，不需要以任何形式存在於要匹配的內容中，也就是單純要加以排除時，其實有更快速的方法，就像前面的檢查密碼範例一樣，只是這裡使用的是否定型順序環視表達式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/^(?!.<em>?hede).</em>$/</span><br></pre></td></tr></table></figure>
+
+<p>這裡的 <code>&quot;hede&quot;</code> 是要排除的字串。其中「<code>.*?</code>」是前面介紹過的忽略優先量詞，意思是，先忽略，直接匹配後面的表達式，也就是「<code>hede</code>」。若後面的表達式匹配失敗，再回過頭來匹配一個任意字元，然後又繼續嘗試匹配後面的表達式。在這裡的效果，就是環視表達式不斷地測試文本是否含有 <code>&quot;hede&quot;</code> 字串，若抵達文本的結尾都沒有發現 <code>&quot;hede&quot;</code> 字串，則否定型順序環視表達式匹配成功。於是，引擎又回到原點，也就是文本的開始位置，然後由「<code>.*</code>」匹配優先量詞，直接匹配到字串尾端。匹配成功。</p>
+<p>這個表達式的效率，在最差的情形下，都比 <code>/^(?:(?!hede).)*$/</code> 快上一倍以上。可以參考 <a href="http://jsfiddle.net/pvJL5/3/" title="jsfiddle.net" target="_blank" rel="external">jsfiddle.net</a> 這裡的比較結果，以及我在 <a href="http://stackoverflow.com/a/24743196/726650" title="StackOverflow" target="_blank" rel="external">StackOverflow</a> 的回答。</p>
+<h3 id="小結"><a href="#小結" class="headerlink" title="小結"></a>小結</h3><p>到這裡，正則引擎最重要的功能與原理都介紹完畢了。記得在學習時，可以搭配查閱 <a href="/2014/08/04/regular-expression-javascript-study-notes-3-informal-bnf-grammar/" title="非正式 BNF 語法">非正式 BNF 語法</a> 快速掌握正則表達式的語法。</p>
+ 
+<h3 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h3><ul>
+<li><a href="http://en.wikipedia.org/wiki/Nondeterministic_finite_automaton_with_%CE%B5-moves" title="NFA-λ (也叫做 NFA-ε 或有 ε 移動的 NFA)" target="_blank" rel="external">NFA-λ (也叫做 NFA-ε 或有 ε 移動的 NFA)</a></li>
+<li><a href="http://www.rexegg.com/regex-lookarounds.html" title="Mastering Lookahead and Lookbehind" target="_blank" rel="external">Mastering Lookahead and Lookbehind</a></li>
+<li><a href="http://books.google.com.tw/books?id=ucwR4KIvExMC&amp;pg=PA66&amp;source=gbs_toc_r&amp;cad=4#v=onepage&amp;q&amp;f=false" title="Mastering Regular Expressions 一書 66 頁的 Perl 語言的範例" target="_blank" rel="external">Mastering Regular Expressions 一書 66 頁的 Perl 語言的範例</a></li>
+<li><a href="http://books.google.com.tw/books?id=ucwR4KIvExMC&amp;pg=PA167&amp;source=gbs_toc_r&amp;cad=4#v=onepage&amp;q&amp;f=false" title="Mastering Regular Expressions, 167 頁" target="_blank" rel="external">Mastering Regular Expressions, 167 頁</a></li>
+<li><a href="http://jsfiddle.net/pvJL5/3/" title="jsfiddle.net" target="_blank" rel="external">jsfiddle.net</a></li>
+<li><a href="http://stackoverflow.com/a/24743196/726650" title="StackOverflow" target="_blank" rel="external">StackOverflow</a></li>
+</ul>
+<h3 id="相關文章"><a href="#相關文章" class="headerlink" title="相關文章"></a>相關文章</h3><!-- cross references -->
+<div><ul>
+<li><a href="/2014/08/03/regular-expression-javascript-study-notes-1-theory-1/" title="Regular Expression (JavaScript) 學習筆記 (1) - 原理篇 (上)">Regular Expression (JavaScript) 學習筆記 (1) - 原理篇 (上)</a></li>
+<li><a href="/2014/08/03/regular-expression-javascript-study-notes-2-theory-2/" title="Regular Expression (JavaScript) 學習筆記 (2) - 原理篇 (下)">Regular Expression (JavaScript) 學習筆記 (2) - 原理篇 (下)</a></li>
+<li><span id="bnf-grammar"></span><a href="/2014/08/04/regular-expression-javascript-study-notes-3-informal-bnf-grammar/" title="Regular Expression (JavaScript) 學習筆記 (3) - Informal BNF 語法">Regular Expression (JavaScript) 學習筆記 (3) - Informal BNF 語法</a></li>
+<li><a href="/2014/07/04/open-sourced-my-javascript-regular-expression-generator-regexgenjs/" title="Open Sourced my JavaScript Regular Expression Generator - RegexGen.js">Open Sourced my JavaScript Regular Expression Generator - RegexGen.js</a></li>
+<li><a href="/2014/08/05/why-i-developed-javascript-regular-expression-generator-regexgenjs/" title="為什麼我要開發 Regular Expression Generator - RegexGen.js">為什麼我要開發 Regular Expression Generator - RegexGen.js</a></li>
+</ul>
+</div>
+<!-- external references -->
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amobiz.github.io/2014/08/03/regular-expression-javascript-study-notes-2-theory-2/" data-id="cj4y0ufs7006qk056t66j9b3o" class="article-share-link">Share</a>
+      
+        <a href="https://amobiz.github.io/2014/08/03/regular-expression-javascript-study-notes-2-theory-2/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Regular-Expression/">Regular Expression</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/regex/">regex</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/08/04/regular-expression-javascript-study-notes-3-informal-bnf-grammar/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Regular Expression (JavaScript) 學習筆記 (3) - Informal BNF 語法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/08/03/regular-expression-javascript-study-notes-1-theory-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Regular Expression (JavaScript) 學習筆記 (1) - 原理篇 (上)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  
+    <ul class="nav"></ul>
+  
+  
+    <section class="comments" title="Disqus">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </section>
+  
+  
+    <section class="comments" title="Facebook">
+      <div class="fb-comments" data-href="https://amobiz.github.io/2014/08/03/regular-expression-javascript-study-notes-2-theory-2/" data-width="100%" data-numposts="5"></div>
+    </section>
+  
+</section>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hack/">Hack</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Productivity/">Productivity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">36</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Software/">Software</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Design/">Web Design</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/7-Zip/">7-Zip</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMD/">AMD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMP/">AMP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/APP2SD/">APP2SD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/">AngularJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/">Atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BEM/">BEM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backup/">Backup</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Batch/">Batch</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blogger/">Blogger</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS-modules/">CSS-modules</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CommonJS/">CommonJS</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DIY/">DIY</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Pattern/">Design Pattern</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ESLint/">ESLint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Facebook-Notes/">Facebook Notes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GTD/">GTD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Generator/">Generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ginger-yoshi/">Ginger yoshi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gist/">Gist</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/">GitHub</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google/">Google</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-App-Engine/">Google App Engine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-Code-Prettify/">Google Code Prettify</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grails/">Grails</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Groovy/">Groovy</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/">Gulp</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAX-RS/">JAX-RS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDOM/">JDOM</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSHint/">JSHint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/">JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jersey/">Jersey</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/">Jetty</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logdown/">Logdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/">Maven</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Medium/">Medium</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NPM/">NPM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Namespace/">Namespace</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Open-Source/">Open Source</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pomodoro-Technique/">Pomodoro Technique</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming/">Programming</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Promise/">Promise</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regular-Expression/">Regular Expression</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RequireJS/">RequireJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SUIT/">SUIT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SWAP/">SWAP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadow-DOM/">Shadow DOM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TagSoup/">TagSoup</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Time-Management/">Time Management</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UMD/">UMD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/URL/">URL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web-Components/">Web Components</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/">Webpack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/">XML</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XPath/">XPath</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yeoman/">Yeoman</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/advertising/">advertising</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/best-practices/">best practices</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/browser/">browser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cheatsheet/">cheatsheet</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/">cmd</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/custom-ROM/">custom ROM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dfp/">dfp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doubleclick/">doubleclick</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doubleclick-for-publishers/">doubleclick for publishers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpt/">gpt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/howto/">howto</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lint/">lint</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linter/">linter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linter-eslint/">linter-eslint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modular-css/">modular css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modularity/">modularity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/normalize/">normalize</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/normalizer/">normalizer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/notes/">notes</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/open-source/">open source</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pitfalls/">pitfalls</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/productivity/">productivity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regex/">regex</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rooted/">rooted</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svn/">svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time-management/">time management</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tutorial/">tutorial</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/7-Zip/" style="font-size: 11.25px;">7-Zip</a> <a href="/tags/AMD/" style="font-size: 11.25px;">AMD</a> <a href="/tags/AMP/" style="font-size: 10px;">AMP</a> <a href="/tags/APP2SD/" style="font-size: 11.25px;">APP2SD</a> <a href="/tags/Android/" style="font-size: 13.75px;">Android</a> <a href="/tags/AngularJS/" style="font-size: 10px;">AngularJS</a> <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/BEM/" style="font-size: 10px;">BEM</a> <a href="/tags/Backup/" style="font-size: 11.25px;">Backup</a> <a href="/tags/Batch/" style="font-size: 11.25px;">Batch</a> <a href="/tags/Blogger/" style="font-size: 12.5px;">Blogger</a> <a href="/tags/CSS-modules/" style="font-size: 10px;">CSS-modules</a> <a href="/tags/CommonJS/" style="font-size: 15px;">CommonJS</a> <a href="/tags/DIY/" style="font-size: 13.75px;">DIY</a> <a href="/tags/Design-Pattern/" style="font-size: 12.5px;">Design Pattern</a> <a href="/tags/ESLint/" style="font-size: 10px;">ESLint</a> <a href="/tags/Facebook-Notes/" style="font-size: 10px;">Facebook Notes</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Generator/" style="font-size: 10px;">Generator</a> <a href="/tags/Ginger-yoshi/" style="font-size: 11.25px;">Ginger yoshi</a> <a href="/tags/Gist/" style="font-size: 10px;">Gist</a> <a href="/tags/GitHub/" style="font-size: 16.25px;">GitHub</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/Google-App-Engine/" style="font-size: 10px;">Google App Engine</a> <a href="/tags/Google-Code-Prettify/" style="font-size: 10px;">Google Code Prettify</a> <a href="/tags/Grails/" style="font-size: 10px;">Grails</a> <a href="/tags/Groovy/" style="font-size: 12.5px;">Groovy</a> <a href="/tags/Gulp/" style="font-size: 11.25px;">Gulp</a> <a href="/tags/HTML/" style="font-size: 13.75px;">HTML</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/JAX-RS/" style="font-size: 10px;">JAX-RS</a> <a href="/tags/JDOM/" style="font-size: 12.5px;">JDOM</a> <a href="/tags/JSHint/" style="font-size: 10px;">JSHint</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Jersey/" style="font-size: 10px;">Jersey</a> <a href="/tags/Jetty/" style="font-size: 10px;">Jetty</a> <a href="/tags/Logdown/" style="font-size: 10px;">Logdown</a> <a href="/tags/Markdown/" style="font-size: 11.25px;">Markdown</a> <a href="/tags/Maven/" style="font-size: 16.25px;">Maven</a> <a href="/tags/Medium/" style="font-size: 10px;">Medium</a> <a href="/tags/NPM/" style="font-size: 10px;">NPM</a> <a href="/tags/Namespace/" style="font-size: 11.25px;">Namespace</a> <a href="/tags/Open-Source/" style="font-size: 11.25px;">Open Source</a> <a href="/tags/Pomodoro-Technique/" style="font-size: 10px;">Pomodoro Technique</a> <a href="/tags/Programming/" style="font-size: 10px;">Programming</a> <a href="/tags/Promise/" style="font-size: 11.25px;">Promise</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Regular-Expression/" style="font-size: 15px;">Regular Expression</a> <a href="/tags/RequireJS/" style="font-size: 10px;">RequireJS</a> <a href="/tags/SUIT/" style="font-size: 10px;">SUIT</a> <a href="/tags/SWAP/" style="font-size: 10px;">SWAP</a> <a href="/tags/Shadow-DOM/" style="font-size: 10px;">Shadow DOM</a> <a href="/tags/TagSoup/" style="font-size: 12.5px;">TagSoup</a> <a href="/tags/Time-Management/" style="font-size: 10px;">Time Management</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/UMD/" style="font-size: 11.25px;">UMD</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/Web-Components/" style="font-size: 10px;">Web Components</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Windows/" style="font-size: 11.25px;">Windows</a> <a href="/tags/XML/" style="font-size: 12.5px;">XML</a> <a href="/tags/XPath/" style="font-size: 12.5px;">XPath</a> <a href="/tags/Yeoman/" style="font-size: 12.5px;">Yeoman</a> <a href="/tags/advertising/" style="font-size: 10px;">advertising</a> <a href="/tags/best-practices/" style="font-size: 10px;">best practices</a> <a href="/tags/browser/" style="font-size: 10px;">browser</a> <a href="/tags/cheatsheet/" style="font-size: 11.25px;">cheatsheet</a> <a href="/tags/cmd/" style="font-size: 11.25px;">cmd</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/custom-ROM/" style="font-size: 11.25px;">custom ROM</a> <a href="/tags/dfp/" style="font-size: 10px;">dfp</a> <a href="/tags/doubleclick/" style="font-size: 10px;">doubleclick</a> <a href="/tags/doubleclick-for-publishers/" style="font-size: 10px;">doubleclick for publishers</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/glob/" style="font-size: 10px;">glob</a> <a href="/tags/gpt/" style="font-size: 10px;">gpt</a> <a href="/tags/howto/" style="font-size: 18.75px;">howto</a> <a href="/tags/lint/" style="font-size: 11.25px;">lint</a> <a href="/tags/linter/" style="font-size: 10px;">linter</a> <a href="/tags/linter-eslint/" style="font-size: 10px;">linter-eslint</a> <a href="/tags/modular-css/" style="font-size: 11.25px;">modular css</a> <a href="/tags/modularity/" style="font-size: 10px;">modularity</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/nodejs/" style="font-size: 13.75px;">nodejs</a> <a href="/tags/normalize/" style="font-size: 10px;">normalize</a> <a href="/tags/normalizer/" style="font-size: 10px;">normalizer</a> <a href="/tags/notes/" style="font-size: 11.25px;">notes</a> <a href="/tags/npm/" style="font-size: 13.75px;">npm</a> <a href="/tags/open-source/" style="font-size: 13.75px;">open source</a> <a href="/tags/pitfalls/" style="font-size: 17.5px;">pitfalls</a> <a href="/tags/productivity/" style="font-size: 10px;">productivity</a> <a href="/tags/regex/" style="font-size: 15px;">regex</a> <a href="/tags/rooted/" style="font-size: 11.25px;">rooted</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/time-management/" style="font-size: 10px;">time management</a> <a href="/tags/tutorial/" style="font-size: 11.25px;">tutorial</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">十二月 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">十一月 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">五月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">七月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/06/">六月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/08/11/react-dfp/">埋設 DFP - DoubleClick for Publishers 廣告</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/22/modular-css-notes/">Modular CSS</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/15/angularjs-1.5-best-practices/">AngularJS 1.5 最佳實務</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/07/re-npm-left-pad-have-we-forgotten-how-to-program/">反駁：NPM &amp; left-pad: Have We Forgotten How To Program?</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/09/npm-package-node-or-browser/">如何判斷 npmjs.com 上的套件，是否支援 node 或 browser</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Amobiz Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'amobiz';
+  
+  var disqus_url = 'https://amobiz.github.io/2014/08/03/regular-expression-javascript-study-notes-2-theory-2/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<div id="fb-root"></div>
+
+<!-- Facebook SDK -->
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.5&appId=1660468744166033";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- End Facebook SDK -->
+
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/script.js"></script>
+<script src="/js/nav.js"></script>
+
+  </div>
+</body>
+</html>

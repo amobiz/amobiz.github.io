@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Open Source json-normalizer | 格物致知</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Open Sourced json-normalizerHi there, I’ve open-sourced my new library, json-normalizer, a JavaScript library that normalize a json object to meets a json-schema using extended schema descriptor. Pl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Open Source json-normalizer">
+<meta property="og:url" content="https://amobiz.github.io/2015/09/06/open-source-json-normalizer/index.html">
+<meta property="og:site_name" content="格物致知">
+<meta property="og:description" content="Open Sourced json-normalizerHi there, I’ve open-sourced my new library, json-normalizer, a JavaScript library that normalize a json object to meets a json-schema using extended schema descriptor. Pl">
+<meta property="og:image" content="http://2.bp.blogspot.com/-0nmrdX7VFbs/U-eoW6u1oZI/AAAAAAAAAHg/ogSeGtS54sY/s320/Octocat.png">
+<meta property="og:image" content="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67">
+<meta property="og:image" content="http://img.shields.io/badge/license-MIT-brightgreen.svg">
+<meta property="og:image" content="https://badge.fury.io/js/json-normalizer.svg">
+<meta property="og:image" content="https://david-dm.org/amobiz/json-normalizer.svg">
+<meta property="og:image" content="https://nodei.co/npm/json-normalizer.png?downloads=true&downloadRank=true&stars=true">
+<meta property="og:image" content="https://nodei.co/npm-dl/json-normalizer.png?months=6&height=3">
+<meta property="og:updated_time" content="2016-06-28T03:07:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Open Source json-normalizer">
+<meta name="twitter:description" content="Open Sourced json-normalizerHi there, I’ve open-sourced my new library, json-normalizer, a JavaScript library that normalize a json object to meets a json-schema using extended schema descriptor. Pl">
+<meta name="twitter:image" content="http://2.bp.blogspot.com/-0nmrdX7VFbs/U-eoW6u1oZI/AAAAAAAAAHg/ogSeGtS54sY/s320/Octocat.png">
+  
+    <link rel="alternative" href="/atom.xml" title="格物致知" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-68633744-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">格物致知</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Happiness only real when shared.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://amobiz.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-open-source-json-normalizer" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/09/06/open-source-json-normalizer/" class="article-date">
+  <time datetime="2015-09-06T05:22:50.000Z" itemprop="datePublished">2015-09-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Programming/">Programming</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/06/open-source-json-normalizer/">Open Source json-normalizer</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <!-- Post Contents -->
+        <p><a href="https://github.com/" target="_blank" rel="external"><br><img src="http://2.bp.blogspot.com/-0nmrdX7VFbs/U-eoW6u1oZI/AAAAAAAAAHg/ogSeGtS54sY/s320/Octocat.png" alt="">
+</a></p>
+<h2 id="Open-Sourced-json-normalizer"><a href="#Open-Sourced-json-normalizer" class="headerlink" title="Open Sourced json-normalizer"></a>Open Sourced <a href="https://npmjs.com/amobiz/json-normalizer" target="_blank" rel="external">json-normalizer</a></h2><p>Hi there, I’ve open-sourced my new library, <a href="https://github.com/amobiz/json-normalizer" target="_blank" rel="external">json-normalizer</a>, a JavaScript library that normalize a json object to meets a json-schema using extended schema descriptor. Please give it a try. Comments and issue reports are welcome. Thank you!</p>
+<a id="more"></a>
+<a id="forkme" href="https://github.com/amobiz/json-normalizer" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" class="nofancybox"></a>
+<h2 id="json-normalizer"><a href="#json-normalizer" class="headerlink" title="json-normalizer"></a>json-normalizer</h2><p>Normalize a json object to meets a json-schema using extended schema descriptor.</p>
+<p><a href="https://github.com/amobiz/json-normalizer/blob/master/LICENSE" target="_blank" rel="external"><img src="http://img.shields.io/badge/license-MIT-brightgreen.svg" alt="MIT"></a> <a href="http://badge.fury.io/js/json-normalizer" target="_blank" rel="external"><img src="https://badge.fury.io/js/json-normalizer.svg" alt="npm version"></a> <a href="https://david-dm.org/amobiz/json-normalizer" target="_blank" rel="external"><img src="https://david-dm.org/amobiz/json-normalizer.svg" alt="David Dependency Badge"></a></p>
+<p><a href="https://nodei.co/npm/json-normalizer.png?downloads=true&amp;downloadRank=true&amp;stars=true" target="_blank" rel="external"><img src="https://nodei.co/npm/json-normalizer.png?downloads=true&amp;downloadRank=true&amp;stars=true" alt="NPM"></a> <a href="https://nodei.co/npm/json-normalizer/" target="_blank" rel="external"><img src="https://nodei.co/npm-dl/json-normalizer.png?months=6&amp;height=3" alt="NPM"></a></p>
+<p>Note: Json-normalizer is not a <a href="http://json-schema.org/" target="_blank" rel="external">json-schema</a> validator. If you are looking for json-schema validators,<br>please check out here: <a href="https://www.npmjs.com/search?q=json-schema+validator" target="_blank" rel="external">json-schema validators</a>.</p>
+<h4 id="Contents"><a href="#Contents" class="headerlink" title="Contents"></a>Contents</h4><ul>
+<li><a href="#overview">Overview</a><ul>
+<li><a href="#the-problems">The Problems</a></li>
+<li><a href="#the-solution">The Solution</a></li>
+</ul>
+</li>
+<li><a href="#install">Install</a></li>
+<li><a href="#api">API</a></li>
+<li><a href="#other-functions-that-may-be-handy">Other functions that may be handy</a><ul>
+<li><a href="#write-your-own-loader">Write your own loader</a></li>
+</ul>
+</li>
+<li><a href="usage-examples">Usage Examples</a><ul>
+<li><a href="#alias-and-array-type">Alias and Array Type</a></li>
+<li><a href="#primary-property-and-gathering-property">Primary Property and Gathering Property</a></li>
+<li><a href="#extending-schema">Extending Schema</a></li>
+</ul>
+</li>
+<li><a href="#build-and-contribute">Build and Contribute</a></li>
+<li><a href="#issues">Issues</a></li>
+<li><a href="#test">Test</a></li>
+<li><a href="#change-logs">Change Logs</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+<h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><h3 id="The-Problems"><a href="#The-Problems" class="headerlink" title="The Problems"></a>The Problems</h3><p>You want:</p>
+<ul>
+<li>Alias, e.g., both “entry” and “entries” are valid property name, but you don’t want to check both of them,</li>
+<li>Support either single item or an array of items, but you don’t want to handle both of them,</li>
+<li>Flat data objects, i.e., user don’t have to nest properties, and</li>
+<li>Maximum reuse of schemas, i.e., you want multiple inheritance.</li>
+</ul>
+<h3 id="The-Solution"><a href="#The-Solution" class="headerlink" title="The Solution"></a>The Solution</h3><p>The normalizer is based on json-schema with the “<a href="https://raw.githubusercontent.com/amobiz/json-normalizer/master/test/spec/schema/normalizable#" target="_blank" rel="external">normalizable</a>“ extension:</p>
+<ol>
+<li>Properties can have alias and being normalized, using the “<code>alias</code>“ keyword.</li>
+<li>For schemas of “<code>object</code>“ type, a “<code>primary</code>“ property can be specified,<br>that when provided value is not an object (a primitive or an array), can be assigned to.</li>
+<li>For schemas of “<code>object</code>“ type, a “<code>gathering</code>“ property can be specified,  that when “<code>additionalProperties</code>“ is set to false, all unrecognized additional properties can be gathered to. The “<code>gathering</code>“ property name defaults to “<code>others</code>“.</li>
+<li>For schemas of “<code>array</code>“ type, if the provided value is not an array, converts that value to an array automatically.</li>
+<li>Allow schema extends other schemas, using the “<code>extends</code>“ keyword.</li>
+</ol>
+<h2 id="Install"><a href="#Install" class="headerlink" title="Install"></a>Install</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install –save json-normalizer</span><br></pre></td></tr></table></figure>
+
+<h2 id="API"><a href="#API" class="headerlink" title="API"></a>API</h2><h3 id="normalize-schema-data-options-callback"><a href="#normalize-schema-data-options-callback" class="headerlink" title="normalize(schema, data, [options,] callback)"></a><code>normalize(schema, data, [options,] callback)</code></h3><p>Normalizes a loose JSON data object to a strict json-schema data object.</p>
+<h4 id="Context"><a href="#Context" class="headerlink" title="Context"></a>Context</h4><p>Don’t care.</p>
+<h4 id="Parameters"><a href="#Parameters" class="headerlink" title="Parameters"></a>Parameters</h4><h5 id="schema"><a href="#schema" class="headerlink" title="schema"></a><code>schema</code></h5><p>The schema used to normalize the given JSON data object.</p>
+<h5 id="data"><a href="#data" class="headerlink" title="data"></a><code>data</code></h5><p>The JSON data object.</p>
+<h5 id="options"><a href="#options" class="headerlink" title="options"></a><code>options</code></h5><p>Optional. Currently only accepts a loader or an array of loaders.</p>
+<h6 id="options-loader-options-loaders"><a href="#options-loader-options-loaders" class="headerlink" title="options.loader | options.loaders"></a><code>options.loader</code> | <code>options.loaders</code></h6><p>A loader or an array of loaders that help loading remote schemas. Loaders are tested in the order listed.</p>
+<h4 id="callback"><a href="#callback" class="headerlink" title="callback"></a><code>callback</code></h4><p>The callback function with <code>function (err, detail)</code> signature that the normalizer delivers the normalized JSON object to. Called with null context.</p>
+<h4 id="Returns"><a href="#Returns" class="headerlink" title="Returns"></a>Returns</h4><p>No return value.</p>
+<h4 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> normalize = <span class="built_in">require</span>(<span class="string">‘json-normalizer’</span>);</span><br><span class="line"><span class="keyword">var</span> schema = &#123;</span><br><span class="line">true<span class="string">“properties”</span>: &#123;</span><br><span class="line">truetrue<span class="string">“entries”</span>: &#123;</span><br><span class="line">truetruetrue<span class="string">“alias”</span>: <span class="string">“entry”</span>,</span><br><span class="line">truetruetrue<span class="string">“type”</span>: <span class="string">“array”</span></span><br><span class="line">truetrue&#125;</span><br><span class="line">true&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> data = &#123;</span><br><span class="line">true<span class="string">“entry”</span>: <span class="string">“index.js”</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// optional, only needed if your schema references remote schema.</span></span><br><span class="line"><span class="keyword">var</span> mapper = …; <span class="comment">// see example bellow</span></span><br><span class="line"><span class="keyword">var</span> options = &#123;</span><br><span class="line">    <span class="attr">loaders</span>: [mapper]</span><br><span class="line">&#125;;</span><br><span class="line">normalize(schema, data, options, <span class="function"><span class="keyword">function</span> (<span class="params">err, result</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!err) &#123;</span><br><span class="line">        <span class="comment">// process the normalized JSON data object here.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="normalize-sync-schema-data-options"><a href="#normalize-sync-schema-data-options" class="headerlink" title="normalize.sync(schema, data [, options])"></a><code>normalize.sync(schema, data [, options])</code></h3><p>Same as the async version but returns normalized schema. Throws when error;<br>Note that loaders must also be sync version.</p>
+<h4 id="Returns-1"><a href="#Returns-1" class="headerlink" title="Returns"></a>Returns</h4><p>The normalized schema.</p>
+<h4 id="Example-1"><a href="#Example-1" class="headerlink" title="Example"></a>Example</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> normalize = <span class="built_in">require</span>(<span class="string">‘json-normalizer’</span>);</span><br><span class="line"><span class="keyword">var</span> schema = &#123;</span><br><span class="line">true<span class="string">“properties”</span>: &#123;</span><br><span class="line">truetrue<span class="string">“entries”</span>: &#123;</span><br><span class="line">truetruetrue<span class="string">“alias”</span>: <span class="string">“entry”</span>,</span><br><span class="line">truetruetrue<span class="string">“type”</span>: <span class="string">“array”</span></span><br><span class="line">truetrue&#125;</span><br><span class="line">true&#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> data = &#123;</span><br><span class="line">true<span class="string">“entry”</span>: <span class="string">“index.js”</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// optional, only needed if your schema references remote schema.</span></span><br><span class="line"><span class="keyword">var</span> mapper = …; <span class="comment">// see example bellow</span></span><br><span class="line"><span class="keyword">var</span> options = &#123;</span><br><span class="line">    <span class="attr">loaders</span>: [mapper]</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> normalized = normalize(schema, data, options);</span><br><span class="line">    <span class="comment">// process the normalized JSON data object here.</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="comment">// handle error here.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Other-functions-that-may-be-handy"><a href="#Other-functions-that-may-be-handy" class="headerlink" title="Other functions that may be handy:"></a>Other functions that may be handy:</h2><h3 id="deref-schema-options-callback"><a href="#deref-schema-options-callback" class="headerlink" title="deref(schema, [options,] callback)"></a><code>deref(schema, [options,] callback)</code></h3><p>Dereferences JSON references in a schema. Default implementation supports only local references, i.e. references that starts with “<code>#</code>“. Custom loaders can be provided via the <code>options</code> object.</p>
+<h4 id="Context-1"><a href="#Context-1" class="headerlink" title="Context"></a>Context</h4><p>Don’t care.</p>
+<h4 id="Parameters-1"><a href="#Parameters-1" class="headerlink" title="Parameters"></a>Parameters</h4><h5 id="schema-1"><a href="#schema-1" class="headerlink" title="schema"></a><code>schema</code></h5><p>The schema that contains JSON references.</p>
+<h5 id="options-1"><a href="#options-1" class="headerlink" title="options"></a><code>options</code></h5><p>Optional. Currently only accepts a loader or an array of loaders.</p>
+<h6 id="options-loader-options-loaders-1"><a href="#options-loader-options-loaders-1" class="headerlink" title="options.loader | options.loaders"></a><code>options.loader</code> | <code>options.loaders</code></h6><p>A loader or an array of loaders that help loading remote schemas. Loaders are tested in the order listed.</p>
+<h5 id="callback-1"><a href="#callback-1" class="headerlink" title="callback"></a><code>callback</code></h5><p>The callback function with <code>function (err, detail)</code> signature that the <code>deref</code> function delivers the deferenced schema to. Called with null context.</p>
+<h4 id="Returns-2"><a href="#Returns-2" class="headerlink" title="Returns"></a>Returns</h4><p>No return value.</p>
+<h3 id="deref-sync-schema-options"><a href="#deref-sync-schema-options" class="headerlink" title="deref.sync(schema [, options])"></a><code>deref.sync(schema [, options])</code></h3><p>Same as the async version but returns dereferenced schema. Throws when error;<br>Note that loaders must also be sync version.</p>
+<h3 id="maperFactory-definitions-function"><a href="#maperFactory-definitions-function" class="headerlink" title="maperFactory([definitions]): function"></a><code>maperFactory([definitions]): function</code></h3><p>Creates a mapper schema loader, i.e. a schema loader that holds schema definitions in memory, initialized with the optional <code>definitions</code> hash object.</p>
+<h4 id="Context-2"><a href="#Context-2" class="headerlink" title="Context"></a>Context</h4><p>Don’t care.</p>
+<h4 id="Parameters-2"><a href="#Parameters-2" class="headerlink" title="Parameters"></a>Parameters</h4><h5 id="definitions"><a href="#definitions" class="headerlink" title="definitions"></a><code>definitions</code></h5><p>Optional. If provided, all definitions in the <code>definitions</code> hash object will be available for mapping. See <code>mapper#map(definitions)</code> for more details.</p>
+<h4 id="Returns-3"><a href="#Returns-3" class="headerlink" title="Returns"></a>Returns</h4><p>The mapper schema loader.</p>
+<h3 id="mapper-root-ref-callback"><a href="#mapper-root-ref-callback" class="headerlink" title="mapper(root, $ref, callback)"></a><code>mapper(root, $ref, callback)</code></h3><p>The async version of mapper.</p>
+<h3 id="mapper-sync-root-ref"><a href="#mapper-sync-root-ref" class="headerlink" title="mapper#sync(root, $ref)"></a><code>mapper#sync(root, $ref)</code></h3><p>The sync version of mapper.</p>
+<h3 id="mapper-map-ref-schema"><a href="#mapper-map-ref-schema" class="headerlink" title="mapper#map($ref, schema)"></a><code>mapper#map($ref, schema)</code></h3><p>Add a <code>schema</code> with the <code>$ref</code> JSON pointer. Subsequent calls with the same JSON pointer will override definition of preceding calls.</p>
+<h4 id="Context-3"><a href="#Context-3" class="headerlink" title="Context"></a>Context</h4><p>Don’t care.</p>
+<h4 id="Parameters-3"><a href="#Parameters-3" class="headerlink" title="Parameters"></a>Parameters</h4><h5 id="ref"><a href="#ref" class="headerlink" title="$ref"></a><code>$ref</code></h5><p>The JSON pointer the schema being published.</p>
+<h5 id="schema-2"><a href="#schema-2" class="headerlink" title="schema"></a><code>schema</code></h5><p>The schema.</p>
+<h4 id="Returns-4"><a href="#Returns-4" class="headerlink" title="Returns"></a>Returns</h4><p>No return value.</p>
+<h3 id="mapper-map-definitions"><a href="#mapper-map-definitions" class="headerlink" title="mapper#map(definitions)"></a><code>mapper#map(definitions)</code></h3><p>Add all <code>$ref</code> : <code>schema</code> pairs defined in the <code>definitions</code> hash object. Subsequent calls with the same JSON pointer will override definition of preceding calls.</p>
+<h4 id="Context-4"><a href="#Context-4" class="headerlink" title="Context"></a>Context</h4><p>Don’t care.</p>
+<h4 id="Parameters-4"><a href="#Parameters-4" class="headerlink" title="Parameters"></a>Parameters</h4><h5 id="definitions-1"><a href="#definitions-1" class="headerlink" title="definitions"></a><code>definitions</code></h5><p>The definitions hash object. Keys in the hash object should be valid JSON pointers; Values in the hash object should be the schema of the corresponding JSON pointer.</p>
+<h4 id="Returns-5"><a href="#Returns-5" class="headerlink" title="Returns"></a>Returns</h4><p>No return value.</p>
+<h4 id="Example-2"><a href="#Example-2" class="headerlink" title="Example"></a>Example</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mapperFactory = <span class="built_in">require</span>(<span class="string">‘json-normalizer/src/loader/mapper’</span>);</span><br><span class="line"><span class="comment">// map json references to local schema files.</span></span><br><span class="line"><span class="keyword">var</span> mapper = mapperFactory(&#123;</span><br><span class="line">true<span class="string">‘<a href="http://json-schema.org/draft-04/schema#" target="_blank" rel="external">http://json-schema.org/draft-04/schema#</a>‘</span>: <span class="built_in">require</span>(<span class="string">‘schema.json’</span>),</span><br><span class="line">true<span class="string">‘<a href="http://json-schema.org/geo" target="_blank" rel="external">http://json-schema.org/geo</a>‘</span>: <span class="built_in">require</span>(<span class="string">‘geo.json’</span>),</span><br><span class="line">true<span class="string">‘<a href="http://json-schema.org/card" target="_blank" rel="external">http://json-schema.org/card</a>‘</span>: <span class="built_in">require</span>(<span class="string">‘card.json’</span>),</span><br><span class="line">true<span class="string">‘<a href="http://json-schema.org/calendar" target="_blank" rel="external">http://json-schema.org/calendar</a>‘</span>: <span class="built_in">require</span>(<span class="string">‘calendar.json’</span>),</span><br><span class="line">true<span class="string">‘<a href="http://json-schema.org/address" target="_blank" rel="external">http://json-schema.org/address</a>‘</span>: <span class="built_in">require</span>(<span class="string">‘address.json’</span>)</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">var</span> schema = &#123;</span><br><span class="line">true…</span><br><span class="line">true<span class="string">“properties”</span>: &#123;</span><br><span class="line">truetrue<span class="string">“userId”</span>: &#123; <span class="string">“type”</span>: <span class="string">“integer”</span> &#125;,</span><br><span class="line">truetrue<span class="string">“userProfile”</span>: &#123; <span class="string">“$ref”</span>: <span class="string">“<a href="http://json-schema.org/card" target="_blank" rel="external">http://json-schema.org/card</a>“</span> &#125;</span><br><span class="line">true&#125;     </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Async Version</span></span><br><span class="line">deref(schema, &#123; <span class="attr">loader</span>: mapper &#125;, <span class="function"><span class="keyword">function</span> (<span class="params">err, schema</span>) </span>&#123;</span><br><span class="line">true<span class="keyword">if</span> (err) &#123;</span><br><span class="line">true    <span class="comment">// handle error here.</span></span><br><span class="line">true&#125;</span><br><span class="line">true<span class="keyword">else</span> &#123;</span><br><span class="line">true    <span class="comment">// use the dereferenced schema.</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Sync Version</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">true<span class="keyword">var</span> deferenced = deref.sync(schema, &#123; <span class="attr">loader</span>: mapper.sync &#125;);</span><br><span class="line">    <span class="comment">// use the dereferenced schema.</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="comment">// handle error here.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Write-Your-Own-Loader"><a href="#Write-Your-Own-Loader" class="headerlink" title="Write Your Own Loader"></a>Write Your Own Loader</h3><ul>
+<li>Async loaders are functions with <code>function (rootSchema, $ref, callback(err, schema))</code> signature.</li>
+<li>Async loaders must return truthy if it can handle the given reference <code>$ref</code>, and the callback be called later when the schema is ready. However, if error occurred, e.g., network failure, the callback be called with the <code>err</code> set to the type of error and the second argument provides details of that error.</li>
+<li>Async loaders must return falsy if it can not handle the given reference <code>$ref</code>, and the <code>callback</code> should not be called at all.</li>
+<li>Sync loaders are functions with <code>function (rootSchema, $ref)</code> signature.</li>
+<li>A local loader is always tested first, and other loaders provided in <code>options.loader</code> or <code>options.loaders</code> argument are then tested by the order listed.</li>
+</ul>
+<h2 id="Usage-Examples"><a href="#Usage-Examples" class="headerlink" title="Usage Examples"></a>Usage Examples</h2><h3 id="Alias-and-Array-Type"><a href="#Alias-and-Array-Type" class="headerlink" title="Alias and Array Type"></a>Alias and Array Type</h3><p>With the schema:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">“properties”</span>: &#123;</span><br><span class="line">        <span class="attr">“entries”</span>: &#123;</span><br><span class="line">            <span class="attr">“alias”</span>: [<span class="string">“entry”</span>],</span><br><span class="line">            <span class="attr">“type”</span>: <span class="string">“array”</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>will normalize this data object:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">“entry”</span>: <span class="string">“index.js”</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>to:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">“entries”</span>: [<span class="string">“index.js”</span>]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Primary-Property-and-Gathering-Property"><a href="#Primary-Property-and-Gathering-Property" class="headerlink" title="Primary Property and Gathering Property"></a>Primary Property and Gathering Property</h3><p>With the schema:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">“properties”</span>: &#123;</span><br><span class="line">        <span class="attr">“src”</span>: &#123;</span><br><span class="line">            <span class="attr">“type”</span>: <span class="string">“string | array”</span></span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">“options”</span>: &#123;</span><br><span class="line">            <span class="attr">“properties”</span>: &#123;</span><br><span class="line">true            <span class="attr">“base”</span>: &#123;</span><br><span class="line">truetrue            <span class="attr">“type”</span>: <span class="string">“string”</span></span><br><span class="line">true            &#125;,</span><br><span class="line">true            <span class="attr">“read”</span>: &#123;</span><br><span class="line">truetrue            <span class="attr">“type”</span>: <span class="string">“boolean”</span></span><br><span class="line">true            &#125;,</span><br><span class="line">true            <span class="attr">“buffer”</span>: &#123;</span><br><span class="line">truetrue            <span class="attr">“type”</span>: <span class="string">“boolean”</span></span><br><span class="line">true            &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">“required”</span>: [<span class="string">“src”</span>]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">“primary”</span>: <span class="string">“src”</span>,</span><br><span class="line">    <span class="attr">“additionalProperties”</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">“gathering”</span>: <span class="string">“options”</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>will normalize this data object:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">“src/index.js”</span></span><br></pre></td></tr></table></figure>
+
+<p>to:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">“src”</span>: <span class="string">“src/index.js”</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>and this data object:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">“src”</span>: <span class="string">“index.js”</span>,</span><br><span class="line">    <span class="attr">“base”</span>: <span class="string">“src”</span>,</span><br><span class="line">    <span class="attr">“read”</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">“unknown”</span>: <span class="string">“…”</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>to:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">“src”</span>: <span class="string">“index.js”</span>,</span><br><span class="line">    <span class="attr">“options”</span>: &#123;</span><br><span class="line">        <span class="attr">“base”</span>: <span class="string">“src”</span>,</span><br><span class="line">        <span class="attr">“read”</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">“unknown”</span>: <span class="string">“…”</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Extending-Schema"><a href="#Extending-Schema" class="headerlink" title="Extending Schema"></a>Extending Schema</h3><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">true<span class="attr">“definitions”</span>: &#123;</span><br><span class="line">truetrue<span class="attr">“options”</span>: &#123;</span><br><span class="line">truetruetrue<span class="attr">“properties”</span>: &#123;</span><br><span class="line">truetruetruetrue<span class="attr">“debug”</span>: &#123;</span><br><span class="line">truetruetruetruetrue<span class="attr">“type”</span>: <span class="string">“boolean”</span></span><br><span class="line">truetruetruetrue&#125;,</span><br><span class="line">truetruetruetrue<span class="attr">“sourcemap”</span>: &#123;</span><br><span class="line">truetruetruetruetrue<span class="attr">“enum”</span>: [<span class="literal">false</span>, <span class="string">“inline”</span>, <span class="string">“external”</span>]</span><br><span class="line">truetruetruetrue&#125;</span><br><span class="line">truetruetrue&#125;</span><br><span class="line">truetrue&#125;</span><br><span class="line">true&#125;,</span><br><span class="line">true<span class="attr">“extends”</span>: [&#123;</span><br><span class="line">truetrue<span class="attr">“$ref”</span>: <span class="string">“#/definitions/options”</span></span><br><span class="line">true&#125;],</span><br><span class="line">true<span class="attr">“properties”</span>: &#123;</span><br><span class="line">truetrue<span class="attr">“bundles”</span>: &#123;</span><br><span class="line">truetruetrue<span class="attr">“alias”</span>: [<span class="string">“bundle”</span>],</span><br><span class="line">truetruetrue<span class="attr">“type”</span>: <span class="string">“array”</span>,</span><br><span class="line">truetruetrue<span class="attr">“extends”</span>: [&#123;</span><br><span class="line">truetruetruetrue<span class="attr">“$ref”</span>: <span class="string">“#/definitions/options”</span></span><br><span class="line">truetruetrue&#125;],</span><br><span class="line">truetruetrue<span class="attr">“properties”</span>: &#123;</span><br><span class="line">truetruetruetrue<span class="attr">“entries”</span>: &#123;</span><br><span class="line">truetruetruetruetrue<span class="attr">“alias”</span>: [<span class="string">“entry”</span>],</span><br><span class="line">truetruetruetruetrue<span class="attr">“type”</span>: <span class="string">“array”</span></span><br><span class="line">truetruetruetrue&#125;,</span><br><span class="line">truetruetruetrue<span class="attr">“options”</span>: &#123;</span><br><span class="line">truetruetruetruetrue<span class="attr">“$ref”</span>: <span class="string">“#/definitions/options”</span></span><br><span class="line">truetruetruetrue&#125;</span><br><span class="line">truetruetrue&#125;</span><br><span class="line">truetrue&#125;,</span><br><span class="line">truetrue<span class="attr">“options”</span>: &#123;</span><br><span class="line">truetruetrue<span class="attr">“$ref”</span>: <span class="string">“#/definitions/options”</span></span><br><span class="line">truetrue&#125;</span><br><span class="line">true&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Please refer to test for more examples.</p>
+<h2 id="Build-and-Contribute"><a href="#Build-and-Contribute" class="headerlink" title="Build and Contribute"></a>Build and Contribute</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> <a href="https://github.com/amobiz/json-normalizer.git" target="_blank" rel="external">https://github.com/amobiz/json-normalizer.git</a></span><br><span class="line">$ <span class="built_in">cd</span> json-normalizer</span><br><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+
+<h2 id="Issues"><a href="#Issues" class="headerlink" title="Issues"></a>Issues</h2><p><a href="https://github.com/amobiz/json-normalizer/issues" target="_blank" rel="external">Iessues</a></p>
+<h2 id="Test"><a href="#Test" class="headerlink" title="Test"></a>Test</h2><p>Tests are written in mocha. Run tests in terminal:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm <span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Change-Logs"><a href="#Change-Logs" class="headerlink" title="Change Logs"></a>Change Logs</h2><ul>
+<li>2015/09/15 - 0.1.1<ul>
+<li>Add sync version.</li>
+<li>Remove mapper#add() method, use mapper#map() instead.</li>
+</ul>
+</li>
+</ul>
+<h2 id="License"><a href="#License" class="headerlink" title="License"></a>License</h2><p>MIT</p>
+<h2 id="Author"><a href="#Author" class="headerlink" title="Author"></a>Author</h2><p><a href="https://github.com/amobiz" target="_blank" rel="external">Amobiz</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amobiz.github.io/2015/09/06/open-source-json-normalizer/" data-id="cj4y0ufsh0074k056gvvo52i8" class="article-share-link">Share</a>
+      
+        <a href="https://amobiz.github.io/2015/09/06/open-source-json-normalizer/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CommonJS/">CommonJS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GitHub/">GitHub</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JSON/">JSON</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/normalize/">normalize</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/normalizer/">normalizer</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/">npm</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/open-source/">open source</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/09/28/javascript-truthy-falsy/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          JavaScript: Truthy? Falsy?
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/09/22/blogger-github-ribbon/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">在 Blogger 上顯示 GitHub Ribbon</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  
+    <ul class="nav"></ul>
+  
+  
+    <section class="comments" title="Disqus">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </section>
+  
+  
+    <section class="comments" title="Facebook">
+      <div class="fb-comments" data-href="https://amobiz.github.io/2015/09/06/open-source-json-normalizer/" data-width="100%" data-numposts="5"></div>
+    </section>
+  
+</section>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hack/">Hack</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Productivity/">Productivity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">36</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Software/">Software</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Design/">Web Design</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/7-Zip/">7-Zip</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMD/">AMD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMP/">AMP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/APP2SD/">APP2SD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/">AngularJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/">Atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BEM/">BEM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backup/">Backup</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Batch/">Batch</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blogger/">Blogger</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS-modules/">CSS-modules</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CommonJS/">CommonJS</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DIY/">DIY</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Pattern/">Design Pattern</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ESLint/">ESLint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Facebook-Notes/">Facebook Notes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GTD/">GTD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Generator/">Generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ginger-yoshi/">Ginger yoshi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gist/">Gist</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/">GitHub</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google/">Google</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-App-Engine/">Google App Engine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-Code-Prettify/">Google Code Prettify</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grails/">Grails</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Groovy/">Groovy</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/">Gulp</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAX-RS/">JAX-RS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDOM/">JDOM</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSHint/">JSHint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/">JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jersey/">Jersey</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/">Jetty</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logdown/">Logdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/">Maven</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Medium/">Medium</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NPM/">NPM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Namespace/">Namespace</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Open-Source/">Open Source</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pomodoro-Technique/">Pomodoro Technique</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming/">Programming</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Promise/">Promise</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regular-Expression/">Regular Expression</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RequireJS/">RequireJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SUIT/">SUIT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SWAP/">SWAP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadow-DOM/">Shadow DOM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TagSoup/">TagSoup</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Time-Management/">Time Management</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UMD/">UMD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/URL/">URL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web-Components/">Web Components</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/">Webpack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/">XML</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XPath/">XPath</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yeoman/">Yeoman</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/advertising/">advertising</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/best-practices/">best practices</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/browser/">browser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cheatsheet/">cheatsheet</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/">cmd</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/custom-ROM/">custom ROM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dfp/">dfp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doubleclick/">doubleclick</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doubleclick-for-publishers/">doubleclick for publishers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpt/">gpt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/howto/">howto</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lint/">lint</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linter/">linter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linter-eslint/">linter-eslint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modular-css/">modular css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modularity/">modularity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/normalize/">normalize</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/normalizer/">normalizer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/notes/">notes</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/open-source/">open source</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pitfalls/">pitfalls</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/productivity/">productivity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regex/">regex</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rooted/">rooted</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svn/">svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time-management/">time management</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tutorial/">tutorial</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/7-Zip/" style="font-size: 11.25px;">7-Zip</a> <a href="/tags/AMD/" style="font-size: 11.25px;">AMD</a> <a href="/tags/AMP/" style="font-size: 10px;">AMP</a> <a href="/tags/APP2SD/" style="font-size: 11.25px;">APP2SD</a> <a href="/tags/Android/" style="font-size: 13.75px;">Android</a> <a href="/tags/AngularJS/" style="font-size: 10px;">AngularJS</a> <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/BEM/" style="font-size: 10px;">BEM</a> <a href="/tags/Backup/" style="font-size: 11.25px;">Backup</a> <a href="/tags/Batch/" style="font-size: 11.25px;">Batch</a> <a href="/tags/Blogger/" style="font-size: 12.5px;">Blogger</a> <a href="/tags/CSS-modules/" style="font-size: 10px;">CSS-modules</a> <a href="/tags/CommonJS/" style="font-size: 15px;">CommonJS</a> <a href="/tags/DIY/" style="font-size: 13.75px;">DIY</a> <a href="/tags/Design-Pattern/" style="font-size: 12.5px;">Design Pattern</a> <a href="/tags/ESLint/" style="font-size: 10px;">ESLint</a> <a href="/tags/Facebook-Notes/" style="font-size: 10px;">Facebook Notes</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Generator/" style="font-size: 10px;">Generator</a> <a href="/tags/Ginger-yoshi/" style="font-size: 11.25px;">Ginger yoshi</a> <a href="/tags/Gist/" style="font-size: 10px;">Gist</a> <a href="/tags/GitHub/" style="font-size: 16.25px;">GitHub</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/Google-App-Engine/" style="font-size: 10px;">Google App Engine</a> <a href="/tags/Google-Code-Prettify/" style="font-size: 10px;">Google Code Prettify</a> <a href="/tags/Grails/" style="font-size: 10px;">Grails</a> <a href="/tags/Groovy/" style="font-size: 12.5px;">Groovy</a> <a href="/tags/Gulp/" style="font-size: 11.25px;">Gulp</a> <a href="/tags/HTML/" style="font-size: 13.75px;">HTML</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/JAX-RS/" style="font-size: 10px;">JAX-RS</a> <a href="/tags/JDOM/" style="font-size: 12.5px;">JDOM</a> <a href="/tags/JSHint/" style="font-size: 10px;">JSHint</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Jersey/" style="font-size: 10px;">Jersey</a> <a href="/tags/Jetty/" style="font-size: 10px;">Jetty</a> <a href="/tags/Logdown/" style="font-size: 10px;">Logdown</a> <a href="/tags/Markdown/" style="font-size: 11.25px;">Markdown</a> <a href="/tags/Maven/" style="font-size: 16.25px;">Maven</a> <a href="/tags/Medium/" style="font-size: 10px;">Medium</a> <a href="/tags/NPM/" style="font-size: 10px;">NPM</a> <a href="/tags/Namespace/" style="font-size: 11.25px;">Namespace</a> <a href="/tags/Open-Source/" style="font-size: 11.25px;">Open Source</a> <a href="/tags/Pomodoro-Technique/" style="font-size: 10px;">Pomodoro Technique</a> <a href="/tags/Programming/" style="font-size: 10px;">Programming</a> <a href="/tags/Promise/" style="font-size: 11.25px;">Promise</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Regular-Expression/" style="font-size: 15px;">Regular Expression</a> <a href="/tags/RequireJS/" style="font-size: 10px;">RequireJS</a> <a href="/tags/SUIT/" style="font-size: 10px;">SUIT</a> <a href="/tags/SWAP/" style="font-size: 10px;">SWAP</a> <a href="/tags/Shadow-DOM/" style="font-size: 10px;">Shadow DOM</a> <a href="/tags/TagSoup/" style="font-size: 12.5px;">TagSoup</a> <a href="/tags/Time-Management/" style="font-size: 10px;">Time Management</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/UMD/" style="font-size: 11.25px;">UMD</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/Web-Components/" style="font-size: 10px;">Web Components</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Windows/" style="font-size: 11.25px;">Windows</a> <a href="/tags/XML/" style="font-size: 12.5px;">XML</a> <a href="/tags/XPath/" style="font-size: 12.5px;">XPath</a> <a href="/tags/Yeoman/" style="font-size: 12.5px;">Yeoman</a> <a href="/tags/advertising/" style="font-size: 10px;">advertising</a> <a href="/tags/best-practices/" style="font-size: 10px;">best practices</a> <a href="/tags/browser/" style="font-size: 10px;">browser</a> <a href="/tags/cheatsheet/" style="font-size: 11.25px;">cheatsheet</a> <a href="/tags/cmd/" style="font-size: 11.25px;">cmd</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/custom-ROM/" style="font-size: 11.25px;">custom ROM</a> <a href="/tags/dfp/" style="font-size: 10px;">dfp</a> <a href="/tags/doubleclick/" style="font-size: 10px;">doubleclick</a> <a href="/tags/doubleclick-for-publishers/" style="font-size: 10px;">doubleclick for publishers</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/glob/" style="font-size: 10px;">glob</a> <a href="/tags/gpt/" style="font-size: 10px;">gpt</a> <a href="/tags/howto/" style="font-size: 18.75px;">howto</a> <a href="/tags/lint/" style="font-size: 11.25px;">lint</a> <a href="/tags/linter/" style="font-size: 10px;">linter</a> <a href="/tags/linter-eslint/" style="font-size: 10px;">linter-eslint</a> <a href="/tags/modular-css/" style="font-size: 11.25px;">modular css</a> <a href="/tags/modularity/" style="font-size: 10px;">modularity</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/nodejs/" style="font-size: 13.75px;">nodejs</a> <a href="/tags/normalize/" style="font-size: 10px;">normalize</a> <a href="/tags/normalizer/" style="font-size: 10px;">normalizer</a> <a href="/tags/notes/" style="font-size: 11.25px;">notes</a> <a href="/tags/npm/" style="font-size: 13.75px;">npm</a> <a href="/tags/open-source/" style="font-size: 13.75px;">open source</a> <a href="/tags/pitfalls/" style="font-size: 17.5px;">pitfalls</a> <a href="/tags/productivity/" style="font-size: 10px;">productivity</a> <a href="/tags/regex/" style="font-size: 15px;">regex</a> <a href="/tags/rooted/" style="font-size: 11.25px;">rooted</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/time-management/" style="font-size: 10px;">time management</a> <a href="/tags/tutorial/" style="font-size: 11.25px;">tutorial</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">十二月 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">十一月 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">五月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">七月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/06/">六月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/08/11/react-dfp/">埋設 DFP - DoubleClick for Publishers 廣告</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/22/modular-css-notes/">Modular CSS</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/15/angularjs-1.5-best-practices/">AngularJS 1.5 最佳實務</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/07/re-npm-left-pad-have-we-forgotten-how-to-program/">反駁：NPM &amp; left-pad: Have We Forgotten How To Program?</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/09/npm-package-node-or-browser/">如何判斷 npmjs.com 上的套件，是否支援 node 或 browser</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Amobiz Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'amobiz';
+  
+  var disqus_url = 'https://amobiz.github.io/2015/09/06/open-source-json-normalizer/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<div id="fb-root"></div>
+
+<!-- Facebook SDK -->
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.5&appId=1660468744166033";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- End Facebook SDK -->
+
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/script.js"></script>
+<script src="/js/nav.js"></script>
+
+  </div>
+</body>
+</html>

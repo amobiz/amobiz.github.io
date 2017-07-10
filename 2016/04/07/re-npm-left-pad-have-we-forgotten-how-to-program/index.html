@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>反駁：NPM &amp; left-pad: Have We Forgotten How To Program? | 格物致知</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="意象說明JavaScript 社群 &amp;lt; 百家爭鳴 &amp;lt; 車廠＋車廂黎明？黃昏？
+Dmitrii Vaccinium
+前一陣子，left-pad 的作者，因為不滿 npmjs.com 屈從財團的壓力，未經作者同意就擅自移轉所有權，因此憤而將全部模組從 npm 下架，而導致眾多知名模組受到波及。此事件引起了廣泛的反思。
+然而，漸漸出現一種聲音，開始呼籲大家不要使用 open source、">
+<meta property="og:type" content="article">
+<meta property="og:title" content="反駁：NPM & left-pad: Have We Forgotten How To Program?">
+<meta property="og:url" content="https://amobiz.github.io/2016/04/07/re-npm-left-pad-have-we-forgotten-how-to-program/index.html">
+<meta property="og:site_name" content="格物致知">
+<meta property="og:description" content="意象說明JavaScript 社群 &amp;lt; 百家爭鳴 &amp;lt; 車廠＋車廂黎明？黃昏？
+Dmitrii Vaccinium
+前一陣子，left-pad 的作者，因為不滿 npmjs.com 屈從財團的壓力，未經作者同意就擅自移轉所有權，因此憤而將全部模組從 npm 下架，而導致眾多知名模組受到波及。此事件引起了廣泛的反思。
+然而，漸漸出現一種聲音，開始呼籲大家不要使用 open source、">
+<meta property="og:image" content="https://images.unsplash.com/photo-1434871619871-1f315a50efba?crop=entropy&fit=crop&fm=jpg&h=975&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1075">
+<meta property="og:updated_time" content="2016-06-28T03:07:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="反駁：NPM & left-pad: Have We Forgotten How To Program?">
+<meta name="twitter:description" content="意象說明JavaScript 社群 &amp;lt; 百家爭鳴 &amp;lt; 車廠＋車廂黎明？黃昏？
+Dmitrii Vaccinium
+前一陣子，left-pad 的作者，因為不滿 npmjs.com 屈從財團的壓力，未經作者同意就擅自移轉所有權，因此憤而將全部模組從 npm 下架，而導致眾多知名模組受到波及。此事件引起了廣泛的反思。
+然而，漸漸出現一種聲音，開始呼籲大家不要使用 open source、">
+<meta name="twitter:image" content="https://images.unsplash.com/photo-1434871619871-1f315a50efba?crop=entropy&fit=crop&fm=jpg&h=975&ixjsv=2.1.0&ixlib=rb-0.3.5&q=80&w=1075">
+  
+    <link rel="alternative" href="/atom.xml" title="格物致知" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
+  
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-68633744-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">格物致知</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Happiness only real when shared.</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://amobiz.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-re-npm-left-pad-have-we-forgotten-how-to-program" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/07/re-npm-left-pad-have-we-forgotten-how-to-program/" class="article-date">
+  <time datetime="2016-04-06T16:00:00.000Z" itemprop="datePublished">2016-04-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Programming/">Programming</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/07/re-npm-left-pad-have-we-forgotten-how-to-program/">反駁：NPM &amp; left-pad: Have We Forgotten How To Program?</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!-- Table of Contents -->
+        
+        <!-- Post Contents -->
+        <div class="Credit"><p><img src="https://images.unsplash.com/photo-1434871619871-1f315a50efba?crop=entropy&amp;fit=crop&amp;fm=jpg&amp;h=975&amp;ixjsv=2.1.0&amp;ixlib=rb-0.3.5&amp;q=80&amp;w=1075" alt=""></p>
+<div class="Credit-backdrop"><div class="Credit-info"><div class="Credit-desc"><p>意象說明<br><br>JavaScript 社群 &lt; 百家爭鳴 &lt; 車廠＋車廂<br>黎明？黃昏？</p>
+</div><div><a class="Credit-link" target="_blank" href="https://unsplash.com/@vaccinium">Dmitrii Vaccinium</a></div></div></div></div>
+<p><a href="http://qz.com/646467/how-one-programmer-broke-the-internet-by-deleting-a-tiny-piece-of-code/" target="_blank" rel="external">前一陣子</a>，<a href="https://github.com/azer/left-pad" target="_blank" rel="external"><code>left-pad</code></a> 的作者，因為不滿 npmjs.com 屈從財團的壓力，未經作者同意就擅自移轉所有權，因此憤而將全部模組從 npm 下架，而導致眾多知名模組受到波及。此事件引起了廣泛的反思。</p>
+<p>然而，漸漸出現一種聲音，開始呼籲大家不要使用 open source、要盡量自己寫程式碼，不要依賴別人的模組，就像這篇文章：『<a href="http://www.haneycodes.net/npm-left-pad-have-we-forgotten-how-to-program/" target="_blank" rel="external">NPM &amp; left-pad: Have We Forgotten How To Program?</a>』(<a href="http://qianduan.guru/2016/04/04/npm-left-pad-have-we-forgotten-how-to-program/" target="_blank" rel="external">中譯</a>)。更有甚者，連『懂得怎麼寫程式之前，別去玩 node.js 好嗎？』這樣的話都出來了。</p>
+<a id="more"></a>
+<h3 id="走火入魔？"><a href="#走火入魔？" class="headerlink" title="走火入魔？"></a>走火入魔？</h3><p>首先，該文作者提到，整個事件的源頭，<code>left-pad</code> 只有 11 個星星 (話說現在已經有 710 顆星星)，只有 11 行程式碼。整個產業卻因 11  行程式碼而崩潰實在不可思議。</p>
+<p>我還是要說，造成崩潰的並不是這 11 行程式碼，這 11 行程式碼並沒有造成任何程式執行錯誤，這 11 行程式碼沒有品質問題；造成崩潰的是這 11 行程式碼，掌握在不遵守 open source 遊戲規則的 npmjs.com 手中；造成崩潰的是，整個產業的運作，竟是依賴在這樣一家公司上。(說的有點重，但是實在是無法接受傾斜於財團而欺壓獨立開發者的行為。)</p>
+<p>舉 Internet 域名為例，對於那些域名已經被搶註冊的大企業，取回域名的最快手段，就是透過收購的方式，打官司也可行，但曠日費時，而且不保證一定勝訴。同樣的邏輯，open source 軟體名稱，憑什麼企業就有權強制他人不許用？</p>
+<p>Npm 事件的問題，是整個 ecosystem 『把持』在少數特定企業而衍生的危機，解法應該是盡可能的分散化，不要依賴於『中央集權』。就像 Java 現在把持在 Oracle 手中，遲遲不肯實現 open source 的承諾而遭人唾棄一樣。</p>
+<p>這跟 open source 如何演化，跟程式設計師會不會寫程式，根本毫無關係。</p>
+<p>作者提到：</p>
+<blockquote>
+<p>There’s a package called isArray that has 880,000 downloads a day, and 18 million downloads in February of 2016. It has 72 dependent NPM packages. Here’s its entire 1 line of code:<br>1<br><code>return toString.call(arr) == &#39;[object Array]&#39;;</code></p>
+</blockquote>
+<p>作者在文中就提到，依賴於 <code>isArray()</code> 的模組，有 72 個。只有 72 個相依性，竟然有人可以稱之為『瘋狂的引用他人的模組』、『走火入魔』。</p>
+<h4 id="模組下載數量怎麼算？"><a href="#模組下載數量怎麼算？" class="headerlink" title="模組下載數量怎麼算？"></a>模組下載數量怎麼算？</h4><p>那『18 million downloads in February of 2016』又怎麼說呢，大家不是在『瘋狂下載』？</p>
+<p>大家真的知道 npm 的 download 數怎麼計算的嗎？</p>
+<p>以我的 <a href="https://www.npmjs.com/package/globjoin" target="_blank" rel="external">globjoin</a> 為例，只不過僥倖被 <a href="https://github.com/stylelint/stylelint" target="_blank" rel="external">stylelint</a> 一個模組引用，現在每個月都有超過三萬次下載，請問，有人瘋狂地引用我的模組嗎？沒有，只有一個 stylelint 引用！三萬次下載你以為就有三萬個不重複使用者嗎？也不是，每次模組更新，就會重新下載，合併計算。</p>
+<p>作者舉的 <a href="https://www.npmjs.com/package/isarray" target="_blank" rel="external"><code>isArray</code></a> 例子，大家可以去看看它的<a href="https://www.npmjs.com/browse/depended/isarray" target="_blank" rel="external">相依模組</a>，其中不乏像 <a href="https://www.npmjs.com/package/browserify" target="_blank" rel="external">browserify</a>、<a href="https://www.npmjs.com/package/buffer" target="_blank" rel="external">buffer</a> 這樣的重量級模組。我可以說，<code>isArray()</code> 的超高下載量，跟我的 globjoin 的現象相同 (當然等級不同)，只是被某些知名的模組引用了。並沒有人『瘋狂的引用他人的模組』，好嗎？！</p>
+<p>至於另一個例子 <a href="https://www.npmjs.com/package/is-positive-integer" target="_blank" rel="external"><code>is-positive-integer</code></a>，『檢查一個整數是否是正數』這個模組的存在本身，的確符合作者的理論。但是由這個模組的實際下載量根本不高來看，更只能證明，顯然絕大多數的開發者並不會貿然使用毫無意義的模組。沒有人使用的模組，就算它依賴於兩萬個模組，影響也極有限。特地拿一個沒有人使用的模組來指責全體開發者，有何意義？</p>
+<h4 id="一部分要歸咎於歷史因素"><a href="#一部分要歸咎於歷史因素" class="headerlink" title="一部分要歸咎於歷史因素"></a>一部分要歸咎於歷史因素</h4><p>至於像 <code>isArray</code> 這樣的函數的存在，正是因為過去並沒有原生的函數可以使用，而導致每個人都要自己寫一個系統本應該要有的功能。這一點在英文原文下面的討論，是一個攻防重點，大家不妨去看看。</p>
+<p>回頭看看 <code>isArray()</code> 的實現：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">return</span> toString.call(arr) == <span class="string">‘[object Array]’</span></span><br></pre></td></tr></table></figure>
+
+<p>沒錯，只有短短的一行。但是捫心自問，不參考任何文件、資料，你隨時都寫的出來嗎？<br>如果你每次<strong>又要再寫一遍</strong>的時候，都還需要翻找文件，這樣真的會比較快嗎？</p>
+<h4 id="再來談談封裝"><a href="#再來談談封裝" class="headerlink" title="再來談談封裝"></a>再來談談封裝</h4><p>如果程式中到處充滿 <code>return toString.call(arr) == &#39;[object Array]&#39;</code>，你就必須直接看到程式碼的細節，而無法像 Bob 大叔在『<a href="http://www.books.com.tw/products/0010579897" target="_blank" rel="external">Clean Code</a>』中所說的，程式碼應該要『讓名稱代表意圖』。於是，你還是會把它封裝成 <code>isArray()</code>。封裝之後，請問你會把它放在哪裡？</p>
+<p><strong>某個模組裡！</strong></p>
+<p>這麼一來，跟直接引用別人的模組，又有何不同，只不過是自己寫的就會比較好看？就不存在模組相依性問題？</p>
+<p>不要忘了，別人還寫好了測試程式。</p>
+<p>沒有測試程式的程式碼，就是『遺留程式碼』。</p>
+<p>你為了不要『相依』別人的模組，自幹了自己的模組，然後不寫測試？好吧，你會寫測試，那麼，這就不是『一行程式碼』的問題了。從頭到尾，你只是在重複別人已經處理好的問題。</p>
+<h3 id="『Have-We-Forgotten-How-To-Program-』"><a href="#『Have-We-Forgotten-How-To-Program-』" class="headerlink" title="『Have We Forgotten How To Program?』"></a>『Have We Forgotten How To Program?』</h3><p>作者提到，一個簡單的『blank project template』就要引用 28,000 個檔案，這是不是太過複雜了？甚至於直接結論：</p>
+<blockquote>
+<p>I get the impression that the NPM ecosystem participants have created a fetish for micro-packages.</p>
+</blockquote>
+<p>『開發者有一種不良的、對微型模塊的熱衷。』</p>
+<blockquote>
+<p>It feels to me as if the entire job of an NPM-participating developer is writing the smallest amount of code possible to string existing library calls together in order to create something new that functions uniquely for their personal or business need.</p>
+</blockquote>
+<p>只想『拼拼湊湊、串起來交差』。</p>
+<p>先不論這 28,000 個檔案，究竟實際被專案引用的有多少，而用來輔助專案開發的比例又有多少。如果一個專案實際上就是有這些需求，那麼這些檔案，不論改用何種方式撰寫，它們的複雜性並不會因此降低，並不是把 100 個函數，全部寫在一起，變成為一個函數，它就變得不複雜了；事實上剛好相反。</p>
+<p>過去開發者不斷地重新發明輪子，而軟體專家則不斷地疾呼要 reuse。終於現在 JavaScript 社群蓬勃發展，大家支持 open source，信任 open source 反而變成『不良』的習慣？</p>
+<h3 id="『Functions-Are-Not-Packages』"><a href="#『Functions-Are-Not-Packages』" class="headerlink" title="『Functions Are Not Packages』"></a>『Functions Are Not Packages』</h3><p>模組並不是這樣定義的。根據維基百科對『<a href="https://en.wikipedia.org/wiki/Modularity" target="_blank" rel="external">Modularity</a>』的定義：</p>
+<blockquote>
+<p>In software design, modularity refers to a logical partitioning of the “software design” that allows complex software to be manageable for the purpose of implementation and maintenance. The logic of partitioning may be based on related functions, implementation considerations, data links, or other criteria.</p>
+</blockquote>
+<p>『在軟體設計中，模組化是指軟體設計的邏輯分割，以允許複雜的軟體，能夠以可管理的方式實作及維護。邏輯分割可能基於相關性、實作考量、資料連結、以及其它要素。』</p>
+<p>要我說，任何具有獨立性、內聚性，可以管理的東西，都可以將它做成模組，哪怕只是提供一些常數。</p>
+<p>『<a href="https://en.wikipedia.org/wiki/Unix_philosophy" target="_blank" rel="external">Do one thing and do it well</a>』，『程式應該只關注一個目標，並儘可能把它做好。讓程式能夠互相協同工作。』稟持著 Unix 的設計哲學，node.js 社群也信奉這個原則，讓每個元件，做到最好，讓每個元件，能夠隨意組合使用。</p>
+<h3 id="『Third-Party-Problems』"><a href="#『Third-Party-Problems』" class="headerlink" title="『Third Party Problems』"></a>『Third Party Problems』</h3><blockquote>
+<p>There’s absolutely no guarantee that what someone else has written is correct, or even works well. Even if correct, is it the most optimal solution possible? At least when you write the code yourself, you can easily modify it to fix bugs and improve its efficiency. Not that there should be many bugs in 1 line functions.</p>
+</blockquote>
+<p>沒有人強迫你用他們的模組，你要使用前，本應做好評估。甚至，如果你是 TDD 派，只要你的程式碼通過測試，就是該模組的功能符合你的需求的證明。更何況如果你對該模組有疑慮，大可以針對該模組撰寫測試來進行評估。『為什麼要幫別人寫測試？』你問。這一段程式你原本不是要自幹？難道自幹就不用寫測試？</p>
+<p>至於，如何保證引用的模組，是『最有效率的解決方案』？好問題，你如何證明你自幹的程式碼，是『最有效率的解決方案』？</p>
+<p>『至少我自己寫的程式碼，要怎麼改就可以怎麼改。』—- 你知道 open source 是什麼意思嗎？</p>
+<blockquote>
+<p>Second, even if the package’s logic is correct, I can’t help but be amazed by the fact that developers are taking on dependencies for single line functions that they should be able to write with their eyes closed. In my opinion, if you cannot write a left-pad, is-positive-integer, or isArray function in 5 minutes flat (including the time you spend Googling), then you don’t actually know how to code.</p>
+</blockquote>
+<p>我前面已經回答過了，忘記的話請自行回捲。</p>
+<h3 id="『Strive-For-Few-Dependencies』"><a href="#『Strive-For-Few-Dependencies』" class="headerlink" title="『Strive For Few Dependencies』"></a>『Strive For Few Dependencies』</h3><blockquote>
+<p>The more dependencies you take on, the more points of failure you have.</p>
+</blockquote>
+<p>你自己寫的程式碼也是一樣，如果你不寫測試的話。</p>
+<blockquote>
+<p>have you vetted any of the programmers who have written these functions that you depend on daily?</p>
+</blockquote>
+<p>你每天吃進肚子裡的東西，穿在身上的衣服，出門開的車，住的房子，你有去審核評估過製作者嗎？</p>
+<p>還是那句話，別人都已經攤開 source 給你看了，為什麼還偏偏要自己寫？你要不要相信這些程式碼，由測試決定！要是怕 npm 又出問題，不會把用到的模組都複製一份到 local repo，或是自己架個 <a href="https://github.com/verdaccio/verdaccio" target="_blank" rel="external">server</a> 嗎？</p>
+<h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><p>作者其實只有一個重點：只有自己會寫程式，別人都是笨蛋都不會寫程式，所以不要相信別人寫的程式。即使別人寫的程式有嚴謹的測試，自己的卻沒有。一個開源社群的茁壯非常不容易，落井下石卻很簡單。將整個生態圈的蓬勃發展，形容為失控，而呼籲大家不要使用，根本就是因噎廢食。</p>
+<p>社群已經出現反思的聲音，表示有人看到問題了，接下來自然就會有人提出解決辦法，這就是社群的運作法則。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://amobiz.github.io/2016/04/07/re-npm-left-pad-have-we-forgotten-how-to-program/" data-id="cj4y0uft70089k0565ki0qc58" class="article-share-link">Share</a>
+      
+        <a href="https://amobiz.github.io/2016/04/07/re-npm-left-pad-have-we-forgotten-how-to-program/#disqus_thread" class="article-comment-link">Comments</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/NPM/">NPM</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Open-Source/">Open Source</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Programming/">Programming</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/modularity/">modularity</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/04/15/angularjs-1.5-best-practices/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          AngularJS 1.5 最佳實務
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/09/npm-package-node-or-browser/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">如何判斷 npmjs.com 上的套件，是否支援 node 或 browser</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<section id="comments">
+  
+    <ul class="nav"></ul>
+  
+  
+    <section class="comments" title="Disqus">
+      <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </section>
+  
+  
+    <section class="comments" title="Facebook">
+      <div class="fb-comments" data-href="https://amobiz.github.io/2016/04/07/re-npm-left-pad-have-we-forgotten-how-to-program/" data-width="100%" data-numposts="5"></div>
+    </section>
+  
+</section>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Hack/">Hack</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Productivity/">Productivity</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Programming/">Programming</a><span class="category-list-count">36</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Software/">Software</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Web-Design/">Web Design</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/7-Zip/">7-Zip</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMD/">AMD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AMP/">AMP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/APP2SD/">APP2SD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Android/">Android</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AngularJS/">AngularJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Atom/">Atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/BEM/">BEM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Backup/">Backup</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Batch/">Batch</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Blogger/">Blogger</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CSS-modules/">CSS-modules</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CommonJS/">CommonJS</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/DIY/">DIY</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Design-Pattern/">Design Pattern</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ESLint/">ESLint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Facebook-Notes/">Facebook Notes</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GTD/">GTD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Generator/">Generator</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ginger-yoshi/">Ginger yoshi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gist/">Gist</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub/">GitHub</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google/">Google</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-App-Engine/">Google App Engine</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google-Code-Prettify/">Google Code Prettify</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Grails/">Grails</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Groovy/">Groovy</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gulp/">Gulp</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTML/">HTML</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JAX-RS/">JAX-RS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JDOM/">JDOM</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSHint/">JSHint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JSON/">JSON</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/">Java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">17</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jersey/">Jersey</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Jetty/">Jetty</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Logdown/">Logdown</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Markdown/">Markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Maven/">Maven</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Medium/">Medium</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NPM/">NPM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Namespace/">Namespace</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Open-Source/">Open Source</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Pomodoro-Technique/">Pomodoro Technique</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Programming/">Programming</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Promise/">Promise</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regular-Expression/">Regular Expression</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RequireJS/">RequireJS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SUIT/">SUIT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SWAP/">SWAP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shadow-DOM/">Shadow DOM</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/TagSoup/">TagSoup</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Time-Management/">Time Management</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/UMD/">UMD</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/URL/">URL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Web-Components/">Web Components</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Webpack/">Webpack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/">Windows</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XML/">XML</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XPath/">XPath</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Yeoman/">Yeoman</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/advertising/">advertising</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/best-practices/">best practices</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/browser/">browser</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cheatsheet/">cheatsheet</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cmd/">cmd</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/component/">component</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/custom-ROM/">custom ROM</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dfp/">dfp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doubleclick/">doubleclick</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/doubleclick-for-publishers/">doubleclick for publishers</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/glob/">glob</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gpt/">gpt</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/howto/">howto</a><span class="tag-list-count">16</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lint/">lint</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linter/">linter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linter-eslint/">linter-eslint</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modular-css/">modular css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/modularity/">modularity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/normalize/">normalize</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/normalizer/">normalizer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/notes/">notes</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/open-source/">open source</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pitfalls/">pitfalls</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/productivity/">productivity</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/regex/">regex</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rooted/">rooted</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/svn/">svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time-management/">time management</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tutorial/">tutorial</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/7-Zip/" style="font-size: 11.25px;">7-Zip</a> <a href="/tags/AMD/" style="font-size: 11.25px;">AMD</a> <a href="/tags/AMP/" style="font-size: 10px;">AMP</a> <a href="/tags/APP2SD/" style="font-size: 11.25px;">APP2SD</a> <a href="/tags/Android/" style="font-size: 13.75px;">Android</a> <a href="/tags/AngularJS/" style="font-size: 10px;">AngularJS</a> <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/BEM/" style="font-size: 10px;">BEM</a> <a href="/tags/Backup/" style="font-size: 11.25px;">Backup</a> <a href="/tags/Batch/" style="font-size: 11.25px;">Batch</a> <a href="/tags/Blogger/" style="font-size: 12.5px;">Blogger</a> <a href="/tags/CSS-modules/" style="font-size: 10px;">CSS-modules</a> <a href="/tags/CommonJS/" style="font-size: 15px;">CommonJS</a> <a href="/tags/DIY/" style="font-size: 13.75px;">DIY</a> <a href="/tags/Design-Pattern/" style="font-size: 12.5px;">Design Pattern</a> <a href="/tags/ESLint/" style="font-size: 10px;">ESLint</a> <a href="/tags/Facebook-Notes/" style="font-size: 10px;">Facebook Notes</a> <a href="/tags/GTD/" style="font-size: 10px;">GTD</a> <a href="/tags/Generator/" style="font-size: 10px;">Generator</a> <a href="/tags/Ginger-yoshi/" style="font-size: 11.25px;">Ginger yoshi</a> <a href="/tags/Gist/" style="font-size: 10px;">Gist</a> <a href="/tags/GitHub/" style="font-size: 16.25px;">GitHub</a> <a href="/tags/Google/" style="font-size: 10px;">Google</a> <a href="/tags/Google-App-Engine/" style="font-size: 10px;">Google App Engine</a> <a href="/tags/Google-Code-Prettify/" style="font-size: 10px;">Google Code Prettify</a> <a href="/tags/Grails/" style="font-size: 10px;">Grails</a> <a href="/tags/Groovy/" style="font-size: 12.5px;">Groovy</a> <a href="/tags/Gulp/" style="font-size: 11.25px;">Gulp</a> <a href="/tags/HTML/" style="font-size: 13.75px;">HTML</a> <a href="/tags/HTTP/" style="font-size: 10px;">HTTP</a> <a href="/tags/JAX-RS/" style="font-size: 10px;">JAX-RS</a> <a href="/tags/JDOM/" style="font-size: 12.5px;">JDOM</a> <a href="/tags/JSHint/" style="font-size: 10px;">JSHint</a> <a href="/tags/JSON/" style="font-size: 10px;">JSON</a> <a href="/tags/Java/" style="font-size: 10px;">Java</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Jersey/" style="font-size: 10px;">Jersey</a> <a href="/tags/Jetty/" style="font-size: 10px;">Jetty</a> <a href="/tags/Logdown/" style="font-size: 10px;">Logdown</a> <a href="/tags/Markdown/" style="font-size: 11.25px;">Markdown</a> <a href="/tags/Maven/" style="font-size: 16.25px;">Maven</a> <a href="/tags/Medium/" style="font-size: 10px;">Medium</a> <a href="/tags/NPM/" style="font-size: 10px;">NPM</a> <a href="/tags/Namespace/" style="font-size: 11.25px;">Namespace</a> <a href="/tags/Open-Source/" style="font-size: 11.25px;">Open Source</a> <a href="/tags/Pomodoro-Technique/" style="font-size: 10px;">Pomodoro Technique</a> <a href="/tags/Programming/" style="font-size: 10px;">Programming</a> <a href="/tags/Promise/" style="font-size: 11.25px;">Promise</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Regular-Expression/" style="font-size: 15px;">Regular Expression</a> <a href="/tags/RequireJS/" style="font-size: 10px;">RequireJS</a> <a href="/tags/SUIT/" style="font-size: 10px;">SUIT</a> <a href="/tags/SWAP/" style="font-size: 10px;">SWAP</a> <a href="/tags/Shadow-DOM/" style="font-size: 10px;">Shadow DOM</a> <a href="/tags/TagSoup/" style="font-size: 12.5px;">TagSoup</a> <a href="/tags/Time-Management/" style="font-size: 10px;">Time Management</a> <a href="/tags/Tomcat/" style="font-size: 10px;">Tomcat</a> <a href="/tags/UMD/" style="font-size: 11.25px;">UMD</a> <a href="/tags/URL/" style="font-size: 10px;">URL</a> <a href="/tags/Web-Components/" style="font-size: 10px;">Web Components</a> <a href="/tags/Webpack/" style="font-size: 10px;">Webpack</a> <a href="/tags/Windows/" style="font-size: 11.25px;">Windows</a> <a href="/tags/XML/" style="font-size: 12.5px;">XML</a> <a href="/tags/XPath/" style="font-size: 12.5px;">XPath</a> <a href="/tags/Yeoman/" style="font-size: 12.5px;">Yeoman</a> <a href="/tags/advertising/" style="font-size: 10px;">advertising</a> <a href="/tags/best-practices/" style="font-size: 10px;">best practices</a> <a href="/tags/browser/" style="font-size: 10px;">browser</a> <a href="/tags/cheatsheet/" style="font-size: 11.25px;">cheatsheet</a> <a href="/tags/cmd/" style="font-size: 11.25px;">cmd</a> <a href="/tags/component/" style="font-size: 10px;">component</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/custom-ROM/" style="font-size: 11.25px;">custom ROM</a> <a href="/tags/dfp/" style="font-size: 10px;">dfp</a> <a href="/tags/doubleclick/" style="font-size: 10px;">doubleclick</a> <a href="/tags/doubleclick-for-publishers/" style="font-size: 10px;">doubleclick for publishers</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/glob/" style="font-size: 10px;">glob</a> <a href="/tags/gpt/" style="font-size: 10px;">gpt</a> <a href="/tags/howto/" style="font-size: 18.75px;">howto</a> <a href="/tags/lint/" style="font-size: 11.25px;">lint</a> <a href="/tags/linter/" style="font-size: 10px;">linter</a> <a href="/tags/linter-eslint/" style="font-size: 10px;">linter-eslint</a> <a href="/tags/modular-css/" style="font-size: 11.25px;">modular css</a> <a href="/tags/modularity/" style="font-size: 10px;">modularity</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/nodejs/" style="font-size: 13.75px;">nodejs</a> <a href="/tags/normalize/" style="font-size: 10px;">normalize</a> <a href="/tags/normalizer/" style="font-size: 10px;">normalizer</a> <a href="/tags/notes/" style="font-size: 11.25px;">notes</a> <a href="/tags/npm/" style="font-size: 13.75px;">npm</a> <a href="/tags/open-source/" style="font-size: 13.75px;">open source</a> <a href="/tags/pitfalls/" style="font-size: 17.5px;">pitfalls</a> <a href="/tags/productivity/" style="font-size: 10px;">productivity</a> <a href="/tags/regex/" style="font-size: 15px;">regex</a> <a href="/tags/rooted/" style="font-size: 11.25px;">rooted</a> <a href="/tags/svn/" style="font-size: 10px;">svn</a> <a href="/tags/time-management/" style="font-size: 10px;">time management</a> <a href="/tags/tutorial/" style="font-size: 11.25px;">tutorial</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">十一月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">九月 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">八月 2014</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/07/">七月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/12/">十二月 2013</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/11/">十一月 2013</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2013/05/">五月 2013</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/07/">七月 2012</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2012/06/">六月 2012</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/03/">三月 2011</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2011/02/">二月 2011</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2010/12/">十二月 2010</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/08/11/react-dfp/">埋設 DFP - DoubleClick for Publishers 廣告</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/22/modular-css-notes/">Modular CSS</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/15/angularjs-1.5-best-practices/">AngularJS 1.5 最佳實務</a>
+          </li>
+        
+          <li>
+            <a href="/2016/04/07/re-npm-left-pad-have-we-forgotten-how-to-program/">反駁：NPM &amp; left-pad: Have We Forgotten How To Program?</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/09/npm-package-node-or-browser/">如何判斷 npmjs.com 上的套件，是否支援 node 或 browser</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Amobiz Chen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+<script>
+  var disqus_shortname = 'amobiz';
+  
+  var disqus_url = 'https://amobiz.github.io/2016/04/07/re-npm-left-pad-have-we-forgotten-how-to-program/';
+  
+  (function(){
+    var dsq = document.createElement('script');
+    dsq.type = 'text/javascript';
+    dsq.async = true;
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
+</script>
+
+
+
+<div id="fb-root"></div>
+
+<!-- Facebook SDK -->
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.5&appId=1660468744166033";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- End Facebook SDK -->
+
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script src="/js/script.js"></script>
+<script src="/js/nav.js"></script>
+
+  </div>
+</body>
+</html>
